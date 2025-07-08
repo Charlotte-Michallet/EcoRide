@@ -1,0 +1,16 @@
+{
+    "name": "chach/eco-ride",
+    "description": "ecoride an app for car-sharing",
+    "autoload": {
+        "psr-4": {
+            "Chach\\EcoRide\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Charlotte-Michallet",
+            "email": "161527468+Charlotte-Michallet@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
