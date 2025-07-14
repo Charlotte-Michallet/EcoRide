@@ -1,1 +1,3 @@
-<h1>sqdfeszdfef</h1>
+<?php
+
+require_once "../templates/pages/home.php";
