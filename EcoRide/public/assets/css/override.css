@@ -1,0 +1,55 @@
+:root { 
+    --green: #00CD35;
+    --green2: #00FF5B;
+    --green3:#33CC66;
+    --green4: #54D64D;
+    --green5: #2BB667;
+    --darkGreen:#0D787A;
+    --darkGreen2: #186E51;
+    --darkGreen3: #17343D;
+    --darkGreen4: #47B885;
+    --darkGreen: #287E40;
+    --kaki:#8FB83B;
+    --turquoise: #05FAAB;
+    --turquoise2:#39EBC6;
+    --blue: #0080E3;
+    --blue2: #0063FF;
+    --blue3:#0019F0;
+    --blue4: #05A8FA;
+    --beige: #E6D8C5;
+
+}
+/* All */
+
+html {
+    scroll-behavior: smooth;
+}
+
+.link {
+color: var(--green5);
+}
+
+.link:hover {
+   color: var(--green3); 
+}
+
+.btn {
+    background: var(--green5);
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: var(--green3);
+    cursor: pointer;
+}
+
+
+/* home page */
+.hero{
+    color: var(--darkGreen2);
+}
+
+.form {
+    position: relative;
+    top: -40px;
+}

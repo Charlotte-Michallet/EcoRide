@@ -1,9 +1,7 @@
 {
-    "name": "chach/eco-ride",
-    "description": "ecoride an app for car-sharing",
     "autoload": {
         "psr-4": {
-            "Chach\\EcoRide\\": "src/"
+            "App\\": "App/"
         }
     },
     "authors": [

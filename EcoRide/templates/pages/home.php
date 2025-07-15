@@ -1,65 +1,102 @@
-
 <?php require_once "../templates/header.php"; ?>
+
+  <!-- intro -->
 <section>
-
-  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-4 md:items-center md:gap-8">
-      <div class="md:col-span-1">
-        <div class="max-w-lg md:max-w-none">
-          <h2 class="text-2xl font-semibold text-gray-900 sm:text-3xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </h2>
-
-          <p class="mt-4 text-gray-700">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur doloremque saepe
-            architecto maiores repudiandae amet perferendis repellendus, reprehenderit voluptas
-            sequi.
-          </p>
-        </div>
+    <div class="hero relative isolate overflow-hidden py-10 sm:py-24 mt-5">
+    <img src="/assets/img/groupe-d-amis-levant-les-bras-dans-la-voiture.jpg" alt="image covoiturage" class="absolute inset-0 -z-10 size-full object-cover object-right md:object-center" />
+  <div class="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl" aria-hidden="true">
+      <div class="aspect-1097/845 w-274.25 bg-linear-to-tr from-[#6E6E6E] to-[#F7F7F7] opacity-20" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+    </div>
+    <div class="absolute -top-52 left-1/2 -z-10 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0 sm:transform-gpu" aria-hidden="true">
+      <div class="aspect-1097/845 w-274.25 bg-linear-to-tr from-[#6E6E6E] to-[#F7F7F7] opacity-20" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+    </div>
+    <div class="max-w-7xl px-6 lg:px-8 mx-auto">
+      <div class="mx-auto max-w-2xl lg:mx-0 bg-gray-200/55 rounded-xl p-4">
+        <h1 class="text-5xl font-semibold tracking-tight sm:text-7xl">EcoRide</h1>
+        <p class="mt-8 text-lg font-medium text-pretty sm:text-xl/8">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat.</p>
       </div>
-
-      <div class="md:col-span-3">
-        <img
-          src="https://images.unsplash.com/photo-1731690415686-e68f78e2b5bd?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          class="rounded"
-          alt=""
-        />
+      <div class="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
+        <dl class="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="flex flex-col-reverse gap-1 bg-gray-200/55 rounded-xl p-4">
+            <dt class="text-base/7">Offices worldwide</dt>
+            <dd class="text-4xl font-semibold tracking-tight">12</dd>
+          </div>
+          <div class="flex flex-col-reverse gap-1 bg-gray-200/55 rounded-xl p-4">
+            <dt class="text-base/7">Full-time colleagues</dt>
+            <dd class="text-4xl font-semibold tracking-tight">300+</dd>
+          </div>
+          <div class="flex flex-col-reverse gap-1 bg-gray-200/55 rounded-xl p-4">
+            <dt class="text-base/7">Hours per week</dt>
+            <dd class="text-4xl font-semibold tracking-tight">40</dd>
+          </div>
+        </dl>
       </div>
     </div>
   </div>
 </section>
 
-<section class="bg-white p-1 xs:p-8">
-  <div class=" max-w-96 sm:max-w-4xl mx-auto border border-[#4D7C0F] rounded-lg p-8">
-    <h2 class="sm:text-xl text-[12px] font-bold mb-6">Title</h2>
-    <form>
-      <div class="space-y-6">
-        <div>
-          <label for="title" class="text-xs xs:text-sm font-medium text-gray-700 mb-1 ">Job Title<!-- --> <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" color="#9CA3AF" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-alert inline-block"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg> </label><input type="text" id="title" class="h-[50px] rounded-[5px] text-xs xs:text-sm border border-[#D1D5DB] w-full px-2" name="title" value="">
-        </div>
-        <div class="grid sm:grid-cols-2 grid-cols-1 gap-6">
-          <div>
-            <label for="category" class="text-xs xs:text-sm font-medium text-gray-700 mb-1">Category</label><select name="category" id="category" class="h-[50px] rounded-[5px] text-xs xs:text-sm border border-[#D1D5DB] w-full px-2"><option value="" selected="">Select</option><option value="HR">HR</option><option value="programming">Programming</option></select>
-          </div>
-          <div>
-            <label for="subcategory" class="text-xs xs:text-sm font-medium text-gray-700 mb-1">Subcategory</label><select name="subcategory" id="subcategory" class="h-[50px] rounded-[5px] text-xs xs:text-sm border border-[#D1D5DB] w-full px-2"><option value="" selected="">Select</option><option value="HR-1">HR-1</option><option value="programming-1">Programming-1</option></select>
-          </div>
-        </div>
-        <div class="grid sm:grid-cols-2 grid-cols-1 gap-6">
-          <div>
-            <label for="country" class="text-xs xs:text-sm font-medium text-gray-700 mb-1">Country <span class="font-light">(Optional)</span></label><select name="country" id="country" class="h-[50px] rounded-[5px] text-xs xs:text-sm border border-[#D1D5DB] w-full px-2"><option value="" selected="">Select</option><option value="syria">Syria</option><option value="turkey">Turkey</option></select>
-          </div>
-          <div><label for="language" class="text-xs xs:text-sm font-medium text-gray-700 mb-1">Language</label>
-            <div class="flex flex-wrap items-center border rounded-md xs:p-2 bg-white">
-              <span class="bg-[#D9F99D] text-[#4D7C0F] px-1 py-0 xs:px-2 xs:py-1 rounded m-1 text-xs xs:text-sm flex items-center">Arabic<button class="ml-1 text-[#4D7C0F] focus:outline-none" type="button">×</button></span><input type="text" placeholder="Add language" class="flex-grow outline-none py-2 w-2/3 text-sm xs:ml-2" value="">
+<!-- form -->
+<section class="form w-3/4 mx-auto p-5 bg-white rounded-md shadow-md dark:bg-gray-800">
+  <form>
+        <div class="flex gap-6 justify-around items-center">
+            <div>
+                <label class="text-gray-700 dark:text-gray-200" for="username">Ville de départ</label>
+                <input id="username" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 dark:focus:border-emerald-500 focus:outline-none focus:ring">
             </div>
-          </div>
+
+            <div>
+                <label class="text-gray-700 dark:text-gray-200" for="emailAddress">Ville d'arriver</label>
+                <input id="emailAddress" type="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 dark:focus:border-emerald-500 focus:outline-none focus:ring">
+            </div>
+
+            <div>
+                <label class="text-gray-700 dark:text-gray-200" for="password">Date de départ</label>
+                <input id="password" type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 dark:focus:border-emerald-500 focus:outline-none focus:ring">
+            </div>
+
+            <div>
+                <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Nombre de passagers</label>
+                <input id="passwordConfirmation" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 dark:focus:border-emerald-500 focus:outline-none focus:ring">
+            </div>
+            <div>
+              <button class="btn item-center px-5 py-2 leading-5 text-white transition-colors duration-300 transform rounded-md focus:outline-none">Rechercher</button>
+            </div>
+
         </div>
-      </div>
-      <div class="mt-8 pt-6 border-t border-gray-200 flex justify-end">
-        <button type="submit" class=" sm:w-[86px] w-full h-[50px] text-xs sm:text-base bg-[#4D7C0F] rounded-[5px] p-[13px_25px] gap-[10px] text-white">Next</button>
-      </div>
     </form>
-  </div>
+</section>
+
+<!-- info -->
+<section>
+    <div class="max-w-6xl px-6 mx-auto">
+        <div class="relative z-20 w-full mt-8 md:flex md:items-center">
+            <div class="absolute w-full bg-green-600 -z-10 md:h-75 rounded-2xl"></div>
+
+            <div class="w-full p-5 md:flex md:items-center rounded-2xl md:bg-transparent md:p-0 lg:px-12 md:justify-evenly">
+                <img class="md:mx-6 rounded-full object-cover shadow-md md:h-[20rem] md:w-60 lg:h-[27rem] lg:w-[17rem] md:rounded-2xl" src="https://images.unsplash.com/photo-1635604553688-d9640263bd9e?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="route en foret" />
+
+                <div class="mt-2 md:mx-6">
+                    <p class="text-lg leading-relaxed text-white md:text-xl"> EcoRide est une entreprise française dédiée à une mobilité plus durable. En favorisant le covoiturage, nous réduisons l’empreinte carbone. Notre mission est de simplifier la mise en relation entre conducteurs et passagers afin de réduire l'empreinte carbone. Avec EcoRide, voyagez de façon plus responsable et contribuez à un avenir plus vert.
+Drive Green Together</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-6xl px-6 mx-auto mb-10">
+        <div class="relative z-20 w-full mt-8 md:flex md:items-center">
+            <div class="absolute w-full bg-green-600 -z-10 md:h-75 rounded-2xl"></div>
+
+            <div class="w-full p-6 md:flex md:items-center rounded-2xl md:bg-transparent md:p-0 lg:px-12 md:justify-evenly">
+               <div class="mt-2 md:mx-6">
+                    <p class="text-lg leading-relaxed text-white md:text-xl"> Voyagez en toute confiance avec EcoRide.
+Notre plateforme sécurisée vous permet de partager vos trajets avec d’autres passagers et de profiter d’un transport fiable. Que ce soit pour un déplacement quotidien ou longue distance, trouvez facilement un trajet adapté à vos besoins et contribuez à un avenir plus durable.</p>
+                </div>
+                <img class="md:mx-6 rounded-full object-cover shadow-md md:h-[20rem] md:w-60 lg:h-[27rem] lg:w-[17rem] md:rounded-2xl" src="/assets/img/sourire-femmes-et-homme-positif-assis-dans-la-voiture.jpg" alt="voyage heureux" />
+            </div>
+        </div>
+    </div>
+
+
 </section>
 <?php require_once "../templates/footer.php"; ?>
