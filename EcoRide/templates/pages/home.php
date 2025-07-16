@@ -37,26 +37,26 @@
 
 <!-- form -->
 <section class="form w-3/4 mx-auto p-5 bg-white rounded-md shadow-md">
-  <form>
+  <form action="post">
         <div class="flex gap-6 justify-around items-center">
             <div>
-                <label class="text-gray-700 dark:text-gray-200" for="username">Ville de départ</label>
-                <input id="username" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:text-gray-300 dark:border-gray-600 focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 dark:focus:border-emerald-500 focus:outline-none focus:ring">
+                <label class="text-gray-700 dark:text-gray-200" for="departureHome">Ville de départ</label>
+                <input type="text" id="departureHome" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:text-gray-300 dark:border-gray-600 focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 dark:focus:border-emerald-500 focus:outline-none focus:ring" name="departureHome" >
             </div>
 
             <div>
-                <label class="text-gray-700 dark:text-gray-200" for="emailAddress">Ville d'arriver</label>
-                <input id="emailAddress" type="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-m dark:text-gray-300 dark:border-gray-600 focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 dark:focus:border-emerald-500 focus:outline-none focus:ring">
+                <label class="text-gray-700 dark:text-gray-200" for="arrivalHome">Ville d'arriver</label>
+                <input type="text" id="arrivalHome" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-m dark:text-gray-300 dark:border-gray-600 focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 dark:focus:border-emerald-500 focus:outline-none focus:ring" name="arrivalHome">
             </div>
 
             <div>
-                <label class="text-gray-700 dark:text-gray-200" for="password">Date de départ</label>
-                <input id="password" type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:text-gray-300 dark:border-gray-600 focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 dark:focus:border-emerald-500 focus:outline-none focus:ring">
+                <label class="text-gray-700 dark:text-gray-200" for="departureDateHome">Date de départ</label>
+                <input type="text" id="departureDateHome" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:text-gray-300 dark:border-gray-600 focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 dark:focus:border-emerald-500 focus:outline-none focus:ring" name="departureDateHome">
             </div>
 
             <div>
-                <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Nombre de passagers</label>
-                <input id="passwordConfirmation" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:text-gray-300 dark:border-gray-600 focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 dark:focus:border-emerald-500 focus:outline-none focus:ring">
+                <label class="text-gray-700 dark:text-gray-200" for="numPassengers">Nombre de passagers</label>
+                <input type="number" id="numPassengers" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:text-gray-300 dark:border-gray-600 focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 dark:focus:border-emerald-500 focus:outline-none focus:ring" name="numPassengers">
             </div>
             <div>
               <button class="btnSearch item-center px-5 py-2 leading-5 text-white transition-colors duration-300 transform rounded-md focus:outline-none">Rechercher</button>
