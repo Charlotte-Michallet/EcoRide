@@ -1,3 +1,5 @@
+/* Initiate varibles  */
+/* Colors */
 :root { 
     --green: #00CD35;
     --green2: #00FF5B;
@@ -10,8 +12,8 @@
     --darkGreen4: #47B885;
     --darkGreen: #287E40;
     --kaki:#8FB83B;
-    --turquoise: #05FAAB;
-    --turquoise2:#39EBC6;
+    --turquoise:#119177;
+    --turquoise2:#14a789;
     --blue: #0080E3;
     --blue2: #0063FF;
     --blue3:#0019F0;
@@ -19,8 +21,9 @@
     --beige: #E6D8C5;
 
 }
-/* All */
 
+
+/* All */
 html {
     scroll-behavior: smooth;
 }
@@ -40,6 +43,18 @@ color: var(--green5);
 
 .btn:hover {
     background: var(--green3);
+    cursor: pointer;
+}
+
+
+
+.btnSearch {
+    background: var(--turquoise);
+    cursor: pointer;
+}
+
+.btnSearch:hover {
+    background: var(--turquoise2);
     cursor: pointer;
 }
 
