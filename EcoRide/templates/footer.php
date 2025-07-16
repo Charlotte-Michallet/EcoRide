@@ -27,7 +27,11 @@
         </li>
 
         <li>
-          <a class="text-gray-700 transition hover:text-gray-700/75" href="http://localhost:8080/index.php?controller=pages&action=contact"> Contact </a>
+          <a class="contact text-gray-700 transition hover:text-gray-700/75" href="http://localhost:8080/index.php?controller=pages&action=contact"> Contact </a>
+        </li>
+
+        <li>
+          <a class="contact text-gray-700 transition hover:text-gray-700/75" href="mailto:contact@ecoride.com">contact@ecoride.com</a>
         </li>
       </ul>
     </div>

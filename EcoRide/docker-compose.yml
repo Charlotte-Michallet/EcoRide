@@ -60,7 +60,7 @@ services:
 volumes:
   db_data:
   mongodb_data:
-
+  
 networks:
   app_network:
     driver: bridge

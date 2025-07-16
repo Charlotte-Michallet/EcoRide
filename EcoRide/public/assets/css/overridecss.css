@@ -19,9 +19,7 @@
     --blue3:#0019F0;
     --blue4: #05A8FA;
     --beige: #E6D8C5;
-
 }
-
 
 /* All */
 html {
@@ -45,7 +43,6 @@ color: var(--green5);
     background: var(--green3);
     cursor: pointer;
 }
-
 
 
 .btnSearch {

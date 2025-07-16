@@ -1,3 +1,4 @@
 <?php require_once "../templates/header.php"; ?>
-<h1>Inscription</h1>
+
+<h1>inscription</h1>
 <?php require_once "../templates/footer.php"; ?>
