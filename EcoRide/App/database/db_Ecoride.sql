@@ -16,7 +16,7 @@ CREATE TABLE users (
     date_of_birth DATE NOT NULL,
     photo VARCHAR(255),
     credits INT(11),
-    id_role INT(11) NOT NULL,
+    id_role INT(11),
     drivers_license VARCHAR(100) DEFAULT NULL,
     CONSTRAINT fk_user_role
         FOREIGN KEY (id_role) REFERENCES roles(id)
