@@ -42,20 +42,23 @@ class Router
 
     protected function render(string $path, array $params = [])
     {
+        $header   = ROOT_PATH . "/templates/header.php";
         $filePath = ROOT_PATH . "/templates/" . $path . ".php";
+        $footer   = ROOT_PATH . "/templates/footer.php";
         try {
-            if (! file_exists($filePath)) {
+            if (! file_exists($filePath) || ! file_exists($header) || ! file_exists($footer)) {
                 // generer erreure
-                throw new \Exception(message: "Fichier non trouver :" . $filePath);
+                throw new \Exception(message: "Fichier non trouver :" . $filePath . $header . $footer);
             } else {
                 // recuperer si fichier
                 extract($params);
                 // extract tranforme le tableau en plusieu  r variable
+                require_once $header;
                 require_once $filePath;
+                require_once $footer;
             }
         } catch (\Exception $e) {
             $this->render('errors/default', ["error" => $e->getMessage()]);
         }
-
     }
 }

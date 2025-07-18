@@ -1,4 +1,6 @@
 <?php
+ob_start();
+
 require_once __DIR__ . "/../vendor/autoload.php";
 
 // cont for root path
@@ -9,3 +11,5 @@ use App\Controller\Router;
 
 $router = new Router();
 $router->router();
+
+ob_end_flush();

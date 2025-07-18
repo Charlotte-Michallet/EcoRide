@@ -68,14 +68,6 @@ class User
     }
 
     /**
-     * Get the value of password
-     */
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    /**
      * Set the value of password
      */
     public function setPassword(string $password): self

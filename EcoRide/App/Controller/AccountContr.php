@@ -75,7 +75,19 @@ class AccountContr
 
     protected function userUnderAge()
     {
-        if ($this->date_of_birth < 18) {
+
+        $today = new \DateTimeImmutable();
+        $dOB   = \DateTimeImmutable::createFromFormat('Y-m-d', $this->date_of_birth);
+
+        if ($dOB === false) {
+            error_log("Date de naissance invalide: " . $this->date_of_birth);
+            return true;
+        }
+
+        $interval = $dOB->diff($today);
+        $age      = $interval->y;
+
+        if ($age < 18) {
             $result = true;
         } else {
             $result = false;

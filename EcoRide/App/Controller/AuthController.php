@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use DateTime;
+
 class AuthController extends Router
 {
     public function route()
@@ -39,6 +41,7 @@ class AuthController extends Router
     protected function register()
     {
         $this->render("auth/register");
+        $this->registermethod();
     }
     protected function profil()
     {
@@ -57,8 +60,9 @@ class AuthController extends Router
             $date_of_birth = htmlspecialchars(trim($_POST["dateBirthRegister"]));
             $password      = htmlspecialchars(trim($_POST["pwdRegister"]));
             $passwordVerif = htmlspecialchars(trim($_POST["ConfPwdRegister"]));
-            $id_role       = $this->userRole();
+            $role          = htmlspecialchars(trim($_POST["userRolesRegister"]));
             $credits       = 20;
+            $id_role       = $this->userRole($role);
 
             $register = new RegisterContr($username, $email, $password, $passwordVerif, $date_of_birth, $credits, $id_role);
             $register->checkImputRegisterUser();
@@ -69,10 +73,10 @@ class AuthController extends Router
 
     }
 
-    protected function userRole()
+    protected function userRole(string $role)
     {
         // if post method
-        switch ($_GET["controller"]) {
+        switch ($role) {
 
             case 'admin':
                 return 1;
@@ -80,13 +84,13 @@ class AuthController extends Router
             case 'empl':
                 return 2;
 
-            case 'drive':
+            case 'driver':
                 return 3;
 
-            case 'pass':
+            case 'passenger':
                 return 4;
 
-            case 'driand':
+            case 'driverAndPassenger':
                 return 5;
 
             default:

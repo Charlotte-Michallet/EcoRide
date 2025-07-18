@@ -18,10 +18,23 @@
     --blue2: #0063FF;
     --blue3:#0019F0;
     --blue4: #05A8FA;
-    --beige: #E6D8C5;
+    --beige: #f7f4efe1;
 }
 
 /* All */
+body {
+   min-height: 100vh;
+   height: 100%;
+   padding: 0;
+   margin: 0;
+   display: flex;
+   flex-direction: column;
+}
+
+main{
+    flex-grow: 1;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -56,7 +69,7 @@ color: var(--green5);
 }
 
 
-/* home page */
+/* Page home */
 .hero{
     color: var(--darkGreen2);
 }
@@ -64,4 +77,12 @@ color: var(--green5);
 .form {
     position: relative;
     top: -40px;
+}
+
+/* Page login */
+
+.login {
+    background: var(--beige);
+    min-height: 73.7vh;
+    display: flex;
 }

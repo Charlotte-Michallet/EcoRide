@@ -1,5 +1,3 @@
-<?php require_once "../templates/header.php"; ?>
-
 <section>
     <div class="container px-6 py-10 mx-auto">
         <div>
@@ -51,5 +49,3 @@
         </div>
     </div>
 </section>
-
-<?php require_once "../templates/footer.php";

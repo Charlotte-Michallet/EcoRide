@@ -5,8 +5,7 @@ use App\Entity\User;
 
 class RegistRepository extends Repository
 {
-
-    public function createUser(string $username, string $email, string $password, string $date_of_birth, int $credits, int $id_role)
+    public function createUser(string $username, string $email, string $password, string $date_of_birth, int $credits, int $id_role): User
     {
         $query = $this->pdo->prepare("INSERT INTO users (username, email, password, date_of_birth, credits, id_role) VALUES(:username,:email, :password, :date, :credits, :id_role);");
 

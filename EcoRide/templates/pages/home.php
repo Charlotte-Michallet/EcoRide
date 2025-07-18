@@ -1,5 +1,3 @@
-<?php require_once "../templates/header.php"; ?>
-
   <!-- intro -->
 <section>
     <div class="hero relative isolate overflow-hidden py-10 sm:py-24 mt-5">
@@ -96,7 +94,4 @@ Notre plateforme sécurisée vous permet de partager vos trajets avec d’autres
             </div>
         </div>
     </div>
-
-
 </section>
-<?php require_once "../templates/footer.php"; ?>
