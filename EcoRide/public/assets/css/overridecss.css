@@ -57,7 +57,6 @@ color: var(--green5);
     cursor: pointer;
 }
 
-
 .btnSearch {
     background: var(--turquoise);
     cursor: pointer;
@@ -83,6 +82,6 @@ color: var(--green5);
 
 .login {
     background: var(--beige);
-    min-height: 73.7vh;
+    min-height: 71vh;
     display: flex;
 }

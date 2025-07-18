@@ -5,7 +5,7 @@
     <!-- Scroll to top link -->
     <div class="absolute -end-20 -top-5">
       <a class="btn inline-block rounded-full p-1 text-white shadow-sm transition sm:p-2 lg:p-4" href="#">
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20" fill="currentColor" >
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
         </svg>
       </a>
@@ -14,7 +14,7 @@
     <!-- logo -->
     <div class="lg:flex lg:items-center lg:justify-between pb-5 items-center">
       <div>
-        <img  class="h-20 w-35 object-contain" src="assets/img/logo/logo.png" alt="Logo">
+        <img class="h-20 w-35 object-contain" src="assets/img/logo/logo.png" alt="Logo ecoride">
       </div>
 
       <!-- Copyright text -->
@@ -38,4 +38,5 @@
   </div>
 </footer>
 </body>
+
 </html>

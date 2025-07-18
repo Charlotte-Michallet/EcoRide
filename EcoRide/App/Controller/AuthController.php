@@ -1,7 +1,6 @@
 <?php
-namespace App\Controller;
 
-use DateTime;
+namespace App\Controller;
 
 class AuthController extends Router
 {
@@ -37,11 +36,12 @@ class AuthController extends Router
     protected function login()
     {
         $this->render("auth/login");
+        $this->loginMethod();
     }
     protected function register()
     {
         $this->render("auth/register");
-        $this->registermethod();
+        $this->registerMethod();
     }
     protected function profil()
     {
@@ -50,7 +50,21 @@ class AuthController extends Router
 
     // Methods for getting data
 
-    protected function registermethod()
+    protected function loginMethod()
+    {
+        // if post method
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            $email      = htmlspecialchars(trim($_POST["emailLogin"]));
+            $password         = htmlspecialchars(trim($_POST["pwdLogin"]));
+
+            $login = new LoggingContr($email, $password);
+            $login->checkImputLoginUser();
+        }
+    }
+
+
+    protected function registerMethod()
     {
         // if post method
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -66,11 +80,7 @@ class AuthController extends Router
 
             $register = new RegisterContr($username, $email, $password, $passwordVerif, $date_of_birth, $credits, $id_role);
             $register->checkImputRegisterUser();
-
-            // show legal page
-            $this->render("auth/register");
         }
-
     }
 
     protected function userRole(string $role)
