@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Repository\RegistRepository;
@@ -63,7 +64,6 @@ class RegisterContr extends AccountContr
             if ($errors) {
                 $_SESSION["errorRegister"] = $errors;
                 exit();
-
             } else {
                 $repoRegister = new RegistRepository();
                 $newUser      = $repoRegister->createUser($this->username, $this->email, $this->password, $this->date_of_birth, $this->credits, $this->id_role);
@@ -71,15 +71,13 @@ class RegisterContr extends AccountContr
                 $_SESSION["id"]       = $newUser->getId();
                 $_SESSION["username"] = $newUser->getUsername();
                 $_SESSION["email"]    = $newUser->getEmail();
-                header("Location: http://localhost:8080/index.php");
+                header("Location: index.php");
 
                 return $newUser;
             }
-
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
-
     }
 
     protected function InputEmpty()

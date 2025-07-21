@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Repository\LoginRepository;
 
-class LoggingContr extends AccountContr
+class LogingContr extends AccountContr
 {
     public function __construct(string $email, string $password)
     {
@@ -38,7 +38,7 @@ class LoggingContr extends AccountContr
                 $_SESSION["id"]       = $newUser->getId();
                 $_SESSION["username"] = $newUser->getUsername();
                 $_SESSION["email"]    = $newUser->getEmail();
-                header("Location: http://localhost:8080/index.php");
+                header("Location: index.php");
 
                 return $newUser;
             }

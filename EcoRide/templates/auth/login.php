@@ -20,7 +20,7 @@
                     <input type="password" id="pwdLogin" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="pwdLogin" placeholder="8+ caractères, majuscule, chiffre" />
                 </div>
 
-
+                <input type="hidden" name="token_csrf" value="<?= htmlspecialchars($token) ?>">
                 <div class="flex items-center justify-end mt-4">
                     <button type="submit" class=" btn px-6 py-2 text-sm text-white font-medium tracking-wide capitalize transition-colors duration-300 transform rounded-lg"> Se connecter </button>
                 </div>

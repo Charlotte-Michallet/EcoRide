@@ -34,7 +34,10 @@ class PageController extends Router
 
     protected function home()
     {
-        $this->render("pages/home");
+        // token CSRF
+        $tokenObj = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
+        $this->render("pages/home", ["token" => $currentToken]);
     }
 
     protected function legal()

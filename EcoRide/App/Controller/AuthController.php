@@ -35,31 +35,59 @@ class AuthController extends Router
     // Methods for redirecting pages
     protected function login()
     {
-        $this->render("auth/login");
+        // generate token CSRF
+        $tokenObj = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
+
+        if (!$currentToken) {
+            error_log('Tentative de connexion bloquée : Jeton CSRF invalide. IP: ');
+            header("Location: http://localhost:8080/index.php?controller=auth&action=login");
+            exit();
+        }
+
+        // show page
+        $this->render("auth/login", ["token" => $currentToken]);
         $this->loginMethod();
     }
+
     protected function register()
     {
-        $this->render("auth/register");
+        // generate token CSRF
+        $tokenObj = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
+
+        // show page
+        $this->render("auth/register", ["token" => $currentToken]);
         $this->registerMethod();
     }
     protected function profil()
     {
-        $this->render("auth/profil");
+        // generate token CSRF
+        $tokenObj = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
+
+        // show page
+        $this->render("auth/profil", ["token" => $currentToken]);
     }
 
     // Methods for getting data
 
     protected function loginMethod()
     {
-        // if post method
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
+            // get data from form
             $email      = htmlspecialchars(trim($_POST["emailLogin"]));
             $password         = htmlspecialchars(trim($_POST["pwdLogin"]));
+            $submittedToken = htmlspecialchars($_POST["token_csrf"]);
 
-            $login = new LoggingContr($email, $password);
-            $login->checkImputLoginUser();
+            // Check token CSRF
+            $token = new TokenCsrf();
+            $isValid =   $token->validateToken($submittedToken);
+            if ($isValid) {
+                // check user
+                $login = new LogingContr($email, $password);
+                $login->checkImputLoginUser();
+            }
         }
     }
 
@@ -69,6 +97,8 @@ class AuthController extends Router
         // if post method
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
+            // get data from form
+            $submittedToken = htmlspecialchars($_POST["token_csrf"]);
             $username      = htmlspecialchars(trim($_POST["usernameRegister"]));
             $email         = htmlspecialchars(trim($_POST["emailRegister"]));
             $date_of_birth = htmlspecialchars(trim($_POST["dateBirthRegister"]));
@@ -78,8 +108,14 @@ class AuthController extends Router
             $credits       = 20;
             $id_role       = $this->userRole($role);
 
-            $register = new RegisterContr($username, $email, $password, $passwordVerif, $date_of_birth, $credits, $id_role);
-            $register->checkImputRegisterUser();
+            // Check token CSRF
+            $token = new TokenCsrf();
+            $isValid =   $token->validateToken($submittedToken);
+            if ($isValid) {
+                // Create user
+                $register = new RegisterContr($username, $email, $password, $passwordVerif, $date_of_birth, $credits, $id_role);
+                $register->checkImputRegisterUser();
+            }
         }
     }
 
