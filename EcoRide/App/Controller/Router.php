@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 class Router
@@ -25,6 +26,12 @@ class Router
                         $authRoute = new AuthController();
                         $authRoute->route();
                         break;
+
+                    case 'trips':
+                        $pageRouter = new TripsController();
+                        $pageRouter->route();
+                        break;
+
 
                     default:
                         # code...

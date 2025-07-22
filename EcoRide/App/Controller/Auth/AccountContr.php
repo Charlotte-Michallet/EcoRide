@@ -1,5 +1,6 @@
 <?php
-namespace App\Controller;
+
+namespace App\Controller\Auth;
 
 use App\Repository\RegistRepository;
 
@@ -38,8 +39,7 @@ class AccountContr
     }
 
     // verify if email is valid
-    protected function pwdInvalid()
-    {}
+    protected function pwdInvalid() {}
 
     protected function pwdMatch()
     {

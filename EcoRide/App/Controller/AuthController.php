@@ -1,7 +1,9 @@
 <?php
-
 namespace App\Controller;
 
+use App\Controller\Auth\LogingContr;
+use App\Controller\Auth\RegisterContr;
+use App\Controller\Car\CarContr;
 use App\Repository\UserRepository;
 
 class AuthController extends Router
@@ -23,6 +25,14 @@ class AuthController extends Router
                         $this->profil();
                         break;
 
+                    case 'profilModify':
+                        $this->profilModify();
+                        break;
+
+                    case 'cars':
+                        $this->cars();
+                        break;
+
                     default:
                         throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
                 }
@@ -38,9 +48,8 @@ class AuthController extends Router
     protected function login()
     {
         // generate token CSRF
-        $tokenObj = new TokenCsrf();
+        $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
-
 
         // show page
         $this->loginMethod();
@@ -50,7 +59,7 @@ class AuthController extends Router
     protected function register()
     {
         // generate token CSRF
-        $tokenObj = new TokenCsrf();
+        $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
         // show page
@@ -60,16 +69,41 @@ class AuthController extends Router
 
     protected function profil()
     {
-        $userId =  $_SESSION["id"];
+        $userId = $_SESSION["id"];
 
         if ($userId) {
 
             $userRepo = new UserRepository();
-            $user = $userRepo->userInfo($userId);
+            $user     = $userRepo->userInfo($userId);
 
             // show page
-            $this->render("auth/profil", ["user" =>  $user]);
+            $this->render("auth/profil", ["user" => $user]);
         }
+    }
+
+    protected function profilModify()
+    {
+        $userId = $_SESSION["id"];
+
+        if ($userId) {
+
+            $userRepo = new UserRepository();
+            $user     = $userRepo->userInfo($userId);
+
+            // show page
+            $this->render("auth/modifyProfil", ["user" => $user]);
+        }
+    }
+
+    protected function cars()
+    {
+        // generate token CSRF
+        $tokenObj     = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
+        $this->carsMethod();
+        // show page
+        $this->render("userTrips/userCars", ["token" => $currentToken]);
+
     }
 
     // Methods for getting data
@@ -79,12 +113,12 @@ class AuthController extends Router
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // get data from form
             $submittedToken = htmlspecialchars($_POST["token_csrf"]);
-            $email      = htmlspecialchars(trim($_POST["emailLogin"]));
-            $password         = htmlspecialchars(trim($_POST["pwdLogin"]));
+            $email          = htmlspecialchars(trim($_POST["emailLogin"]));
+            $password       = htmlspecialchars(trim($_POST["pwdLogin"]));
 
             // Check token CSRF
-            $token = new TokenCsrf();
-            $isValid =   $token->validateToken($submittedToken);
+            $token   = new TokenCsrf();
+            $isValid = $token->validateToken($submittedToken);
             if ($isValid) {
                 // check user
                 $login = new LogingContr($email, $password);
@@ -93,7 +127,6 @@ class AuthController extends Router
         }
     }
 
-
     protected function registerMethod()
     {
         // if post method
@@ -101,22 +134,55 @@ class AuthController extends Router
 
             // get data from form
             $submittedToken = htmlspecialchars($_POST["token_csrf"]);
-            $username      = htmlspecialchars(trim($_POST["usernameRegister"]));
-            $email         = htmlspecialchars(trim($_POST["emailRegister"]));
-            $date_of_birth = htmlspecialchars(trim($_POST["dateBirthRegister"]));
-            $password      = htmlspecialchars(trim($_POST["pwdRegister"]));
-            $passwordVerif = htmlspecialchars(trim($_POST["ConfPwdRegister"]));
-            $role          = htmlspecialchars(trim($_POST["userRolesRegister"]));
-            $credits       = 20;
-            $id_role       = $this->userRole($role);
+            $username       = htmlspecialchars(trim($_POST["usernameRegister"]));
+            $email          = htmlspecialchars(trim($_POST["emailRegister"]));
+            $date_of_birth  = htmlspecialchars(trim($_POST["dateBirthRegister"]));
+            $password       = htmlspecialchars(trim($_POST["pwdRegister"]));
+            $passwordVerif  = htmlspecialchars(trim($_POST["ConfPwdRegister"]));
+            $role           = htmlspecialchars(trim($_POST["userRolesRegister"]));
+            $credits        = 20;
+            $id_role        = $this->userRole($role);
 
             // Check token CSRF
-            $token = new TokenCsrf();
-            $isValid =   $token->validateToken($submittedToken);
+            $token   = new TokenCsrf();
+            $isValid = $token->validateToken($submittedToken);
             if ($isValid) {
                 // Create user
                 $register = new RegisterContr($username, $email, $password, $passwordVerif, $date_of_birth, $credits, $id_role);
                 $register->checkImputRegisterUser();
+            }
+        }
+    }
+
+    protected function carsMethod()
+    {
+        $user_id = $_SESSION["id"];
+
+        if ($user_id) {
+
+            // if post method
+            if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["newCar"]) && $_POST["newCar"])) {
+
+                // get data from form
+                $submittedToken      = htmlspecialchars($_POST["token_csrf"]);
+                $brand               = htmlspecialchars(trim($_POST["brandCreate"]));
+                $model               = htmlspecialchars(trim($_POST["modelCreate"]));
+                $energy_type         = htmlspecialchars(trim($_POST["energyType"]));
+                $numplate            = htmlspecialchars(trim($_POST["nbPlate"]));
+                $num_seats_string    = htmlspecialchars(trim($_POST["numSpaces"]));
+                $first_register_date = htmlspecialchars(trim($_POST["dateNbPlate"]));
+                $color               = htmlspecialchars(trim($_POST["colorCreate"]));
+                $num_seats           = (int) $num_seats_string;
+                // Check token CSRF
+                $token   = new TokenCsrf();
+                $isValid = $token->validateToken($submittedToken);
+
+                if ($isValid) {
+
+                    // new car
+                    $carContr = new CarContr($brand, $model, $energy_type, $num_seats, $numplate, $first_register_date, $color, $user_id);
+                    $carContr->checkImputs();
+                }
             }
         }
     }

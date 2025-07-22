@@ -13,7 +13,7 @@ class User
     protected int $credits;
     protected int $id_role;
     protected string $role;
-    protected string $drivers_license;
+    protected ?string $drivers_license;
 
     /**
      * Get the value of id
@@ -154,7 +154,7 @@ class User
     /**
      * Get the value of drivers_license
      */
-    public function getDriversLicense(): string
+    public function getDriversLicense(): ?string
     {
         return $this->drivers_license;
     }
@@ -162,7 +162,7 @@ class User
     /**
      * Set the value of drivers_license
      */
-    public function setDriversLicense(string $drivers_license): self
+    public function setDriversLicense(?string $drivers_license): self
     {
         $this->drivers_license = $drivers_license;
 

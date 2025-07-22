@@ -22,6 +22,11 @@
 }
 
 /* All */
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
    min-height: 100vh;
    height: 100%;
@@ -35,18 +40,7 @@ main{
     flex-grow: 1;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-.link {
-color: var(--green5);
-}
-
-.link:hover {
-   color: var(--green3); 
-}
-
+/* buttons */
 .btn {
     background: var(--green5);
     cursor: pointer;
@@ -67,6 +61,23 @@ color: var(--green5);
     cursor: pointer;
 }
 
+
+/* Links */
+.link {
+color: var(--green5);
+}
+
+.link:hover {
+   color: var(--green3); 
+}
+
+a {
+    cursor: pointer;
+}
+
+
+
+/* Pages */
 
 /* Page home */
 .hero{

@@ -26,6 +26,42 @@ CREATE TABLE users (
 
 CREATE TABLE cars(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    brand VARCHAR(50) NOT NULL,
+    model VARCHAR(50) NOT NULL,
+    energy_type VARCHAR(50) NOT NULL,
+    num_seats INT(11) NOT NULL,
+    number_plate VARCHAR(30) NOT NULL UNIQUE,
+    first_register_date DATE NOT NULL,
+    color VARCHAR(50) NOT NULL,
+    user_id INT(11) NOT NULL,
+    CONSTRAINT fk_user_car
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE preferences(
+    id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    user_id INT(11) NOT NULL UNIQUE,
+    smoking_allowed BOOLEAN NOT NULL,
+    animal_allowed BOOLEAN NOT NULL,
+    description TEXT,
+    CONSTRAINT fk_user_preference
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- not done
+
+
+
+CREATE TABLE feedbacks(
+    id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    note FLOAT,
+    feedback TEXT,
+    status VARCHAR(50),
+    reservation_id INT(11),
+    CONSTRAINT fk_user_feedback
+        FOREIGN KEY (user_id) REFERENCES users(id)
+        FOREIGN KEY (reservation_id) REFERENCES roles(id)
 );
 
 CREATE TABLE car_sharing(
@@ -37,20 +73,12 @@ CREATE TABLE reservations(
 );
 
 
-CREATE TABLE preferences(
-    id INT(11) PRIMARY KEY AUTO_INCREMENT,
-);
-
-CREATE TABLE feedbacks(
-    id INT(11) PRIMARY KEY AUTO_INCREMENT,
-);
-
 
 -- Insert data in tables
-INSERT INTO roles(name, description) 
-VALUES ("admin", "Administrateur du systeme qui peut gerer les comptes et voir les statistiques."),
-("employee", "Employe qui peut gerer les trajets et les avis."),
-("driver", "Utilisateur enregistre qui peut etre chauffeur d'un trajet"),
-("passenger", "Utilisateur enregistre qui peut etre passager d'un trajet." ),
-("driverAndpassenger", "Utilisateur enregistre qui peut etre passager ou chauffeur d'un trajet."),
-("visitor", "Utilisateur non authentifie, mais il peut tout de meme rechercher des trajets");
+INSERT INTO roles(name, description,role) 
+VALUES ("admin", "Administrateur du systeme qui peut gerer les comptes et voir les statistiques.", "Admin"),
+("employee", "Employe qui peut gerer les trajets et les avis.", "Employé"),
+("driver", "Utilisateur enregistre qui peut etre chauffeur d'un trajet", "Conducteur"),
+("passenger", "Utilisateur enregistre qui peut etre passager d'un trajet.", "Passager"),
+("driverAndpassenger", "Utilisateur enregistre qui peut etre passager ou chauffeur d'un trajet.", "Conducteur ou passager"),
+("visitor", "Utilisateur non authentifie, mais il peut tout de meme rechercher des trajets", "Visiteur");

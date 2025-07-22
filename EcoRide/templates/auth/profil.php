@@ -1,16 +1,6 @@
 <section class="mt-5">
-    <!-- Page title -->
 
-    <h1 class="mt-2 text-2xl font-semibold md:text-3xl">Profil</h1>
-
-    <!-- pages -->
-    <div class="flex overflow-x-auto overflow-y-hidden border-b border-gray-200 whitespace-nowrap">
-        <button class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-blue-600 bg-transparent border-b-2 border-blue-500 sm:px-4 -px-1  whitespace-nowrap focus:outline-none">Creer voyage </button>
-
-        <button class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1  whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400"> Gere ses trajets</button>
-
-        <button class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">Historique</button>
-    </div>
+    <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php" ?>
 
 
     <!-- Profil info and feedback -->
@@ -23,12 +13,12 @@
                 <div class="w-full max-w-md">
 
                     <div class="flex items-center justify-center mt-6">
-                        <a href="#" class="w-1/3 pb-4 font-medium text-center text-gray-500 capitalize border-b dark:border-gray-400 dark:text-gray-300">
+                        <a href="http://localhost:8080/index.php?controller=auth&action=profilModify" class="w-1/3 pb-4 font-medium text-center text-gray-500 capitalize border-b">
                             modifier compte
                         </a>
 
-                        <a href="#" class="w-1/3 pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-blue-500 dark:border-blue-400 dark:text-white">
-                            supimer compte
+                        <a href="#" class="w-1/3 pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-blue-500">
+                            supprimer compte
                         </a>
                     </div>
 
