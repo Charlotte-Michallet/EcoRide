@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
+
 class AuthController extends Router
 {
     public function route()
@@ -39,15 +41,10 @@ class AuthController extends Router
         $tokenObj = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
-        if (!$currentToken) {
-            error_log('Tentative de connexion bloquée : Jeton CSRF invalide. IP: ');
-            header("Location: http://localhost:8080/index.php?controller=auth&action=login");
-            exit();
-        }
 
         // show page
-        $this->render("auth/login", ["token" => $currentToken]);
         $this->loginMethod();
+        $this->render("auth/login", ["token" => $currentToken]);
     }
 
     protected function register()
@@ -57,17 +54,22 @@ class AuthController extends Router
         $currentToken = $tokenObj->getGenerateToken();
 
         // show page
-        $this->render("auth/register", ["token" => $currentToken]);
         $this->registerMethod();
+        $this->render("auth/register", ["token" => $currentToken]);
     }
+
     protected function profil()
     {
-        // generate token CSRF
-        $tokenObj = new TokenCsrf();
-        $currentToken = $tokenObj->getGenerateToken();
+        $userId =  $_SESSION["id"];
 
-        // show page
-        $this->render("auth/profil", ["token" => $currentToken]);
+        if ($userId) {
+
+            $userRepo = new UserRepository();
+            $user = $userRepo->userInfo($userId);
+
+            // show page
+            $this->render("auth/profil", ["user" =>  $user]);
+        }
     }
 
     // Methods for getting data
@@ -76,9 +78,9 @@ class AuthController extends Router
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // get data from form
+            $submittedToken = htmlspecialchars($_POST["token_csrf"]);
             $email      = htmlspecialchars(trim($_POST["emailLogin"]));
             $password         = htmlspecialchars(trim($_POST["pwdLogin"]));
-            $submittedToken = htmlspecialchars($_POST["token_csrf"]);
 
             // Check token CSRF
             $token = new TokenCsrf();
@@ -136,7 +138,7 @@ class AuthController extends Router
             case 'passenger':
                 return 4;
 
-            case 'driverAndPassenger':
+            case 'driverAndPassengerR':
                 return 5;
 
             default:

@@ -35,7 +35,7 @@
                                     <input
                                         type="radio"
                                         name="userRolesRegister"
-                                        value="driverAndPassenger"
+                                        value="driverAndPassengerR"
                                         id="driverAndPassengerR"
                                         class="sr-only"
                                         checked />

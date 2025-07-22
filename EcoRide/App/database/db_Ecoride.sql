@@ -5,7 +5,8 @@ use ecoride;
 CREATE TABLE roles(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
-    description VARCHAR(255) NOT NULL
+    description VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE users (

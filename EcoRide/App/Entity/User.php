@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entity;
 
 class User
@@ -8,9 +9,10 @@ class User
     protected string $email;
     protected string $password;
     protected string $date_of_birth;
-    protected string $photo_url;
+    protected ?string $photo_url;
     protected int $credits;
     protected int $id_role;
+    protected string $role;
     protected string $drivers_license;
 
     /**
@@ -98,7 +100,7 @@ class User
     /**
      * Get the value of photo_url
      */
-    public function getPhotoUrl(): string
+    public function getPhotoUrl(): ?string
     {
         return $this->photo_url;
     }
@@ -106,7 +108,7 @@ class User
     /**
      * Set the value of photo_url
      */
-    public function setPhotoUrl(string $photo_url): self
+    public function setPhotoUrl(?string $photo_url): self
     {
         $this->photo_url = $photo_url;
 
@@ -163,6 +165,24 @@ class User
     public function setDriversLicense(string $drivers_license): self
     {
         $this->drivers_license = $drivers_license;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of role
+     */
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    /**
+     * Set the value of role
+     */
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }

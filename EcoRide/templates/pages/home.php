@@ -38,23 +38,23 @@
     <form action="post">
       <div class="flex gap-6 justify-around items-center">
         <div>
-          <label class="text-gray-700 " for="departureHome">Ville de départ</label>
-          <input type="text" id="departureHome" class="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-200 rounded-md  focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring" name="departureHome">
+          <label for="departureHome">Ville de départ</label>
+          <input type="text" id="departureHome" class="block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring" name="departureHome">
         </div>
 
         <div>
-          <label class="text-gray-700 " for="arrivalHome">Ville d'arriver</label>
-          <input type="text" id="arrivalHome" class="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-200 rounded-m focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring" name="arrivalHome">
+          <label for="arrivalHome">Ville d'arriver</label>
+          <input type="text" id="arrivalHome" class="block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring" name="arrivalHome">
         </div>
 
         <div>
-          <label class="text-gray-700" for="departureDateHome">Date de départ</label>
-          <input type="text" id="departureDateHome" class="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-200 rounded-m focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring" name="departureDateHome">
+          <label for="departureDateHome">Date de départ</label>
+          <input type="text" id="departureDateHome" class="block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring" name="departureDateHome">
         </div>
 
         <div>
-          <label class="text-gray-700" for="numPassengers">Nombre de passagers</label>
-          <input type="number" id="numPassengers" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-emerald-600 focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring" name="numPassengers">
+          <label for="numPassengers">Nombre de passagers</label>
+          <input type="number" id="numPassengers" class="block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring" name="numPassengers">
         </div>
 
         <input type="hidden" name="token_csrf" value="<?= htmlspecialchars($token) ?>">
@@ -78,7 +78,7 @@
 
           <div class="mt-2 md:mx-6">
             <p class="text-lg leading-relaxed text-white md:text-xl"> EcoRide est une entreprise française dédiée à une mobilité plus durable. En favorisant le covoiturage, nous réduisons l’empreinte carbone. Notre mission est de simplifier la mise en relation entre conducteurs et passagers afin de réduire l'empreinte carbone. Avec EcoRide, voyagez de façon plus responsable et contribuez à un avenir plus vert.
-              Drive Green Together</p>
+              Drive Green Together!</p>
           </div>
         </div>
       </div>

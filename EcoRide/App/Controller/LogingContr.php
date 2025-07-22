@@ -33,14 +33,12 @@ class LogingContr extends AccountContr
                 exit();
             } else {
                 $repoLogin = new LoginRepository();
-                $newUser      = $repoLogin->getUser($this->email, $this->password);
+                $user      = $repoLogin->getUser($this->email, $this->password);
 
-                $_SESSION["id"]       = $newUser->getId();
-                $_SESSION["username"] = $newUser->getUsername();
-                $_SESSION["email"]    = $newUser->getEmail();
+                $_SESSION["id"]       = $user->getId();
+                $_SESSION["username"] = $user->getUsername();
+                $_SESSION["email"]    = $user->getEmail();
                 header("Location: index.php");
-
-                return $newUser;
             }
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

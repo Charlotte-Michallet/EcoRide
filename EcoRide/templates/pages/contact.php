@@ -15,7 +15,9 @@
                     </span>
 
                     <h2 class="mt-2 text-base font-medium">Email</h2>
-                    <a href="mailto:contact@ecoride.com"><p class="mt-2 text-sm text-emerald-600">contact@ecoride.com</p></a>
+                    <a href="mailto:contact@ecoride.com">
+                        <p class="mt-2 text-sm text-emerald-600">contact@ecoride.com</p>
+                    </a>
                 </div>
 
                 <div>
@@ -38,13 +40,15 @@
                     </span>
 
                     <h2 class="mt-2 text-base font-medium">Phone</h2>
-                  <a href="tel:+33166778899"> <p class="mt-2 text-sm text-emerald-600">01 66 77 88 99</p></a>
+                    <a href="tel:+33166778899">
+                        <p class="mt-2 text-sm text-emerald-600">01 66 77 88 99</p>
+                    </a>
                 </div>
             </div>
 
             <!-- Google maps -->
             <div class="overflow-hidden rounded-lg lg:col-span-2 h-96 lg:h-auto">
-                <iframe  width="100%" height="100%" frameborder="0" title="map" marginheight="0" marginwidth="0" scrolling="no" style="filter: grayscale(0.2) contrast(1.2) opacity(0.8)" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10498.009169451838!2d2.3308047606380042!3d48.86770045434094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e3c954c68fd%3A0x50b82c368941a60!2s2e%20Arrondissement%2C%2075002%20Paris!5e0!3m2!1sfr!2sfr!4v1752653848078!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe width="100%" height="100%" frameborder="0" title="map" marginheight="0" marginwidth="0" scrolling="no" style="filter: grayscale(0.2) contrast(1.2) opacity(0.8)" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10498.009169451838!2d2.3308047606380042!3d48.86770045434094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e3c954c68fd%3A0x50b82c368941a60!2s2e%20Arrondissement%2C%2075002%20Paris!5e0!3m2!1sfr!2sfr!4v1752653848078!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </div>
