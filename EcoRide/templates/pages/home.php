@@ -11,7 +11,8 @@
       <div class="max-w-7xl px-6 lg:px-8 mx-auto">
         <div class="mx-auto max-w-2xl lg:mx-0 bg-gray-200/80 rounded-xl p-4">
           <h1 class="text-5xl font-semibold tracking-tight sm:text-7xl">EcoRide</h1>
-          <p class="mt-8 text-lg font-medium text-pretty sm:text-xl/8">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat.</p>
+          <p class="mt-3 text-2xl font-semibold text-pretty">Drive Green Together</p>
+          <p class="mt-4 text-lg font-medium text-pretty sm:text-xl/8">Plateforme de covoiturage écologique</p>
         </div>
         <div class="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
           <dl class="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
@@ -57,7 +58,7 @@
           <input type="number" id="numPassengers" class="block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring" name="numPassengers">
         </div>
 
-        <input type="hidden" name="token_csrf" value="<?= htmlspecialchars($token) ?>">
+        <input type="hidden" name="token_csrf" value="<?php echo htmlspecialchars($token) ?>">
 
         <div>
           <button class="btnSearch item-center px-5 py-2 leading-5 text-white transition-colors duration-300 transform rounded-md focus:outline-none">Rechercher</button>

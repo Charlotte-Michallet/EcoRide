@@ -1,5 +1,5 @@
 <section class="mt-5">
-
+<!-- car -->
     <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php"?>
 
     <!-- Table Section -->
@@ -16,13 +16,12 @@
                                 <h2 class="text-xl font-semibold">
                                     Mes voitures
                                 </h2>
-
                             </div>
 
                             <div>
                                 <div class="inline-flex gap-x-2">
 
-                                    <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-modal-signup" data-hs-overlay="#hs-modal-signup">
+                                    <button type="button" id="btnOpenModal" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-modal-signup" data-hs-overlay="#hs-modal-signup">
                                         <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M5 12h14" />
                                             <path d="M12 5v14" />
@@ -41,339 +40,135 @@
 
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
-                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                Marque
-                                            </span>
+                                            <span class="text-xs font-semibold uppercase">Marque</span>
                                         </div>
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
-                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                modele
-                                            </span>
+                                            <span class="text-xs font-semibold uppercase">Modele</span>
                                         </div>
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
-                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                Type d'energie utiliser
-                                            </span>
+                                            <span class="text-xs font-semibold uppercase">Type d'energie utiliser</span>
                                         </div>
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
-                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                Nombre de place maximum
-                                            </span>
+                                            <span class="text-xs font-semibold uppercase">Nombre de place maximum</span>
                                         </div>
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
-                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                Immatriculation
-                                            </span>
+                                            <span class="text-xs font-semibold uppercase">Immatriculation</span>
                                         </div>
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
-                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                Date première immatriculation
-                                            </span>
+                                            <span class="text-xs font-semibold uppercase">Date première immatriculation</span>
                                         </div>
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
-                                            <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                Couleur
-                                            </span>
+                                            <span class="text-xs font-semibold uppercase ">Couleur</span>
+                                        </div>
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-xs font-semibold uppercase ">Supprimer</span>
                                         </div>
                                     </th>
 
                                 </tr>
                             </thead>
 
-                            <tbody class="divide-y divide-gray-200 ">
+                            <tbody class="divide-y divide-gray-300 ">
 
-                                <!-- Row -->
-                                <tr>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="ps-6 py-3">
-                                            <label for="hs-at-with-checkboxes-1" class="flex">
-                                                <input type="checkbox" class="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-at-with-checkboxes-1">
-                                                <span class="sr-only">Checkbox</span>
-                                            </label>
-                                        </div>
-                                    </td>
+                                <?php foreach ($cars as $car) {?>
 
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <span class="text-sm text-gray-600 dark:text-neutral-400">Streamlab</span>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <div class="flex items-center gap-x-2">
-                                                <img class="inline-block size-6 rounded-full" src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar">
-                                                <div class="grow">
-                                                    <span class="text-sm text-gray-600 dark:text-neutral-400">Christina Bersh</span>
+                                    <!-- Row -->
+                                    <tr>
+                                        <td class="size-px whitespace-nowrap">
+                                            <div class="ps-6 py-3">
+                                            <p><?php echo $car->getBrand(); ?></p>
+                                            </div>
+                                        </td>
+
+                                        <td class="size-px whitespace-nowrap">
+                                            <div class="px-6 py-3">
+                                                <p><?php echo $car->getModel(); ?></p>
+                                            </div>
+                                        </td>
+
+                                        <td class="size-px whitespace-nowrap">
+                                            <div class="px-6 py-3">
+                                                <p><?php echo $car->getEnergyType(); ?></p>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                                Copy Key
-                                                <svg class="shrink-0 size-4 text-gray-400 dark:text-neutral-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                    <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
-                                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
-                                                <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                                                </svg>
-                                                Successful
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <span class="text-sm text-gray-600 dark:text-neutral-400">28 Dec, 12:12</span>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-1.5">
-                                            <div class="hs-dropdown [--placement:bottom-right] relative inline-block">
-                                                <button id="hs-table-dropdown-1" type="button" class="hs-dropdown-toggle py-1.5 px-2 inline-flex justify-center items-center gap-2 rounded-lg text-gray-700 align-middle disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:text-neutral-400 dark:hover:text-white dark:focus:ring-offset-gray-800" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <circle cx="12" cy="12" r="1" />
-                                                        <circle cx="19" cy="12" r="1" />
-                                                        <circle cx="5" cy="12" r="1" />
-                                                    </svg>
-                                                </button>
-                                                <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-40 z-10 bg-white shadow-2xl rounded-lg p-2 mt-2 dark:divide-neutral-700 dark:bg-neutral-800 dark:border dark:border-neutral-700" role="menu" aria-orientation="vertical" aria-labelledby="hs-table-dropdown-1">
-                                                    <div class="py-2 first:pt-0 last:pb-0">
-                                                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
-                                                            Rename
-                                                        </a>
-                                                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
-                                                            Regenrate Key
-                                                        </a>
-                                                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
-                                                            Disable
-                                                        </a>
-                                                    </div>
-                                                    <div class="py-2 first:pt-0 last:pb-0">
-                                                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-red-600 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-red-500 dark:hover:bg-neutral-700" href="#">
-                                                            Delete
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
 
-                                <tr>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="ps-6 py-3">
-                                            <label for="hs-at-with-checkboxes-2" class="flex">
-                                                <input type="checkbox" class="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-at-with-checkboxes-2">
-                                                <span class="sr-only">Checkbox</span>
-                                            </label>
-                                        </div>
-                                    </td>
-
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <span class="text-sm text-gray-600 dark:text-neutral-400">Node</span>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <div class="flex items-center gap-x-2">
-                                                <img class="inline-block size-6 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar">
-                                                <div class="grow">
-                                                    <span class="text-sm text-gray-600 dark:text-neutral-400">David Harrison</span>
-                                                </div>
+                                        <td class="size-px whitespace-nowrap">
+                                            <div class="px-6 py-3">
+                                                <p><?php echo $car->getNumSeats(); ?></p>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                                Copy Key
-                                                <svg class="shrink-0 size-4 text-gray-400 dark:text-neutral-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                    <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
-                                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <span class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-green-200">
-                                                <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
-                                                </svg>
-                                                Warning
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <span class="text-sm text-gray-600 dark:text-neutral-400">20 Dec, 09:27</span>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-1.5">
-                                            <div class="hs-dropdown [--placement:bottom-right] relative inline-block">
-                                                <button id="hs-table-dropdown-2" type="button" class="hs-dropdown-toggle py-1.5 px-2 inline-flex justify-center items-center gap-2 rounded-lg text-gray-700 align-middle disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:text-neutral-400 dark:hover:text-white dark:focus:ring-offset-gray-800" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <circle cx="12" cy="12" r="1" />
-                                                        <circle cx="19" cy="12" r="1" />
-                                                        <circle cx="5" cy="12" r="1" />
-                                                    </svg>
-                                                </button>
-                                                <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-40 z-10 bg-white shadow-2xl rounded-lg p-2 mt-2 dark:divide-neutral-700 dark:bg-neutral-800 dark:border dark:border-neutral-700" role="menu" aria-orientation="vertical" aria-labelledby="hs-table-dropdown-2">
-                                                    <div class="py-2 first:pt-0 last:pb-0">
-                                                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
-                                                            Rename
-                                                        </a>
-                                                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
-                                                            Regenrate Key
-                                                        </a>
-                                                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
-                                                            Disable
-                                                        </a>
-                                                    </div>
-                                                    <div class="py-2 first:pt-0 last:pb-0">
-                                                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-red-600 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-red-500 dark:hover:bg-neutral-700" href="#">
-                                                            Delete
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
 
-                                <tr>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="ps-6 py-3">
-                                            <label for="hs-at-with-checkboxes-3" class="flex">
-                                                <input type="checkbox" class="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-at-with-checkboxes-3">
-                                                <span class="sr-only">Checkbox</span>
-                                            </label>
-                                        </div>
-                                    </td>
-
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <span class="text-sm text-gray-600 dark:text-neutral-400">FrontMail</span>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <div class="flex items-center gap-x-2">
-                                                <span class="inline-flex items-center justify-center size-6 rounded-full bg-gray-300 dark:bg-neutral-700">
-                                                    <span class="text-xs font-medium text-gray-800 dark:text-neutral-200">A</span>
-                                                </span>
-                                                <div class="grow">
-                                                    <span class="text-sm text-gray-600 dark:text-neutral-400">Anne Richard</span>
-                                                </div>
+                                        <td class="size-px whitespace-nowrap">
+                                            <div class="px-6 py-3">
+                                                <p><?php echo $car->getNumplate(); ?></p>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                                Copy Key
-                                                <svg class="shrink-0 size-4 text-gray-400 dark:text-neutral-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                    <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
-                                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
-                                                <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                                                </svg>
-                                                Successful
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <span class="text-sm text-gray-600 dark:text-neutral-400">18 Dec, 15:20</span>
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-1.5">
-                                            <div class="hs-dropdown [--placement:bottom-right] relative inline-block">
-                                                <button id="hs-table-dropdown-3" type="button" class="hs-dropdown-toggle py-1.5 px-2 inline-flex justify-center items-center gap-2 rounded-lg text-gray-700 align-middle disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:text-neutral-400 dark:hover:text-white dark:focus:ring-offset-gray-800" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <circle cx="12" cy="12" r="1" />
-                                                        <circle cx="19" cy="12" r="1" />
-                                                        <circle cx="5" cy="12" r="1" />
-                                                    </svg>
-                                                </button>
-                                                <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-40 z-10 bg-white shadow-2xl rounded-lg p-2 mt-2 dark:divide-neutral-700 dark:bg-neutral-800 dark:border dark:border-neutral-700" role="menu" aria-orientation="vertical" aria-labelledby="hs-table-dropdown-3">
-                                                    <div class="py-2 first:pt-0 last:pb-0">
-                                                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
-                                                            Rename
-                                                        </a>
-                                                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
-                                                            Regenrate Key
-                                                        </a>
-                                                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
-                                                            Disable
-                                                        </a>
-                                                    </div>
-                                                    <div class="py-2 first:pt-0 last:pb-0">
-                                                        <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-red-600 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-red-500 dark:hover:bg-neutral-700" href="#">
-                                                            Delete
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
 
+                                        <td class="size-px whitespace-nowrap">
+                                            <div class="px-6 py-3">
+                                            <p><?php echo $car->getFirstRegisterDate(); ?></p>
+                                            </div>
+                                        </td>
+
+                                        <td class="size-px whitespace-nowrap">
+                                            <div class="px-6 py-3">
+                                            <p><?php echo $car->getColor(); ?></p>
+                                            </div>
+                                        </td>
+
+
+                                        <td class="size-px whitespace-nowrap">
+                                            <div class="px-6 py-3">
+                                           <form method="post">
+                                           <input type="hidden" name="idCarDelete" value="<?php echo $car->getId(); ?>">
+                                           <input type="hidden" name="token_csrf" value="<?php echo htmlspecialchars($token); ?>">
+                                            <button class="text-sm" name="submitDeleteCar" value="submitDeleteCar" type="submit">Supprimer</button>
+                                        </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php }?>
 
                             </tbody>
                         </table>
                         <!-- End Table -->
 
                         <!-- Footer -->
-                        <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700">
+                        <div class="bg-gray-50/60 px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-300">
                             <div>
-                                <p class="text-sm text-gray-600 dark:text-neutral-400">
-                                    <span class="font-semibold text-gray-800 dark:text-neutral-200">6</span> results
+                                <p class="text-sm text-gray-600">
+                                    <span class="font-semibold text-gray-800">6</span> results
                                 </p>
                             </div>
 
-                            <div>
-                                <div class="inline-flex gap-x-2">
-                                    <img src="<?php ROOT_PATH?> /public/assets/img/logo/form.png" alt="logo EcoRide">
-                                    <p class="text-s">*Voyage écologique = voyage en éléctrique</p>
+                            <divc class="flex items-center">
+                                <div class="text-xs inline-flex gap-x-2">
+                                    <img class="w-auto h-7 w-7" src="<?php ROOT_PATH?> /assets/img/logo/form.png" alt="logo EcoRide">
+                                    <p>*Voyage écologique = voyage en éléctrique</p>
                                 </div>
-                            </div>
+                            </divc>
                         </div>
                         <!-- End Footer -->
                     </div>
@@ -394,7 +189,7 @@
             <div class="bg-white border border-gray-200 rounded-xl shadow-2xs">
                 <div class="p-4 sm:p-7">
                     <div class="text-center">
-                        <h3 id="hs-modal-signup-label" class="block text-2xl font-bold text-gray-800">Ajouter une voiture</h3>
+                        <h3 id="hs-modal-signup-label" class="block text-2xl font-bold ">Ajouter une voiture</h3>
                     </div>
 
                     <!-- Form -->
@@ -434,9 +229,9 @@
                             <div>
                                 <label for="energyType" class="block text-sm mb-2">Type d'energie de la voiture</label>
                                 <select name="energyType" id="energyType">
-                                    <option value="electrique">Electrique</option>
-                                    <option value="hybride">Hybride</option>
-                                    <option value="thermal">Thermiaque</option>
+                                    <option value="Electrique">Electrique</option>
+                                    <option value="Hybride">Hybride</option>
+                                    <option value="Thermique">Thermique</option>
 
                                 </select>
                             </div>

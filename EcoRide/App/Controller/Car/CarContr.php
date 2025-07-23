@@ -42,6 +42,12 @@ class CarContr
                 return $errors;
             }
 
+            if ($this->carTaken() === true) {
+                $errors = ["La voiture est déjà enregistrer"];
+                echo "La voiture est déjà enregistrer";
+                return $errors;
+            }
+
             if (! is_numeric($this->num_seats)) {
                 echo "Ce champs doit etre numerique";
                 $errors = ["Ce champs doit etre numerique"];
@@ -55,9 +61,7 @@ class CarContr
             } else {
 
                 $repoCar = new CarRepository();
-                $newCar  = $repoCar->createCar($this->brand, $this->model, $this->energy_type, $this->num_seats, $this->numplate, $this->first_register_date, $this->color, $this->user_id);
-
-                return $newCar;
+                $repoCar->createCar($this->brand, $this->model, $this->energy_type, $this->num_seats, $this->numplate, $this->first_register_date, $this->color, $this->user_id);
 
             }
         } catch (\Exception $e) {
@@ -77,6 +81,17 @@ class CarContr
     protected function inputInvalid()
     {
         if (! preg_match("/^[a-zA-Z0-9]*$/", $this->brand) || ! preg_match("/^[a-zA-Z0-9_]*$/", $this->model) || ! preg_match("/^[a-zA-Z0-9]*$/", $this->energy_type) || ! preg_match("/^[a-zA-Z0-9]*$/", $this->color) || ! preg_match("/^[0-9]*$/", $this->num_seats) || ! preg_match("/^[a-zA-Z0-9-]*$/", $this->numplate)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    protected function carTaken()
+    {
+        $carRepo = new CarRepository();
+        if ($carRepo->checkCarInDb($this->numplate)) {
             $result = true;
         } else {
             $result = false;

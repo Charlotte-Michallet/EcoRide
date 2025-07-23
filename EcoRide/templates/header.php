@@ -14,6 +14,10 @@
   <!-- css link -->
   <link rel="stylesheet" href="/assets/css/overridecss.css">
 
+  <!-- link JavaScript -->
+
+  <script type="module" src="/assets/javascript/index.js"></script>
+
   <title>EcoRide</title>
 </head>
 
@@ -40,7 +44,7 @@
 
         <div class="flex items-center gap-4 text-lg">
 
-          <?php if (isset($_SESSION["username"])) { ?>
+          <?php if (isset($_SESSION["username"])) {?>
             <div class="flex items-center gap-x-6">
               <a href="http://localhost:8080/index.php?controller=auth&action=profil"><img class="object-cover w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&h=764&q=100" alt="profil pic"></a>
 
@@ -52,7 +56,7 @@
 
             </div>
 
-          <?php } else { ?>
+          <?php } else {?>
             <div class="sm:flex sm:gap-4">
               <a
                 class="btn block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
@@ -66,7 +70,7 @@
                 Inscription
               </a>
             </div>
-          <?php } ?>
+          <?php }?>
         </div>
       </div>
     </div>

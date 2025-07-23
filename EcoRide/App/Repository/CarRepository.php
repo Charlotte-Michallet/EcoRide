@@ -23,18 +23,42 @@ class CarRepository extends Repository
 
             $query->execute();
 
-            // user id (from user table just created)
-            $lastInsertedId = $this->pdo->lastInsertId();
-
-            // Hydration
-            $carInfo = new car();
-            $carInfo->setId($lastInsertedId);
-
-            return $carInfo;
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
+    }
 
+    public function showUserCars(int $user_id)
+    {
+        try {
+            $query = $this->pdo->prepare("SELECT * FROM cars WHERE user_id = :user_id;");
+            $query->bindValue(":user_id", $user_id, $this->pdo::PARAM_INT);
+            $query->execute();
+
+            $carsInfo = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+            $cars = [];
+            foreach ($carsInfo as $carInfo) {
+
+                // Hydration
+                $car = new Car();
+                $car->setId($carInfo["id"]);
+                $car->setBrand($carInfo["brand"]);
+                $car->setModel($carInfo["model"]);
+                $car->setEnergyType($carInfo["energy_type"]);
+                $car->setNumSeats($carInfo["num_seats"]);
+                $car->setNumplate($carInfo["number_plate"]);
+                $car->setFirstRegisterDate($carInfo["first_register_date"]);
+                $car->setColor($carInfo["color"]);
+                $car->setUserId($carInfo["user_id"]);
+                $cars[] = $car;
+
+            }
+            return $cars;
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 
     public function deleteCar(int $id)
@@ -50,7 +74,7 @@ class CarRepository extends Repository
 
     public function checkCarInDb(string $numplate): mixed
     {
-        $query = $this->pdo->prepare("SELECT COUNT(*) FROM cars WHERE numplate = :numplate;");
+        $query = $this->pdo->prepare("SELECT COUNT(*) FROM cars WHERE number_plate = :numplate;");
 
         $query->bindValue(":numplate", $numplate);
         $query->execute();

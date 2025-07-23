@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\Auth\LogingContr;
 use App\Controller\Auth\RegisterContr;
 use App\Controller\Car\CarContr;
+use App\Repository\CarRepository;
 use App\Repository\UserRepository;
 
 class AuthController extends Router
@@ -97,13 +98,21 @@ class AuthController extends Router
 
     protected function cars()
     {
-        // generate token CSRF
-        $tokenObj     = new TokenCsrf();
-        $currentToken = $tokenObj->getGenerateToken();
-        $this->carsMethod();
-        // show page
-        $this->render("userTrips/userCars", ["token" => $currentToken]);
+        $user_id = $_SESSION["id"];
 
+        if ($user_id) {
+            // generate token CSRF
+            $tokenObj     = new TokenCsrf();
+            $currentToken = $tokenObj->getGenerateToken();
+            $this->carsMethod();
+            $carRepo  = new CarRepository();
+            $carsInfo = $carRepo->showUserCars($user_id);
+
+            $this->deleteCarnMethod();
+
+            // show page
+            $this->render("userTrips/userCars", ["token" => $currentToken, "cars" => $carsInfo]);
+        }
     }
 
     // Methods for getting data
@@ -158,32 +167,50 @@ class AuthController extends Router
     {
         $user_id = $_SESSION["id"];
 
-        if ($user_id) {
+        // if post method
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["newCar"]) && $_POST["newCar"])) {
 
-            // if post method
-            if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["newCar"]) && $_POST["newCar"])) {
+            // get data from form
+            $submittedToken      = htmlspecialchars($_POST["token_csrf"]);
+            $brand               = htmlspecialchars(trim($_POST["brandCreate"]));
+            $model               = htmlspecialchars(trim($_POST["modelCreate"]));
+            $energy_type         = htmlspecialchars(trim($_POST["energyType"]));
+            $numplate            = htmlspecialchars(trim($_POST["nbPlate"]));
+            $num_seats_string    = htmlspecialchars(trim($_POST["numSpaces"]));
+            $first_register_date = htmlspecialchars(trim($_POST["dateNbPlate"]));
+            $color               = htmlspecialchars(trim($_POST["colorCreate"]));
+            $num_seats           = (int) $num_seats_string;
+            // Check token CSRF
+            $token   = new TokenCsrf();
+            $isValid = $token->validateToken($submittedToken);
 
-                // get data from form
-                $submittedToken      = htmlspecialchars($_POST["token_csrf"]);
-                $brand               = htmlspecialchars(trim($_POST["brandCreate"]));
-                $model               = htmlspecialchars(trim($_POST["modelCreate"]));
-                $energy_type         = htmlspecialchars(trim($_POST["energyType"]));
-                $numplate            = htmlspecialchars(trim($_POST["nbPlate"]));
-                $num_seats_string    = htmlspecialchars(trim($_POST["numSpaces"]));
-                $first_register_date = htmlspecialchars(trim($_POST["dateNbPlate"]));
-                $color               = htmlspecialchars(trim($_POST["colorCreate"]));
-                $num_seats           = (int) $num_seats_string;
-                // Check token CSRF
-                $token   = new TokenCsrf();
-                $isValid = $token->validateToken($submittedToken);
+            if ($isValid) {
 
-                if ($isValid) {
-
-                    // new car
-                    $carContr = new CarContr($brand, $model, $energy_type, $num_seats, $numplate, $first_register_date, $color, $user_id);
-                    $carContr->checkImputs();
-                }
+                // new car
+                $carContr = new CarContr($brand, $model, $energy_type, $num_seats, $numplate, $first_register_date, $color, $user_id);
+                $carContr->checkImputs();
             }
+        }
+
+    }
+
+    protected function deleteCarnMethod()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["submitDeleteCar"]) && $_POST["submitDeleteCar"])) {
+
+            // get data from form
+            $submittedToken = htmlspecialchars($_POST["token_csrf"]);
+            $id             = htmlspecialchars(trim($_POST["idCarDelete"]));
+
+            // Check token CSRF
+            $token   = new TokenCsrf();
+            $isValid = $token->validateToken($submittedToken);
+
+            if ($isValid) {
+                $carRepo = new CarRepository();
+                $carRepo->deleteCar($id);
+            }
+
         }
     }
 
