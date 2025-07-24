@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 class PageController extends Router
@@ -35,7 +34,7 @@ class PageController extends Router
     protected function home()
     {
         // token CSRF
-        $tokenObj = new TokenCsrf();
+        $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
         $this->render("pages/home", ["token" => $currentToken]);
     }

@@ -1,5 +1,5 @@
-<section>
-    <div class="container px-6 py-10 mx-auto">
+<section id="contactPage">
+    <div id="titre" class="container px-6 py-10 mx-auto">
         <div>
             <h1 class="mt-2 text-2xl font-semibold md:text-3xl">Nous contacter</h1>
         </div>

@@ -1,4 +1,4 @@
-<section class="mt-5">
-    <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php" ?>
+<section id="createTripePage" class="mt-5">
+    <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php"?>
 
 </section>

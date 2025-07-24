@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 class TripsController extends Router
@@ -36,9 +35,8 @@ class TripsController extends Router
     protected function createTrip()
     {
         // generate token CSRF
-        $tokenObj = new TokenCsrf();
+        $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
-
 
         // show page
         $this->render("userTrips/createTrip", ["token" => $currentToken]);
@@ -47,7 +45,7 @@ class TripsController extends Router
     protected function manageTrip()
     {
         // generate token CSRF
-        $tokenObj = new TokenCsrf();
+        $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
         // show page
@@ -57,7 +55,7 @@ class TripsController extends Router
     protected function history()
     {
         // generate token CSRF
-        $tokenObj = new TokenCsrf();
+        $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
         // show page

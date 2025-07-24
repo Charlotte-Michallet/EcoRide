@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 class Router
@@ -32,7 +31,6 @@ class Router
                         $pageRouter->route();
                         break;
 
-
                     default:
                         # code...
                         break;
@@ -52,6 +50,7 @@ class Router
         $header   = ROOT_PATH . "/templates/header.php";
         $filePath = ROOT_PATH . "/templates/" . $path . ".php";
         $footer   = ROOT_PATH . "/templates/footer.php";
+
         try {
             if (! file_exists($filePath) || ! file_exists($header) || ! file_exists($footer)) {
                 // generer erreure
@@ -63,6 +62,7 @@ class Router
                 require_once $header;
                 require_once $filePath;
                 require_once $footer;
+
             }
         } catch (\Exception $e) {
             $this->render('errors/default', ["error" => $e->getMessage()]);

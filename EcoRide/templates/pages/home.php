@@ -1,5 +1,5 @@
   <!-- intro -->
-  <section>
+<section id="homePage">
     <div class="hero relative isolate overflow-hidden py-10 sm:py-24 mt-5">
       <img src="/assets/img/groupe-d-amis-levant-les-bras-dans-la-voiture.jpg" alt="image covoiturage" class="absolute inset-0 -z-10 size-full object-cover object-right md:object-center" />
       <div class="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl" aria-hidden="true">
@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-  </section>
+
 
   <!-- form -->
   <section class="form w-3/4 mx-auto p-5 bg-white rounded-md shadow-md">
@@ -99,3 +99,5 @@
       </div>
     </div>
   </section>
+
+</section>

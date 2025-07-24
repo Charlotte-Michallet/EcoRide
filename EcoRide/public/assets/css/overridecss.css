@@ -96,3 +96,16 @@ a {
     min-height: 71vh;
     display: flex;
 }
+
+
+/* Page userCars */
+
+.modal-active {
+    visibility: visible;
+    display: flex;
+}
+
+.modal-hidden{
+    /* visibility: hidden; */
+    display: none;
+}

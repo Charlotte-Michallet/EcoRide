@@ -1,6 +1,6 @@
-<section class="mt-5">
+<section id="modifyProfilPage" class="mt-5">
 
-    <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php" ?>
+    <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php"?>
 
     <div class="flex justify-center">
 
@@ -108,7 +108,7 @@
                         <input type="password" id="ConfPwdRegister" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="ConfPwdRegister" placeholder="Retapez votre mot de passe" />
                     </div>
 
-                    <input type="hidden" name="token_csrf" value="<?= htmlspecialchars($token) ?>">
+                    <input type="hidden" name="token_csrf" value="<?php echo htmlspecialchars($token) ?>">
 
                     <button type="submit"
                         class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform rounded-lg md:col-start-1">
@@ -125,8 +125,5 @@
         </div>
     </div>
     </div>
-
-
-
 
 </section>

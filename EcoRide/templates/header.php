@@ -21,7 +21,8 @@
   <title>EcoRide</title>
 </head>
 
-<body>
+<body >
+
   <header>
 
     <div class="flex justify-around items-center gap-8 mx-10 text-gray-900">

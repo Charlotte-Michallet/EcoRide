@@ -1,6 +1,6 @@
-<section class="mt-5">
+<section id="profilPage" class="mt-5">
 
-    <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php" ?>
+    <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php"?>
 
 
     <!-- Profil info and feedback -->
@@ -27,12 +27,12 @@
                     </h2>
 
                     <div class="flex flex-col items-center mt-8">
-                        <p class="block w-full py-3 text-gray-700"> Pseudo: <?= $user->getUsername() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Email: <?= $user->getEmail() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Date de naissance: <?= $user->getDateOfBirth() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Credits: <?= $user->getCredits() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Role: <?= $user->getRole()  ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Permis: <?= $user->getDriversLicense() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Pseudo:                                                                                                                                                       <?php echo $user->getUsername() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Email:                                                                                                                                                     <?php echo $user->getEmail() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Date de naissance:                                                                                                                                                                             <?php echo $user->getDateOfBirth() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Credits:                                                                                                                                                         <?php echo $user->getCredits() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Role:                                                                                                                                                   <?php echo $user->getRole() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Permis:                                                                                                                                                       <?php echo $user->getDriversLicense() ?></p>
                     </div>
 
                 </div>
@@ -88,3 +88,5 @@
         </div>
         <!-- End Grid -->
     </div>
+
+</section>
