@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller\Auth;
 
 use App\Repository\RegistRepository;
@@ -39,7 +38,15 @@ class AccountContr
     }
 
     // verify if email is valid
-    protected function pwdInvalid() {}
+    protected function pwdInvalid()
+    {
+        if (! preg_match("/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/", $this->password)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
 
     protected function pwdMatch()
     {
@@ -75,14 +82,8 @@ class AccountContr
 
     protected function userUnderAge()
     {
-
         $today = new \DateTimeImmutable();
         $dOB   = \DateTimeImmutable::createFromFormat('Y-m-d', $this->date_of_birth);
-
-        if ($dOB === false) {
-            error_log("Date de naissance invalide: " . $this->date_of_birth);
-            return true;
-        }
 
         $interval = $dOB->diff($today);
         $age      = $interval->y;

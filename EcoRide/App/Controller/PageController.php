@@ -27,7 +27,7 @@ class PageController extends Router
                 // home page
             }
         } catch (\Exception $e) {
-            $this->render('errors/default', ["error" => $e->getMessage()]);
+            $this->render("errors/default", ["error" => $e->getMessage()]);
         }
     }
 

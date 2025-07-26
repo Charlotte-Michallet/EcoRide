@@ -8,40 +8,31 @@ const inputs = document.querySelectorAll("input, select");
 console.log(inputs);
 
 export function init() {
-  console.log("hello");
+    console.log("hello");
 
-  // Open close modal
-  btnOpenModal.addEventListener("click", () => {
-    addCaroverlay.classList.toggle("hidden");
-    addCarModal.classList.toggle("hidden");
-  });
+    // Open close modal
+    btnOpenModal.addEventListener("click", () => {
+        addCaroverlay.classList.toggle("hidden");
+        addCarModal.classList.toggle("hidden");
+    });
 
-  closeModal.addEventListener("click", () => {
-    addCaroverlay.classList.toggle("hidden");
-    addCarModal.classList.toggle("hidden");
-  });
+    closeModal.addEventListener("click", () => {
+        addCaroverlay.classList.toggle("hidden");
+        addCarModal.classList.toggle("hidden");
+    });
 
-  btnAddCar.addEventListener("click", () => {
-    addCaroverlay.classList.toggle("hidden");
-    addCarModal.classList.toggle("hidden");
-  });
+    btnAddCar.addEventListener("click", () => {
+        addCaroverlay.classList.toggle("hidden");
+        addCarModal.classList.toggle("hidden");
+    });
 
-  // form handler
+    // form handler
 
-  addCarForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-  });
-}
-
-function escapeHtml(unsafe) {
-  return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    addCarForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+    });
 }
 
 function checkform() {
-  console.log("qfef");
+    console.log("qfef");
 }

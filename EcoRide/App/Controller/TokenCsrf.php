@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 class TokenCsrf
@@ -13,7 +12,7 @@ class TokenCsrf
         if (empty($_SESSION["csrf_token"])) {
             $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
         }
-        $currentToken =  $_SESSION["csrf_token"];
+        $currentToken = $_SESSION["csrf_token"];
         return $currentToken;
     }
 
@@ -23,15 +22,17 @@ class TokenCsrf
             throw new \RuntimeException("Erreur critique : La session PHP n'est pas active.");
         }
 
-        $currentToken =  $_SESSION["csrf_token"];
+        $currentToken = $_SESSION["csrf_token"];
 
-        if ($submittedToken === null || !isset($currentToken)) {
+        if ($submittedToken === null || ! isset($currentToken)) {
             return false;
         }
 
         $isValid = hash_equals($submittedToken, $currentToken);
-        if ($isValid)
+        if ($isValid) {
             unset($currentToken);
+        }
+
         return $isValid;
     }
 }

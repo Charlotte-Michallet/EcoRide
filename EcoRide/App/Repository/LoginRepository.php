@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Repository;
 
 use App\Entity\User;
@@ -7,14 +6,13 @@ use App\Entity\User;
 class LoginRepository extends Repository
 {
 
-    public function getUser(string $email, string $password)
+    public function getUser(string $email, string $password): bool | User
     {
         $query = $this->pdo->prepare("SELECT * FROM users WHERE email = :email;");
 
         // bind value from form to query
         $query->bindValue(":email", $email, $this->pdo::PARAM_STR);
         $query->execute();
-
 
         $user = $query->fetch(\PDO::FETCH_ASSOC);
 

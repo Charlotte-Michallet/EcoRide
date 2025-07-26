@@ -1,0 +1,239 @@
+import { escapeHtml } from "./../../global/formValidator.js";
+
+const API_ENDPOINT = "index.php?controller=api&resource=auth&action=register";
+const form = document.querySelector("form");
+const inputs = document.querySelectorAll("input");
+const tokenRegister = document.getElementById("tokenRegister");
+const selectRadio = document.querySelectorAll(
+    "input[name='userRolesRegister']"
+);
+
+let role, username, email, dob, password, pwdVerify;
+
+let token = tokenRegister.value;
+
+// Visibility of password and verify
+toggleVisibility.addEventListener("click", () => {
+    if (pwdRegister.type === "password") {
+        pwdRegister.type = "text";
+    } else {
+        pwdRegister.type = "password";
+    }
+});
+
+toggleV.addEventListener("click", () => {
+    if (ConfPwdR.type === "password") {
+        ConfPwdR.type = "text";
+    } else {
+        ConfPwdR.type = "password";
+    }
+});
+
+// foreach input call function
+inputs.forEach((input) => {
+    input.addEventListener("input", (e) => {
+        switch (e.target.id) {
+            case "usernameRegister":
+                usernamecheck(e.target.value);
+                break;
+
+            case "emailRegister":
+                emailcheck(e.target.value);
+                break;
+
+            case "dateBirthR":
+                dobCheck(e.target.value);
+                break;
+
+            case "pwdRegister":
+                passwordCheck(e.target.value);
+                break;
+
+            case "ConfPwdR":
+                passwordmatch(e.target.value);
+                break;
+
+            default:
+                null;
+                break;
+        }
+    });
+});
+
+/// error paragraph with message
+const errorDisplay = (tag, message, valid) => {
+    const paragrapheError = document.getElementById(tag + "Error");
+    if (!valid) {
+        paragrapheError.classList.remove("hidden");
+        paragrapheError.textContent = message;
+    } else {
+        paragrapheError.classList.add("hidden");
+        paragrapheError.textContent = "";
+    }
+};
+
+selectRadio.forEach((radio) => {
+    radio.addEventListener("input", (e) => {
+        let roleValue = e.target.value;
+
+        if (!roleValue) {
+            errorDisplay("registerForm", "Veillez choisir un role");
+            role = null;
+        } else {
+            role = roleValue;
+            errorDisplay("registerForm", "", true);
+        }
+    });
+});
+
+//function verification pseudo
+const usernamecheck = (value) => {
+    if (value.length > 0 && (value.length < 3 || value.length > 20)) {
+        errorDisplay(
+            "username",
+            "Le pseudo doit faire entre 3 et 20 caractère"
+        );
+        username = null;
+    } else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
+        errorDisplay(
+            "username",
+            "Le pseudo doit ne doit pas contenir de caractère spéciaux."
+        );
+        username = null;
+    } else {
+        errorDisplay("username", "", true);
+        username = value;
+    }
+};
+
+//function verification mail
+const emailcheck = (value) => {
+    // verify if email format is correct
+    if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
+        errorDisplay("email", "Le mail n'est pas valid.");
+        email = null;
+    } else {
+        errorDisplay("email", "", true);
+        // initiat variable email from the form
+        email = value;
+    }
+};
+
+const dobCheck = (value) => {
+    const today = new Date().getFullYear();
+    let dateob = new Date(value).getFullYear();
+    let age = today - dateob;
+
+    if (age < 18) {
+        errorDisplay(
+            "dob",
+            "Vous devez avoir majeur pour vous inscrir sur notre site"
+        );
+    } else {
+        errorDisplay("dob", "", true);
+        dob = value;
+    }
+};
+
+//function verification password
+const passwordCheck = (value) => {
+    password = value;
+    if (
+        !value.match(
+            /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/
+        )
+    ) {
+        errorDisplay(
+            "pwd",
+            "Le mot de passe doit avoir au moins 8 caractère, une majuscule, une minuscule, un chiffre et un caracteres special."
+        );
+        password = null;
+    } else {
+        errorDisplay("pwd", "", true);
+        password = value;
+    }
+
+    if (pwdVerify) {
+        passwordmatch(pwdVerify);
+    }
+};
+
+const passwordmatch = (value) => {
+    // verify if email format is correct
+    if (value !== password) {
+        errorDisplay("registerForm", "Le mot de passe ne correspond pas.");
+        pwdVerify = null;
+    } else {
+        errorDisplay("registerForm", "", true);
+        pwdVerify = value;
+    }
+};
+
+const checkForm = (role, username, email, dob, password, pwdVerify, token) => {
+    const usernameSanitized = escapeHtml(username);
+    const emailSanitized = escapeHtml(email);
+    const dobSanitized = escapeHtml(dob);
+    const pwdSanitized = escapeHtml(password);
+    const pwdVerifySanitized = escapeHtml(pwdVerify);
+
+    const data = {
+        role,
+        username: usernameSanitized,
+        email: emailSanitized,
+        dob: dobSanitized,
+        password: pwdSanitized,
+        pwdVerify: pwdVerifySanitized,
+        token,
+    };
+    return data;
+};
+
+// submit form
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // if all variables are true (not null)
+    if (role && username && email && dob && password && pwdVerify) {
+        errorDisplay("registerForm", "", true);
+
+        let registerData = checkForm(
+            role,
+            username,
+            email,
+            dob,
+            password,
+            pwdVerify,
+            token
+        );
+
+        try {
+            // API
+            const resp = await fetch(API_ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(registerData),
+            });
+
+            const responseData = await resp.json();
+
+            if (resp.status == 401) {
+                errorDisplay(
+                    "registerForm",
+                    responseData.message ||
+                        "Le pseudo ou l'adresse mail exist déjà."
+                );
+            } else if (resp.ok) {
+                window.location.href = "http://localhost:8080/index.php";
+            } else {
+                errorDisplay(
+                    "registerForm",
+                    responseData.message || "L'inscription a échouée."
+                );
+            }
+        } catch (error) {
+            alert(`Inscription échouer : ${error.message}`);
+        }
+    } else {
+        errorDisplay("registerForm", "Veillez remplir tout les champs.");
+    }
+});

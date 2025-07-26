@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller\Auth;
 
 use App\Repository\RegistRepository;
@@ -22,48 +21,48 @@ class RegisterContr extends AccountContr
         $errors = [];
         try {
             if ($this->InputEmpty() === true) {
-                $errors = ["Tous les champs sont obligatoires."];
+                $errors = ["empty" => "Tous les champs sont obligatoires."];
                 return $errors;
             }
 
             if ($this->userInvalid() === true) {
-                $errors = ["Le nom d'utilisateur est invalide. Utilisez uniquement des lettres et des chiffres."];
+                $errors = ["userInvalid" => "Le nom d'utilisateur est invalide. Utilisez uniquement des lettres et des chiffres."];
                 return $errors;
             }
 
             if ($this->emailInvalid() === true) {
-                $errors = ["L'adresse email est invalide."];
+                $errors = ["emailInvalide" => "L'adresse email est invalide."];
                 return $errors;
             }
 
-            // if ($this->pwdInvalid() === true) {
-            //     $errors = ["Ne peut "];
-            //     return $errors;
-            // }
+            if ($this->pwdInvalid() === true) {
+                $errors = ["pwdInvalide" => "Le mot de passe est invalide."];
+                return $errors;
+            }
 
             if ($this->pwdMatch() === false) {
-                $errors = ["Les mots de passe ne sont pas identiques."];
+                $errors = ["passwordMatch" => "Les mots de passe ne sont pas identiques."];
                 return $errors;
             }
 
             if ($this->usernameTaken() === true) {
-                $errors = ["Ce nom d'utilisateur est déjà utilisé."];
+                $errors = ["userTaken" => "Ce nom d'utilisateur est déjà utilisé."];
                 return $errors;
             }
 
             if ($this->emailTaken() === true) {
-                $errors = ["Cet email est déjà utilisé."];
+                $errors = ["emailTaken" => "Cet email est déjà utilisé."];
                 return $errors;
             }
 
             if ($this->userUnderAge() === true) {
-                $errors = ["Vous devez être majeur pour vous inscrire sur notre plateforme."];
+                $errors = ["userAge" => "Vous devez être majeur pour vous inscrire sur notre plateforme."];
                 return $errors;
             }
 
-            if ($errors) {
-                $_SESSION["errorRegister"] = $errors;
-                exit();
+            if (! empty($errors)) {
+                return $errors;
+
             } else {
                 $repoRegister = new RegistRepository();
                 $newUser      = $repoRegister->createUser($this->username, $this->email, $this->password, $this->date_of_birth, $this->credits, $this->id_role);
@@ -71,9 +70,6 @@ class RegisterContr extends AccountContr
                 $_SESSION["id"]       = $newUser->getId();
                 $_SESSION["username"] = $newUser->getUsername();
                 $_SESSION["email"]    = $newUser->getEmail();
-                header("Location: index.php");
-
-                return $newUser;
             }
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

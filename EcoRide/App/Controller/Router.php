@@ -1,14 +1,25 @@
 <?php
 namespace App\Controller;
 
+use App\Controller\Api\ApiController;
+
 class Router
 {
     public function router()
     {
+
         try {
 
-            // routage
+            // routage for redirecting pages
             if (isset($_GET["controller"])) {
+
+                // if controller for API
+                if ($_GET["controller"] === "api") {
+                    $apiController = new ApiController();
+                    $apiController->apiRoute();
+                    return;
+                }
+
                 switch ($_GET["controller"]) {
 
                     case 'pages':
@@ -17,13 +28,13 @@ class Router
                         break;
 
                     case 'car-sharing':
-                        $carRoute = new CarSharingController();
-                        $carRoute->route();
+                        $carRouter = new CarSharingController();
+                        $carRouter->route();
                         break;
 
                     case 'auth':
-                        $authRoute = new AuthController();
-                        $authRoute->route();
+                        $authRouter = new AuthController();
+                        $authRouter->route();
                         break;
 
                     case 'trips':
@@ -41,7 +52,14 @@ class Router
                 $pageRouter->home();
             }
         } catch (\Exception $e) {
-            $this->render('errors/default', ["error" => $e->getMessage()]);
+
+            if (isset($_GET["controller"]) && $_GET["controller"] === "api") {
+                self::jsonResponse(["status" => "error", "message" => "Erreur interne du serveur API: " . $e->getMessage()], 500);
+
+            } else {
+
+                $this->render("errors/default", ["error" => $e->getMessage()]);
+            }
         }
     }
 
@@ -65,7 +83,16 @@ class Router
 
             }
         } catch (\Exception $e) {
-            $this->render('errors/default', ["error" => $e->getMessage()]);
+            $this->render("errors/default", ["error" => $e->getMessage()]);
         }
+    }
+
+    public static function jsonResponse(array $data, int $statusCode = 200)
+    {
+        http_response_code($statusCode);
+        header("Content-Type: application/json");
+        echo json_encode($data);
+
+        exit();
     }
 }
