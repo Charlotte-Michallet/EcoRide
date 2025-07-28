@@ -1,4 +1,4 @@
-import { escapeHtml } from "./../../global/formValidator.js";
+import { escapeHtml, errorDisplay } from "./../../global/formValidator.js";
 
 const API_ENDPOINT = "index.php?controller=api&resource=auth&action=login";
 const form = document.querySelector("form");
@@ -34,18 +34,6 @@ inputs.forEach((input) => {
         }
     });
 });
-
-// error paragraph with message
-const errorDisplay = (tag, message, valid) => {
-    const paragrapheError = document.getElementById(tag + "Error");
-    if (!valid) {
-        paragrapheError.classList.remove("hidden");
-        paragrapheError.textContent = message;
-    } else {
-        paragrapheError.classList.add("hidden");
-        paragrapheError.textContent = "";
-    }
-};
 
 //function verification mail
 const emailcheck = function (value) {

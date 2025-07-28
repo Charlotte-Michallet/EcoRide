@@ -95,11 +95,17 @@ class ApiController
     {
         switch ($action) {
 
-            case 'auth':
+            case 'modifyProfil':
 
                 break;
 
-            case 'search':
+            case 'addCar':
+                if ($method === "POST") {
+                    $carApiControl = new AddCarApi();
+                    $carApiControl->carData();
+                } else {
+                    Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la connexion."], 405);
+                }
 
                 break;
 

@@ -1,4 +1,4 @@
-import { escapeHtml } from "./../../global/formValidator.js";
+import { escapeHtml, errorDisplay } from "./../../global/formValidator.js";
 
 const API_ENDPOINT = "index.php?controller=api&resource=auth&action=register";
 const form = document.querySelector("form");
@@ -60,18 +60,7 @@ inputs.forEach((input) => {
     });
 });
 
-/// error paragraph with message
-const errorDisplay = (tag, message, valid) => {
-    const paragrapheError = document.getElementById(tag + "Error");
-    if (!valid) {
-        paragrapheError.classList.remove("hidden");
-        paragrapheError.textContent = message;
-    } else {
-        paragrapheError.classList.add("hidden");
-        paragrapheError.textContent = "";
-    }
-};
-
+// verify role input
 selectRadio.forEach((radio) => {
     radio.addEventListener("input", (e) => {
         let roleValue = e.target.value;
@@ -86,7 +75,7 @@ selectRadio.forEach((radio) => {
     });
 });
 
-//function verification pseudo
+//verify username
 const usernamecheck = (value) => {
     if (value.length > 0 && (value.length < 3 || value.length > 20)) {
         errorDisplay(
@@ -106,7 +95,7 @@ const usernamecheck = (value) => {
     }
 };
 
-//function verification mail
+//verify email
 const emailcheck = (value) => {
     // verify if email format is correct
     if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
@@ -119,6 +108,7 @@ const emailcheck = (value) => {
     }
 };
 
+// verify date of birth (under 18)
 const dobCheck = (value) => {
     const today = new Date().getFullYear();
     let dateob = new Date(value).getFullYear();
@@ -135,7 +125,7 @@ const dobCheck = (value) => {
     }
 };
 
-//function verification password
+//verify password
 const passwordCheck = (value) => {
     password = value;
     if (
@@ -158,6 +148,7 @@ const passwordCheck = (value) => {
     }
 };
 
+// verify password match
 const passwordmatch = (value) => {
     // verify if email format is correct
     if (value !== password) {

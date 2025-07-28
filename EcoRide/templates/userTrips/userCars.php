@@ -31,7 +31,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- End Header -->
 
                         <!-- Table -->
                         <table class="min-w-full divide-y divide-gray-200">
@@ -142,10 +141,10 @@
                                         <td class="size-px whitespace-nowrap">
                                             <div class="px-6 py-3">
                                            <form method="post">
-                                           <input type="hidden" name="idCarDelete" value="<?php echo $car->getId(); ?>">
-                                           <input type="hidden" name="token_csrf" value="<?php echo htmlspecialchars($token); ?>">
-                                            <button class="text-sm" name="submitDeleteCar" value="submitDeleteCar" type="submit">Supprimer</button>
-                                        </form>
+                                                <input type="hidden" name="idCarDelete" value="<?php echo $car->getId(); ?>">
+                                                <input type="hidden" name="token_csrf" value="<?php echo htmlspecialchars($token); ?>">
+                                                <button class="text-sm" name="submitDeleteCar" value="submitDeleteCar" type="submit">Supprimer</button>
+                                            </form>
                                             </div>
                                         </td>
                                     </tr>
@@ -153,7 +152,6 @@
 
                             </tbody>
                         </table>
-                        <!-- End Table -->
 
                         <!-- Footer -->
                         <div class="bg-gray-50/60 px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-300">
@@ -175,15 +173,12 @@
                 </div>
             </div>
         </div>
-        <!-- End Card -->
     </div>
-    <!-- End Table Section -->
 
 
 
 
     <!-- Modal -->
-
     <div id="addCarModal" class="hidden bg-gray-500/50 size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto" role="dialog" tabindex="-1" aria-labelledby="hs-modal-signup-label">
         <div id="addCaroverlay" class="hidden hs-overlay-open:mt-7  hs-overlay-open:duration-500 mt-5 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
             <div class="bg-white border border-gray-200 rounded-xl shadow-2xs">
@@ -196,107 +191,54 @@
                     <!-- Form -->
                     <form id="addCarForm" method="post">
                         <div class="grid gap-y-4">
-                            <!-- Form Group -->
+
                             <div>
                                 <label for="brandCreate" class="block text-sm mb-2">Marque de la voiture</label>
-                                <div class="relative">
-                                    <input type="text" id="brandCreate" name="brandCreate" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" aria-describedby="brandrror">
-                                    <div class="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                                        <svg class="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
-                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <p class="hidden text-xs text-red-600 mt-2" id="branderror"></p>
+                                    <input type="text" id="brandCreate" name="brandCreate" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" aria-describedby="brandrror" placeholder="Renault">
+                                <p class="hidden text-xs text-red-600 mt-2" id="brandError"></p>
                             </div>
-                            <!-- End Form Group -->
 
-                            <!-- Form Group -->
                             <div>
                                 <label for="modelCreate" class="block text-sm mb-2">Model de la voiture</label>
-                                <div class="relative">
-                                    <input type="text" id="modelCreate" name="modelCreate" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" aria-describedby="modelerror">
-                                    <div class="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                                        <svg class="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
-                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <p class="hidden text-xs text-red-600 mt-2" id="modelerror"></p>
+                                    <input type="text" id="modelCreate" name="modelCreate" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" aria-describedby="modelerror" placeholder="Zoe">
+                                <p class="hidden text-xs text-red-600 mt-2" id="modelError"></p>
                             </div>
-                            <!-- End Form Group -->
 
-                            <!-- Form Group -->
                             <div>
                                 <label for="energyType" class="block text-sm mb-2">Type d'energie de la voiture</label>
                                 <select name="energyType" id="energyType">
+                                    <option value="Energy">-- Choisissez un type d'energie --</option>
                                     <option value="Electrique">Electrique</option>
                                     <option value="Hybride">Hybride</option>
                                     <option value="Thermique">Thermique</option>
-
                                 </select>
                             </div>
 
-                            <!-- Form Group -->
                             <div>
                                 <label for="numSpaces" class="block text-sm mb-2">Nombre de place total de la voiture</label>
-                                <div class="relative">
-                                    <input type="number" id="numSpaces" name="numSpaces" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" aria-describedby="numspaceerror">
-                                    <div class="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                                        <svg class="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
-                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <p class="hidden text-xs text-red-600 mt-2" id="numspaceerror"></p>
+                                    <input type="number" id="numSpaces" name="numSpaces" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" min="2" max="9" aria-describedby="numspaceerror" placeholder="5">
+                                <p class="hidden text-xs text-red-600 mt-2" id="seatsError"></p>
                             </div>
-                            <!-- End Form Group -->
 
                              <div>
                                 <label for="nbPlate" class="block text-sm mb-2">Numéro d'immatriculation</label>
-                                <div class="relative">
-                                    <input type="text" id="nbPlate" name="nbPlate" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" aria-describedby="numplateerror">
-                                    <div class="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                                        <svg class="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
-                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <p class="hidden text-xs text-red-600 mt-2" id="numplateerror"></p>
+                                    <input type="text" id="nbPlate" name="nbPlate" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" aria-describedby="numplateerror" placeholder="XX-000-XX">
+                                <p class="hidden text-xs text-red-600 mt-2" id="numplateError"></p>
                             </div>
-                            <!-- End Form Group -->
 
-                            <!-- Form Group -->
                             <div>
                                 <label for="dateNbPlate" class="block text-sm mb-2">Date de la première immatriculation</label>
-                                <div class="relative">
-                                    <input type="date" id="dateNbPlate" name="dateNbPlate" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" aria-describedby="datenumplateerror">
-                                    <div class="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                                        <svg class="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
-                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <p class="hidden text-xs text-red-600 mt-2" id="datenumplateerror"></p>
+                                    <input type="date" id="dateNbPlate" name="dateNbPlate" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" aria-describedby="datenumplateerror" >
+                                <p class="hidden text-xs text-red-600 mt-2" id="datenumplateError"></p>
                             </div>
-                            <!-- End Form Group -->
 
-                            <!-- Form Group -->
                             <div>
                                 <label for="colorCreate" class="block text-sm mb-2">Couleur de la voiture</label>
-                                <div class="relative">
-                                    <input type="text" id="colorCreate" name="colorCreate" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" aria-describedby="colorerror">
-                                    <div class="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                                        <svg class="size-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
-                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <p class="hidden text-xs text-red-600 mt-2" id="colorerror"></p>
+                                    <input type="text" id="colorCreate" name="colorCreate" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" aria-describedby="colorerror" placeholder="Blanc">
+                                <p class="hidden text-xs text-red-600 mt-2" id="formError"></p>
                             </div>
-                            <!-- End Form Group -->
 
-                            <input type="hidden" name="token_csrf" value="<?php echo htmlspecialchars($token) ?>">
+                            <input type="hidden" id="tokenCsrf" name="tokenCsrf" value="<?php echo htmlspecialchars($token) ?>">
                             <button id="btnAddCar" type="submit" name="newCar" value="newCar" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50">Ajouter la voiture</button>
                         </div>
                     </form>
@@ -305,6 +247,4 @@
             </div>
         </div>
     </div>
-
-
 </section>
