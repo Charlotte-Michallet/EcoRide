@@ -50,7 +50,6 @@ const emailcheck = function (value) {
 
 //function verification password
 const passwordCheck = (value) => {
-    password = value;
     if (
         !value.match(
             /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/

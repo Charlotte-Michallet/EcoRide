@@ -70,6 +70,7 @@ class RegisterContr extends AccountContr
                 $_SESSION["id"]       = $newUser->getId();
                 $_SESSION["username"] = $newUser->getUsername();
                 $_SESSION["email"]    = $newUser->getEmail();
+                $_SESSION["photo"]    = $newUser->getPhotoUrl();
             }
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

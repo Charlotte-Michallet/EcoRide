@@ -100,14 +100,20 @@ class ApiController
                 break;
 
             case 'addCar':
-                if ($method === "POST") {
-                    $carApiControl = new AddCarApi();
-                    $carApiControl->carData();
-                } else {
-                    Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la connexion."], 405);
-                }
 
-                break;
+                if (isset($_SESSION["id"])) {
+                    // if post method
+                    if ($method === "POST") {
+                        $carApiControl = new AddCarApi();
+                        $carApiControl->carData();
+                    } else {
+                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
+                    }
+                    break;
+                } else {
+                    Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
+                    return;
+                }
 
             case 'profil':
 

@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Api;
 
+use App\Controller\Car\CarContr;
 use App\Controller\Router;
 use App\Controller\TokenCsrf;
 
@@ -8,7 +9,6 @@ class AddCarApi
 {
     public function carData()
     {
-
         $data   = file_get_contents("php://input");
         $result = json_decode($data, true);
 
@@ -17,31 +17,50 @@ class AddCarApi
             return;
         }
 
-        $user_id = $_SESSION["id"];
+        // get data from form
+        $resultsubmittedToken      = $result["token"];
+        $resultbrand               = $result["brand"];
+        $resultmodel               = $result["model"];
+        $resultenergy_type         = $result["energy"];
+        $resultnumplate            = $result["numPlate"];
+        $resultnum_seats_string    = $result["seats"];
+        $resultfirst_register_date = $result["dateRegister"];
+        $resultcolor               = $result["color"];
 
-        // if post method
-        if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["newCar"]) && $_POST["newCar"])) {
+        // Sanitize data
+        $submittedToken      = htmlspecialchars($resultsubmittedToken);
+        $brand               = htmlspecialchars(trim($resultbrand));
+        $model               = htmlspecialchars(trim($resultmodel));
+        $energy_type         = htmlspecialchars(trim($resultenergy_type));
+        $numplate            = htmlspecialchars(trim($resultnumplate));
+        $num_seats_string    = htmlspecialchars(trim($resultnum_seats_string));
+        $first_register_date = htmlspecialchars(trim($resultfirst_register_date));
+        $color               = htmlspecialchars(trim($resultcolor));
 
-            // get data from form
-            $submittedToken      = htmlspecialchars($_POST["token_csrf"]);
-            $brand               = htmlspecialchars(trim($_POST["brandCreate"]));
-            $model               = htmlspecialchars(trim($_POST["modelCreate"]));
-            $energy_type         = htmlspecialchars(trim($_POST["energyType"]));
-            $numplate            = htmlspecialchars(trim($_POST["nbPlate"]));
-            $num_seats_string    = htmlspecialchars(trim($_POST["numSpaces"]));
-            $first_register_date = htmlspecialchars(trim($_POST["dateNbPlate"]));
-            $color               = htmlspecialchars(trim($_POST["colorCreate"]));
-            $num_seats           = (int) $num_seats_string;
-            // Check token CSRF
-            $token   = new TokenCsrf();
-            $isValid = $token->validateToken($submittedToken);
+        $num_seats = (int) $num_seats_string;
 
-            if ($isValid) {
+        // Check token CSRF
+        $token   = new TokenCsrf();
+        $isValid = $token->validateToken($submittedToken);
 
-                // new car
-                // $carContr = new CarContr($brand, $model, $energy_type, $num_seats, $numplate, $first_register_date, $color, $user_id);
-                // $carContr->checkImputs();
+        if ($isValid) {
+
+            $user_id = $_SESSION["id"];
+
+            // new car
+            $carContr = new CarContr($brand, $model, $energy_type, $num_seats, $numplate, $first_register_date, $color, $user_id);
+            $carError = $carContr->checkImputs();
+
+            if (! empty($carError)) {
+                Router::jsonResponse(["status" => "error", "message" => $carError[0]], 400);
+            } else {
+                Router::jsonResponse(["status" => "success", "message" => "Voiture ajouté"], 200);
+                return;
             }
+
+        } else {
+            Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);
+            return;
         }
     }
 }

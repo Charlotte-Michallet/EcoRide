@@ -39,6 +39,7 @@ class LoginContr extends AccountContr
                     $_SESSION["id"]       = $user->getId();
                     $_SESSION["username"] = $user->getUsername();
                     $_SESSION["email"]    = $user->getEmail();
+                    $_SESSION["photo"]    = $user->getPhotoUrl();
                 }
 
             }

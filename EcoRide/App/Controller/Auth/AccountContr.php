@@ -19,7 +19,7 @@ class AccountContr
     // verify special caratares
     protected function userInvalid()
     {
-        if (! preg_match("/^[a-zA-Z0-9]*$/", $this->username)) {
+        if (! preg_match("/^[a-zA-Z0-9_.-]*$/", $this->username)) {
             $result = true;
         } else {
             $result = false;

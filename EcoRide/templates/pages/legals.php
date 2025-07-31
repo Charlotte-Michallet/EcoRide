@@ -1,4 +1,4 @@
-<section id="legalPage">
+<section>
     <div class="flex flex-col p-5 lg:px-48 lg:py-11">
     <div class="bg-gray-100 p-5 mb-10 rounded-2xl">
         <h1 class="font-bold text-2xl mb-2">Tailwind Rocks!</h1>
@@ -25,5 +25,4 @@
             assumenda architecto animi veniam dolore dolor?</p>
     </div>
     </div>
-
 </section>

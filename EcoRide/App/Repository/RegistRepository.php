@@ -30,7 +30,7 @@ class RegistRepository extends Repository
         $userInfo->setId($lastInsertedId);
         $userInfo->setUsername($username);
         $userInfo->setEmail($email);
-        // $userInfo->setPassword($password);
+        $userInfo->setPhotoUrl("/assets/img/user.jpg");
         $userInfo->setDateOfBirth($date_of_birth);
         $userInfo->setCredits($credits);
         $userInfo->setIdRole($id_role);

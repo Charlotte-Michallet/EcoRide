@@ -22,7 +22,7 @@ class LoginRepository extends Repository
             $userInfo->setId($user["id"]);
             $userInfo->setUsername($user["username"]);
             $userInfo->setEmail($user["email"]);
-            // $userInfo->setPassword($password);
+            $userInfo->setPhotoUrl($user["photo"]);
             $userInfo->setDateOfBirth($user["date_of_birth"]);
             $userInfo->setCredits($user["credits"]);
             $userInfo->setIdRole($user["id"]);

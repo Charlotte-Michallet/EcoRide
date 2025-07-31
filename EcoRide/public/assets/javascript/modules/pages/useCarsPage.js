@@ -146,14 +146,15 @@ const numPlateCheck = (value) => {
 
 // verify date firts register
 const dateRegisterCheck = (value) => {
-    const today = new Date().getFullYear();
-    let dateR = new Date(value).getFullYear();
-    let year = today - dateR;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let dateR = new Date(value);
+    dateR.setHours(0, 0, 0, 0);
 
-    if (year < 0) {
+    if (dateR > today) {
         errorDisplay(
             "datenumplate",
-            "Veillez mettre une date anterieur a aujourd'hui."
+            "Veillez mettre une date anterieur ou égale a aujourd'hui."
         );
         dateRegister = null;
     } else {
@@ -243,25 +244,18 @@ addCarForm.addEventListener("submit", async (e) => {
             const resp = await fetch(API_ENDPOINT, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                credentials: "include",
                 body: JSON.stringify(carData),
             });
 
             const responseData = await resp.json();
+            console.log(responseData);
 
-            if (resp.status == 401) {
-                errorDisplay(
-                    "registerForm",
-                    responseData.message ||
-                        "Le pseudo ou l'adresse mail exist déjà."
-                );
-            } else if (resp.ok) {
+            if (resp.ok) {
                 window.location.href =
                     "http://localhost:8080/index.php?controller=auth&action=cars";
             } else {
-                errorDisplay(
-                    "form",
-                    responseData.message || "L'ajout de la voiture a échouée"
-                );
+                errorDisplay("form", responseData.message);
             }
         } catch (error) {
             alert(`L'ajout de la voiture a échouée : ${error.message}`);

@@ -1,5 +1,6 @@
 export function escapeHtml(unsafe) {
-    return unsafe
+    const unsafeTrim = String(unsafe || "").trim();
+    return unsafeTrim
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")

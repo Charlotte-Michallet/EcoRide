@@ -23,68 +23,43 @@
                     </div>
 
                     <h2 class="mb-2 text-3xl text-gray-800 font-bold lg:text-4xl dark:text-neutral-200">
-                        Profil
+                        Mon profil
                     </h2>
 
                     <div class="flex flex-col items-center mt-8">
-                        <p class="block w-full py-3 text-gray-700"> Pseudo:                                                                                                                                                       <?php echo $user->getUsername() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Email:                                                                                                                                                     <?php echo $user->getEmail() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Date de naissance:                                                                                                                                                                             <?php echo $user->getDateOfBirth() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Credits:                                                                                                                                                         <?php echo $user->getCredits() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Role:                                                                                                                                                   <?php echo $user->getRole() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Permis:                                                                                                                                                       <?php echo $user->getDriversLicense() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Pseudo:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php echo $user->getUsername() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Email:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           <?php echo $user->getEmail() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Date de naissance:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       <?php echo $user->getDateOfBirth() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Credits:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <?php echo $user->getCredits() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Role:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <?php echo $user->getRole() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Permis:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php echo $user->getDriversLicense() ?></p>
                     </div>
 
                 </div>
             </div>
 
             <!-- feedback -->
-            <div class="lg:mt-0 lg:col-span-6 lg:col-end-13">
-                <div class="space-y-6 sm:space-y-8">
-                    <!-- List -->
-                    <ul class="grid grid-cols-2 divide-y divide-y-2 divide-x divide-x-2 divide-gray-200 overflow-hidden dark:divide-neutral-700">
-                        <li class="flex flex-col -m-0.5 p-4 sm:p-8">
-                            <div class="flex items-end gap-x-2 text-3xl sm:text-5xl font-bold text-gray-800 mb-2 dark:text-neutral-200">
-                                45k+
-                            </div>
-                            <p class="text-sm sm:text-base text-gray-600 dark:text-neutral-400">
-                                users - from new startups to public companies
-                            </p>
-                        </li>
+            <div class="container lg:col-span-5 min-h-screen px-6 mx-auto">
+                <div class="w-full max-w-md">
 
-                        <li class="flex flex-col -m-0.5 p-4 sm:p-8">
-                            <div class="flex items-end gap-x-2 text-3xl sm:text-5xl font-bold text-gray-800 mb-2 dark:text-neutral-200">
 
-                                23%
-                            </div>
-                            <p class="text-sm sm:text-base text-gray-600 dark:text-neutral-400">
-                                increase in traffic on webpages with Looms
-                            </p>
-                        </li>
+                    <h2 class="mb-2 text-3xl text-gray-800 font-bold lg:text-4xl dark:text-neutral-200">
+                        Mes préferences
+                    </h2>
 
-                        <li class="flex flex-col -m-0.5 p-4 sm:p-8">
-                            <div class="flex items-end gap-x-2 text-3xl sm:text-5xl font-bold text-gray-800 mb-2 dark:text-neutral-200">
+                    <div class="flex flex-col items-center mt-8">
+                        <p class="block w-full py-3 text-gray-700"> Animal acepter    :                                                                                                                                                                                                                                                                                                                                                    <?php echo $user->getUsername() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Fumer acepeter        :                                                                                                                                                                                                                                                                                                                                                             <?php echo $user->getEmail() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Mes autre preferences           :                                                                                                                                                                                                                                                                                                                                                                                              <?php echo $user->getDateOfBirth() ?></p>
 
-                                9.3%
-                            </div>
-                            <p class="text-sm sm:text-base text-gray-600 dark:text-neutral-400">
-                                boost in reply rates across sales outreach
-                            </p>
-                        </li>
+                    </div>
 
-                        <li class="flex flex-col -m-0.5 p-4 sm:p-8">
-                            <div class="flex items-end gap-x-2 text-3xl sm:text-5xl font-bold text-gray-800 mb-2 dark:text-neutral-200">
-                                2x
-                            </div>
-                            <p class="text-sm sm:text-base text-gray-600 dark:text-neutral-400">
-                                faster than previous Preline versions
-                            </p>
-                        </li>
-                    </ul>
-                    <!-- End List -->
                 </div>
             </div>
-            <!-- End Col -->
+
+
+
+
         </div>
         <!-- End Grid -->
     </div>
