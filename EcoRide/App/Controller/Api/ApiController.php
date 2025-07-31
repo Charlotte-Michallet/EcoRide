@@ -48,7 +48,7 @@ class ApiController
                     $registerApiControl = new RegisterApi();
                     $registerApiControl->registerData();
                 } else {
-                    Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la connexion."], 405);
+                    Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour l'inscription."], 405);
                 }
                 break;
 
@@ -96,8 +96,19 @@ class ApiController
         switch ($action) {
 
             case 'modifyProfil':
-
-                break;
+                if (isset($_SESSION["id"])) {
+                    // if post method
+                    if ($method === "POST") {
+                        $ModifyApiControl = new ModifyApi();
+                        $ModifyApiControl->modifyData();
+                    } else {
+                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
+                    }
+                    break;
+                } else {
+                    Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
+                    return;
+                }
 
             case 'addCar':
 

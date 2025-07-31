@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 class User
@@ -9,7 +8,7 @@ class User
     protected string $email;
     protected string $password;
     protected string $date_of_birth;
-    protected ?string $photo_url;
+    protected string $photo_url;
     protected int $credits;
     protected int $id_role;
     protected string $role;

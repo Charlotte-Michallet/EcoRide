@@ -1,7 +1,7 @@
 import { escapeHtml, errorDisplay } from "./../../global/formValidator.js";
 
 const API_ENDPOINT =
-    "index.php?controller=api&resource=auth&action=modifyProfil";
+    "index.php?controller=api&resource=profil&action=modifyProfil";
 const forms = document.querySelectorAll("form");
 const inputs = document.querySelectorAll("input");
 
@@ -257,7 +257,6 @@ textPref.addEventListener("input", (e) => {
 forms.forEach((form) => {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        console.log(e.target.id);
 
         switch (e.target.id) {
             case "formRoles":
@@ -468,30 +467,30 @@ const checkFormpreferences = (preferences, token) => {
 
 // API
 const API = async (data, error, message = "") => {
-    console.log(data);
+    try {
+        const resp = await fetch(API_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
 
-    // try {
-    //     const resp = await fetch(API_ENDPOINT, {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify(data),
-    //     });
+        const responseData = await resp.json();
 
-    //     const responseData = await resp.json();
-
-    //     if (resp.status == 401) {
-    //         errorDisplay(error, responseData.message || message);
-    //     } else if (resp.ok) {
-    //         window.location.href =
-    //             "http://localhost:8080/index.php?controller=auth&action=profil";
-    //     } else {
-    //         errorDisplay(
-    //             error,responseData.message ||"La modification n'a pas etait prise en compte."
-    //         );
-    //     }
-    // } catch (error) {
-    //     alert(
-    //         `Les modifications n'ont pas etaientt pris en compte : ${error.message}`
-    //     );
-    // }
+        if (resp.status === 401) {
+            errorDisplay(error, responseData.message || message);
+        } else if (resp.ok) {
+            window.location.href =
+                "http://localhost:8080/index.php?controller=auth&action=profil";
+        } else {
+            errorDisplay(
+                error,
+                responseData.message ||
+                    `La modification n'a pas etait prise en compte. ${message}`
+            );
+        }
+    } catch (error) {
+        alert(
+            `Les modifications n'ont pas etaient pris en compte : ${error.message}`
+        );
+    }
 };

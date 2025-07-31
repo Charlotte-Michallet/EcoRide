@@ -36,6 +36,7 @@ class RegisterApi
         $passwordVerif  = htmlspecialchars(trim($resultPwdVerify));
         $credits        = 20;
         $id_role        = $this->userRole($role);
+        $photo_url      = "/assets/img/user.jpg";
 
         // Check token CSRF
         $token   = new TokenCsrf();
@@ -43,13 +44,13 @@ class RegisterApi
 
         if ($isValid) {
             // Create user
-            $register      = new RegisterContr($username, $email, $password, $passwordVerif, $date_of_birth, $credits, $id_role);
+            $register      = new RegisterContr($username, $email, $password, $passwordVerif, $date_of_birth, $photo_url, $credits, $id_role);
             $registererror = $register->checkImputRegisterUser();
 
             if (! empty($registererror)) {
-                Router::jsonResponse(["status" => "error", "message" => "Le pseudo ou l'adresse mail exist déjà."], 401);
+                Router::jsonResponse(["status" => "error", "message" => $registererror], 401);
             } else {
-                Router::jsonResponse(["status" => "success", "message" => "Login success"], 200);
+                Router::jsonResponse(["status" => "success", "message" => "L'inscription réussi."], 200);
             }
         } else {
             Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);

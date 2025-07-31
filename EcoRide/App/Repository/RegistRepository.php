@@ -5,9 +5,9 @@ use App\Entity\User;
 
 class RegistRepository extends Repository
 {
-    public function createUser(string $username, string $email, string $password, string $date_of_birth, int $credits, int $id_role): User
+    public function createUser(string $username, string $email, string $password, string $date_of_birth, string $photo_url, int $credits, int $id_role): User
     {
-        $query = $this->pdo->prepare("INSERT INTO users (username, email, password, date_of_birth, credits, id_role) VALUES(:username,:email, :password, :date, :credits, :id_role);");
+        $query = $this->pdo->prepare("INSERT INTO users (username, email, password, date_of_birth, photo, credits, id_role) VALUES(:username,:email, :password, :date, :photo, :credits, :id_role);");
 
         // hash password
         $hashPwd = password_hash($password, PASSWORD_DEFAULT);
@@ -19,6 +19,8 @@ class RegistRepository extends Repository
         $query->bindValue(":date", $date_of_birth, $this->pdo::PARAM_STR);
         $query->bindValue(":credits", $credits, $this->pdo::PARAM_INT);
         $query->bindValue(":id_role", $id_role, $this->pdo::PARAM_INT);
+        $query->bindValue(":photo", $photo_url, $this->pdo::PARAM_STR);
+
         $query->execute();
         $query->fetch(\PDO::FETCH_ASSOC);
 
@@ -30,7 +32,7 @@ class RegistRepository extends Repository
         $userInfo->setId($lastInsertedId);
         $userInfo->setUsername($username);
         $userInfo->setEmail($email);
-        $userInfo->setPhotoUrl("/assets/img/user.jpg");
+        $userInfo->setPhotoUrl($photo_url);
         $userInfo->setDateOfBirth($date_of_birth);
         $userInfo->setCredits($credits);
         $userInfo->setIdRole($id_role);
