@@ -42,10 +42,10 @@
 
           </ul>
         </nav>
-
         <div class="flex items-center gap-4 text-lg">
 
           <?php if (isset($_SESSION["username"])) {?>
+
             <div class="flex items-center gap-x-6">
               <a href="http://localhost:8080/index.php?controller=auth&action=profil"><img class="object-cover w-12 h-12 rounded-full" src="<?php echo $_SESSION["photo"] ?>" alt="profil pic"></a>
 

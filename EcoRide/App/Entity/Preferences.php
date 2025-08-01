@@ -5,8 +5,8 @@ class Preferences
 {
     private int $id;
     private int $user_id;
-    private bool $smoking;
-    private bool $animal;
+    private string|bool $smoking;
+    private string|bool $animal;
     private string $description;
 
     /**
@@ -48,7 +48,7 @@ class Preferences
     /**
      * Get the value of smoking
      */
-    public function isSmoking(): bool
+    public function getSmoking(): string | bool
     {
         return $this->smoking;
     }
@@ -56,7 +56,7 @@ class Preferences
     /**
      * Set the value of smoking
      */
-    public function setSmoking(bool $smoking): self
+    public function setSmoking($smoking): self
     {
         $this->smoking = $smoking;
 
@@ -66,7 +66,7 @@ class Preferences
     /**
      * Get the value of animal
      */
-    public function isAnimal(): bool
+    public function getAnimal(): string | bool
     {
         return $this->animal;
     }
@@ -74,7 +74,7 @@ class Preferences
     /**
      * Set the value of animal
      */
-    public function setAnimal(bool $animal): self
+    public function setAnimal($animal): self
     {
         $this->animal = $animal;
 

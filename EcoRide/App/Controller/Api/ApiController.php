@@ -126,9 +126,20 @@ class ApiController
                     return;
                 }
 
-            case 'profil':
-
-                break;
+            case 'img':
+                if (isset($_SESSION["id"])) {
+                    // if post method
+                    if ($method === "POST") {
+                        $ImgControl = new ImgApi();
+                        $ImgControl->imgData();
+                    } else {
+                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
+                    }
+                    break;
+                } else {
+                    Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
+                    return;
+                }
 
             default:
 

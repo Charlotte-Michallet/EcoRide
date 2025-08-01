@@ -32,11 +32,19 @@ class ModifyApi
             $userModify = new ModifyProContr();
 
             if (isset($result["role"])) {
-                //     $resultRole = $result["role"];
-                //     $role       = htmlspecialchars(trim($resultRole));
-                //     $id_role    = $this->userRole($role);
-                Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
-                return;
+
+                $resultRole = $result["role"];
+                $role       = htmlspecialchars(trim($resultRole));
+                $id_role    = $this->userRole($role);
+
+                $userError = $userModify->checkRole($id_role, $user_id);
+                if (! empty($userError)) {
+                    Router::jsonResponse(["status" => "error", "message" => "Le champs doit etre rempli"], 422);
+                    return;
+                } else {
+                    Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
+                    return;
+                }
 
             } elseif (isset($result["username"])) {
 
@@ -60,48 +68,70 @@ class ModifyApi
                 if (! empty($userError)) {
                     Router::jsonResponse(["status" => "error", "message" => $userError], 422);
                     return;
+                } else {
+                    Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
+                    return;
                 }
-                Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
-                return;
 
-            } elseif (isset($result["photo"])) {
-                //     $resultPhoto = $result["photo"];
-                //     $photo       = htmlspecialchars(trim($resultPhoto));
-                //     break;
-                Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
-                return;
             } elseif (isset($result["license"])) {
-                //     $resultLicense = $result["license"];
-                //     $license       = htmlspecialchars(trim($resultLicense));
-                //     break;
-                Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
-                return;
+                $resultLicense = $result["license"];
+                $license       = htmlspecialchars(trim($resultLicense));
+
+                $userError = $userModify->checkLicense($license, $user_id);
+                if (! empty($userError)) {
+                    Router::jsonResponse(["status" => "error", "message" => $userError], 422);
+                    return;
+                } else {
+                    Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
+                    return;
+                }
             } elseif (isset($result["password"])) {
-                //     $resultPassword  = $result["password"];
-                //     $resultPwdVerify = $result["pwdVerify"];
-                //     $password        = htmlspecialchars(trim($resultPassword));
-                //     $passwordVerif   = htmlspecialchars(trim($resultPwdVerify));
-                //     break;
-                Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
-                return;
-            } elseif (isset($result["animal"])) {
-                //     $resultAnimal = $result["animal"];
-                //     $animal       = htmlspecialchars(trim($resultAnimal));
-                //     break;
-                Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
-                return;
-            } elseif (isset($result["smoking"])) {
-                //     $resultSmoking = $result["smoking"];
-                //     $smoking       = htmlspecialchars(trim($resultSmoking));
-                //     break;
-                Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
-                return;
+                $resultPassword  = $result["password"];
+                $resultPwdVerify = $result["pwdVerify"];
+
+                $password      = htmlspecialchars(trim($resultPassword));
+                $passwordVerif = htmlspecialchars(trim($resultPwdVerify));
+
+                $userError = $userModify->checkPassword($password, $passwordVerif, $user_id);
+                if (! empty($userError)) {
+
+                    Router::jsonResponse(["status" => "error", "message" => ""], 422);
+                    return;
+                } else {
+                    Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
+                    return;
+                }
+
+            } elseif (isset($result["animal"]) && isset($result["smoking"])) {
+                $resultAnimal  = $result["animal"];
+                $resultSmoking = $result["smoking"];
+
+                $animal  = htmlspecialchars(trim($resultAnimal));
+                $smoking = htmlspecialchars(trim($resultSmoking));
+
+                $userError = $userModify->checkAccept($animal, $smoking, $user_id);
+
+                if (! empty($userError)) {
+                    Router::jsonResponse(["status" => "error", "message" => $userError], 422);
+                    return;
+                } else {
+                    Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
+                    return;
+                }
             } elseif (isset($result["preferences"])) {
-                //     $resultPreferences = $result["preferences"];
-                //     $preferences       = htmlspecialchars(trim($resultPreferences));
-                //     break;
-                Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
-                return;
+
+                $resultPreferences = $result["preferences"];
+                $preferences       = htmlspecialchars(trim($resultPreferences));
+
+                $userError = $userModify->checkPreferences($preferences, $user_id);
+
+                if (! empty($userError)) {
+                    Router::jsonResponse(["status" => "error", "message" => $userError], 422);
+                    return;
+                } else {
+                    Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
+                    return;
+                }
             } else {
                 Router::jsonResponse(["status" => "error", "message" => "aucune donnée ne correspond"], 401);
                 return;
@@ -111,6 +141,7 @@ class ModifyApi
             Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);
             return;
         }
+
     }
 
     protected function userRole(string $role)
@@ -121,7 +152,7 @@ class ModifyApi
             case 'admin':
                 return 1;
 
-            case 'empl':
+            case 'emplee':
                 return 2;
 
             case 'driver':
@@ -130,11 +161,11 @@ class ModifyApi
             case 'passenger':
                 return 4;
 
-            case 'driverAndPassengerR':
+            case 'driverAndPassenger':
                 return 5;
 
             default:
-                return 6;
+                return null;
         }
     }
 

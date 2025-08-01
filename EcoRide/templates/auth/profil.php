@@ -13,13 +13,14 @@
                 <div class="w-full max-w-md">
 
                     <div class="flex items-center justify-center mt-6">
-                        <a href="http://localhost:8080/index.php?controller=auth&action=profilModify" class="w-1/3 pb-4 font-medium text-center text-gray-500 capitalize border-b">
+                        <a href="http://localhost:8080/index.php?controller=auth&action=profilModify"
+                            class="w-1/3 pb-4 font-medium text-center text-gray-500 capitalize border-b">
                             modifier compte
                         </a>
-
-                        <a href="#" class="w-1/3 pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-blue-500">
-                            supprimer compte
-                        </a>
+                        <form method="post">
+                            <input type="hidden" name="tokenProfil" id="tokenProfil" value="<?php echo htmlspecialchars($token) ?>">
+                            <button type="submit" name="deleteProfil" value="deleteProfil" class="cursor-pointer pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-blue-500">Supprimer compte </button>
+                        </form>
                     </div>
 
                     <h2 class="mb-2 text-3xl text-gray-800 font-bold lg:text-4xl dark:text-neutral-200">
@@ -27,12 +28,18 @@
                     </h2>
 
                     <div class="flex flex-col items-center mt-8">
-                        <p class="block w-full py-3 text-gray-700"> Pseudo:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php echo $user->getUsername() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Email:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           <?php echo $user->getEmail() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Date de naissance:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       <?php echo $user->getDateOfBirth() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Credits:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <?php echo $user->getCredits() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Role:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <?php echo $user->getRole() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Permis:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <?php echo $user->getDriversLicense() ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Pseudo:
+                            <?php echo htmlspecialchars($user->getUsername()) ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Email:
+                            <?php echo htmlspecialchars($user->getEmail()); ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Date de
+                            naissance:<?php echo htmlspecialchars($user->getDateOfBirth()); ?></p>
+                        <p class="block w-full py-3 text-gray-700">
+                            Credits:<?php echo htmlspecialchars($user->getCredits()); ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Role:
+                            <?php echo htmlspecialchars($user->getRole()); ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Permis:
+                            <?php echo htmlspecialchars($user->getDriversLicense()); ?></p>
                     </div>
 
                 </div>
@@ -48,20 +55,15 @@
                     </h2>
 
                     <div class="flex flex-col items-center mt-8">
-                        <p class="block w-full py-3 text-gray-700"> Animal acepter    :                                                                                                                                                                                                                                                                                                                                                    <?php echo $user->getUsername() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Fumer acepeter        :                                                                                                                                                                                                                                                                                                                                                             <?php echo $user->getEmail() ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Mes autre preferences           :                                                                                                                                                                                                                                                                                                                                                                                              <?php echo $user->getDateOfBirth() ?></p>
-
+                        <p class="block w-full py-3 text-gray-700"> Animal acepter :</p>
+                        <p class="block w-full py-3 text-gray-700"> Fumer acepeter : </p>
+                        <p class="block w-full py-3 text-gray-700"> Mes autre preferences :</p>
                     </div>
 
                 </div>
             </div>
 
-
-
-
         </div>
         <!-- End Grid -->
     </div>
-
 </section>

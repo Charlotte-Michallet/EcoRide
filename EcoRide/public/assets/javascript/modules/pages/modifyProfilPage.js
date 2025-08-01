@@ -2,10 +2,14 @@ import { escapeHtml, errorDisplay } from "./../../global/formValidator.js";
 
 const API_ENDPOINT =
     "index.php?controller=api&resource=profil&action=modifyProfil";
+const IMG_API_ENDPOINT = "index.php?controller=api&resource=profil&action=img";
+
 const forms = document.querySelectorAll("form");
 const inputs = document.querySelectorAll("input");
 
 const selectRoles = document.querySelectorAll("input[name='userRoles']");
+const selectLicense = document.querySelectorAll("input[name='hasLicense']");
+
 const selectAniamls = document.querySelectorAll("input[name='animalsAllowed']");
 const selectSmocking = document.querySelectorAll(
     "input[name='allowedSmoking']"
@@ -51,10 +55,6 @@ inputs.forEach((input) => {
                 photoCheck(e.target.files[0]);
                 break;
 
-            case "license":
-                licenseCheck(e.target.value);
-                break;
-
             case "passwordModif":
                 passwordCheck(e.target.value);
                 break;
@@ -82,36 +82,6 @@ selectRoles.forEach((radio) => {
         } else {
             role = roleValue;
             errorDisplay("roles", "", true);
-        }
-    });
-});
-
-// verify annimal input
-selectAniamls.forEach((radio) => {
-    radio.addEventListener("input", (e) => {
-        let acceptValue = e.target.value;
-
-        if (!acceptValue) {
-            errorDisplay("preferences", "Veillez choisir une préférence.");
-            animal = null;
-        } else {
-            animal = acceptValue;
-            errorDisplay("preferences", "", true);
-        }
-    });
-});
-
-// verify smocking input
-selectSmocking.forEach((radio) => {
-    radio.addEventListener("input", (e) => {
-        let acceptValue = e.target.value;
-
-        if (!acceptValue) {
-            errorDisplay("preferences", "Veillez choisir une préférence.");
-            smoking = null;
-        } else {
-            smoking = acceptValue;
-            errorDisplay("preferences", "", true);
         }
     });
 });
@@ -154,12 +124,13 @@ const emailcheck = (value) => {
 
 const photoCheck = (files) => {
     const mimeAutorised = ["image/png", "image/jpeg", "image/jpg"];
-    // let pathUpload = "/fakepath/";
+
     const reader = new FileReader();
+    const maxSize = 3 * 1024 * 1024;
 
     if (files && files.type) {
         if (mimeAutorised.includes(files.type)) {
-            if (files.size < 5242880) {
+            if (files.size < maxSize) {
                 photo = files;
                 const prevue = document.getElementById("prevue");
                 reader.onload = function (e) {
@@ -169,7 +140,7 @@ const photoCheck = (files) => {
             } else {
                 errorDisplay(
                     "photo",
-                    "La taille de l'image ne doit pas dépasser 5Mo"
+                    "La taille de l'image ne doit pas dépasser 3Mo"
                 );
                 photo = null;
             }
@@ -186,19 +157,20 @@ const photoCheck = (files) => {
     }
 };
 
-const licenseCheck = (value) => {
-    // verify if email format is correct
-    if (value.match(/^\d{12}$/)) {
-        errorDisplay("license", "", true);
-        license = value;
-    } else if (value.match(/^[a-zA-Z0-9]{1,15}$/)) {
-        errorDisplay("license", "", true);
-        license = value;
-    } else {
-        errorDisplay("license", "Le numéro de permis n'est pas valid.");
-        license = null;
-    }
-};
+// verify annimal input
+selectLicense.forEach((radio) => {
+    radio.addEventListener("input", (e) => {
+        let hasLicense = e.target.value;
+
+        if (!hasLicense) {
+            errorDisplay("license", "Veillez cocher si vous avez le permis.");
+            license = null;
+        } else {
+            license = hasLicense;
+            errorDisplay("license", "", true);
+        }
+    });
+});
 
 // PASSWORD
 //verify password
@@ -233,6 +205,36 @@ const passwordmatch = (value) => {
         pwdVerify = value;
     }
 };
+
+// verify annimal input
+selectAniamls.forEach((radio) => {
+    radio.addEventListener("input", (e) => {
+        let acceptValue = e.target.value;
+
+        if (!acceptValue) {
+            errorDisplay("preferences", "Veillez choisir une préférence.");
+            animal = null;
+        } else {
+            animal = acceptValue;
+            errorDisplay("preferences", "", true);
+        }
+    });
+});
+
+// verify smocking input
+selectSmocking.forEach((radio) => {
+    radio.addEventListener("input", (e) => {
+        let acceptValue = e.target.value;
+
+        if (!acceptValue) {
+            errorDisplay("preferences", "Veillez choisir une préférence.");
+            smoking = null;
+        } else {
+            smoking = acceptValue;
+            errorDisplay("preferences", "", true);
+        }
+    });
+});
 
 textPref.addEventListener("input", (e) => {
     let value = e.target.value;
@@ -295,11 +297,11 @@ forms.forEach((form) => {
                 break;
 
             case "formPhoto":
-                data = checkFormPhoto(photo, token);
-
                 if (photo) {
+                    token = tokenLicense.value;
+                    imgAPI(photo, token, "photo");
+
                     errorDisplay("photo", "", true);
-                    API(data, "photo");
                 } else {
                     errorDisplay("photo", "Veuillez sélectionner une image.");
                 }
@@ -415,18 +417,6 @@ const checkFormLicense = (license, token) => {
     return data;
 };
 
-const checkFormPhoto = (photo, token) => {
-    // if empty dont send
-    token = tokenLicense.value;
-    const photoSanitized = escapeHtml(photo);
-
-    const data = {
-        photo: photoSanitized,
-        token,
-    };
-    return data;
-};
-
 const checkFormPwd = (password, pwdVerify, token) => {
     // if empty dont send
     token = tokenPwd.value;
@@ -453,6 +443,7 @@ const checkFormAccept = (animal, smoking, token) => {
     };
     return data;
 };
+
 const checkFormpreferences = (preferences, token) => {
     // if empty dont send
     token = tokenpreference.value;
@@ -476,11 +467,62 @@ const API = async (data, error, message = "") => {
 
         const responseData = await resp.json();
 
-        if (resp.status === 401) {
-            errorDisplay(error, responseData.message || message);
-        } else if (resp.ok) {
-            window.location.href =
-                "http://localhost:8080/index.php?controller=auth&action=profil";
+        if (resp.ok) {
+            const succes = document.getElementById("succes");
+            succes.classList.remove("hidden");
+            succes.textContent = `La modification a bien était prise en compte.`;
+
+            setTimeout(() => {
+                window.location.href =
+                    "http://localhost:8080/index.php?controller=auth&action=profil";
+
+                succes.classList.add("hidden");
+                succes.textContent = "";
+            }, 1000);
+        } else {
+            errorDisplay(
+                error,
+                responseData.message ||
+                    `La modification n'a pas etait prise en compte. ${message}`
+            );
+        }
+    } catch (error) {
+        alert(
+            `Les modifications n'ont pas etaient pris en compte : ${error.message}`
+        );
+    }
+};
+
+const imgAPI = async (photofile, token, error, message = "") => {
+    const formData = new FormData();
+
+    formData.append("image", photofile);
+    formData.append("token", token);
+
+    for (let [key, value] of formData.entries()) {
+        console.log(`${key}, ${value}`);
+    }
+
+    try {
+        const resp = await fetch(IMG_API_ENDPOINT, {
+            method: "POST",
+            body: formData,
+        });
+
+        const responseData = await resp.json();
+
+        if (resp.ok) {
+            const succes = document.getElementById("succes");
+            succes.classList.remove("hidden");
+            succes.textContent = `La modification a bien était prise en compte.`;
+
+            setTimeout(() => {
+                window.location.href =
+                    "http://localhost:8080/index.php?controller=auth&action=profil";
+
+                succes.classList.add("hidden");
+                succes.textContent = "";
+            }, 1000);
         } else {
             errorDisplay(
                 error,

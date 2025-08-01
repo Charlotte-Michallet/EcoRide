@@ -8,7 +8,7 @@ class User
     protected string $email;
     protected string $password;
     protected string $date_of_birth;
-    protected string $photo_url;
+    protected array|string $photo_url;
     protected int $credits;
     protected int $id_role;
     protected string $role;
@@ -69,6 +69,14 @@ class User
     }
 
     /**
+     * Get the value of password
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    /**
      * Set the value of password
      */
     public function setPassword(string $password): self
@@ -99,7 +107,7 @@ class User
     /**
      * Get the value of photo_url
      */
-    public function getPhotoUrl(): ?string
+    public function getPhotoUrl(): array | string
     {
         return $this->photo_url;
     }
@@ -107,7 +115,7 @@ class User
     /**
      * Set the value of photo_url
      */
-    public function setPhotoUrl(?string $photo_url): self
+    public function setPhotoUrl($photo_url): self
     {
         $this->photo_url = $photo_url;
 
@@ -151,24 +159,6 @@ class User
     }
 
     /**
-     * Get the value of drivers_license
-     */
-    public function getDriversLicense(): ?string
-    {
-        return $this->drivers_license;
-    }
-
-    /**
-     * Set the value of drivers_license
-     */
-    public function setDriversLicense(?string $drivers_license): self
-    {
-        $this->drivers_license = $drivers_license;
-
-        return $this;
-    }
-
-    /**
      * Get the value of role
      */
     public function getRole(): string
@@ -182,6 +172,24 @@ class User
     public function setRole(string $role): self
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of drivers_license
+     */
+    public function getDriversLicense(): ?string
+    {
+        return $this->drivers_license;
+    }
+
+    /**
+     * Set the value of drivers_license
+     */
+    public function setDriversLicense(?string $drivers_license): self
+    {
+        $this->drivers_license = $drivers_license;
 
         return $this;
     }

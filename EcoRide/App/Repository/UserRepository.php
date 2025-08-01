@@ -1,6 +1,7 @@
 <?php
 namespace App\Repository;
 
+use App\Entity\Preferences;
 use App\Entity\User;
 
 class UserRepository extends Repository
@@ -25,7 +26,7 @@ class UserRepository extends Repository
         $userInfo->setPhotoUrl($user["photo"]);
         $userInfo->setCredits($user["credits"]);
         $userInfo->setRole($user["role"]);
-        $userInfo->setDriversLicense($user["drivers_license"] ?? "");
+        $userInfo->setDriversLicense($user["drivers_license"] ?? "Non renseigné");
 
         return $userInfo;
     }
@@ -39,5 +40,35 @@ class UserRepository extends Repository
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
+    }
+
+    public function userpref(int $user_id)
+    {
+        $check = $this->pdo->prepare("SELECT COUNT(*) FROM preferences WHERE user_id = :user_id;");
+        $check->bindValue(":user_id", $user_id, $this->pdo::PARAM_INT);
+        $check->execute();
+
+        $exists = $check->fetchColumn() > 0;
+
+        if ($exists) {
+
+            $query = $this->pdo->prepare("SELECT * FROM preferences WHERE user_id = :user_id ");
+
+            $query->bindValue(":user_id", $user_id, $this->pdo::PARAM_INT);
+            $query->execute();
+
+            $userpre = $query->fetch(\PDO::FETCH_ASSOC);
+
+            // Hydration
+            $userpreferences = new Preferences();
+            $userpreferences->setSmoking($userpre["smoking_allowed"]);
+            $userpreferences->setAnimal($userpre["animal_allowed"]);
+            $userpreferences->setDescription($userpre["description"]) ?? "";
+
+            return $userpreferences;
+        } else {
+            return [];
+        }
+
     }
 }

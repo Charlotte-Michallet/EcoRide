@@ -5,6 +5,7 @@ use App\Repository\CarRepository;
 
 class CarContr
 {
+    private int $id;
     private string $brand;
     private string $model;
     private string $energy_type;
@@ -157,5 +158,4 @@ class CarContr
         }
         return $result;
     }
-
 }

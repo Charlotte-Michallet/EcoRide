@@ -25,7 +25,7 @@ class LoginRepository extends Repository
             $userInfo->setPhotoUrl($user["photo"]);
             $userInfo->setDateOfBirth($user["date_of_birth"]);
             $userInfo->setCredits($user["credits"]);
-            $userInfo->setIdRole($user["id"]);
+            $userInfo->setIdRole($user["id_role"]);
 
             return $userInfo;
         } else {

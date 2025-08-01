@@ -67,6 +67,8 @@ class CarRepository extends Repository
             $query = $this->pdo->prepare("DELETE FROM cars WHERE id = :id;");
             $query->bindValue(":id", $id, $this->pdo::PARAM_STR);
             $query->execute();
+
+            header("Location: http://localhost:8080/index.php?controller=auth&action=cars");
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }

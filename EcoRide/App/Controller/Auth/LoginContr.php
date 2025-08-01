@@ -18,13 +18,11 @@ class LoginContr extends AccountContr
             if ($this->InputEmpty() === true) {
                 $errors[] = ["Tous les champs sont obligatoires."];
                 // echo "Tous les champs sont obligatoires."; // Verify if statment works
-                return $errors;
             }
 
             if ($this->emailInvalid() === true) {
                 $errors[] = ["L'adresse email est invalide."];
                 // echo "L'adresse email est invalide."; // Verify if statment works
-                return $errors;
             }
 
             if (! empty($errors)) {
@@ -40,6 +38,7 @@ class LoginContr extends AccountContr
                     $_SESSION["username"] = $user->getUsername();
                     $_SESSION["email"]    = $user->getEmail();
                     $_SESSION["photo"]    = $user->getPhotoUrl();
+                    $_SESSION["role"]     = $user->getIdRole();
                 }
 
             }

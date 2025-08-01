@@ -23,43 +23,35 @@ class RegisterContr extends AccountContr
         $errors = [];
         try {
             if ($this->InputEmpty() === true) {
-                $errors = ["empty" => "Tous les champs sont obligatoires."];
-                return $errors;
+                $errors = ["Tous les champs sont obligatoires."];
             }
 
             if ($this->userInvalid() === true) {
-                $errors = ["userInvalid" => "Le nom d'utilisateur est invalide. Utilisez uniquement des lettres et des chiffres."];
-                return $errors;
+                $errors = ["Le nom d'utilisateur est invalide. Utilisez uniquement des lettres et des chiffres."];
             }
 
             if ($this->emailInvalid() === true) {
-                $errors = ["emailInvalide" => "L'adresse email est invalide."];
-                return $errors;
+                $errors = ["L'adresse email est invalide."];
             }
 
             if ($this->pwdInvalid() === true) {
-                $errors = ["pwdInvalide" => "Le mot de passe est invalide."];
-                return $errors;
+                $errors = ["Le mot de passe est invalide."];
             }
 
             if ($this->pwdMatch() === false) {
-                $errors = ["passwordMatch" => "Les mots de passe ne sont pas identiques."];
-                return $errors;
+                $errors = ["Les mots de passe ne sont pas identiques."];
             }
 
             if ($this->usernameTaken() === true) {
-                $errors = ["userTaken" => "Ce nom d'utilisateur est déjà utilisé."];
-                return $errors;
+                $errors = ["Ce nom d'utilisateur est déjà utilisé."];
             }
 
             if ($this->emailTaken() === true) {
-                $errors = ["emailTaken" => "Cet email est déjà utilisé."];
-                return $errors;
+                $errors = ["Cet email est déjà utilisé."];
             }
 
             if ($this->userUnderAge() === true) {
-                $errors = ["userAge" => "Vous devez être majeur pour vous inscrire sur notre plateforme."];
-                return $errors;
+                $errors = ["Vous devez être majeur pour vous inscrire sur notre plateforme."];
             }
 
             if (! empty($errors)) {
@@ -73,6 +65,7 @@ class RegisterContr extends AccountContr
                 $_SESSION["username"] = $newUser->getUsername();
                 $_SESSION["email"]    = $newUser->getEmail();
                 $_SESSION["photo"]    = $newUser->getPhotoUrl();
+                $_SESSION["role"]     = $newUser->getIdRole();
             }
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

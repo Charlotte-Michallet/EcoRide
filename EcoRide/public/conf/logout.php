@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(dirname(__DIR__)) . "/config/configSession.php";
+require_once dirname(__DIR__, 2) . "/config/configSession.php";
 
 session_unset();
 session_destroy();

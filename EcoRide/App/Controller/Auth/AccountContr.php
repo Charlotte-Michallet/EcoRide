@@ -11,7 +11,7 @@ class AccountContr
     protected string $password;
     protected string $passwordVerif;
     protected string $date_of_birth;
-    protected string $photo_url;
+    protected string|array $photo_url;
     protected int $credits;
     protected int $id_role;
     protected string $drivers_license;

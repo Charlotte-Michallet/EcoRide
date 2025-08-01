@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Controller\Auth\ProfilContr;
 use App\Repository\CarRepository;
 use App\Repository\UserRepository;
 
@@ -68,14 +69,15 @@ class AuthController extends Router
         $userId = $_SESSION["id"];
 
         if ($userId) {
+            $tokenObj     = new TokenCsrf();
+            $currentToken = $tokenObj->getGenerateToken();
 
             $userRepo = new UserRepository();
             $user     = $userRepo->userInfo($userId);
 
-            $this->deleteUserMethod();
+            $this->render("auth/profil", ["user" => $user, "token" => $currentToken]);
 
-            // show page
-            $this->render("auth/profil", ["user" => $user]);
+            $this->deleteUserMethod();
         }
     }
 
@@ -139,19 +141,19 @@ class AuthController extends Router
 
     protected function deleteUserMethod()
     {
-        if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["submitDeleteCar"]) && $_POST["submitDeleteCar"])) {
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["deleteProfil"]) && $_POST["deleteProfil"])) {
 
             // get data from form
-            $submittedToken = htmlspecialchars($_POST["token_csrf"]);
-            $id             = htmlspecialchars(trim($_POST["idUserDelete"]));
+            $submittedToken = htmlspecialchars($_POST["tokenProfil"]);
+            $id             = $_SESSION["id"];
 
             // Check token CSRF
             $token   = new TokenCsrf();
             $isValid = $token->validateToken($submittedToken);
 
             if ($isValid) {
-                $carRepo = new UserRepository();
-                $carRepo->deleteUser($id);
+                $profilContr = new ProfilContr();
+                $profilContr->deleteUser($id);
             }
 
         }

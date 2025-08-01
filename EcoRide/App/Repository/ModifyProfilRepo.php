@@ -19,9 +19,6 @@ class ModifyProfilRepo extends Repository
         $userInfo = new User();
         $userInfo->setIdRole($id_role);
         return $userInfo;
-
-        //    ( password,) VALUES(:password
-
     }
 
     public function UpdateUsername(string $username, int $id)
@@ -30,7 +27,6 @@ class ModifyProfilRepo extends Repository
 
         $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
         $query->bindValue(":username", $username, $this->pdo::PARAM_STR);
-
         $query->execute();
 
         // Hydration
@@ -90,7 +86,6 @@ class ModifyProfilRepo extends Repository
 
         $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
         $query->bindValue(":password", $hashPwd, $this->pdo::PARAM_STR);
-
         $query->execute();
     }
 
@@ -119,47 +114,29 @@ class ModifyProfilRepo extends Repository
         $preferencesEntity->setUserId($user_id);
         $preferencesEntity->setSmoking($smoking);
         $preferencesEntity->setAnimal($animal);
-
-        return $preferencesEntity;
     }
 
     public function UpadatePreferences(string $description, int $user_id)
     {
-        $query = $this->pdo->prepare("UPDATE users SET description = :description WHERE user_id = :user_id;");
+        $check = $this->pdo->prepare("SELECT COUNT(*) FROM preferences WHERE user_id = :user_id;");
+        $check->bindValue(":user_id", $user_id, $this->pdo::PARAM_INT);
+        $check->execute();
 
-        $query->bindValue(":user_id", $user_id, $this->pdo::PARAM_INT);
-        $query->bindValue(":description", $description, $this->pdo::PARAM_STR);
-        $query->execute();
+        $exists = $check->fetchColumn() > 0;
 
-        // Hydration
-        $preferencesEntity = new Preferences();
-        $preferencesEntity->setUserId($user_id);
-        $preferencesEntity->setDescription($description);
+        if ($exists) {
+            $query = $this->pdo->prepare("UPDATE preferences SET description = :description WHERE user_id = :user_id;");
 
-        return $preferencesEntity;
-    }
+            $query->bindValue(":user_id", $user_id, $this->pdo::PARAM_INT);
+            $query->bindValue(":description", $description, $this->pdo::PARAM_STR);
+            $query->execute();
 
-    public function checkUserInDb(string $username): mixed
-    {
-        $query = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE username = :username;");
-
-        $query->bindValue(":username", $username);
-        $query->execute();
-
-        $count = $query->fetchColumn();
-
-        return $count > 0;
-    }
-
-    public function checkEmailInDb(string $email): mixed
-    {
-        $query = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email;");
-
-        $query->bindValue(":email", $email);
-        $query->execute();
-
-        $count = $query->fetchColumn();
-
-        return $count > 0;
+            // Hydration
+            $preferencesEntity = new Preferences();
+            $preferencesEntity->setUserId($user_id);
+            $preferencesEntity->setDescription($description);
+        } else {
+            return ["Il faut remplir les préférences avant."];
+        }
     }
 }
