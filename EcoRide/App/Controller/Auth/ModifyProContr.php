@@ -178,20 +178,25 @@ class ModifyProContr extends AccountContr
         $this->id              = $id;
         $errors                = [];
 
+        if ($this->drivers_license === "noLicense") {
+            $this->drivers_license = false;
+
+        } elseif ($this->drivers_license === "gotLicense") {
+            $this->drivers_license = true;
+
+        } else {
+            $errors = ["Veillez cocher si vous avez le permis."];
+            return $errors;
+        }
+
         try {
-            if (preg_match("/^\d{12}$/", $this->drivers_license) || preg_match("/^[a-zA-Z0-9]{1,15}$/", $this->drivers_license)) {
-
-                $modifyRepo = new ModifyProfilRepo;
-                $modifyRepo->UpadateLicense($this->drivers_license, $this->id);
-
-            } else {
-                $errors = ["Le numéro de permis n'est pas valide."];
-                return $errors;
-            }
+            $modifyRepo = new ModifyProfilRepo;
+            $modifyRepo->UpadateLicense($this->drivers_license, $this->id);
 
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
+
     }
 
     public function checkAccept($animal, $smoking, $id)

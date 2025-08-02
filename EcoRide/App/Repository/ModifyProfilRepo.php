@@ -63,12 +63,12 @@ class ModifyProfilRepo extends Repository
         return $userInfo;
     }
 
-    public function UpadateLicense(string $drivers_license, int $id)
+    public function UpadateLicense(bool $drivers_license, int $id)
     {
         $query = $this->pdo->prepare("UPDATE users SET drivers_license = :license WHERE id = :id;");
 
         $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
-        $query->bindValue(":license", $drivers_license, $this->pdo::PARAM_STR);
+        $query->bindValue(":license", $drivers_license, $this->pdo::PARAM_BOOL);
         $query->execute();
 
         // Hydration
@@ -112,8 +112,8 @@ class ModifyProfilRepo extends Repository
         // Hydration
         $preferencesEntity = new Preferences();
         $preferencesEntity->setUserId($user_id);
-        $preferencesEntity->setSmoking($smoking);
-        $preferencesEntity->setAnimal($animal);
+        $preferencesEntity->setSmokingAllowed($smoking);
+        $preferencesEntity->setAnimalAllowed($animal);
     }
 
     public function UpadatePreferences(string $description, int $user_id)

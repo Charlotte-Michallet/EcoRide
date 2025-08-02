@@ -9,7 +9,7 @@ class UserRepository extends Repository
     public function userInfo(int $id)
     {
 
-        $query = $this->pdo->prepare("SELECT u.id, u.username, u.email, u.date_of_birth, u.photo, r.role, u.credits, IFNULL(u.drivers_license,'') FROM users u INNER JOIN roles r ON u.id_role = r.id WHERE u.id = :id;");
+        $query = $this->pdo->prepare("SELECT u.id, u.username, u.email, u.date_of_birth, u.photo, r.role, u.credits, u.drivers_license FROM users u INNER JOIN roles r ON u.id_role = r.id WHERE u.id = :id;");
 
         // bind value from form to query
         $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
@@ -26,7 +26,7 @@ class UserRepository extends Repository
         $userInfo->setPhotoUrl($user["photo"]);
         $userInfo->setCredits($user["credits"]);
         $userInfo->setRole($user["role"]);
-        $userInfo->setDriversLicense($user["drivers_license"] ?? "Non renseigné");
+        $userInfo->setDriversLicense($user["drivers_license"]);
 
         return $userInfo;
     }
@@ -50,6 +50,7 @@ class UserRepository extends Repository
 
         $exists = $check->fetchColumn() > 0;
 
+        $userpreferences = new Preferences();
         if ($exists) {
 
             $query = $this->pdo->prepare("SELECT * FROM preferences WHERE user_id = :user_id ");
@@ -60,15 +61,13 @@ class UserRepository extends Repository
             $userpre = $query->fetch(\PDO::FETCH_ASSOC);
 
             // Hydration
-            $userpreferences = new Preferences();
-            $userpreferences->setSmoking($userpre["smoking_allowed"]);
-            $userpreferences->setAnimal($userpre["animal_allowed"]);
-            $userpreferences->setDescription($userpre["description"]) ?? "";
 
-            return $userpreferences;
-        } else {
-            return [];
+            $userpreferences->setSmokingAllowed($userpre["smoking_allowed"]);
+            $userpreferences->setAnimalAllowed($userpre["animal_allowed"]);
+            $userpreferences->setDescription($userpre["description"]);
+
         }
+        return $userpreferences;
 
     }
 }

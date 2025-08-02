@@ -18,7 +18,7 @@ CREATE TABLE users (
     photo VARCHAR(255),
     credits INT(11),
     id_role INT(11),
-    drivers_license VARCHAR(100) DEFAULT NULL,
+    drivers_license BOOLEAN,
     CONSTRAINT fk_user_role
         FOREIGN KEY (id_role) REFERENCES roles(id)
         ON DELETE RESTRICT

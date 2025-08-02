@@ -5,9 +5,11 @@ class Preferences
 {
     private int $id;
     private int $user_id;
-    private string|bool $smoking;
-    private string|bool $animal;
-    private string $description;
+    private ?bool $smoking_allowed = null;
+    private ?bool $animal_allowed  = null;
+    private string $smoking;
+    private string $animal;
+    private ?string $description = null;
 
     /**
      * Get the value of id
@@ -46,9 +48,45 @@ class Preferences
     }
 
     /**
+     * Get the value of smoking_allowed
+     */
+    public function isSmokingAllowed(): ?bool
+    {
+        return $this->smoking_allowed;
+    }
+
+    /**
+     * Set the value of smoking_allowed
+     */
+    public function setSmokingAllowed(?bool $smoking_allowed): self
+    {
+        $this->smoking_allowed = $smoking_allowed;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of animal_allowed
+     */
+    public function isAnimalAllowed(): ?bool
+    {
+        return $this->animal_allowed;
+    }
+
+    /**
+     * Set the value of animal_allowed
+     */
+    public function setAnimalAllowed(?bool $animal_allowed): self
+    {
+        $this->animal_allowed = $animal_allowed;
+
+        return $this;
+    }
+
+    /**
      * Get the value of smoking
      */
-    public function getSmoking(): string | bool
+    public function getSmoking(): string
     {
         return $this->smoking;
     }
@@ -56,7 +94,7 @@ class Preferences
     /**
      * Set the value of smoking
      */
-    public function setSmoking($smoking): self
+    public function setSmoking(string $smoking): self
     {
         $this->smoking = $smoking;
 
@@ -66,7 +104,7 @@ class Preferences
     /**
      * Get the value of animal
      */
-    public function getAnimal(): string | bool
+    public function getAnimal(): string
     {
         return $this->animal;
     }
@@ -74,7 +112,7 @@ class Preferences
     /**
      * Set the value of animal
      */
-    public function setAnimal($animal): self
+    public function setAnimal(string $animal): self
     {
         $this->animal = $animal;
 
@@ -84,7 +122,7 @@ class Preferences
     /**
      * Get the value of description
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -92,7 +130,7 @@ class Preferences
     /**
      * Set the value of description
      */
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 

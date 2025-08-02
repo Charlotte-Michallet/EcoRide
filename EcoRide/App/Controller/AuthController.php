@@ -75,7 +75,22 @@ class AuthController extends Router
             $userRepo = new UserRepository();
             $user     = $userRepo->userInfo($userId);
 
-            $this->render("auth/profil", ["user" => $user, "token" => $currentToken]);
+            $license = $user->isDriversLicense();
+
+            if ($license === false) {
+                $license = "Non";
+
+            } elseif ($license === true) {
+                $license = "Oui";
+
+            } else {
+                $license = "Non renseigné";
+            }
+
+            $profilContr = new ProfilContr();
+            $preferences = $profilContr->Preferences($userId);
+
+            $this->render("auth/profil", ["token" => $currentToken, "user" => $user, "license" => $license, "preferences" => $preferences]);
 
             $this->deleteUserMethod();
         }

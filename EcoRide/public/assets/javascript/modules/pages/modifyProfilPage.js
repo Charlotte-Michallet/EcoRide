@@ -157,7 +157,6 @@ const photoCheck = (files) => {
     }
 };
 
-// verify annimal input
 selectLicense.forEach((radio) => {
     radio.addEventListener("input", (e) => {
         let hasLicense = e.target.value;
@@ -298,7 +297,7 @@ forms.forEach((form) => {
 
             case "formPhoto":
                 if (photo) {
-                    token = tokenLicense.value;
+                    token = tokenPhoto.value;
                     imgAPI(photo, token, "photo");
 
                     errorDisplay("photo", "", true);
@@ -312,11 +311,11 @@ forms.forEach((form) => {
 
                 if (license) {
                     errorDisplay("license", "", true);
-                    API(data, token, "license", "L'adresse mail exist déjà.");
+                    API(data, token, "license");
                 } else {
                     errorDisplay(
                         "license",
-                        "Veillez remplir le numéro de permis."
+                        "Veillez cocher si vous avez le permis."
                     );
                 }
                 break;

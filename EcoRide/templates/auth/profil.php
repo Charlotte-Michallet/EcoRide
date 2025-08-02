@@ -28,18 +28,17 @@
                     </h2>
 
                     <div class="flex flex-col items-center mt-8">
-                        <p class="block w-full py-3 text-gray-700"> Pseudo:
-                            <?php echo htmlspecialchars($user->getUsername()) ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Email:
-                            <?php echo htmlspecialchars($user->getEmail()); ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Pseudo
+                            <?php echo " : " . htmlspecialchars($user->getUsername()) ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Email
+                            <?php echo " : " . htmlspecialchars($user->getEmail()); ?></p>
                         <p class="block w-full py-3 text-gray-700"> Date de
-                            naissance:<?php echo htmlspecialchars($user->getDateOfBirth()); ?></p>
+                            naissance:<?php echo " : " . htmlspecialchars($user->getDateOfBirth()); ?></p>
                         <p class="block w-full py-3 text-gray-700">
-                            Credits:<?php echo htmlspecialchars($user->getCredits()); ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Role:
-                            <?php echo htmlspecialchars($user->getRole()); ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Permis:
-                            <?php echo htmlspecialchars($user->getDriversLicense()); ?></p>
+                            Credits:<?php echo " : " . htmlspecialchars($user->getCredits()); ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Role
+                            <?php echo " : " . htmlspecialchars($user->getRole()); ?></p>
+                        <p class="block w-full py-3 text-gray-700"> A le permis                                                                                <?php echo " : " . htmlspecialchars($license); ?> </p>
                     </div>
 
                 </div>
@@ -55,9 +54,9 @@
                     </h2>
 
                     <div class="flex flex-col items-center mt-8">
-                        <p class="block w-full py-3 text-gray-700"> Animal acepter :</p>
-                        <p class="block w-full py-3 text-gray-700"> Fumer acepeter : </p>
-                        <p class="block w-full py-3 text-gray-700"> Mes autre preferences :</p>
+                        <p class="block w-full py-3 text-gray-700"> Animal acepter<?php echo " : " . htmlspecialchars($preferences["animal"]); ?> </p>
+                        <p class="block w-full py-3 text-gray-700"> Fumer acepeter<?php echo " : " . htmlspecialchars($preferences["smoking"]); ?></p>
+                        <p class="block w-full py-3 text-gray-700"> Mes autre preferences<?php echo " : " . htmlspecialchars($preferences["descriptif"]); ?></p>
                     </div>
 
                 </div>

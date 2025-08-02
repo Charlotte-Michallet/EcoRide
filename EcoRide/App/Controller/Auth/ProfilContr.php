@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller\Auth;
 
-use App\Entity\Preferences;
 use App\Repository\UserRepository;
 
 class ProfilContr
@@ -27,13 +26,36 @@ class ProfilContr
     public function Preferences($id)
     {
         try {
-            $profilRegister = new UserRepository();
-            $pref           = $profilRegister->userpref($id);
+            $preferences     = [];
+            $profilRegister  = new UserRepository();
+            $pref            = $profilRegister->userpref($id);
+            $animal_allowed  = $pref->isAnimalAllowed();
+            $smoking_allowed = $pref->isSmokingAllowed();
+            $descriptif      = $pref->getDescription();
 
-            if ($pref) {
-                var_dump($pref);
-
+            if ($animal_allowed === false) {
+                $preferences["animal"] = "Non";
+            } elseif ($animal_allowed === true) {
+                $preferences["animal"] = "Oui";
+            } else {
+                $preferences["animal"] = "Non renseigné";
             }
+
+            if ($smoking_allowed === false) {
+                $preferences["smoking"] = "Non";
+            } elseif ($smoking_allowed === true) {
+                $preferences["smoking"] = "Oui";
+            } else {
+                $preferences["smoking"] = "Non renseigné";
+            }
+
+            if ($descriptif === null) {
+                $preferences["descriptif"] = "Non renseigné";
+            } else {
+                $preferences["descriptif"] = $descriptif;
+            }
+
+            return $preferences;
 
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
