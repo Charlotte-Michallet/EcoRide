@@ -241,7 +241,7 @@ textPref.addEventListener("input", (e) => {
     if (value.length === 0) {
         errorDisplay("otherPreferences", "Le champs ne doit pas etre vide.");
         preferences = null;
-    } else if (!value.match(/^[a-zA-Z0-9\s\-.&+\/()[\]]+$/)) {
+    } else if (!value.match(/^[a-zA-Z0-9\s\-.&+\/()[\]!,;:\é\è\à\ç\ù]+$/)) {
         errorDisplay(
             "otherPreferences",
             "Le champs ne doit pas contenir de caractère spéciaux."

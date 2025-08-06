@@ -28,6 +28,10 @@ class ApiController
                     $this->profilRequest($method, $action);
                     break;
 
+                case 'trip':
+                    $this->tripsRequests($method, $action);
+                    break;
+
                 default:
                     Router::jsonResponse(["status" => "error", "message" => "Ressource API non reconnue."], 404);
                     break;
@@ -111,7 +115,6 @@ class ApiController
                 }
 
             case 'addCar':
-
                 if (isset($_SESSION["id"])) {
                     // if post method
                     if ($method === "POST") {
@@ -140,6 +143,39 @@ class ApiController
                     Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
                     return;
                 }
+
+            default:
+
+                break;
+        }
+    }
+
+    private function tripsRequests($method, $action)
+    {
+        switch ($action) {
+
+            case 'createTrip':
+                if (isset($_SESSION["id"])) {
+                    // if post method
+                    if ($method === "POST") {
+                        $ImgControl = new CreateTripApi();
+                        $ImgControl->tripData();
+                    } else {
+                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
+                    }
+
+                } else {
+                    Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
+                    return;
+                }
+
+            case 'search':
+
+                break;
+
+            case 'profil':
+
+                break;
 
             default:
 

@@ -66,11 +66,11 @@ class AuthController extends Router
 
     protected function profil()
     {
-        $userId = $_SESSION["id"];
+        $userId       = $_SESSION["id"];
+        $tokenObj     = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
 
         if ($userId) {
-            $tokenObj     = new TokenCsrf();
-            $currentToken = $tokenObj->getGenerateToken();
 
             $userRepo = new UserRepository();
             $user     = $userRepo->userInfo($userId);
@@ -93,23 +93,26 @@ class AuthController extends Router
             $this->render("auth/profil", ["token" => $currentToken, "user" => $user, "license" => $license, "preferences" => $preferences]);
 
             $this->deleteUserMethod();
+        } else {
+            header("Location: http://localhost:8080/index.php");
         }
     }
 
     protected function profilModify()
     {
-        $userId = $_SESSION["id"];
+        $userId       = $_SESSION["id"];
+        $tokenObj     = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
 
         if ($userId) {
 
             $userRepo = new UserRepository();
             $user     = $userRepo->userInfo($userId);
 
-            $tokenObj     = new TokenCsrf();
-            $currentToken = $tokenObj->getGenerateToken();
-
             // show page
             $this->render("auth/modifyProfil", ["user" => $user, "token" => $currentToken]);
+        } else {
+            header("Location: http://localhost:8080/index.php");
         }
     }
 
@@ -129,6 +132,8 @@ class AuthController extends Router
 
             // // show page
             $this->render("userTrips/userCars", ["token" => $currentToken, "cars" => $carsInfo]);
+        } else {
+            header("Location: http://localhost:8080/index.php");
         }
     }
 

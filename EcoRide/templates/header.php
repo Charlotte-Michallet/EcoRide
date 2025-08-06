@@ -11,6 +11,15 @@
   <!-- links for tailwind -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+  <!-- linl leaflet.js -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Leaflet routing machine -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+  <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
+
+
   <!-- css link -->
   <link rel="stylesheet" href="/assets/css/overridecss.css">
 
@@ -21,7 +30,7 @@
   <title>EcoRide</title>
 </head>
 
-<body >
+<body>
 
   <header>
 

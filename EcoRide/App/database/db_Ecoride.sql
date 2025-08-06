@@ -48,9 +48,22 @@ CREATE TABLE preferences(
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+CREATE TABLE car_sharing(
+    id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    car_id INT(11),
+    departure_city VARCHAR(255) NOT NULL,
+    arrival_city VARCHAR(255) NOT NULL,
+    daparture_date DATE NOT NULL,
+    departure_hour TIME NOT NULL,
+    arrival_date DATE NOT NULL,
+    arrival_time TIME NOT NULL,
+    price INT(11) NOT NULL,
+    num_seats INT(11) NOT NULL,
+    CONSTRAINT fk_car_id
+    FOREIGN KEY (car_id) REFERENCES cars(id)
+);
+
 -- not done
-
-
 
 CREATE TABLE feedbacks(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -64,9 +77,6 @@ CREATE TABLE feedbacks(
         FOREIGN KEY (reservation_id) REFERENCES roles(id)
 );
 
-CREATE TABLE car_sharing(
-    id INT(11) PRIMARY KEY AUTO_INCREMENT,
-);
 
 CREATE TABLE reservations(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,

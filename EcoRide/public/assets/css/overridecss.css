@@ -109,3 +109,10 @@ a {
     /* visibility: hidden; */
     display: none;
 }
+
+/* Page Create Trip */
+
+#mapid {
+    height: 90%;
+    width: 100%; 
+}

@@ -19,3 +19,8 @@ export function errorDisplay(tag, message, valid) {
         paragrapheError.textContent = "";
     }
 }
+
+export function apiCityFail(paragraphe) {
+    paragraphe.classList.add("hidden");
+    paragraphe.textContent = "";
+}

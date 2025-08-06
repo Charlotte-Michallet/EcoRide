@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use App\Repository\CarRepository;
+
 class TripsController extends Router
 {
     public function route()
@@ -34,12 +36,18 @@ class TripsController extends Router
     // Methods for redirecting pages
     protected function createTrip()
     {
-        // generate token CSRF
+
+        $userId       = $_SESSION["id"];
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
+        if ($userId) {
+            // generate token CSRF
+            $carRepo  = new CarRepository();
+            $carsInfo = $carRepo->showUserCars($userId);
+        }
         // show page
-        $this->render("userTrips/createTrip", ["token" => $currentToken]);
+        $this->render("userTrips/createTrip", ["token" => $currentToken, "cars" => $carsInfo]);
     }
 
     protected function manageTrip()

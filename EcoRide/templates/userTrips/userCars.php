@@ -161,12 +161,12 @@
                                 </p>
                             </div>
 
-                            <divc class="flex items-center">
+                            <div class="flex items-center">
                                 <div class="text-xs inline-flex gap-x-2">
                                     <img class="w-auto h-7 w-7" src="<?php ROOT_PATH?> /assets/img/logo/form.png" alt="logo EcoRide">
                                     <p>*Voyage écologique = voyage en éléctrique</p>
                                 </div>
-                            </divc>
+                            </div>
                         </div>
                         <!-- End Footer -->
                     </div>

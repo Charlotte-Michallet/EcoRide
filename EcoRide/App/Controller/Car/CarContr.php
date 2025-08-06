@@ -47,8 +47,8 @@ class CarContr
                 return $errors;
             }
 
-            if (! is_numeric($this->num_seats)) {
-                $errors = ["Ce champs doit etre numerique"];
+            if ($this->numSeatsInvalid() === true) {
+                $errors = ["Ce champs doit etre un nombre entier et positif"];
                 return $errors;
             }
 
@@ -108,6 +108,15 @@ class CarContr
     protected function energyInvalid()
     {
         if (! preg_match("/^[a-zA-Z]*$/", $this->energy_type) || $this->energy_type === "Energy") {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+    protected function numSeatsInvalid()
+    {
+        if (filter_var($this->num_seats, FILTER_VALIDATE_INT) === false || $this->num_seats < 0) {
             $result = true;
         } else {
             $result = false;

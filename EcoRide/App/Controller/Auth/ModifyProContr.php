@@ -250,7 +250,7 @@ class ModifyProContr extends AccountContr
             $errors = ["Le champs doit etre rempli"];
         }
 
-        if (! preg_match("/^[a-zA-Z0-9\s\-.&+\/()[\]]+$/", $this->description)) {
+        if (! preg_match("/^[a-zA-Z0-9\s\-.&+\/()[\]!,;:\é\è\à\ç\ù]+$/", $this->description)) {
             $errors = ["Le champs ne doit pas contenir de caractère spéciaux."];
         }
 
