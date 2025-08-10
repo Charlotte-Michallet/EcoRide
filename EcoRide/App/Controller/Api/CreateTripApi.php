@@ -15,44 +15,45 @@ class CreateTripApi
         if (json_last_error() !== JSON_ERROR_NONE) {
             Router::jsonResponse(["status" => "error", "message" => "Format des données JSON invalide."], 400);
             return;
-        };
+        }
 
         // get data from form
         $resultSubmittedToken = $result["token"];
-        $resultdepartCity     = $result["departCity"];
-        $resultarrivalCity    = $result["arrivalCity"];
-        $resultcarId          = $result["carId"];
-        $resultdateDeparture  = $result["dateDeparture"];
-        $resulthourDeparture  = $result["hourDeparture"];
-        $resultnumPlaces      = $result["numPlaces"];
         $resultpricePlaces    = $result["pricePlaces"];
+        $resultnumPlaces      = $result["numPlaces"];
+        $infoItinary          = $result["info"];
+        $resulthourDeparture  = $result["hourDeparture"];
+        $resultcarId          = $result["carId"];
+        $arrivalCity          = $result["arrivalCity"];
+        $resultdateDeparture  = $result["dateDeparture"];
+        $departCity           = $result["departCity"];
 
         // escape special caractares
-        $submittedToken = htmlspecialchars($resultSubmittedToken);
-        $departCity     = htmlspecialchars(trim($resultdepartCity));
-        $arrivalCity    = htmlspecialchars(trim($resultarrivalCity));
-        $carId          = htmlspecialchars(trim($resultcarId));
-        $dateDeparture  = htmlspecialchars(trim($resultdateDeparture));
-        $hourDeparture  = htmlspecialchars(trim($resulthourDeparture));
-        $numPlaces      = htmlspecialchars(trim($resultnumPlaces));
-        $pricePlaces    = htmlspecialchars(trim($resultpricePlaces));
+        $submittedToken    = htmlspecialchars($resultSubmittedToken);
+        $carIdString       = htmlspecialchars(trim($resultcarId));
+        $dateDeparture     = htmlspecialchars(trim($resultdateDeparture));
+        $hourDeparture     = htmlspecialchars(trim($resulthourDeparture));
+        $numPlacesString   = htmlspecialchars(trim($resultnumPlaces));
+        $pricePlacesString = htmlspecialchars(trim($resultpricePlaces));
+
+        $numPlaces   = (int) $numPlacesString;
+        $pricePlaces = (int) $pricePlacesString;
+        $carId       = (int) $carIdString;
 
         // Check token CSRF
         $token   = new TokenCsrf();
         $isValid = $token->validateToken($submittedToken);
 
-        $user_id = $_SESSION["id"];
-
         if ($isValid) {
 
-            $tripContr = new CreateTripContr($departCity, $arrivalCity, $numPlaces, $dateDeparture, $hourDeparture, $pricePlaces, $carId, $user_id);
+            $tripContr = new CreateTripContr($departCity, $arrivalCity, $numPlaces, $dateDeparture, $hourDeparture, $pricePlaces, $carId, $infoItinary);
 
             $tripError = $tripContr->checkImputs();
 
             if (! empty($tripError)) {
                 Router::jsonResponse(["status" => "error", "message" => $tripError], 401);
             } else {
-                Router::jsonResponse(["status" => "success", "message" => "L'inscription réussi."], 200);
+                Router::jsonResponse(["status" => "success", "message" => "La création de trajer réussi"], 200);
             }
         } else {
             Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);

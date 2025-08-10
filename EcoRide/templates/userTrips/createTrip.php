@@ -96,6 +96,7 @@
                     </div>
 
                     <input type="hidden" name="token_csrf" id="tokenTrip" value="<?php echo htmlspecialchars($token) ?>">
+                     <p class="hidden text-green-600 mt-2" id="succes"></p>
 
                     <button type="submit"
                                 class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform rounded-lg md:col-start-1">

@@ -172,8 +172,8 @@ const numPlacesCheck = (value) => {
     } else if (value.length === 0) {
         errorDisplay("numPlaces", "Le champs doit etre renseigne");
         numPlaces = null;
-    } else if (value < 1 || value > 9) {
-        errorDisplay("numPlaces", "Le nombre de place doit etre entre 1 et 9");
+    } else if (value < 1 || value > 8) {
+        errorDisplay("numPlaces", "Le nombre de place doit etre entre 1 et 8");
         numPlaces = null;
     } else {
         errorDisplay("numPlaces", "", true);
@@ -259,10 +259,14 @@ function debounce(func, delay) {
         clearTimeout(timeoutId);
 
         // new timer and return promise
-        return new Promise((resolve) => {
-            timeoutId = setTimeout(() => {
-                const result = func.apply(this, args);
-                resolve(result);
+        return new Promise((resolve, rejet) => {
+            timeoutId = setTimeout(async () => {
+                try {
+                    const result = func.apply(this, args);
+                    resolve(result);
+                } catch (error) {
+                    rejet(error);
+                }
             }, delay);
         });
     };
@@ -417,7 +421,6 @@ const checkForm = (
         numPlaces: numPlacesSanitized,
         dateDeparture: dateDepartureSanitized,
         hourDeparture: hourDepartureSanitized,
-        numPlaces: numPlacesSanitized,
         pricePlaces: pricePlacesSanitized,
         carId: carIdPlacesSanitized,
         info,
@@ -443,7 +446,7 @@ form.addEventListener("submit", async (e) => {
     ) {
         errorDisplay("TripForm", "", true);
 
-        let registerData = checkForm(
+        let tripData = checkForm(
             departCity,
             arrivalCity,
             numPlaces,
@@ -455,35 +458,33 @@ form.addEventListener("submit", async (e) => {
             token
         );
 
-        console.log(registerData);
+        try {
+            // API
+            const resp = await fetch(API_ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(tripData),
+            });
 
-        // try {
-        //     // API
-        //     const resp = await fetch(API_ENDPOINT, {
-        //         method: "POST",
-        //         headers: { "Content-Type": "application/json" },
-        //         body: JSON.stringify(registerData),
-        //     });
+            const responseData = await resp.json();
+            const succes = document.getElementById("succes");
+            succes.classList.remove("hidden");
+            succes.textContent = `La modification a bien était prise en compte.`;
 
-        //     const responseData = await resp.json();
+            if (resp.ok) {
+                setTimeout(() => {
+                    window.location.href =
+                        "http://localhost:8080/index.php?controller=auth&action=profil";
 
-        //     if (resp.status == 401) {
-        //         errorDisplay(
-        //             "TripForm",
-        //             responseData.message ||
-        //                 "Le pseudo ou l'adresse mail exist déjà."
-        //         );
-        //     } else if (resp.ok) {
-        //         window.location.href = "http://localhost:8080/index.php";
-        //     } else {
-        //         errorDisplay(
-        //             "TripForm",
-        //             responseData.message || "L'inscription a échouée."
-        //         );
-        //     }
-        // } catch (error) {
-        //     alert(`La creation du trajet a échoué : ${error.message}`);
-        // }
+                    succes.classList.add("hidden");
+                    succes.textContent = "";
+                }, 1000);
+            } else {
+                errorDisplay("TripForm", responseData.message);
+            }
+        } catch (error) {
+            alert(`La creation du trajet a échoué : ${error.message}`);
+        }
     } else {
         errorDisplay("TripForm", "Veillez remplir tout les champs.");
     }

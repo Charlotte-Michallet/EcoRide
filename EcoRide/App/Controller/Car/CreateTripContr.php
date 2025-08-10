@@ -1,19 +1,23 @@
 <?php
 namespace App\Controller\Car;
 
+use App\Repository\TripRepository;
+use DateInterval;
+use DateTime;
+
 class CreateTripContr
 {
-    private int $id;
-    private string $departure_city;
-    private string $arrival_city;
+    private string|array $departure_city;
+    private string|array $arrival_city;
     private int $num_places;
     private string $date_trip;
     private string $hour_trip;
+    private string $arrival_time;
     private int $price;
     private int $car_id;
-    private int $user_id;
+    private array|string $info_itinary;
 
-    public function __construct(string $departure_city, string $arrival_city, int $num_places, string $date_trip, string $hour_trip, int $price, int $car_id, int $user_id)
+    public function __construct(string | array $departure_city, string | array $arrival_city, int $num_places, string $date_trip, string $hour_trip, int $price, int $car_id, array | string $infoItinary)
     {
         $this->departure_city = $departure_city;
         $this->arrival_city   = $arrival_city;
@@ -22,7 +26,7 @@ class CreateTripContr
         $this->hour_trip      = $hour_trip;
         $this->price          = $price;
         $this->car_id         = $car_id;
-        $this->user_id        = $user_id;
+        $this->info_itinary   = $infoItinary;
     }
 
     public function checkImputs()
@@ -34,33 +38,35 @@ class CreateTripContr
                 return $errors;
             }
 
-            if ($this->departureCityInvalid() === true) {
-                $errors = ["La marque ou model sont invalid"];
+            $departureValidation = $this->departureCityInvalid();
+            if ($departureValidation === true || isset($departureValidation["valide"]) && $departureValidation["valide"] === false) {
+                $errors = ["Les informations de la ville de depart sont incorrect"];
                 return $errors;
             }
 
-            if ($this->departureCityInvalid() === true) {
-                $errors = ["La marque ou model sont invalid"];
+            $arrivalalidation = $this->arrivalCityInvalid();
+            if ($arrivalalidation === true || isset($arrivalalidation["valide"]) && $arrivalalidation["valide"] === false) {
+                $errors = ["Les informations de la ville de depart sont incorrect"];
                 return $errors;
             }
 
             if ($this->numberPlacesInvalid() === true) {
-                $errors = ["Les champs sont invalid"];
+                $errors = ["Le champs numero place est incorrect"];
                 return $errors;
             }
 
             if ($this->departuredateInvalid() === true) {
-                $errors = ["Les champs sont invalid"];
+                $errors = ["Le champs date de dapart est incorrect"];
                 return $errors;
             }
 
             if ($this->departurehourInvalid() === true) {
-                $errors = ["Les champs sont invalid"];
+                $errors = ["Le champs heure de depart est incorrect"];
                 return $errors;
             }
 
             if ($this->priceInvalid() === true) {
-                $errors = ["La voiture est déjà enregistrer"];
+                $errors = ["Le prix est incorrect"];
                 return $errors;
             }
 
@@ -69,12 +75,23 @@ class CreateTripContr
                 return $errors;
             }
 
+            if ($this->infoItinarInvalid() === true) {
+                $errors = ["Les information sur le trajet sont incomplet."];
+                return $errors;
+            }
+
             if (! empty($errors)) {
                 return $errors;
             } else {
+                $this->arrival_time = $this->calcArrivalTime();
 
-                // $repoCar = new CarRepository();
-                // $repoCar->createCar($this->brand, $this->model, $this->energy_type, $this->num_seats, $this->numplate, $this->first_register_date, $this->color, $this->user_id);
+                $tripRepo  = new TripRepository();
+                $tripError = $tripRepo->CreateTrip($this->departure_city, $this->arrival_city, $this->num_places, $this->date_trip, $this->hour_trip, $this->price, $this->car_id, $this->arrival_time);
+
+                if (empty($tripError)) {
+                    $errors = ["Il faut remplir les champs avant."];
+                    return $errors;
+                }
             }
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
@@ -83,7 +100,7 @@ class CreateTripContr
 
     protected function InputEmpty()
     {
-        if (empty($this->departure_city) || empty($this->arrival_city) || empty($this->date_trip) || empty($this->hour_trip) || empty($this->price) || empty($this->car_id) || empty($this->num_places)) {
+        if (empty($this->departure_city) || empty($this->arrival_city) || empty($this->date_trip) || empty($this->hour_trip) || empty($this->price) || empty($this->car_id) || empty($this->num_places) || empty($this->info_itinary)) {
             $result = true;
         } else {
             $result = false;
@@ -91,12 +108,79 @@ class CreateTripContr
         return $result;
     }
     protected function departureCityInvalid()
-    {}
+    {
+        if (! isset($this->departure_city["display_name"]) && ! isset($this->departure_city["lat"]) && ! isset($this->departure_city["lon"])) {
+            $result = true;
+
+        } else {
+            $city = $this->departure_city["display_name"];
+
+            $cityEncode = urlencode($city);
+
+            $url = "https://nominatim.openstreetmap.org/search?q=$cityEncode&countrycodes=fr&format=json";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_USERAGENT, "tonNomOutSiteWeb/1.0");
+
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            $data = json_decode($response, true);
+
+            if (! empty($data)) {
+                $this->departure_city = $data[0]["display_name"];
+                return $this->departure_city;
+
+            } else {
+                return [
+                    "valide"  => false,
+                    "message" => "ville non trouvée",
+                ];
+            }
+        }
+        return $result;
+    }
+
     protected function arrivalCityInvalid()
-    {}
+    {
+        if (! isset($this->arrival_city["display_name"]) && ! isset($this->arrival_city["lat"]) && ! isset($this->arrival_city["lon"])) {
+            $result = true;
+
+        } else {
+            $city = $this->arrival_city["display_name"];
+
+            $cityEncode = urlencode($city);
+
+            $url = "https://nominatim.openstreetmap.org/search?q=$cityEncode&countrycodes=fr&format=json";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_USERAGENT, "tonNomOuSiteWeb/1.0");
+
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            $data = json_decode($response, true);
+
+            if (! empty($data)) {
+                $this->arrival_city = $data[0]["display_name"];
+                return $this->arrival_city;
+
+            } else {
+                return [
+                    "valide"  => false,
+                    "message" => "ville non trouvée",
+                ];
+            }
+        }
+        return $result;
+    }
     protected function numberPlacesInvalid()
     {
-        if (filter_var($this->num_places, FILTER_VALIDATE_INT) === false || ($this->num_places > 1 && $this->num_places < 9)) {
+        if (filter_var($this->num_places, FILTER_VALIDATE_INT) === false || ($this->num_places < 1 || $this->num_places > 8)) {
             $result = true;
         } else {
             $result = false;
@@ -144,6 +228,52 @@ class CreateTripContr
             $result = false;
         }
         return $result;
+    }
+
+    protected function infoItinarInvalid()
+    {
+        if (count($this->info_itinary) !== 3) {
+            $result = true;
+        } else {
+            $distanceKm = $this->info_itinary[0];
+            $hours      = $this->info_itinary[1];
+            $minutes    = $this->info_itinary[2];
+
+            if ($distanceKm < 0) {
+                $result = true;
+            } else {
+                $result = false;
+            }
+
+            if (! is_int($hours) || $hours < 0) {
+                $result = true;
+            } else {
+                $result = false;
+            }
+
+            if (! is_int($minutes) || $minutes < 0 || $minutes >= 60) {
+                $result = true;
+            } else {
+                $result = false;
+            }
+        }
+
+        return $result;
+    }
+
+    protected function calcArrivalTime()
+    {
+        $hours   = $this->info_itinary[1];
+        $minutes = $this->info_itinary[2];
+
+        $hourTrip = new DateTime($this->hour_trip);
+        $interval = new DateInterval("PT{$hours}H{$minutes}M");
+
+        $tripTime       = $hourTrip->add($interval);
+        $tripTimestring = $tripTime->format("H:i");
+
+        return $tripTimestring;
+
     }
 
 }
