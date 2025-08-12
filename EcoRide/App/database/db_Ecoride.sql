@@ -59,10 +59,26 @@ CREATE TABLE car_sharing(
     price INT(11) NOT NULL,
     num_seats INT(11) NOT NULL,
     CONSTRAINT fk_car_id
-    FOREIGN KEY (car_id) REFERENCES cars(id)
+    FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE
 );
 
+-- Add on a colum on the table
+ALTER TABLE car_sharing ADD status VARCHAR(255);
+
 -- not done
+CREATE TABLE reservations(
+    id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    car_sharing_id INT(11) NOT NULL,
+    user_id INT(11) NOT NULL,
+    reservation_date DATE NOT NULL,
+    num_seats_bookes INT(11) NOT NULL,
+    payment_status VARCHAR(50),
+    status VARCHAR(50),
+    CONSTRAINT fk_trip_user_id
+    FOREIGN KEY (car_sharing_id) REFERENCES car_sharing(id),
+     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    
+);
 
 CREATE TABLE feedbacks(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -72,16 +88,9 @@ CREATE TABLE feedbacks(
     status VARCHAR(50),
     reservation_id INT(11),
     CONSTRAINT fk_user_feedback
-        FOREIGN KEY (user_id) REFERENCES users(id)
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         FOREIGN KEY (reservation_id) REFERENCES roles(id)
 );
-
-
-CREATE TABLE reservations(
-    id INT(11) PRIMARY KEY AUTO_INCREMENT,
-);
-
-
 
 -- Insert data in tables
 INSERT INTO roles(name, description,role) 

@@ -12,6 +12,7 @@ class Trip
     protected string $arrival_time;
     protected int $price;
     protected int $num_seats;
+    protected string $status;
 
     /**
      * Get the value of id
@@ -171,6 +172,24 @@ class Trip
     public function setNumSeats(int $num_seats): self
     {
         $this->num_seats = $num_seats;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of status
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set the value of status
+     */
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
