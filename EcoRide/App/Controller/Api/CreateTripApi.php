@@ -21,7 +21,10 @@ class CreateTripApi
         $resultSubmittedToken = $result["token"];
         $resultpricePlaces    = $result["pricePlaces"];
         $resultnumPlaces      = $result["numPlaces"];
-        $infoItinary          = $result["info"];
+        $resultkilometers     = $result["kilometers"];
+        $resulthour           = $result["hour"];
+        $resultminites        = $result["minites"];
+        $resulttravelTime     = $result["travelTime"];
         $resulthourDeparture  = $result["hourDeparture"];
         $resultcarId          = $result["carId"];
         $arrivalCity          = $result["arrivalCity"];
@@ -35,10 +38,17 @@ class CreateTripApi
         $hourDeparture     = htmlspecialchars(trim($resulthourDeparture));
         $numPlacesString   = htmlspecialchars(trim($resultnumPlaces));
         $pricePlacesString = htmlspecialchars(trim($resultpricePlaces));
+        $kilometersString  = htmlspecialchars(trim($resultkilometers));
+        $hourtripString    = htmlspecialchars(trim($resulthour));
+        $minutesTripString = htmlspecialchars(trim($resultminites));
+        $travelTime        = htmlspecialchars(trim($resulttravelTime));
 
         $numPlaces   = (int) $numPlacesString;
         $pricePlaces = (int) $pricePlacesString;
         $carId       = (int) $carIdString;
+        $kilometers  = (int) $kilometersString;
+        $hourtrip    = (int) $hourtripString;
+        $minutesTrip = (int) $minutesTripString;
 
         // Check token CSRF
         $token   = new TokenCsrf();
@@ -46,7 +56,7 @@ class CreateTripApi
 
         if ($isValid) {
 
-            $tripContr = new CreateTripContr($departCity, $arrivalCity, $numPlaces, $dateDeparture, $hourDeparture, $pricePlaces, $carId, $infoItinary);
+            $tripContr = new CreateTripContr($departCity, $arrivalCity, $numPlaces, $dateDeparture, $hourDeparture, $pricePlaces, $carId, $kilometers, $hourtrip, $minutesTrip, $travelTime);
 
             $tripError = $tripContr->checkImputs();
 
@@ -58,6 +68,5 @@ class CreateTripApi
         } else {
             Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);
         }
-
     }
 }

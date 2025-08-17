@@ -18,7 +18,10 @@ let departCity,
     dateDeparture,
     hourDeparture,
     pricePlaces,
-    info,
+    kilometers,
+    hour,
+    minites,
+    travelTime,
     carId;
 
 const map = L.map("mapid").setView([48.8566, 2.3522], 13);
@@ -67,7 +70,7 @@ inputs.forEach((input) => {
 });
 
 // Verify data from inputs
-//verify username
+//verify departure city
 const departureCityCheck = async (value) => {
     const cityFound = document.getElementById("cityFound");
 
@@ -369,14 +372,17 @@ async function showItinerary() {
 
         const distanceKm = (distance / 1000).toFixed(2);
         const durationMin = Math.floor(duration / 60);
-        const hours = Math.floor(durationMin / 60);
-        const minutes = durationMin % 60;
-        info = [distanceKm, hours, minutes];
+        const hoursTips = Math.floor(durationMin / 60);
+        const minutesTrip = durationMin % 60;
+        kilometers = distanceKm;
+        hour = hoursTips;
+        minites = minutesTrip;
+        travelTime = hour + ":" + minites;
         if (distanceKm) {
             calcPricePeson(distanceKm);
         }
 
-        travelInfo.textContent = `Distance : ${distanceKm}km - Durée : ${hours}h ${minutes}min`;
+        travelInfo.textContent = `Distance : ${distanceKm}km - Durée : ${hoursTips}h ${minutesTrip}min`;
 
         if (currentRoute) {
             map.removeLayer(currentRoute);
@@ -391,7 +397,7 @@ async function showItinerary() {
             .bindPopup("Départ")
             .openPopup();
         endMarker = L.marker([end[1], end[0]]).addTo(map).bindPopup("Arrivée");
-        return info;
+        return kilometers, hour, minites, travelTime;
     } catch (error) {
         alert(`La creation du trajet: ${error}`);
     }
@@ -406,7 +412,10 @@ const checkForm = (
     hourDeparture,
     pricePlaces,
     carId,
-    info,
+    kilometers,
+    hour,
+    minites,
+    travelTime,
     token
 ) => {
     const numPlacesSanitized = escapeHtml(numPlaces);
@@ -423,7 +432,10 @@ const checkForm = (
         hourDeparture: hourDepartureSanitized,
         pricePlaces: pricePlacesSanitized,
         carId: carIdPlacesSanitized,
-        info,
+        kilometers,
+        hour,
+        minites,
+        travelTime,
         token,
     };
     return data;
@@ -433,6 +445,19 @@ const checkForm = (
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    console.log(
+        departCity,
+        arrivalCity,
+        numPlaces,
+        dateDeparture,
+        hourDeparture,
+        pricePlaces,
+        carId,
+        kilometers,
+        hour,
+        minites,
+        travelTime
+    );
     // if all variables are true (not null)
     if (
         departCity &&
@@ -442,7 +467,10 @@ form.addEventListener("submit", async (e) => {
         hourDeparture &&
         pricePlaces &&
         carId &&
-        info
+        kilometers &&
+        hour &&
+        minites &&
+        travelTime
     ) {
         errorDisplay("TripForm", "", true);
 
@@ -454,9 +482,13 @@ form.addEventListener("submit", async (e) => {
             hourDeparture,
             pricePlaces,
             carId,
-            info,
+            kilometers,
+            hour,
+            minites,
+            travelTime,
             token
         );
+        console.log(tripData);
 
         try {
             // API

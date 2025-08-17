@@ -2,8 +2,6 @@
 namespace App\Controller\Car;
 
 use App\Repository\TripRepository;
-use DateInterval;
-use DateTime;
 
 class CreateTripContr
 {
@@ -13,12 +11,16 @@ class CreateTripContr
     private string $date_trip;
     private string $hour_trip;
     private string $arrival_time;
+    private int $kilometers;
+    private int $hourtrip;
+    private int $minutestrip;
+    private string $travel_time;
     private int $price;
     private int $car_id;
-    private array|string $info_itinary;
 
-    public function __construct(string | array $departure_city, string | array $arrival_city, int $num_places, string $date_trip, string $hour_trip, int $price, int $car_id, array | string $infoItinary)
+    public function __construct(string | array $departure_city, string | array $arrival_city, int $num_places, string $date_trip, string $hour_trip, int $price, int $car_id, int $kilometers, int $hourtrip, int $minutestrip, string $travel_time)
     {
+
         $this->departure_city = $departure_city;
         $this->arrival_city   = $arrival_city;
         $this->num_places     = $num_places;
@@ -26,7 +28,10 @@ class CreateTripContr
         $this->hour_trip      = $hour_trip;
         $this->price          = $price;
         $this->car_id         = $car_id;
-        $this->info_itinary   = $infoItinary;
+        $this->kilometers     = $kilometers;
+        $this->hourtrip       = $hourtrip;
+        $this->minutestrip    = $minutestrip;
+        $this->travel_time    = $travel_time;
     }
 
     public function checkImputs()
@@ -55,13 +60,13 @@ class CreateTripContr
                 return $errors;
             }
 
-            if ($this->departuredateInvalid() === true) {
-                $errors = ["Le champs date de dapart est incorrect"];
+            if ($this->departurehourInvalid() === true) {
+                $errors = ["Le champs heure de depart est incorrect"];
                 return $errors;
             }
 
-            if ($this->departurehourInvalid() === true) {
-                $errors = ["Le champs heure de depart est incorrect"];
+            if ($this->departuredateInvalid() === true) {
+                $errors = ["Le champs date de dapart est incorrect"];
                 return $errors;
             }
 
@@ -75,18 +80,30 @@ class CreateTripContr
                 return $errors;
             }
 
-            if ($this->infoItinarInvalid() === true) {
-                $errors = ["Les information sur le trajet sont incomplet."];
+            if (is_int($this->kilometers) === false) {
+                $errors = ["Les kilometres sont incorrect"];
+                return $errors;
+            }
+            if ($this->travelTileInvalid() === true) {
+                $errors = ["Le temps de trajet est incorrect."];
+                return $errors;
+            }
+
+            if (is_int($this->hourtrip) === false && is_int($this->minutestrip)) {
+                $errors = ["Les heures et minutes sont incorrect"];
                 return $errors;
             }
 
             if (! empty($errors)) {
                 return $errors;
             } else {
+
+                // $this->kilometers   $this->hourtrip    $this->minutestrip  $this->travel_time
                 $this->arrival_time = $this->calcArrivalTime();
+                $this->travel_time  = $this->timeformat();
 
                 $tripRepo  = new TripRepository();
-                $tripError = $tripRepo->CreateTrip($this->departure_city, $this->arrival_city, $this->num_places, $this->date_trip, $this->hour_trip, $this->price, $this->car_id, $this->arrival_time);
+                $tripError = $tripRepo->CreateTrip($this->departure_city, $this->arrival_city, $this->num_places, $this->date_trip, $this->hour_trip, $this->price, $this->car_id, $this->arrival_time, $this->kilometers, $this->travel_time);
 
                 if (empty($tripError)) {
                     $errors = ["Il faut remplir les champs avant."];
@@ -100,7 +117,8 @@ class CreateTripContr
 
     protected function InputEmpty()
     {
-        if (empty($this->departure_city) || empty($this->arrival_city) || empty($this->date_trip) || empty($this->hour_trip) || empty($this->price) || empty($this->car_id) || empty($this->num_places) || empty($this->info_itinary)) {
+        if (empty($this->departure_city) || empty($this->arrival_city) || empty($this->date_trip) || empty($this->hour_trip) || empty($this->price) || empty($this->car_id) || empty($this->num_places) || empty($this->kilometers) || empty($this->hourtrip) || empty($this->minutestrip) || empty($this->travel_time)) {
+
             $result = true;
         } else {
             $result = false;
@@ -130,7 +148,7 @@ class CreateTripContr
             $data = json_decode($response, true);
 
             if (! empty($data)) {
-                $this->departure_city = $data[0]["display_name"];
+                $this->departure_city = $data[0]["name"];
                 return $this->departure_city;
 
             } else {
@@ -166,7 +184,7 @@ class CreateTripContr
             $data = json_decode($response, true);
 
             if (! empty($data)) {
-                $this->arrival_city = $data[0]["display_name"];
+                $this->arrival_city = $data[0]["name"];
                 return $this->arrival_city;
 
             } else {
@@ -190,7 +208,7 @@ class CreateTripContr
     protected function departuredateInvalid()
     {
         $today    = new \DateTimeImmutable();
-        $dateTrip = \DateTimeImmutable::createFromFormat('Y-m-d', $this->date_trip);
+        $dateTrip = \DateTimeImmutable::createFromFormat('Y-m-d H:i', $this->date_trip . " " . $this->hour_trip);
 
         if ($dateTrip < $today) {
             $result = true;
@@ -230,32 +248,12 @@ class CreateTripContr
         return $result;
     }
 
-    protected function infoItinarInvalid()
+    protected function travelTileInvalid()
     {
-        if (count($this->info_itinary) !== 3) {
+        if (! preg_match("/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/", $this->travel_time)) {
             $result = true;
         } else {
-            $distanceKm = $this->info_itinary[0];
-            $hours      = $this->info_itinary[1];
-            $minutes    = $this->info_itinary[2];
-
-            if ($distanceKm < 0) {
-                $result = true;
-            } else {
-                $result = false;
-            }
-
-            if (! is_int($hours) || $hours < 0) {
-                $result = true;
-            } else {
-                $result = false;
-            }
-
-            if (! is_int($minutes) || $minutes < 0 || $minutes >= 60) {
-                $result = true;
-            } else {
-                $result = false;
-            }
+            $result = false;
         }
 
         return $result;
@@ -263,17 +261,23 @@ class CreateTripContr
 
     protected function calcArrivalTime()
     {
-        $hours   = $this->info_itinary[1];
-        $minutes = $this->info_itinary[2];
+        $hours   = $this->hourtrip;
+        $minutes = $this->minutestrip;
 
-        $hourTrip = new DateTime($this->hour_trip);
-        $interval = new DateInterval("PT{$hours}H{$minutes}M");
+        $hourTrip = new \DateTime($this->hour_trip);
+        $interval = new \DateInterval("PT{$hours}H{$minutes}M");
 
         $tripTime       = $hourTrip->add($interval);
         $tripTimestring = $tripTime->format("H:i");
 
         return $tripTimestring;
+    }
 
+    protected function timeformat()
+    {
+        $timeDate     = new \DateTime($this->travel_time);
+        $formatedTime = $timeDate->format("H:i");
+        return $formatedTime;
     }
 
 }

@@ -5,11 +5,11 @@ use App\Entity\Trip;
 
 class TripRepository extends Repository
 {
-    public function CreateTrip($departure_city, $arrival_city, $num_places, $date_trip, $hour_trip, $price, $car_id, $arrival_time)
+    public function CreateTrip($departure_city, $arrival_city, $num_places, $date_trip, $hour_trip, $price, $car_id, $arrival_time, $kilometers, $travel_time)
     {
         try {
             $status = "Programmé";
-            $query  = $this->pdo->prepare("INSERT INTO car_sharing (car_id, departure_city, arrival_city, departure_date, departure_hour, arrival_time, price, num_seats, status) VALUES(:car_id, :departure_city, :arrival_city, :departure_date, :departure_hour, :arrival_time, :price, :num_seats, :status);");
+            $query  = $this->pdo->prepare("INSERT INTO car_sharing (car_id, departure_city, arrival_city, departure_date, departure_hour, arrival_time, price, num_seats, status, kilometers, travel_time) VALUES(:car_id, :departure_city, :arrival_city, :departure_date, :departure_hour, :arrival_time, :price, :num_seats, :status, :kilometers, :travel_time);");
 
             // bind value from form to query
             $query->bindValue(":car_id", $car_id, $this->pdo::PARAM_INT);
@@ -21,6 +21,8 @@ class TripRepository extends Repository
             $query->bindValue(":price", $price, $this->pdo::PARAM_INT);
             $query->bindValue(":num_seats", $num_places, $this->pdo::PARAM_INT);
             $query->bindValue(":status", $status, $this->pdo::PARAM_STR);
+            $query->bindValue(":kilometers", $kilometers, $this->pdo::PARAM_INT);
+            $query->bindValue(":travel_time", $travel_time, $this->pdo::PARAM_STR);
 
             $query->execute();
 
@@ -38,6 +40,8 @@ class TripRepository extends Repository
             $tripInfo->setCarId($car_id);
             $tripInfo->setArrivalTime($arrival_time);
             $tripInfo->setStatus($status);
+            $tripInfo->setKilometers($kilometers);
+            $tripInfo->setTravel_time($travel_time);
 
             return $tripInfo;
 
@@ -53,7 +57,7 @@ class TripRepository extends Repository
             $todayTime = new \DateTime();
             $today     = $todayTime->format("Y-m-d");
 
-            $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.car_id, s.status FROM car_sharing s INNER JOIN cars c on s.car_id = c.id WHERE c.user_id = :user_id AND s.departure_date < :today ORDER BY departure_date ASC, departure_hour ASC;");
+            $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.car_id, s.status, s.kilometers, s.travel_time FROM car_sharing s INNER JOIN cars c on s.car_id = c.id WHERE c.user_id = :user_id AND s.departure_date < :today ORDER BY departure_date ASC, departure_hour ASC;");
 
             // bind value from form to query
             $query->bindValue(":user_id", $user_id, $this->pdo::PARAM_INT);
@@ -76,6 +80,8 @@ class TripRepository extends Repository
                 $tripInfo->setCarId($tripData["car_id"]);
                 $tripInfo->setArrivalTime($tripData["arrival_time"]);
                 $tripInfo->setStatus($tripData["status"]);
+                $tripInfo->setKilometers($tripData["kilometers"]);
+                $tripInfo->setTravel_time($tripData["travel_time"]);
                 $trips[] = $tripInfo;
             }
 
@@ -93,7 +99,7 @@ class TripRepository extends Repository
             $todayTime = new \DateTime();
             $today     = $todayTime->format("Y-m-d");
 
-            $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.car_id, s.status FROM car_sharing s INNER JOIN cars c on s.car_id = c.id WHERE c.user_id = :user_id AND s.departure_date >= :today ORDER BY departure_date ASC, departure_hour ASC;");
+            $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.car_id, s.status, s.kilometers, s.travel_time FROM car_sharing s INNER JOIN cars c on s.car_id = c.id WHERE c.user_id = :user_id AND s.departure_date >= :today ORDER BY departure_date ASC, departure_hour ASC;");
 
             // bind value from form to query
             $query->bindValue(":user_id", $user_id, $this->pdo::PARAM_INT);
@@ -116,6 +122,8 @@ class TripRepository extends Repository
                 $tripInfo->setCarId($tripData["car_id"]);
                 $tripInfo->setArrivalTime($tripData["arrival_time"]);
                 $tripInfo->setStatus($tripData["status"]);
+                $tripInfo->setKilometers($tripData["kilometers"]);
+                $tripInfo->setTravel_time($tripData["travel_time"]);
                 $trips[] = $tripInfo;
             }
 
@@ -159,6 +167,74 @@ class TripRepository extends Repository
             throw new \Exception($e->getMessage());
         }
 
+    }
+
+    public function findTrip($departCity, $arrival_city, $date_trip, $num_seats)
+    {
+        try {
+
+            $check = $this->pdo->prepare("SELECT COUNT(*) FROM car_sharing WHERE departure_date = :date AND departure_city= :departure AND arrival_city = :arrival AND num_seats >= :seats AND status = 'Programmé';");
+
+            $check->bindValue(":departure", $departCity, $this->pdo::PARAM_STR);
+            $check->bindValue(":arrival", $arrival_city, $this->pdo::PARAM_STR);
+            $check->bindValue(":date", $date_trip, $this->pdo::PARAM_STR);
+            $check->bindValue(":seats", $num_seats, $this->pdo::PARAM_INT);
+            $check->execute();
+
+            $exists = $check->fetchColumn() > 0;
+
+            if (empty($exists)) {
+                return false;
+            }
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+
+    public function showAllTrips($departCity, $arrival_city, $date_trip, $num_seats)
+    {
+        try {
+
+            $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.status, s.kilometers, s.travel_time, c.energy_type, u.username, u.photo, u.notes FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' ORDER BY departure_date ASC, departure_hour ASC;");
+
+            // // bind value from form to query
+            $query->bindValue(":departure", $departCity, $this->pdo::PARAM_STR);
+            $query->bindValue(":arrival", $arrival_city, $this->pdo::PARAM_STR);
+            $query->bindValue(":date", $date_trip, $this->pdo::PARAM_STR);
+            $query->bindValue(":seats", $num_seats, $this->pdo::PARAM_INT);
+
+            $query->execute();
+
+            $tripsData = $query->fetchAll(\PDO::FETCH_ASSOC);
+            $trips     = [];
+            if ($tripsData) {
+                // Hydration
+                foreach ($tripsData as $tripData) {
+                    $tripInfo = new Trip();
+                    $tripInfo->setId($tripData["id"]);
+                    $tripInfo->setDepartureCity($tripData["departure_city"]);
+                    $tripInfo->setArrivalCity($tripData["arrival_city"]);
+                    $tripInfo->setDepartureDate($tripData["departure_date"]);
+                    $tripInfo->setDepartureHour($tripData["departure_hour"]);
+                    $tripInfo->setArrivalTime($tripData["arrival_time"]);
+                    $tripInfo->setPrice($tripData["price"]);
+                    $tripInfo->setNumSeats($tripData["num_seats"]);
+                    $tripInfo->setStatus($tripData["status"]);
+                    $tripInfo->setEnergyTy($tripData["energy_type"]);
+                    $tripInfo->setUsername($tripData["username"]);
+                    $tripInfo->setPhoto($tripData["photo"]);
+                    // $tripInfo->setNotes($tripData["notes"]);
+                    $tripInfo->setKilometers($tripData["kilometers"]);
+                    $tripInfo->setTravel_time($tripData["travel_time"]);
+                    $trips[] = $tripInfo;
+                }
+            }
+            return $trips;
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 
 }

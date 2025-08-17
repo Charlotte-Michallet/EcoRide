@@ -77,11 +77,13 @@ class ApiController
     {
         switch ($action) {
 
-            case 'auth':
-
-                break;
-
             case 'search':
+                if ($method === "POST") {
+                    $showApiControl = new FindItinaryApi();
+                    $showApiControl->findItinary();
+                } else {
+                    Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour l'inscription."], 405);
+                }
 
                 break;
 

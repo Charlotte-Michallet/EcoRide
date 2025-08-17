@@ -7,31 +7,55 @@
             <h3>Conducteur :</h3>
             <?php foreach ($trips as $trip) {?>
 
-                <!-- Card -->
-                <div class="flex flex-col border border-gray-200 rounded-xl">
+                <div class="pt-2 border border-gray-200 rounded-xl">
                     <div class="p-4 md:p-5">
-                        <div class="flex items-center gap-x-2">
-                            <p class="text-sm font-semibold text-gray-500">
-                                Départ :                                          <?php echo $trip->getDepartureCity(); ?>
-                            </p>
-                            <div class="hs-tooltip">
-                                <div class="hs-tooltip-toggle">
 
-                                    <p class="text-sm font-semibold text-gray-500">
-                                        Arrivé:                                                 <?php echo $trip->getArrivalCity(); ?>
-                                    </p>
-                                </div>
+                        <div class="flex justify-between gap-x-2 pb-2">
+                            <div class="flex items-center gap-x-2">
+                                <p class="font-semibold">                                                                                                                                                                                                                                                                                                                                                                                                                <?php echo $trip->getDepartureDate(); ?></span></p>
                             </div>
-                            <p class="text-sm font-semibold text-gray-500">
-                                Statut :                                         <?php echo $trip->getStatus(); ?>
-                            </p>
+                            <div class="flex items-center gap-x-2">
+                                <p class="font-semibold">
+                                    <?php echo $trip->getStatus(); ?></span>
+                                </p>
+                            </div>
                         </div>
 
-                        <div class="mt-2 text-gray-800">
-                            <p class="font-semibold"> Date depart:                                                                   <?php echo $trip->getDepartureDate(); ?></p> <span class="text-gray-500"><?php echo $trip->getDepartureHour(); ?></span>
+                        <div class="flex justify-between gap-x-2 pb-2">
+                            <div class="flex items-center gap-x-2">
+                                <p class="font-semibold"><?php echo $trip->getDepartureCity(); ?></p>
+                            </div>
+                            <div class="line my-2 mx-6"></div>
+
+                            <div class="flex items-center gap-x-2">
+                                <p class="font-semibold"><?php echo $trip->getKilometers(); ?></p>
+                            </div>
+                             <div class="line my-2 mx-6"></div>
+
+                            <div class="flex items-center gap-x-2">
+                                <p class="font-semibold"><?php echo $trip->getArrivalCity(); ?></p>
+                            </div>
                         </div>
-                        <div class="mt-2 text-gray-800">
-                            <p class="font-semibold"> Heure arrivé:                                                                     <?php echo $trip->getArrivalTime(); ?></p> <span class="text-gray-500"><?php echo $trip->getNumSeats(); ?></span>
+
+
+                        <div class="flex justify-between gap-x-2 px-5 pb-3">
+                            <div class="flex items-center gap-x-2 ">
+                                <p class="font-semibold"><?php echo $trip->getDepartureHour(); ?></p>
+                            </div>
+
+                            <div class="flex items-center gap-x-2 ">
+                                <p class="font-semibold"><?php echo $trip->getTravel_time(); ?></p>
+                            </div>
+
+                            <div class="flex items-center gap-x-2 ">
+                                <p class="font-semibold"><?php echo $trip->getArrivalTime(); ?></p>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between gap-x-2">
+                            <div class="flex items-center gap-x-2 ">
+                                <p class="font-semibold">Places disponible : <span><?php echo $trip->getNumSeats(); ?></span></p>
+                            </div>
                         </div>
                     </div>
                 </div>

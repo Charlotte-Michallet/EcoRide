@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use App\Repository\TripRepository;
+
 class CarSharingController extends Router
 {
     public function route()
@@ -25,6 +27,11 @@ class CarSharingController extends Router
 
     protected function show()
     {
-        $this->render("carSharing/showItinerary");
+        // generate token CSRF
+        $tokenObj     = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
+
+        $this->render("carSharing/showItinerary", ["token" => $currentToken]);
+
     }
 }

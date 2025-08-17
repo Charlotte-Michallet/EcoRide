@@ -13,6 +13,12 @@ class Trip
     protected int $price;
     protected int $num_seats;
     protected string $status;
+    protected int $kilometers;
+    protected string $travel_time;
+    protected string $energy_ty;
+    protected string $username;
+    protected string $photo;
+    protected int $notes;
 
     /**
      * Get the value of id
@@ -190,6 +196,116 @@ class Trip
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of kilometers
+     */
+
+    public function getKilometers(): int
+    {
+        return $this->kilometers;
+    }
+
+    /**
+     * Set the value of kilometers
+     */
+    public function setKilometers(int $kilometers): self
+    {
+        $this->kilometers = $kilometers;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of travel time
+     */
+
+    public function getTravel_time(): string
+    {
+        return $this->travel_time;
+    }
+
+    /**
+     * Set the value of travel time
+     */
+    public function setTravel_time(string $travel_time): self
+    {
+        $this->travel_time = $travel_time;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of energy_ty
+     */
+    public function getEnergyTy(): string
+    {
+        return $this->energy_ty;
+    }
+
+    /**
+     * Set the value of energy_ty
+     */
+    public function setEnergyTy(string $energy_ty): self
+    {
+        $this->energy_ty = $energy_ty;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of username
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set the value of username
+     */
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of photo
+     */
+    public function getPhoto(): string
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set the value of photo
+     */
+    public function setPhoto(string $photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of notes
+     */
+    public function getNotes(): int
+    {
+        return $this->notes;
+    }
+
+    /**
+     * Set the value of notes
+     */
+    public function setNotes(int $notes): self
+    {
+        $this->notes = $notes;
 
         return $this;
     }
