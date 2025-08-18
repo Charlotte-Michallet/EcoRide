@@ -18,7 +18,17 @@ class Trip
     protected string $energy_ty;
     protected string $username;
     protected string $photo;
-    protected int $notes;
+    protected string $brand;
+    protected string $model;
+    protected string $color;
+    private ?bool $smoking_allowed = null;
+    private ?bool $animal_allowed  = null;
+    private string $smoking;
+    private string $animal;
+    private ?string $description = null;
+    private ?int $note;
+    private ?string $feedback;
+    protected ?float $notes;
 
     /**
      * Get the value of id
@@ -295,7 +305,7 @@ class Trip
     /**
      * Get the value of notes
      */
-    public function getNotes(): int
+    public function getNotes(): ?float
     {
         return $this->notes;
     }
@@ -303,9 +313,189 @@ class Trip
     /**
      * Set the value of notes
      */
-    public function setNotes(int $notes): self
+    public function setNotes(?float $notes): self
     {
         $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of brand
+     */
+    public function getBrand(): string
+    {
+        return $this->brand;
+    }
+
+    /**
+     * Set the value of brand
+     */
+    public function setBrand(string $brand): self
+    {
+        $this->brand = $brand;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of model
+     */
+    public function getModel(): string
+    {
+        return $this->model;
+    }
+
+    /**
+     * Set the value of model
+     */
+    public function setModel(string $model): self
+    {
+        $this->model = $model;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of color
+     */
+    public function getColor(): string
+    {
+        return $this->color;
+    }
+
+    /**
+     * Set the value of color
+     */
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of description
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set the value of description
+     */
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of smoking_allowed
+     */
+    public function isSmokingAllowed(): ?bool
+    {
+        return $this->smoking_allowed;
+    }
+
+    /**
+     * Set the value of smoking_allowed
+     */
+    public function setSmokingAllowed(?bool $smoking_allowed): self
+    {
+        $this->smoking_allowed = $smoking_allowed;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of animal_allowed
+     */
+    public function isAnimalAllowed(): ?bool
+    {
+        return $this->animal_allowed;
+    }
+
+    /**
+     * Set the value of animal_allowed
+     */
+    public function setAnimalAllowed(?bool $animal_allowed): self
+    {
+        $this->animal_allowed = $animal_allowed;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of smoking
+     */
+    public function getSmoking(): string
+    {
+        return $this->smoking;
+    }
+
+    /**
+     * Set the value of smoking
+     */
+    public function setSmoking(string $smoking): self
+    {
+        $this->smoking = $smoking;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of animal
+     */
+    public function getAnimal(): string
+    {
+        return $this->animal;
+    }
+
+    /**
+     * Set the value of animal
+     */
+    public function setAnimal(string $animal): self
+    {
+        $this->animal = $animal;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of note
+     */
+    public function getNote(): ?int
+    {
+        return $this->note;
+    }
+
+    /**
+     * Set the value of note
+     */
+    public function setNote(?int $note): self
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of feedback
+     */
+    public function getFeedback(): ?string
+    {
+        return $this->feedback;
+    }
+
+    /**
+     * Set the value of feedback
+     */
+    public function setFeedback(?string $feedback): self
+    {
+        $this->feedback = $feedback;
 
         return $this;
     }

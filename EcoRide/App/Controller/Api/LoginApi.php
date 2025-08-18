@@ -48,6 +48,5 @@ class LoginApi
         } else {
             Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);
         }
-
     }
 }

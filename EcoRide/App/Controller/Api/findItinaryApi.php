@@ -33,9 +33,8 @@ class FindItinaryApi
         $numPlaces = (int) $numPlacesString;
 
         // Check token CSRF
-        $token          = new TokenCsrf();
-        $isValid        = $token->validateToken($submittedToken);
-        $tokenGenerated = $token->getGenerateToken();
+        $token   = new TokenCsrf();
+        $isValid = $token->validateToken($submittedToken);
 
         if ($isValid) {
             $showTripContr = new ShowTripContr($departCity, $arrivalCity, $dateDeparture, $numPlaces);
@@ -63,13 +62,10 @@ class FindItinaryApi
                         "photo"      => $trip->getPhoto(),
                         "kilometers" => $trip->getKilometers(),
                         "travelTime" => $trip->getTravel_time(),
-                        "token"      => $tokenGenerated,
-                        // "notes" => $trip->getNotes()
                     ];
                 }
                 Router::jsonResponse(["status" => "success", "message" => "La création de trajer réussi", "trips" => $tripsArray], 200);
             }
-
         } else {
             Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);
         }

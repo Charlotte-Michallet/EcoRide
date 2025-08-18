@@ -192,11 +192,18 @@ class TripRepository extends Repository
         }
     }
 
-    public function showAllTrips($departCity, $arrival_city, $date_trip, $num_seats)
+    public function showAllTrips($departCity, $arrival_city, $date_trip, $num_seats, $userId)
     {
         try {
+            if (isset($userId) && ! empty($userId)) {
+                $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.status, s.kilometers, s.travel_time, c.energy_type, u.username, u.photo, u.notes FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' AND u.id != :user_id ORDER BY departure_date ASC, departure_hour ASC;");
 
-            $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.status, s.kilometers, s.travel_time, c.energy_type, u.username, u.photo, u.notes FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' ORDER BY departure_date ASC, departure_hour ASC;");
+                // bind value from form to query
+                $query->bindValue(":user_id", $userId, $this->pdo::PARAM_INT);
+
+            } else {
+                $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.status, s.kilometers, s.travel_time, c.energy_type, u.username, u.photo, u.notes FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' ORDER BY departure_date ASC, departure_hour ASC;");
+            }
 
             // // bind value from form to query
             $query->bindValue(":departure", $departCity, $this->pdo::PARAM_STR);
@@ -224,13 +231,118 @@ class TripRepository extends Repository
                     $tripInfo->setEnergyTy($tripData["energy_type"]);
                     $tripInfo->setUsername($tripData["username"]);
                     $tripInfo->setPhoto($tripData["photo"]);
-                    // $tripInfo->setNotes($tripData["notes"]);
+                    // $tripInfo->setNotes($tripData["notes"]);  beug avec note null
                     $tripInfo->setKilometers($tripData["kilometers"]);
                     $tripInfo->setTravel_time($tripData["travel_time"]);
                     $trips[] = $tripInfo;
                 }
             }
             return $trips;
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+
+    public function detailsTrips($id)
+    {
+        try {
+            $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.status, s.kilometers, s.travel_time, c.brand, c.model, c.energy_type, c.color, u.username, u.photo FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.id = :id;");
+
+            // bind value from form to query
+            $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
+
+            $query->execute();
+
+            $tripData = $query->fetch(\PDO::FETCH_ASSOC);
+
+            $tripInfo = new Trip();
+            $tripInfo->setId($tripData["id"]);
+            $tripInfo->setDepartureCity($tripData["departure_city"]);
+            $tripInfo->setArrivalCity($tripData["arrival_city"]);
+            $tripInfo->setDepartureDate($tripData["departure_date"]);
+            $tripInfo->setDepartureHour($tripData["departure_hour"]);
+            $tripInfo->setArrivalTime($tripData["arrival_time"]);
+            $tripInfo->setPrice($tripData["price"]);
+            $tripInfo->setNumSeats($tripData["num_seats"]);
+            $tripInfo->setStatus($tripData["status"]);
+            $tripInfo->setKilometers($tripData["kilometers"]);
+            $tripInfo->setTravel_time($tripData["travel_time"]);
+            $tripInfo->setBrand($tripData["brand"]);
+            $tripInfo->setModel($tripData["model"]);
+            $tripInfo->setEnergyTy($tripData["energy_type"]);
+            $tripInfo->setColor($tripData["color"]);
+            $tripInfo->setUsername($tripData["username"]);
+            $tripInfo->setPhoto($tripData["photo"]);
+
+            return $tripInfo;
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+
+    public function otherDetails($id)
+    {
+        try {
+            $query = $this->pdo->prepare("SELECT s.id, u.notes, p.smoking_allowed, p.animal_allowed, p.description, f.note, f.feedback FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id INNER JOIN preferences p ON p.user_id = u.id LEFT JOIN feedbacks f ON f.user_id = u.id AND f.status = 'validate' WHERE s.id = :id;");
+
+            // bind value from form to query
+            $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
+            $query->execute();
+
+            $tripData = $query->fetch(\PDO::FETCH_ASSOC);
+
+            $tripInfo = new Trip();
+
+            $tripInfo->setNotes($tripData["notes"]);
+            $tripInfo->setSmokingAllowed($tripData["smoking_allowed"]);
+            $tripInfo->setAnimalAllowed($tripData["animal_allowed"]);
+            $tripInfo->setDescription($tripData["description"]) ?? "";
+            $tripInfo->setNote($tripData["note"]);
+            $tripInfo->setFeedback($tripData["feedback"]) ?? "";
+
+            return $tripInfo;
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+
+    }
+
+    public function seatsTrip($id)
+    {
+        try {
+            $query = $this->pdo->prepare("SELECT num_seats FROM car_sharing WHERE id = :id;");
+
+            $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
+            $query->execute();
+
+            $tripData = $query->fetch(\PDO::FETCH_ASSOC);
+
+            $numsteats = $tripData["num_seats"];
+
+            return $numsteats;
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+
+    public function updatetSeatsTrip($numSeats, $id)
+    {
+        try {
+            $query = $this->pdo->prepare("UPDATE car_sharing SET num_seats = :seats WHERE id = :id;");
+
+            $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
+            $query->bindValue(":seats", $numSeats, $this->pdo::PARAM_STR);
+            $query->execute();
+
+            $tripInfo = new Trip();
+            $tripInfo->setNumSeats($numSeats);
+
+            header("Location: http://localhost:8080/index.php?controller=trips&action=manageTrip");
+            return $tripInfo;
 
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

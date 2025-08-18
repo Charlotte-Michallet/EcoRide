@@ -32,6 +32,10 @@ class AuthController extends Router
                         $this->cars();
                         break;
 
+                    case 'credits':
+                        $this->credits();
+                        break;
+
                     default:
                         throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
                 }
@@ -132,6 +136,22 @@ class AuthController extends Router
 
             // // show page
             $this->render("userTrips/userCars", ["token" => $currentToken, "cars" => $carsInfo]);
+        } else {
+            header("Location: http://localhost:8080/index.php");
+        }
+    }
+
+    protected function credits()
+    {
+        $user_id = $_SESSION["id"];
+
+        if ($user_id) {
+            // generate token CSRF
+            $tokenObj     = new TokenCsrf();
+            $currentToken = $tokenObj->getGenerateToken();
+
+            // // show page
+            $this->render("auth/credit", ["token" => $currentToken]);
         } else {
             header("Location: http://localhost:8080/index.php");
         }

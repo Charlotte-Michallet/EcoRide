@@ -87,8 +87,9 @@ class ApiController
 
                 break;
 
-            case 'profil':
-
+            case 'participate':
+                $loggin = new IsLoggedIn();
+                $loggin->isLoggin();
                 break;
 
             default:

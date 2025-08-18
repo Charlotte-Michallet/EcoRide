@@ -3,8 +3,6 @@ namespace App\Controller\CarSharing;
 
 use App\Repository\TripRepository;
 
-// use App\Repository\TripRepository;
-
 class ShowTripContr extends TripContr
 {
     public function __construct($departure_city, $arrival_city, $date_trip, int $numPlaces)
@@ -62,14 +60,17 @@ class ShowTripContr extends TripContr
 
     public function getTrips()
     {
+        $user_id = null;
+        if (isset($_SESSION["id"]) && ! empty($_SESSION["id"])) {
+            $user_id = $_SESSION["id"];
+        }
         $tripRepo = new TripRepository();
-        $trips    = $tripRepo->showAllTrips($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places);
+        $trips    = $tripRepo->showAllTrips($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id);
         return $trips;
     }
 
     protected function InputEmpty()
     {
-
         if (empty($this->departure_city) || empty($this->arrival_city) || empty($this->date_trip) || empty($this->num_places)) {
             $result = true;
         } else {

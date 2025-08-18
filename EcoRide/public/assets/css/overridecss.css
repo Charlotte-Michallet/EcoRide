@@ -16,7 +16,7 @@
     --turquoise2:#14a789;
     --blue: #0080E3;
     --blue2: #0063FF;
-    --blue3:#0019F0;
+    --blue3:#4a58d4f3;
     --blue4: #05A8FA;
     --beige: #f7f4efe1;
 }
@@ -117,18 +117,26 @@ a {
     width: 100%; 
 }
 
-.line {
+.lineLeft {
     flex-grow: 1;
     flex-shrink: 1;
     height: 6px;
-    background:gray;
+    background:var(--blue3);
     position: relative;
 }
 
-.line::before {
+.lineRigth {
+    flex-grow: 1;
+    flex-shrink: 1;
+    height: 6px;
+    background:var(--blue3);
+    position: relative;
+}
+
+.lineLeft::before {
     content: "";
     position: absolute;
-    background:gray;
+    background:var(--blue3);
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -138,10 +146,10 @@ a {
     left: -2px;
 }
 
-.line::after {
+.lineRigth::after {
     content: "";
     position: absolute;
-    background:gray;
+    background:var(--blue3);
     border-radius: 50%;
     height: 20px;
     width: 20px;

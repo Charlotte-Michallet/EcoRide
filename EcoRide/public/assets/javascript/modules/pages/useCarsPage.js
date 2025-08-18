@@ -249,7 +249,6 @@ addCarForm.addEventListener("submit", async (e) => {
             });
 
             const responseData = await resp.json();
-            console.log(responseData);
 
             if (resp.ok) {
                 window.location.href =

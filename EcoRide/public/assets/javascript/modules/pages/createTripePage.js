@@ -445,19 +445,6 @@ const checkForm = (
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    console.log(
-        departCity,
-        arrivalCity,
-        numPlaces,
-        dateDeparture,
-        hourDeparture,
-        pricePlaces,
-        carId,
-        kilometers,
-        hour,
-        minites,
-        travelTime
-    );
     // if all variables are true (not null)
     if (
         departCity &&
@@ -488,7 +475,6 @@ form.addEventListener("submit", async (e) => {
             travelTime,
             token
         );
-        console.log(tripData);
 
         try {
             // API

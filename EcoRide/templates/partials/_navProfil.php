@@ -23,4 +23,8 @@
     <a href="http://localhost:8080/index.php?controller=trips&action=history"> <button
             class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">Historique</button>
         </a>
+
+        <a href="http://localhost:8080/index.php?controller=auth&action=credits"> <button
+            class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">Credits</button>
+        </a>
 </div>

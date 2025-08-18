@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Repository\CarRepository;
+use App\Repository\ReservationRepository;
 use App\Repository\TripRepository;
 
 class TripsController extends Router
@@ -68,8 +69,11 @@ class TripsController extends Router
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
+        $reservaRepo = new ReservationRepository();
+        $reservation = $reservaRepo->ReservaManage($user_id);
+
         // show page
-        $this->render("userTrips/manageTrips", ["token" => $currentToken, "trips" => $trips]);
+        $this->render("userTrips/manageTrips", ["token" => $currentToken, "trips" => $trips, "reservations" => $reservation]);
     }
 
     protected function history()
@@ -82,8 +86,11 @@ class TripsController extends Router
         $tripRepo = new TripRepository();
         $trips    = $tripRepo->showTripHistory($user_id);
 
+        $reservaRepo = new ReservationRepository();
+        $reservation = $reservaRepo->showReservationHistory($user_id);
+
         // show page
-        $this->render("userTrips/history", ["token" => $currentToken, "trips" => $trips]);
+        $this->render("userTrips/history", ["token" => $currentToken, "trips" => $trips, "reservations" => $reservation]);
     }
 
     protected function deleteMethod()

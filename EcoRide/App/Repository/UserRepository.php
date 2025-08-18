@@ -68,6 +68,35 @@ class UserRepository extends Repository
 
         }
         return $userpreferences;
+    }
+
+    public function usercredits(int $id)
+    {
+        $query = $this->pdo->prepare("SELECT credits FROM users WHERE id = :id ");
+
+        $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
+        $query->execute();
+
+        $usercreditinfo = $query->fetch(\PDO::FETCH_ASSOC);
+
+        $usercredit = $usercreditinfo["credits"];
+        return $usercredit;
 
     }
+
+    public function UpdatecreditsTrip(int $id, int $creditUserd)
+    {
+        $query = $this->pdo->prepare("UPDATE users SET credits = :credits  WHERE id = :id ");
+
+        $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
+        $query->bindValue(":credits", $creditUserd, $this->pdo::PARAM_INT);
+        $query->execute();
+
+        // // Hydration
+        $userinfo    = new User();
+        $userCredits = $userinfo->setCredits($creditUserd);
+
+        return $userCredits;
+    }
+
 }

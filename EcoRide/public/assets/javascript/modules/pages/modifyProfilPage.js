@@ -16,8 +16,6 @@ const selectSmocking = document.querySelectorAll(
 );
 const textPref = document.getElementById("otherPreferences");
 
-console.log();
-
 let data, token;
 let role, username, email, photo, license, password, pwdVerify;
 let animal, smoking, preferences;
@@ -497,10 +495,6 @@ const imgAPI = async (photofile, token, error, message = "") => {
 
     formData.append("image", photofile);
     formData.append("token", token);
-
-    for (let [key, value] of formData.entries()) {
-        console.log(`${key}, ${value}`);
-    }
 
     try {
         const resp = await fetch(IMG_API_ENDPOINT, {

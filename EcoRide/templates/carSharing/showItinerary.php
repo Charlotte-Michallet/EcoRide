@@ -26,7 +26,7 @@
 
                 <div>
                     <label for="numPassengers">Nombre de passagers</label>
-                    <input type="number" id="numPassengersItineray" class="block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring" name="numPassengersItineray" placeholder="3">
+                    <input type="number" id="numPassengersItineray" class="block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring" name="numPassengersItineray" placeholder="3" min="1">
                     <p class="hidden text-xs text-red-600 mt-2" id="numPlacesError"></p>
 
                 </div>

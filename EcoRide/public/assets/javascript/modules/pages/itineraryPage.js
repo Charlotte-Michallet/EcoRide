@@ -284,7 +284,8 @@ formItineray.addEventListener("submit", async (e) => {
             const responseData = await resp.json();
             if (resp.ok) {
                 let trips = responseData.trips;
-                show(trips);
+                let seats = ItineryData.numPlaces;
+                show(trips, seats);
             } else {
                 errorDisplay("form", responseData.message);
                 tripResults.textContent = "";

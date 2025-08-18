@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use App\Controller\CarSharing\DetailsContr;
+use App\Controller\CarSharing\ReservationContr;
 use App\Repository\TripRepository;
 
 class CarSharingController extends Router
@@ -12,6 +14,10 @@ class CarSharingController extends Router
                 switch ($_GET["action"]) {
                     case 'show':
                         $this->show();
+                        break;
+
+                    case 'details':
+                        $this->details();
                         break;
 
                     default:
@@ -32,6 +38,62 @@ class CarSharingController extends Router
         $currentToken = $tokenObj->getGenerateToken();
 
         $this->render("carSharing/showItinerary", ["token" => $currentToken]);
+    }
 
+    protected function details()
+    {
+        // generate token CSRF
+        $tokenObj     = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
+
+        $id = $_GET["id"];
+
+        $detailsRepo   = new TripRepository();
+        $details       = $detailsRepo->detailsTrips($id);
+        $detailsCont   = new DetailsContr();
+        $othersdetails = $detailsCont->details($id);
+
+        $this->particiate();
+
+        $this->render("carSharing/detailsCarSharing", ["token" => $currentToken, "details" => $details, "moreDetails" => $othersdetails]);
+
+    }
+
+    protected function particiate()
+    {
+        $id = $_GET["id"];
+
+        if (isset($id)) {
+            if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+                if (isset($_POST["participateBtn"]) && $_POST["participateBtn"]) {
+
+                    $submittedToken = $_POST["token_Participate"];
+                    $token          = new TokenCsrf();
+                    $isValid        = $token->validateToken($submittedToken);
+
+                    if ($isValid) {
+                        $carSharingIdString   = $_POST["car_sharing_id"];
+                        $userId               = $_SESSION["id"];
+                        $reservationDate      = $_POST["reservation_date"];
+                        $numSeatsBookesString = $_GET["seats"];
+                        $creditsUsedString    = $_POST["creditsUsed"];
+                        $paymentStatus        = "en attente";
+                        $status               = "enregistrée";
+
+                        $carSharingId   = (int) $carSharingIdString;
+                        $numSeatsBookes = (int) $numSeatsBookesString;
+                        $creditsUsed    = (int) $creditsUsedString;
+
+                        $reserContr  = new ReservationContr();
+                        $reservation = $reserContr->reservation($carSharingId, $userId, $reservationDate, $numSeatsBookes, $paymentStatus, $status, $creditsUsed);
+
+                        if (is_array($reservation) && count($reservation) !== 0) {
+                            print_r($reservation);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

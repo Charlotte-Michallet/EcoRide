@@ -1,4 +1,4 @@
-export function show(trips) {
+export function show(trips, seats) {
     tripResults.textContent = "";
 
     const containerDate = document.createElement("div");
@@ -44,14 +44,14 @@ export function show(trips) {
         textdeparture.textContent = trip.hour;
 
         const lineLeft = document.createElement("div");
-        lineLeft.className = "line my-2 mx-6";
+        lineLeft.className = "lineLeft my-2 ml-3";
 
         const textTimeTrip = document.createElement("p");
         textTimeTrip.className = "text-lg font-semibold";
         textTimeTrip.textContent = trip.travelTime;
 
         const lineRight = document.createElement("div");
-        lineRight.className = "line my-2 mx-6";
+        lineRight.className = "lineRigth my-2 mr-3";
 
         const textArrival = document.createElement("p");
         textArrival.className = "font-semibold";
@@ -144,20 +144,8 @@ export function show(trips) {
         }
         containerEnergie.appendChild(textEnergie);
 
-        const formDetail = document.createElement("form");
-        formDetail.method = "post";
-
-        const tokenInput = document.createElement("input");
-        tokenInput.type = "hidden";
-        tokenInput.name = "tokendetails";
-        tokenInput.value = trip.token;
-        formDetail.appendChild(tokenInput);
-
-        const idInput = document.createElement("input");
-        idInput.type = "hidden";
-        idInput.name = "idTrip";
-        idInput.value = trip.id;
-        formDetail.appendChild(idInput);
+        const linkDetail = document.createElement("a");
+        linkDetail.href = `http://localhost:8080/index.php?controller=car-sharing&action=details&id=${trip.id}&seats=${seats}`;
 
         const btn = document.createElement("button");
         btn.type = "submit";
@@ -166,10 +154,10 @@ export function show(trips) {
         btn.textContent = "Détails";
         btn.className =
             "px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80";
-        formDetail.appendChild(btn);
+        linkDetail.appendChild(btn);
 
         containerDetails.appendChild(containerEnergie);
-        containerDetails.appendChild(formDetail);
+        containerDetails.appendChild(linkDetail);
         container.appendChild(containerDetails);
 
         // insert all

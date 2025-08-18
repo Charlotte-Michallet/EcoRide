@@ -29,11 +29,6 @@
                             </svg>
                             </span>
                         </div>
-
-
-
-
-
                     <p class="hidden text-xs text-red-600 mt-2" id="pwdLoginError"></p>
                 </div>
 
