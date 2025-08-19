@@ -69,12 +69,15 @@ class TripRepository extends Repository
 
             // Hydration
             foreach ($tripsData as $tripData) {
+                $dateObject = new \DateTime($tripData["departure_date"]);
+                $tripDate   = $dateObject->format("d/m/Y");
+
                 $tripInfo = new Trip();
                 $tripInfo->setId($tripData["id"]);
                 $tripInfo->setDepartureCity($tripData["departure_city"]);
                 $tripInfo->setArrivalCity($tripData["arrival_city"]);
                 $tripInfo->setNumSeats($tripData["num_seats"]);
-                $tripInfo->setDepartureDate($tripData["departure_date"]);
+                $tripInfo->setDepartureDate($tripDate);
                 $tripInfo->setDepartureHour($tripData["departure_hour"]);
                 $tripInfo->setPrice($tripData["price"]);
                 $tripInfo->setCarId($tripData["car_id"]);
@@ -111,12 +114,15 @@ class TripRepository extends Repository
 
             // Hydration
             foreach ($tripsData as $tripData) {
+                $dateObject = new \DateTime($tripData["departure_date"]);
+                $tripDate   = $dateObject->format("d/m/Y");
+
                 $tripInfo = new Trip();
                 $tripInfo->setId($tripData["id"]);
                 $tripInfo->setDepartureCity($tripData["departure_city"]);
                 $tripInfo->setArrivalCity($tripData["arrival_city"]);
                 $tripInfo->setNumSeats($tripData["num_seats"]);
-                $tripInfo->setDepartureDate($tripData["departure_date"]);
+                $tripInfo->setDepartureDate($tripDate);
                 $tripInfo->setDepartureHour($tripData["departure_hour"]);
                 $tripInfo->setPrice($tripData["price"]);
                 $tripInfo->setCarId($tripData["car_id"]);
@@ -183,10 +189,58 @@ class TripRepository extends Repository
 
             $exists = $check->fetchColumn() > 0;
 
-            if (empty($exists)) {
-                return false;
+            if ($exists) {
+                return "trajet trouvés";
+
+            } else {
+                $check = $this->pdo->prepare("SELECT COUNT(*) FROM car_sharing WHERE departure_date > :date AND departure_city= :departure AND arrival_city = :arrival AND num_seats >= :seats AND status = 'Programmé';");
+
+                $check->bindValue(":departure", $departCity, $this->pdo::PARAM_STR);
+                $check->bindValue(":arrival", $arrival_city, $this->pdo::PARAM_STR);
+                $check->bindValue(":date", $date_trip, $this->pdo::PARAM_STR);
+                $check->bindValue(":seats", $num_seats, $this->pdo::PARAM_INT);
+                $check->execute();
+
+                $nextDate = $check->fetchColumn() > 0;
+
+                if ($nextDate) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+
+    public function findotherTrip($departCity, $arrival_city, $date_trip, $num_seats, $userId)
+    {
+        try {
+            if (isset($userId) && ! empty($userId)) {
+                $query = $this->pdo->prepare("SELECT s.id, s.departure_date FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date > :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' AND u.id != :user_id ORDER BY departure_date ASC LIMIT 1;");
+
+                // bind value from form to query
+                $query->bindValue(":user_id", $userId, $this->pdo::PARAM_INT);
+
+            } else {
+                $query = $this->pdo->prepare("SELECT s.id, s.departure_date FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' ORDER BY departure_date ASC, departure_hour ASC;");
+            }
+
+            // // bind value from form to query
+            $query->bindValue(":departure", $departCity, $this->pdo::PARAM_STR);
+            $query->bindValue(":arrival", $arrival_city, $this->pdo::PARAM_STR);
+            $query->bindValue(":date", $date_trip, $this->pdo::PARAM_STR);
+            $query->bindValue(":seats", $num_seats, $this->pdo::PARAM_INT);
+
+            $query->execute();
+
+            $tripsData  = $query->fetch(\PDO::FETCH_ASSOC);
+            $dateObject = new \DateTime($tripsData["departure_date"]);
+            $tripDate   = $dateObject->format("d/m/Y");
+
+            return $tripDate;
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
@@ -218,11 +272,14 @@ class TripRepository extends Repository
             if ($tripsData) {
                 // Hydration
                 foreach ($tripsData as $tripData) {
+                    $dateObject = new \DateTime($tripData["departure_date"]);
+                    $tripDate   = $dateObject->format("d/m/Y");
+
                     $tripInfo = new Trip();
                     $tripInfo->setId($tripData["id"]);
                     $tripInfo->setDepartureCity($tripData["departure_city"]);
                     $tripInfo->setArrivalCity($tripData["arrival_city"]);
-                    $tripInfo->setDepartureDate($tripData["departure_date"]);
+                    $tripInfo->setDepartureDate($tripDate);
                     $tripInfo->setDepartureHour($tripData["departure_hour"]);
                     $tripInfo->setArrivalTime($tripData["arrival_time"]);
                     $tripInfo->setPrice($tripData["price"]);
@@ -243,6 +300,19 @@ class TripRepository extends Repository
             throw new \Exception($e->getMessage());
         }
     }
+    public function seeSeatsTrip($id)
+    {
+        $query = $this->pdo->prepare("SELECT num_seats FROM car_sharing WHERE id = :id");
+        $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
+
+        $query->execute();
+
+        $seatsData = $query->fetch(\PDO::FETCH_ASSOC);
+
+        $seats = $seatsData["num_seats"];
+
+        return $seats;
+    }
 
     public function detailsTrips($id)
     {
@@ -256,11 +326,15 @@ class TripRepository extends Repository
 
             $tripData = $query->fetch(\PDO::FETCH_ASSOC);
 
+            $dateObject = new \DateTime($tripData["departure_date"]);
+            $tripDate   = $dateObject->format("d/m/Y");
+
             $tripInfo = new Trip();
             $tripInfo->setId($tripData["id"]);
             $tripInfo->setDepartureCity($tripData["departure_city"]);
             $tripInfo->setArrivalCity($tripData["arrival_city"]);
-            $tripInfo->setDepartureDate($tripData["departure_date"]);
+            $tripInfo->setDepartureDate($tripDate);
+            $tripInfo->setDepartureDateFormat($tripData["departure_date"]);
             $tripInfo->setDepartureHour($tripData["departure_hour"]);
             $tripInfo->setArrivalTime($tripData["arrival_time"]);
             $tripInfo->setPrice($tripData["price"]);
@@ -342,6 +416,7 @@ class TripRepository extends Repository
             $tripInfo->setNumSeats($numSeats);
 
             header("Location: http://localhost:8080/index.php?controller=trips&action=manageTrip");
+            echo "Modification on bien etait prise en compte";
             return $tripInfo;
 
         } catch (\Exception $e) {

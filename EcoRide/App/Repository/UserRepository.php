@@ -15,14 +15,16 @@ class UserRepository extends Repository
         $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
         $query->execute();
 
-        $user = $query->fetch(\PDO::FETCH_ASSOC);
+        $user       = $query->fetch(\PDO::FETCH_ASSOC);
+        $dateObject = new \DateTime($user["date_of_birth"]);
+        $dateBirth  = $dateObject->format("d/m/Y");
 
         // Hydration
         $userInfo = new User();
         $userInfo->setId($user["id"]);
         $userInfo->setUsername($user["username"]);
         $userInfo->setEmail($user["email"]);
-        $userInfo->setDateOfBirth($user["date_of_birth"]);
+        $userInfo->setDateOfBirth($dateBirth);
         $userInfo->setPhotoUrl($user["photo"]);
         $userInfo->setCredits($user["credits"]);
         $userInfo->setRole($user["role"]);

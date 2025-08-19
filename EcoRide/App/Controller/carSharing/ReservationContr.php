@@ -16,7 +16,7 @@ class ReservationContr
         $reservationNumber = str_replace(".", "", $timestamp . $random);
 
         $reservaRepo = new ReservationRepository();
-        $reserva     = $reservaRepo->createReservation($carSharingId, $userId, $reservationDate, $numSeatsBookes, $paymentStatus, $status, $reservationNumber);
+        $reserva     = $reservaRepo->createReservation($carSharingId, $userId, $reservationDate, $numSeatsBookes, $paymentStatus, $status, $reservationNumber, $creditsUsed);
 
         // Update credits
         if (! empty($reserva)) {

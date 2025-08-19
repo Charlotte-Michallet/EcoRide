@@ -53,9 +53,13 @@ class CarSharingController extends Router
         $detailsCont   = new DetailsContr();
         $othersdetails = $detailsCont->details($id);
 
+        $numseats    = $details->getNumSeats();
+        $cretis      = $details->getPrice();
+        $cretisTotal = $numseats * $cretis;
+
         $this->particiate();
 
-        $this->render("carSharing/detailsCarSharing", ["token" => $currentToken, "details" => $details, "moreDetails" => $othersdetails]);
+        $this->render("carSharing/detailsCarSharing", ["token" => $currentToken, "details" => $details, "moreDetails" => $othersdetails, "totalPrice" => $cretisTotal]);
 
     }
 
@@ -87,10 +91,6 @@ class CarSharingController extends Router
 
                         $reserContr  = new ReservationContr();
                         $reservation = $reserContr->reservation($carSharingId, $userId, $reservationDate, $numSeatsBookes, $paymentStatus, $status, $creditsUsed);
-
-                        if (is_array($reservation) && count($reservation) !== 0) {
-                            print_r($reservation);
-                        }
                     }
                 }
             }

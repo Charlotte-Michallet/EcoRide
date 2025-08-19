@@ -17,12 +17,10 @@ class LoginContr extends AccountContr
         try {
             if ($this->InputEmpty() === true) {
                 $errors[] = ["Tous les champs sont obligatoires."];
-                // echo "Tous les champs sont obligatoires."; // Verify if statment works
             }
 
             if ($this->emailInvalid() === true) {
                 $errors[] = ["L'adresse email est invalide."];
-                // echo "L'adresse email est invalide."; // Verify if statment works
             }
 
             if (! empty($errors)) {

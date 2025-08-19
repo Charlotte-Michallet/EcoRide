@@ -6,7 +6,7 @@
         <h1 >Profil</h1>
     </a>
 
-     <?php if ($_SESSION["role"] === 3 || $_SESSION["role"] === 5) {?>
+     <?php if ($_SESSION["role"] === 3 || $_SESSION["role"] === 5 || $_SESSION["role"] === 2) {?>
     <a href="http://localhost:8080/index.php?controller=auth&action=cars"> <button
             class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">Mes voitures</button></a>
 

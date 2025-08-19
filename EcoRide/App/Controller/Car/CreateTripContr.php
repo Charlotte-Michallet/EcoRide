@@ -98,7 +98,6 @@ class CreateTripContr
                 return $errors;
             } else {
 
-                // $this->kilometers   $this->hourtrip    $this->minutestrip  $this->travel_time
                 $this->arrival_time = $this->calcArrivalTime();
                 $this->travel_time  = $this->timeformat();
 

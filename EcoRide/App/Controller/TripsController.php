@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Repository\CarRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\TripRepository;
+use App\Repository\UserRepository;
 
 class TripsController extends Router
 {
@@ -64,6 +65,7 @@ class TripsController extends Router
         $this->deleteMethod();
         $this->UpdateStartMethod();
         $this->UpdateEndMethod();
+        $this->deletereservation();
 
         // generate token CSRF
         $tokenObj     = new TokenCsrf();
@@ -145,6 +147,63 @@ class TripsController extends Router
             if ($isValid) {
                 $tripRepo = new TripRepository();
                 $tripRepo->updatetTrip($status, $id);
+            }
+        }
+    }
+
+    protected function deletereservation()
+    {
+        $user_id = $_SESSION["id"];
+
+        if (isset($user_id)) {
+            if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+                if (isset($_POST["deleteReservation"]) && $_POST["deleteReservation"]) {
+
+                    $submittedToken = $_POST["tokenDeleteReserva"];
+
+                    $token   = new TokenCsrf();
+                    $isValid = $token->validateToken($submittedToken);
+
+                    if ($isValid) {
+                        $idReservationString    = $_POST["idReservation"];
+                        $seatsReservationString = $_POST["seatsReserved"];
+                        $idcarsharingString     = $_POST["idCarSharing"];
+                        $creditsString          = $_POST["credits"];
+                        $carSharingStatusString = $_POST["carSharingStatus"];
+
+                        $idReservation    = (int) $idReservationString;
+                        $seatsReservation = (int) $seatsReservationString;
+                        $idcarsharing     = (int) $idcarsharingString;
+                        $credits          = (int) $creditsString;
+                        $carSharingStatus = (int) $carSharingStatusString;
+
+                        $revervaRepo = new ReservationRepository();
+                        $delete      = $revervaRepo->deleteTrip($idReservation);
+
+                        if ($delete === true) {
+                            $tripRep      = new TripRepository();
+                            $seats        = $tripRep->seeSeatsTrip($idcarsharing);
+                            $seatsUpadate = $seats + $seatsReservation;
+                            $update       = $tripRep->updatetSeatsTrip($seatsUpadate, $idcarsharing);
+
+                            if (! empty($update)) {
+                                var_dump("yes");
+                                $userRepo          = new UserRepository();
+                                $creditsuser       = $userRepo->usercredits($user_id);
+                                $updateCredits     = $creditsuser + $credits;
+                                $updateUserCredits = $userRepo->UpdatecreditsTrip($user_id, $updateCredits);
+
+                                if (empty($updateUserCredits)) {
+                                    var_dump("erreur");
+                                }
+                            }
+
+                        } else {
+                            var_dump("erreur");
+                        }
+                    }
+                }
             }
         }
     }

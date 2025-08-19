@@ -80,6 +80,7 @@
 
                         </div>
                     </form>
+                    <?php if ($_SESSION["role"] === 3 || $_SESSION["role"] === 5 || $_SESSION["role"] === 2) {?>
 
                     <!-- License -->
                     <form method="post" id="formlicense" class="col-span-4 flex">
@@ -105,6 +106,7 @@
                             <button type="submit" class="btn flex items-center justify-between px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg col-start-1">Ajouter le permis</button>
                         </div>
                     </form>
+                    <?php }?>
 
                     <!-- Password -->
                     <form method="post" id="formpassword" class="col-span-4">
@@ -211,6 +213,7 @@
                 </form>
                 <p class="hidden text-green-600 mt-2" id="succes"></p></
             </div>
+
         </div>
     </div>
 </section>

@@ -91,6 +91,7 @@ CREATE TABLE feedbacks(
 -- Add on a colum on the table
 ALTER TABLE car_sharing ADD status VARCHAR(255);
 ALTER TABLE car_sharing ADD kilometers INT(11);
+ALTER TABLE reservations ADD totalPrice INT(11);
 ALTER TABLE car_sharing ADD travel_time TIME;
 ALTER TABLE users ADD notes VARCHAR(255);
 

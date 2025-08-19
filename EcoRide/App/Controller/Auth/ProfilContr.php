@@ -34,19 +34,25 @@ class ProfilContr
             $descriptif      = $pref->getDescription();
 
             if ($animal_allowed === false) {
-                $preferences["animal"] = "Non";
+                $preferences["animal"]    = "Non";
+                $_SESSION["preferencesA"] = "Non";
             } elseif ($animal_allowed === true) {
-                $preferences["animal"] = "Oui";
+                $preferences["animal"]    = "Oui";
+                $_SESSION["preferencesA"] = "Oui";
             } else {
-                $preferences["animal"] = "Non renseigné";
+                $preferences["animal"]    = "Non renseigné";
+                $_SESSION["preferencesA"] = "Non renseigné";
             }
 
             if ($smoking_allowed === false) {
-                $preferences["smoking"] = "Non";
+                $preferences["smoking"]   = "Non";
+                $_SESSION["preferencesS"] = "Non";
             } elseif ($smoking_allowed === true) {
-                $preferences["smoking"] = "Oui";
+                $preferences["smoking"]   = "Oui";
+                $_SESSION["preferencesS"] = "Oui";
             } else {
-                $preferences["smoking"] = "Non renseigné";
+                $preferences["smoking"]   = "Non renseigné";
+                $_SESSION["preferencesS"] = "Non renseigné";
             }
 
             if ($descriptif === null) {

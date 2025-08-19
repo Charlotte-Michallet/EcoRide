@@ -44,32 +44,35 @@ class ShowTripContr extends TripContr
             $errors = ["Le champs nombre de place est incorrect"];
             return $errors;
         }
-
-        if (! empty($errors)) {
-            return $errors;
-        } else {
-            $tripRepo  = new TripRepository();
-            $checkTrip = $tripRepo->findTrip($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places);
-
-            if ($checkTrip === false) {
-                $errors = ["Aucun trajet trouvet"];
-                return $errors;
-            }
-        }
+        return $errors;
     }
 
     public function getTrips()
     {
         $user_id = null;
+
         if (isset($_SESSION["id"]) && ! empty($_SESSION["id"])) {
             $user_id = $_SESSION["id"];
         }
         $tripRepo = new TripRepository();
-        $trips    = $tripRepo->showAllTrips($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id);
-        return $trips;
+
+        $checkTrip = $tripRepo->findTrip($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places);
+
+        if ($checkTrip === "trajet trouvés") {
+            $trips = $tripRepo->showAllTrips($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id);
+            return $trips;
+        } elseif ($checkTrip === true) {
+
+            $newDateTrip      = $tripRepo->findotherTrip($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id);
+            $errors["errors"] = ["Des covoiturage sont dispobles au " . $newDateTrip];
+            return $errors;
+        } else {
+            $errors["errors"] = ["Aucun trajet trouver a cette date et ces villes"];
+            return $errors;
+        }
     }
 
-    protected function InputEmpty()
+    public function InputEmpty()
     {
         if (empty($this->departure_city) || empty($this->arrival_city) || empty($this->date_trip) || empty($this->num_places)) {
             $result = true;
@@ -172,5 +175,6 @@ class ShowTripContr extends TripContr
             $result = false;
         }
         return $result;
+
     }
 }

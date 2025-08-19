@@ -5,9 +5,9 @@ use App\Entity\Reservation;
 
 class ReservationRepository extends Repository
 {
-    public function createReservation(int $carSharingId, int $userId, string $reservationDate, int $numSeatsBookes, string $paymentStatus, string $status, string $num_reser)
+    public function createReservation(int $carSharingId, int $userId, string $reservationDate, int $numSeatsBookes, string $paymentStatus, string $status, string $num_reser, int $creditTotal)
     {
-        $query = $this->pdo->prepare("INSERT INTO reservations (number_reser, car_sharing_id, user_id, reservation_date, num_seats_bookes, payment_status, status) VALUES(:number_reser, :car_sharing_id, :user_id, :reservation_date, :numSeatsBookes, :payment_status, :status);");
+        $query = $this->pdo->prepare("INSERT INTO reservations (number_reser, car_sharing_id, user_id, reservation_date, num_seats_bookes, payment_status, status, totalPrice) VALUES(:number_reser, :car_sharing_id, :user_id, :reservation_date, :numSeatsBookes, :payment_status, :status, :totalPrice);");
 
         // bind value from form to query
         $query->bindValue(":car_sharing_id", $carSharingId, $this->pdo::PARAM_INT);
@@ -17,6 +17,7 @@ class ReservationRepository extends Repository
         $query->bindValue(":payment_status", $paymentStatus, $this->pdo::PARAM_STR);
         $query->bindValue(":status", $status, $this->pdo::PARAM_STR);
         $query->bindValue(":number_reser", $num_reser, $this->pdo::PARAM_STR);
+        $query->bindValue(":totalPrice", $creditTotal, $this->pdo::PARAM_INT);
 
         $query->execute();
         $query->fetch(\PDO::FETCH_ASSOC);
@@ -32,6 +33,7 @@ class ReservationRepository extends Repository
         $reservationInfo->setPaymentStatus($paymentStatus);
         $reservationInfo->setStatus($status);
         $reservationInfo->setNumReser($num_reser);
+        $reservationInfo->setTotalprice($creditTotal);
 
         return $reservationInfo;
     }
@@ -42,7 +44,7 @@ class ReservationRepository extends Repository
             $todayTime = new \DateTime();
             $today     = $todayTime->format("Y-m-d");
 
-            $query = $this->pdo->prepare("SELECT r.id, r.number_reser, r.num_seats_bookes, r.payment_status, r.status AS resaStatus, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.car_id, s.status, s.kilometers, s.travel_time, c.brand, c.model, c.color, u.username FROM reservations r INNER JOIN car_sharing s on r.car_sharing_id = s.id INNER JOIN cars c on s.car_id = c.id INNER JOIN users u on c.user_id = u.id WHERE r.user_id = :user_id AND s.departure_date < :today ORDER BY departure_date ASC, departure_hour ASC;");
+            $query = $this->pdo->prepare("SELECT r.id, r.number_reser, r.car_sharing_id, r.num_seats_bookes, r.payment_status, r.status AS resaStatus, r.totalPrice, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.car_id, s.status, s.kilometers, s.travel_time, c.brand, c.model, c.color, u.username FROM reservations r INNER JOIN car_sharing s on r.car_sharing_id = s.id INNER JOIN cars c on s.car_id = c.id INNER JOIN users u on c.user_id = u.id WHERE r.user_id = :user_id AND s.departure_date < :today ORDER BY departure_date ASC, departure_hour ASC;");
 
             // bind value from form to query
             $query->bindValue(":user_id", $user_id, $this->pdo::PARAM_INT);
@@ -54,18 +56,22 @@ class ReservationRepository extends Repository
 
             // Hydration
             foreach ($reservationsData as $reservationData) {
+                $dateObject = new \DateTime($reservationData["departure_date"]);
+                $dateTrip   = $dateObject->format("d/m/Y");
+
                 $reservationInfo = new Reservation();
                 $reservationInfo->setId($reservationData["id"]);
                 $reservationInfo->setNumReser($reservationData["number_reser"]);
+                $reservationInfo->setCarSharingId($reservationData["car_sharing_id"]);
                 $reservationInfo->setNumSeatsBookes($reservationData["num_seats_bookes"]);
                 $reservationInfo->setPaymentStatus($reservationData["payment_status"]);
                 $reservationInfo->setStatus($reservationData["resaStatus"]);
                 $reservationInfo->setDepartureCity($reservationData["departure_city"]);
                 $reservationInfo->setArrivalCity($reservationData["arrival_city"]);
-                $reservationInfo->setDepartureDate($reservationData["departure_date"]);
+                $reservationInfo->setDepartureDate($dateTrip);
                 $reservationInfo->setDepartureHour($reservationData["departure_hour"]);
                 $reservationInfo->setArrivalTime($reservationData["arrival_time"]);
-                $reservationInfo->setPrice($reservationData["price"]);
+                $reservationInfo->setPrice($reservationData["totalPrice"]);
                 $reservationInfo->setCarId($reservationData["car_id"]);
                 $reservationInfo->setStatusCarSharing($reservationData["status"]);
                 $reservationInfo->setKilometers($reservationData["kilometers"]);
@@ -74,6 +80,7 @@ class ReservationRepository extends Repository
                 $reservationInfo->setModel($reservationData["model"]);
                 $reservationInfo->setColor($reservationData["color"]);
                 $reservationInfo->setUsername($reservationData["username"]);
+                $reservationInfo->setTotalprice($reservationData["totalPrice"]);
 
                 $reservations[] = $reservationInfo;
             }
@@ -92,7 +99,7 @@ class ReservationRepository extends Repository
             $todayTime = new \DateTime();
             $today     = $todayTime->format("Y-m-d");
 
-            $query = $this->pdo->prepare(" SELECT r.id, r.number_reser, r.num_seats_bookes, r.payment_status, r.status AS resaStatus, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.car_id, s.status, s.kilometers, s.travel_time, c.brand, c.model, c.color, u.username FROM reservations r INNER JOIN car_sharing s on r.car_sharing_id = s.id INNER JOIN cars c on s.car_id = c.id INNER JOIN users u on c.user_id = u.id WHERE r.user_id = :user_id AND s.departure_date >= :today ORDER BY departure_date ASC, departure_hour ASC;");
+            $query = $this->pdo->prepare(" SELECT r.id, r.number_reser, r.car_sharing_id, r.num_seats_bookes, r.payment_status, r.status AS resaStatus, r.totalPrice, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.car_id, s.status, s.kilometers, s.travel_time, c.brand, c.model, c.color, u.username FROM reservations r INNER JOIN car_sharing s on r.car_sharing_id = s.id INNER JOIN cars c on s.car_id = c.id INNER JOIN users u on c.user_id = u.id WHERE r.user_id = :user_id AND s.departure_date >= :today ORDER BY departure_date ASC, departure_hour ASC;");
 
             // bind value from form to query
             $query->bindValue(":user_id", $user_id, $this->pdo::PARAM_INT);
@@ -105,18 +112,24 @@ class ReservationRepository extends Repository
 
             // Hydration
             foreach ($reservationsData as $reservationData) {
+
+                $dateObject = new \DateTime($reservationData["departure_date"]);
+                $dateTrip   = $dateObject->format("d/m/Y");
+
                 $reservationInfo = new Reservation();
                 $reservationInfo->setId($reservationData["id"]);
                 $reservationInfo->setNumReser($reservationData["number_reser"]);
+                $reservationInfo->setCarSharingId($reservationData["car_sharing_id"]);
                 $reservationInfo->setNumSeatsBookes($reservationData["num_seats_bookes"]);
                 $reservationInfo->setPaymentStatus($reservationData["payment_status"]);
                 $reservationInfo->setStatus($reservationData["resaStatus"]);
                 $reservationInfo->setDepartureCity($reservationData["departure_city"]);
                 $reservationInfo->setArrivalCity($reservationData["arrival_city"]);
-                $reservationInfo->setDepartureDate($reservationData["departure_date"]);
+                $reservationInfo->setDepartureDate($dateTrip);
+                $reservationInfo->setDepartureDateFormat($reservationData["departure_date"]);
                 $reservationInfo->setDepartureHour($reservationData["departure_hour"]);
                 $reservationInfo->setArrivalTime($reservationData["arrival_time"]);
-                $reservationInfo->setPrice($reservationData["price"]);
+                $reservationInfo->setPrice($reservationData["totalPrice"]);
                 $reservationInfo->setCarId($reservationData["car_id"]);
                 $reservationInfo->setStatusCarSharing($reservationData["status"]);
                 $reservationInfo->setKilometers($reservationData["kilometers"]);
@@ -125,6 +138,7 @@ class ReservationRepository extends Repository
                 $reservationInfo->setModel($reservationData["model"]);
                 $reservationInfo->setColor($reservationData["color"]);
                 $reservationInfo->setUsername($reservationData["username"]);
+                $reservationInfo->setTotalprice($reservationData["totalPrice"]);
 
                 $reservations[] = $reservationInfo;
             }
@@ -136,19 +150,24 @@ class ReservationRepository extends Repository
         }
     }
 
-    // public function deleteTrip($id)
-    // {
-    //     try {
-    //         $query = $this->pdo->prepare("DELETE FROM car_sharing WHERE id = :id;");
-    //         $query->bindValue(":id", $id, $this->pdo::PARAM_STR);
-    //         $query->execute();
+    public function deleteTrip($id)
+    {
+        try {
+            $query = $this->pdo->prepare("DELETE FROM reservations WHERE id = :id;");
+            $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
+            $query->execute();
 
-    //         header("Location: http://localhost:8080/index.php?controller=trips&action=manageTrip");
+            $rowCount = $query->rowCount();
 
-    //     } catch (\Exception $e) {
-    //         throw new \Exception($e->getMessage());
-    //     }
+            if ($rowCount > 0) {
+                return true;
+            } else {
+                return false;
+            }
 
-    // }
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
 
 }

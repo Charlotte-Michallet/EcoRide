@@ -41,7 +41,7 @@
 
                 <div class="flex justify-between gap-x-2 pb-2">
                     <div class="flex items-center gap-x-2">
-                        <p class="text-lg font-semibold">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           <?php echo $details->getDepartureCity() ?> </p>
+                        <p class="text-lg font-semibold">                                                                                                                                                                                                                                                                                              <?php echo $details->getDepartureCity() ?> </p>
                     </div>
 
                     <div class="flex items-center gap-x-2">
@@ -218,36 +218,33 @@
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <div class="mt-4">
                 <p class="text-pretty text-gray-700">
-                   Le trajet coute.... Ete vous sure de vouloir participer a ce trajet
+                    Le trajet coute                                                                                                                                                                                <?php echo $totalPrice ?>. Ete vous sure de vouloir participer a ce trajet
                 </p>
             </div>
 
-            <div class="flex">
-                <button type="button" id="cancel"
-                    class="rounded bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200">
-                    Annuler
-                </button>
-                <form method="post" class="mt-6 flex justify-end gap-2">
-                    <input type="hidden" name="token_Participate"
-                        value="<?php echo htmlspecialchars($token) ?>">
-                        <input type="hidden" id="car_sharing_id" name="car_sharing_id"
-                        value="<?php echo $details->getId() ?>">
-                        <input type="hidden" id="reservation_date" name="reservation_date"
-                        value="<?php echo $details->getDepartureDate() ?>">
-                        <input type="hidden" id="creditsUsed" name="creditsUsed"
-                        value="<?php echo $details->getPrice() ?>">
+            <div class="flex gap-6">
+                <div class="mt-6 flex justify-end gap-2">
+                    <button type="button" id="cancel"
+                        class="rounded bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200">
+                        Annuler
+                    </button>
+                </div>
 
-                        <input type="hidden" id="tokenLogin" name="token_Participate"
-                        value="<?php echo htmlspecialchars($token) ?>">
+                <form method="post" class="mt-6 flex justify-end gap-2">
+                    <input type="hidden" name="token_Participate" value="<?php echo htmlspecialchars($token) ?>">
+                    <input type="hidden" id="creditsUsed" name="creditsUsed" value="<?php echo $totalPrice ?>">
+                    <input type="hidden" id="car_sharing_id" name="car_sharing_id"
+                        value="<?php echo $details->getId() ?>">
+                    <input type="hidden" id="reservation_date" name="reservation_date"
+                        value="<?php echo $details->getDepartureDateFormat() ?>">
                     <button type="submit" id="participateBtn" name="participateBtn" value="participateBtn"
                         class="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
                         Participer
                     </button>
                 </form>
+
             </div>
 
         </div>
     </div>
-
-
 </section>

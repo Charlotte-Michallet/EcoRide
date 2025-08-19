@@ -486,11 +486,11 @@ form.addEventListener("submit", async (e) => {
 
             const responseData = await resp.json();
             const succes = document.getElementById("succes");
-            succes.classList.remove("hidden");
-            succes.textContent = `La modification a bien était prise en compte.`;
 
             if (resp.ok) {
                 setTimeout(() => {
+                    succes.classList.remove("hidden");
+                    succes.textContent = `La modification a bien était prise en compte.`;
                     window.location.href =
                         "http://localhost:8080/index.php?controller=auth&action=profil";
 

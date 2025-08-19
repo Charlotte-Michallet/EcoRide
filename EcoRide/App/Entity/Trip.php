@@ -8,6 +8,7 @@ class Trip
     protected string $departure_city;
     protected string $arrival_city;
     protected string $departure_date;
+    protected string $departure_dateFormat;
     protected string $departure_hour;
     protected string $arrival_time;
     protected int $price;
@@ -496,6 +497,24 @@ class Trip
     public function setFeedback(?string $feedback): self
     {
         $this->feedback = $feedback;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of departure_dateFormat
+     */
+    public function getDepartureDateFormat(): string
+    {
+        return $this->departure_dateFormat;
+    }
+
+    /**
+     * Set the value of departure_dateFormat
+     */
+    public function setDepartureDateFormat(string $departure_dateFormat): self
+    {
+        $this->departure_dateFormat = $departure_dateFormat;
 
         return $this;
     }

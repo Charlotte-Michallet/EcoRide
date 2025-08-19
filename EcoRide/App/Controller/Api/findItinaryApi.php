@@ -39,32 +39,42 @@ class FindItinaryApi
         if ($isValid) {
             $showTripContr = new ShowTripContr($departCity, $arrivalCity, $dateDeparture, $numPlaces);
             $checkInputs   = $showTripContr->checkInputs();
+
             if (! empty($checkInputs)) {
                 Router::jsonResponse(["status" => "error", "message" => $checkInputs], 402);
                 return;
-            } else {
-                $trips      = $showTripContr->getTrips();
-                $tripsArray = [];
 
-                foreach ($trips as $trip) {
-                    $tripsArray[] = [
-                        "id"         => $trip->getId(),
-                        "departure"  => $trip->getDepartureCity(),
-                        "arrival"    => $trip->getArrivalCity(),
-                        "date"       => $trip->getDepartureDate(),
-                        "hour"       => $trip->getDepartureHour(),
-                        "time"       => $trip->getArrivalTime(),
-                        "price"      => $trip->getPrice(),
-                        "places"     => $trip->getNumSeats(),
-                        "status"     => $trip->getStatus(),
-                        "energy"     => $trip->getEnergyTy(),
-                        "username"   => $trip->getUsername(),
-                        "photo"      => $trip->getPhoto(),
-                        "kilometers" => $trip->getKilometers(),
-                        "travelTime" => $trip->getTravel_time(),
-                    ];
+            } else {
+                $trips = $showTripContr->getTrips();
+
+                if (isset($trips["errors"])) {
+
+                    $error = $trips["errors"];
+                    Router::jsonResponse(["status" => "error", "message" => $error], 402);
+                    return;
+                } else {
+                    $tripsArray = [];
+
+                    foreach ($trips as $trip) {
+                        $tripsArray[] = [
+                            "id"         => $trip->getId(),
+                            "departure"  => $trip->getDepartureCity(),
+                            "arrival"    => $trip->getArrivalCity(),
+                            "date"       => $trip->getDepartureDate(),
+                            "hour"       => $trip->getDepartureHour(),
+                            "time"       => $trip->getArrivalTime(),
+                            "price"      => $trip->getPrice(),
+                            "places"     => $trip->getNumSeats(),
+                            "status"     => $trip->getStatus(),
+                            "energy"     => $trip->getEnergyTy(),
+                            "username"   => $trip->getUsername(),
+                            "photo"      => $trip->getPhoto(),
+                            "kilometers" => $trip->getKilometers(),
+                            "travelTime" => $trip->getTravel_time(),
+                        ];
+                    }
+                    Router::jsonResponse(["status" => "success", "message" => "La création de trajer réussi", "trips" => $tripsArray], 200);
                 }
-                Router::jsonResponse(["status" => "success", "message" => "La création de trajer réussi", "trips" => $tripsArray], 200);
             }
         } else {
             Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);

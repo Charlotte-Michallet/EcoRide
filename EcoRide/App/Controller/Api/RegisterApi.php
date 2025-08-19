@@ -66,7 +66,7 @@ class RegisterApi
             case 'admin':
                 return 1;
 
-            case 'emplee':
+            case 'employee':
                 return 2;
 
             case 'driver':

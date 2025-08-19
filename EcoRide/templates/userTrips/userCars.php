@@ -157,7 +157,7 @@
                         <div class="bg-gray-50/60 px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-300">
                             <div>
                                 <p class="text-sm text-gray-600">
-                                    <span class="font-semibold text-gray-800">6</span> results
+                                   Drive Green Together
                                 </p>
                             </div>
 

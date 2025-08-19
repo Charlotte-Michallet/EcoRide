@@ -147,6 +147,21 @@ class ApiController
                     return;
                 }
 
+            case 'credit':
+                if (isset($_SESSION["id"])) {
+                    // if post method
+                    if ($method === "POST") {
+                        $CreditsControl = new CreditsApi();
+                        $CreditsControl->creditsData();
+                    } else {
+                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
+                    }
+                    break;
+                } else {
+                    Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
+                    return;
+                }
+
             default:
 
                 break;

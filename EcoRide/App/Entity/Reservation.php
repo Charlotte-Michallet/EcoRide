@@ -14,9 +14,11 @@ class Reservation
     protected string $departure_city;
     protected string $arrival_city;
     protected string $departure_date;
+    protected string $departureDateFormat;
     protected string $departure_hour;
     protected string $arrival_time;
     protected int $price;
+    protected int $totalprice;
     protected int $car_id;
     protected string $statusCarSharing;
     protected int $kilometers;
@@ -400,6 +402,42 @@ class Reservation
     public function setColor(string $color): self
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of departureDateFormat
+     */
+    public function getDepartureDateFormat(): string
+    {
+        return $this->departureDateFormat;
+    }
+
+    /**
+     * Set the value of departureDateFormat
+     */
+    public function setDepartureDateFormat(string $departureDateFormat): self
+    {
+        $this->departureDateFormat = $departureDateFormat;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of totalprice
+     */
+    public function getTotalprice(): int
+    {
+        return $this->totalprice;
+    }
+
+    /**
+     * Set the value of totalprice
+     */
+    public function setTotalprice(int $totalprice): self
+    {
+        $this->totalprice = $totalprice;
 
         return $this;
     }

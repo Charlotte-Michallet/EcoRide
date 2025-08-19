@@ -40,6 +40,9 @@ class CarRepository extends Repository
             $cars = [];
             foreach ($carsInfo as $carInfo) {
 
+                $dateObject   = new \DateTime($carInfo["first_register_date"]);
+                $dateregister = $dateObject->format("d/m/Y");
+
                 // Hydration
                 $car = new Car();
                 $car->setId($carInfo["id"]);
@@ -48,7 +51,7 @@ class CarRepository extends Repository
                 $car->setEnergyType($carInfo["energy_type"]);
                 $car->setNumSeats($carInfo["num_seats"]);
                 $car->setNumplate($carInfo["number_plate"]);
-                $car->setFirstRegisterDate($carInfo["first_register_date"]);
+                $car->setFirstRegisterDate($dateregister);
                 $car->setColor($carInfo["color"]);
                 $car->setUserId($carInfo["user_id"]);
                 $cars[] = $car;
