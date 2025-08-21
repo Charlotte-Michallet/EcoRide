@@ -145,7 +145,7 @@ export function show(trips, seats) {
         containerEnergie.appendChild(textEnergie);
 
         const linkDetail = document.createElement("a");
-        linkDetail.href = `http://localhost:8080/index.php?controller=car-sharing&action=details&id=${trip.id}&seats=${seats}`;
+        linkDetail.href = `/index.php?controller=car-sharing&action=details&id=${trip.id}&seats=${seats}`;
 
         const btn = document.createElement("button");
         btn.type = "submit";

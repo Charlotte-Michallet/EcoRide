@@ -100,7 +100,7 @@ form.addEventListener("submit", async (e) => {
             const responseData = await resp.json();
 
             if (resp.ok) {
-                window.location.href = "http://localhost:8080/index.php";
+                window.location.href = "/index.php";
             } else if (resp.status == 401) {
                 errorDisplay(
                     "formcheck",

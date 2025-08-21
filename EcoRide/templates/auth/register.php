@@ -9,7 +9,7 @@
                 <h1 class="text-2xl font-semibold tracking-wider capitalize">
                     Créer votre compte des maintenant
                 </h1>
-                <a href="http://localhost:8080/index.php?controller=auth&action=login">
+                <a href="/index.php?controller=auth&action=login">
                     <p class="mt-1 text-sm text-gray-500">Déjà un compte! Connectez vous</p>
                 </a>
 

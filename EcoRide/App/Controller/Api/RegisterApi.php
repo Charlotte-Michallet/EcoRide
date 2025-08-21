@@ -37,6 +37,7 @@ class RegisterApi
         $credits        = 20;
         $id_role        = $this->userRole($role);
         $photo_url      = "/assets/img/user.jpg";
+        $active         = "active";
 
         // Check token CSRF
         $token   = new TokenCsrf();
@@ -44,7 +45,7 @@ class RegisterApi
 
         if ($isValid) {
             // Create user
-            $register      = new RegisterContr($username, $email, $password, $passwordVerif, $date_of_birth, $photo_url, $credits, $id_role);
+            $register      = new RegisterContr($username, $email, $password, $passwordVerif, $date_of_birth, $photo_url, $credits, $id_role, $active);
             $registererror = $register->checkImputRegisterUser();
 
             if (! empty($registererror)) {

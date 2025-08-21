@@ -32,6 +32,10 @@ class ApiController
                     $this->tripsRequests($method, $action);
                     break;
 
+                case 'admin':
+                    $this->adminRequests($method, $action);
+                    break;
+
                 default:
                     Router::jsonResponse(["status" => "error", "message" => "Ressource API non reconnue."], 404);
                     break;
@@ -187,13 +191,30 @@ class ApiController
                     return;
                 }
 
-            case 'search':
+            default:
 
                 break;
+        }
+    }
 
-            case 'profil':
+    private function adminRequests($method, $action)
+    {
+        switch ($action) {
 
-                break;
+            // case 'login':
+            //     if (isset($_SESSION["id"])) {
+            //         // if post method
+            //         if ($method === "POST") {
+            //             $loginControl = new LoginApiAdmin();
+            //             $loginControl->loginAdminData();
+            //         } else {
+            //             Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
+            //         }
+
+            //     } else {
+            //         Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
+            //         return;
+            //     }
 
             default:
 

@@ -471,7 +471,7 @@ const API = async (data, error, message = "") => {
 
             setTimeout(() => {
                 window.location.href =
-                    "http://localhost:8080/index.php?controller=auth&action=profil";
+                    "/index.php?controller=auth&action=profil";
 
                 succes.classList.add("hidden");
                 succes.textContent = "";
@@ -511,7 +511,7 @@ const imgAPI = async (photofile, token, error, message = "") => {
 
             setTimeout(() => {
                 window.location.href =
-                    "http://localhost:8080/index.php?controller=auth&action=profil";
+                    "/index.php?controller=auth&action=profil";
 
                 succes.classList.add("hidden");
                 succes.textContent = "";

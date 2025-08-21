@@ -1,5 +1,22 @@
 <!-- form -->
 <section id="itineraryPage">
+     <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 3) {?>
+
+        <div class="max-w-3xl flex flex-col mx-auto size-full">
+
+            <div class="text-center py-10 px-4 sm:px-6 lg:px-8">
+                <h1 class="block text-3xl font-bold text-gray-800 ">Veuillez changer de role pour acceder au fonctionnalité</h1>
+
+                <div class="mt-5 flex flex-col justify-center items-center gap-2 sm:flex-row sm:gap-3">
+                    <a class="w-full sm:w-auto py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                        href="/index.php?controller=auth&action=profilModify">
+                        Ajouter les preferences
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    <?php } else {?>
     <form action="post" id="formItineray" class="form w-3/4 mx-auto p-5 mt-15 rounded-md shadow-md">
         <div class="flex flex-col">
 
@@ -133,4 +150,5 @@
     </div>
     <!-- End Card Blog -->
 <p class="text-xs text-gray-500">* Voyage écologique = voyage en éléctrique </p>
+<?php }?>
 </section>

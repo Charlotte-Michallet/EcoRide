@@ -42,11 +42,11 @@
         <nav aria-label="Global" class="hidden md:block">
           <ul class="flex items-center gap-6 text-lg">
             <li>
-              <a class="transition hover:text-gray-700/75" href="http://localhost:8080/index.php?controller=car-sharing&action=show">Covoiturage </a>
+              <a class="transition hover:text-gray-700/75" href="/index.php?controller=car-sharing&action=show">Covoiturage </a>
             </li>
 
             <li>
-              <a class="transition hover:text-gray-500/75" href="http://localhost:8080/index.php?controller=pages&action=contact"> Contact </a>
+              <a class="transition hover:text-gray-500/75" href="/index.php?controller=pages&action=contact"> Contact </a>
             </li>
 
           </ul>
@@ -56,7 +56,7 @@
           <?php if (isset($_SESSION["username"])) {?>
 
             <div class="flex items-center gap-x-6">
-              <a href="http://localhost:8080/index.php?controller=auth&action=profil"><img class="object-cover w-12 h-12 rounded-full" src="<?php echo $_SESSION["photo"] ?>" alt="profil pic"></a>
+              <a href="/index.php?controller=auth&action=profil"><img class="object-cover w-12 h-12 rounded-full" src="<?php echo $_SESSION["photo"] ?>" alt="profil pic"></a>
 
               <a
                 class="btn block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
@@ -70,13 +70,13 @@
             <div class="sm:flex sm:gap-4">
               <a
                 class="btn block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-                href="http://localhost:8080/index.php?controller=auth&action=login">
+                href="/index.php?controller=auth&action=login">
                 Connexion
               </a>
 
               <a
                 class="link hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
-                href="http://localhost:8080/index.php?controller=auth&action=register">
+                href="/index.php?controller=auth&action=register">
                 Inscription
               </a>
             </div>

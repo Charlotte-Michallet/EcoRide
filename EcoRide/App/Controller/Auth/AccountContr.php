@@ -15,6 +15,7 @@ class AccountContr
     protected int $credits;
     protected int $id_role;
     protected string|bool $drivers_license;
+    protected string $active;
 
     // verify special caratares
     protected function userInvalid()

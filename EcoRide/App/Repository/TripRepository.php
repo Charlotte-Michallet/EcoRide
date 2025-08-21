@@ -152,7 +152,7 @@ class TripRepository extends Repository
             $tripInfo = new Trip();
             $tripInfo->setStatus($status);
 
-            header("Location: http://localhost:8080/index.php?controller=trips&action=manageTrip");
+            header("Location: /index.php?controller=trips&action=manageTrip");
             return $tripInfo;
 
         } catch (\Exception $e) {
@@ -167,7 +167,7 @@ class TripRepository extends Repository
             $query->bindValue(":id", $id, $this->pdo::PARAM_STR);
             $query->execute();
 
-            header("Location: http://localhost:8080/index.php?controller=trips&action=manageTrip");
+            header("Location: /index.php?controller=trips&action=manageTrip");
 
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
@@ -175,16 +175,16 @@ class TripRepository extends Repository
 
     }
 
-    public function findTrip($departCity, $arrival_city, $date_trip, $num_seats)
+    public function findTrip($departCity, $arrival_city, $date_trip, $num_seats, $user_id)
     {
         try {
-
-            $check = $this->pdo->prepare("SELECT COUNT(*) FROM car_sharing WHERE departure_date = :date AND departure_city= :departure AND arrival_city = :arrival AND num_seats >= :seats AND status = 'Programmé';");
+            $check = $this->pdo->prepare("SELECT COUNT(*) FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' AND u.id != :user_id ;");
 
             $check->bindValue(":departure", $departCity, $this->pdo::PARAM_STR);
             $check->bindValue(":arrival", $arrival_city, $this->pdo::PARAM_STR);
             $check->bindValue(":date", $date_trip, $this->pdo::PARAM_STR);
             $check->bindValue(":seats", $num_seats, $this->pdo::PARAM_INT);
+            $check->bindValue(":user_id", $user_id, $this->pdo::PARAM_INT);
             $check->execute();
 
             $exists = $check->fetchColumn() > 0;
@@ -193,12 +193,13 @@ class TripRepository extends Repository
                 return "trajet trouvés";
 
             } else {
-                $check = $this->pdo->prepare("SELECT COUNT(*) FROM car_sharing WHERE departure_date > :date AND departure_city= :departure AND arrival_city = :arrival AND num_seats >= :seats AND status = 'Programmé';");
+                $check = $this->pdo->prepare("SELECT COUNT(*) FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date > :date ANDs. departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' AND u.id != :user_id;");
 
                 $check->bindValue(":departure", $departCity, $this->pdo::PARAM_STR);
                 $check->bindValue(":arrival", $arrival_city, $this->pdo::PARAM_STR);
                 $check->bindValue(":date", $date_trip, $this->pdo::PARAM_STR);
                 $check->bindValue(":seats", $num_seats, $this->pdo::PARAM_INT);
+                $check->bindValue(":user_id", $user_id, $this->pdo::PARAM_INT);
                 $check->execute();
 
                 $nextDate = $check->fetchColumn() > 0;
@@ -415,7 +416,7 @@ class TripRepository extends Repository
             $tripInfo = new Trip();
             $tripInfo->setNumSeats($numSeats);
 
-            header("Location: http://localhost:8080/index.php?controller=trips&action=manageTrip");
+            header("Location: /index.php?controller=trips&action=manageTrip");
             echo "Modification on bien etait prise en compte";
             return $tripInfo;
 

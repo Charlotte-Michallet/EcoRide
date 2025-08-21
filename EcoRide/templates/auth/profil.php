@@ -62,7 +62,7 @@
                 <div class="sm:flex sm:gap-4 w-full">
 
                     <a class="btn block rounded-md px-4 py-3 content-center font-medium text-white transition hover:bg-teal-700"
-                        href="http://localhost:8080/index.php?controller=auth&action=profilModify">
+                        href="/index.php?controller=auth&action=profilModify">
                         Modifier compte
                     </a>
                     <form method="post"

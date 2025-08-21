@@ -71,7 +71,7 @@ class CarRepository extends Repository
             $query->bindValue(":id", $id, $this->pdo::PARAM_STR);
             $query->execute();
 
-            header("Location: http://localhost:8080/index.php?controller=auth&action=cars");
+            header("Location: /index.php?controller=auth&action=cars");
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }

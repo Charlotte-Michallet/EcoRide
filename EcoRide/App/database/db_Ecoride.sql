@@ -94,6 +94,7 @@ ALTER TABLE car_sharing ADD kilometers INT(11);
 ALTER TABLE reservations ADD totalPrice INT(11);
 ALTER TABLE car_sharing ADD travel_time TIME;
 ALTER TABLE users ADD notes VARCHAR(255);
+ALTER TABLE users ADD active VARCHAR(255);
 
 
 -- Insert data in tables

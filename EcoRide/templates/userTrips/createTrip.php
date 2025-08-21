@@ -11,7 +11,7 @@
 
                 <div class="mt-5 flex flex-col justify-center items-center gap-2 sm:flex-row sm:gap-3">
                     <a class="w-full sm:w-auto py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                        href="http://localhost:8080/index.php?controller=auth&action=profilModify">
+                        href="/index.php?controller=auth&action=profilModify">
                         Ajouter les preferences
                     </a>
                 </div>
@@ -124,7 +124,7 @@
                                 <?php }?>
                             </select>
 
-                            <a href="http://localhost:8080/index.php?controller=auth&action=cars">
+                            <a href="/index.php?controller=auth&action=cars">
                                 <p class="text-xs mt-3" id="newCar">Vous voulez ajoutez une nouvelle voiture</p>
                             </a>
                             <p class="hidden text-xs text-red-600 mt-2" id="TripFormError"></p>

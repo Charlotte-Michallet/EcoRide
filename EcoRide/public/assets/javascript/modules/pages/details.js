@@ -32,7 +32,7 @@ participate.addEventListener("click", async () => {
 
             setTimeout(() => {
                 window.location.href =
-                    "http://localhost:8080/index.php?controller=auth&action=credits";
+                    "/index.php?controller=auth&action=credits";
             }, 1800);
         } else if (resp.status == 403) {
             errorLoggin.classList.remove("hidden");
@@ -41,7 +41,7 @@ participate.addEventListener("click", async () => {
 
             setTimeout(() => {
                 window.location.href =
-                    "http://localhost:8080/index.php?controller=auth&action=profil";
+                    "index.php?controller=auth&action=profil";
             }, 1800);
         } else {
             errorLoggin.classList.remove("hidden");
@@ -49,7 +49,7 @@ participate.addEventListener("click", async () => {
                 "Veilleiz vous connecter ou creer un compte d'abord";
             setTimeout(() => {
                 window.location.href =
-                    "http://localhost:8080/index.php?controller=auth&action=login";
+                    "/index.php?controller=auth&action=login";
             }, 1500);
         }
     } catch (error) {

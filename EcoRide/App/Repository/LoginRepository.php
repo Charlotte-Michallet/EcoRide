@@ -5,7 +5,6 @@ use App\Entity\User;
 
 class LoginRepository extends Repository
 {
-
     public function getUser(string $email, string $password): bool | User
     {
         $query = $this->pdo->prepare("SELECT * FROM users WHERE email = :email;");
@@ -26,6 +25,7 @@ class LoginRepository extends Repository
             $userInfo->setDateOfBirth($user["date_of_birth"]);
             $userInfo->setCredits($user["credits"]);
             $userInfo->setIdRole($user["id_role"]);
+            $userInfo->setActive($user["active"]);
 
             return $userInfo;
         } else {

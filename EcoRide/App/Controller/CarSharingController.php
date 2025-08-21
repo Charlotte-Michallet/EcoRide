@@ -53,9 +53,12 @@ class CarSharingController extends Router
         $detailsCont   = new DetailsContr();
         $othersdetails = $detailsCont->details($id);
 
-        $numseats    = $details->getNumSeats();
-        $cretis      = $details->getPrice();
-        $cretisTotal = $numseats * $cretis;
+        $cretis = $details->getPrice();
+
+        $numSeatsBookesString = $_GET["seats"];
+        $numSeatsBookes       = (int) $numSeatsBookesString;
+
+        $cretisTotal = $numSeatsBookes * $cretis;
 
         $this->particiate();
 

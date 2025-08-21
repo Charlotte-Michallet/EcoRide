@@ -56,7 +56,7 @@ class ShowTripContr extends TripContr
         }
         $tripRepo = new TripRepository();
 
-        $checkTrip = $tripRepo->findTrip($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places);
+        $checkTrip = $tripRepo->findTrip($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id);
 
         if ($checkTrip === "trajet trouvés") {
             $trips = $tripRepo->showAllTrips($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id);

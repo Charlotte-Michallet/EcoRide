@@ -14,6 +14,7 @@ class LoginContr extends AccountContr
     public function checkImputLoginUser()
     {
         $errors = [];
+
         try {
             if ($this->InputEmpty() === true) {
                 $errors[] = ["Tous les champs sont obligatoires."];
@@ -25,11 +26,18 @@ class LoginContr extends AccountContr
 
             if (! empty($errors)) {
                 return $errors;
+
             } else {
                 $repoLogin = new LoginRepository();
-                $user      = $repoLogin->getUser($this->email, $this->password);
+
+                $user   = $repoLogin->getUser($this->email, $this->password);
+                $active = $user->getActive();
+
                 if ($user === false) {
                     $errors[] = ["Le pseudo ou l'adresse email est incorrect."];
+                    return $errors;
+                } elseif ($active === "notActive") {
+                    $errors[] = ["Votre compte a était desactivé"];
                     return $errors;
                 } else {
                     $_SESSION["id"]       = $user->getId();
@@ -38,7 +46,6 @@ class LoginContr extends AccountContr
                     $_SESSION["photo"]    = $user->getPhotoUrl();
                     $_SESSION["role"]     = $user->getIdRole();
                 }
-
             }
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

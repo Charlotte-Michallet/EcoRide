@@ -14,7 +14,7 @@ class MySql
     private function __construct()
     {
         // get .env and convert in to an array
-        $config = parse_ini_file(ROOT_PATH . "/" . ".env");
+        $config = parse_ini_file(dirname(__DIR__, 2) . "/" . ".env");
 
         if (isset($config["DB_NAME"])) {
             $this->db_name = $config["DB_NAME"];

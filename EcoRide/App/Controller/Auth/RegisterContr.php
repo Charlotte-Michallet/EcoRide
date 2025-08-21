@@ -5,7 +5,7 @@ use App\Repository\RegistRepository;
 
 class RegisterContr extends AccountContr
 {
-    public function __construct(string $username, string $email, string $password, string $passwordVerif, string $date_of_birth, string $photo_url, int $credits, int $id_role)
+    public function __construct(string $username, string $email, string $password, string $passwordVerif, string $date_of_birth, string $photo_url, int $credits, int $id_role, string $active)
     {
         $this->username      = $username;
         $this->email         = $email;
@@ -15,6 +15,7 @@ class RegisterContr extends AccountContr
         $this->credits       = $credits;
         $this->id_role       = $id_role;
         $this->photo_url     = $photo_url;
+        $this->active        = $active;
 
     }
 
@@ -59,7 +60,7 @@ class RegisterContr extends AccountContr
 
             } else {
                 $repoRegister = new RegistRepository();
-                $newUser      = $repoRegister->createUser($this->username, $this->email, $this->password, $this->date_of_birth, $this->photo_url, $this->credits, $this->id_role);
+                $newUser      = $repoRegister->createUser($this->username, $this->email, $this->password, $this->date_of_birth, $this->photo_url, $this->credits, $this->id_role, $this->active);
 
                 $_SESSION["id"]       = $newUser->getId();
                 $_SESSION["username"] = $newUser->getUsername();

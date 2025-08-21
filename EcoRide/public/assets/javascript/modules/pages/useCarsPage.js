@@ -252,7 +252,7 @@ addCarForm.addEventListener("submit", async (e) => {
 
             if (resp.ok) {
                 window.location.href =
-                    "http://localhost:8080/index.php?controller=auth&action=cars";
+                    "/index.php?controller=auth&action=cars";
             } else {
                 errorDisplay("form", responseData.message);
             }

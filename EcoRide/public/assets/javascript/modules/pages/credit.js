@@ -55,7 +55,7 @@ form.addEventListener("submit", async (e) => {
 
                 setTimeout(() => {
                     window.location.href =
-                        "http://localhost:8080/index.php?controller=auth&action=profil";
+                        "/index.php?controller=auth&action=profil";
 
                     succes.classList.add("hidden");
                     succes.textContent = "";

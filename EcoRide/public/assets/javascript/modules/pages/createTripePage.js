@@ -492,7 +492,7 @@ form.addEventListener("submit", async (e) => {
                     succes.classList.remove("hidden");
                     succes.textContent = `La modification a bien était prise en compte.`;
                     window.location.href =
-                        "http://localhost:8080/index.php?controller=auth&action=profil";
+                        "/index.php?controller=auth&action=profil";
 
                     succes.classList.add("hidden");
                     succes.textContent = "";

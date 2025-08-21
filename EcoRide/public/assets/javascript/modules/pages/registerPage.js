@@ -213,7 +213,7 @@ form.addEventListener("submit", async (e) => {
                         "Le pseudo ou l'adresse mail exist déjà."
                 );
             } else if (resp.ok) {
-                window.location.href = "http://localhost:8080/index.php";
+                window.location.href = "/index.php";
             } else {
                 errorDisplay(
                     "registerForm",

@@ -17,8 +17,8 @@ class Reservation
     protected string $departureDateFormat;
     protected string $departure_hour;
     protected string $arrival_time;
-    protected int $price;
-    protected int $totalprice;
+    protected ?int $price;
+    protected ?int $totalprice;
     protected int $car_id;
     protected string $statusCarSharing;
     protected int $kilometers;
@@ -247,7 +247,7 @@ class Reservation
     /**
      * Get the value of price
      */
-    public function getPrices(): int
+    public function getPrices(): ?int
     {
         return $this->price;
     }
@@ -255,7 +255,7 @@ class Reservation
     /**
      * Set the value of price
      */
-    public function setPrice(int $price): self
+    public function setPrice(?int $price): self
     {
         $this->price = $price;
 
@@ -427,7 +427,7 @@ class Reservation
     /**
      * Get the value of totalprice
      */
-    public function getTotalprice(): int
+    public function getTotalprice(): ?int
     {
         return $this->totalprice;
     }
@@ -435,7 +435,7 @@ class Reservation
     /**
      * Set the value of totalprice
      */
-    public function setTotalprice(int $totalprice): self
+    public function setTotalprice(?int $totalprice): self
     {
         $this->totalprice = $totalprice;
 

@@ -98,7 +98,7 @@ class AuthController extends Router
 
             $this->deleteUserMethod();
         } else {
-            header("Location: http://localhost:8080/index.php");
+            header("Location: /index.php");
         }
     }
 
@@ -116,7 +116,7 @@ class AuthController extends Router
             // show page
             $this->render("auth/modifyProfil", ["user" => $user, "token" => $currentToken]);
         } else {
-            header("Location: http://localhost:8080/index.php");
+            header("Location: /index.php");
         }
     }
 
@@ -137,7 +137,7 @@ class AuthController extends Router
             // // show page
             $this->render("userTrips/userCars", ["token" => $currentToken, "cars" => $carsInfo]);
         } else {
-            header("Location: http://localhost:8080/index.php");
+            header("Location: index.php");
         }
     }
 
@@ -153,7 +153,7 @@ class AuthController extends Router
             // // show page
             $this->render("auth/credit", ["token" => $currentToken]);
         } else {
-            header("Location: http://localhost:8080/index.php");
+            header("Location: /index.php");
         }
     }
 

@@ -9,10 +9,11 @@ class User
     protected string $password;
     protected string $date_of_birth;
     protected array|string $photo_url;
-    protected int $credits;
+    protected ?int $credits;
     protected int $id_role;
     protected string $role;
     protected ?bool $drivers_license = null;
+    protected string $active;
 
     /**
      * Get the value of id
@@ -125,7 +126,7 @@ class User
     /**
      * Get the value of credits
      */
-    public function getCredits(): int
+    public function getCredits(): ?int
     {
         return $this->credits;
     }
@@ -133,7 +134,7 @@ class User
     /**
      * Set the value of credits
      */
-    public function setCredits(int $credits): self
+    public function setCredits(?int $credits): self
     {
         $this->credits = $credits;
 
@@ -190,6 +191,24 @@ class User
     public function setDriversLicense(?bool $drivers_license): self
     {
         $this->drivers_license = $drivers_license;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of active
+     */
+    public function getActive(): string
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set the value of active
+     */
+    public function setActive(string $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

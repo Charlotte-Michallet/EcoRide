@@ -43,7 +43,7 @@
         <div class="flex items-center justify-center py-4 text-center bg-gray-50 dark:bg-gray-700">
             <span class="text-sm text-gray-600 dark:text-gray-200">Vous n'avez pas de compter. Créer en un!</span>
 
-            <a href="http://localhost:8080/index.php?controller=auth&action=register" class="link mx-2 text-sm font-bold">Inscription</a>
+            <a href="/index.php?controller=auth&action=register" class="link mx-2 text-sm font-bold">Inscription</a>
         </div>
     </div>
 

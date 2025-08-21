@@ -15,7 +15,7 @@ class ProfilContr
 
             session_unset();
             session_destroy();
-            header("Location: http://localhost:8080/index.php");
+            header("Location: /index.php");
 
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
