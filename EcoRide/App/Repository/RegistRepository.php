@@ -5,7 +5,7 @@ use App\Entity\User;
 
 class RegistRepository extends Repository
 {
-    public function createUser(string $username, string $email, string $password, string $date_of_birth, string $photo_url, int $credits, int $id_role, string $active): User
+    public function createUser(string $username, string $email, string $password, string $date_of_birth, string $photo_url, int $credits, int $id_role, string $active)
     {
         $query = $this->pdo->prepare("INSERT INTO users (username, email, password, date_of_birth, photo, credits, id_role,active) VALUES(:username,:email, :password, :date, :photo, :credits, :id_role, :active);");
 
@@ -23,23 +23,25 @@ class RegistRepository extends Repository
         $query->bindValue(":active", $active, $this->pdo::PARAM_STR);
 
         $query->execute();
-        $query->fetch(\PDO::FETCH_ASSOC);
 
-        // user id (from user table just created)
-        $lastInsertedId = $this->pdo->lastInsertId();
+        if ($id_role != 2) {
+            $query->fetch(\PDO::FETCH_ASSOC);
 
-        // Hydration
-        $userInfo = new User();
-        $userInfo->setId($lastInsertedId);
-        $userInfo->setUsername($username);
-        $userInfo->setEmail($email);
-        $userInfo->setPhotoUrl($photo_url);
-        $userInfo->setDateOfBirth($date_of_birth);
-        $userInfo->setCredits($credits);
-        $userInfo->setIdRole($id_role);
-        $userInfo->setActive($active);
+            // user id (from user table just created)
+            $lastInsertedId = $this->pdo->lastInsertId();
+            // Hydration
+            $userInfo = new User();
+            $userInfo->setId($lastInsertedId);
+            $userInfo->setUsername($username);
+            $userInfo->setEmail($email);
+            $userInfo->setPhotoUrl($photo_url);
+            $userInfo->setDateOfBirth($date_of_birth);
+            $userInfo->setCredits($credits);
+            $userInfo->setIdRole($id_role);
+            $userInfo->setActive($active);
 
-        return $userInfo;
+            return $userInfo;
+        }
     }
 
     public function checkUserInDb(string $username): mixed

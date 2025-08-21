@@ -21,7 +21,7 @@
 
 
   <!-- css link -->
-  <link rel="stylesheet" href="assets/css/overridecss.css">
+  <link rel="stylesheet" href="/assets/css/overridecss.css">
 
   <!-- link JavaScript -->
 
@@ -31,57 +31,67 @@
 </head>
 
 <body>
-  <!-- Header -->
-<header
-  class="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-48 w-full bg-white border-b border-gray-200 text-sm py-2.5 lg:ps-65">
-  <nav class="px-4 sm:px-6 flex basis-full items-center w-full mx-auto">
+  <header>
 
-    <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
-      <div class="flex flex-row items-center justify-end gap-1">
-        <button type="button"
-          class="md:hidden size-9.5 relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">
-          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.3-4.3" />
-          </svg>
-          <span class="sr-only">Search</span>
-        </button>
+    <div class="flex justify-around items-center gap-8 mx-10 text-gray-900">
 
-        <button type="button"
-          class="size-9.5 relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">
-          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-          </svg>
-          <span class="sr-only">Notifications</span>
-        </button>
-
-        <button type="button"
-          class="size-9.5 relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">
-          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-          </svg>
-          <span class="sr-only">Activity</span>
-        </button>
-
+      <div class="block">
+        <img class="w-auto h-10 sm:h-15" src="<?php ROOT_PATHS?>/../assets/img/logo/logo.png" alt="logo">
       </div>
-    </div>
-    <?php if (isset($_SESSION["username"])) {?>
+      <?php if (isset($_SESSION["username"]) && $_SESSION["role"] === 1) {?>
+      <div class="flex flex-1 items-center justify-end md:justify-between">
+        <nav aria-label="Global" class="hidden md:block">
+          <ul class="flex items-center gap-6 text-lg">
+            <li>
+              <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                href="/admin/index.php?controller=pages&action=dashboard">
+                Dashboard
+              </a>
+            </li>
 
+            <li>
+              <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                href="/admin/index.php?controller=manage&action=users">
+                Utilisateurs
+              </a>
+            </li>
+
+            <li>
+              <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                href="/admin/index.php?controller=manage&action=employees">
+                Compte employée
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+        <div class="flex items-center gap-4 text-lg">
             <div class="flex items-center gap-x-6">
-              <a href="/index.php?controller=auth&action=profil"><img class="object-cover w-9 h-9 rounded-full" src="<?php echo $_SESSION["photo"] ?>" alt="profil pic"></a>
+              <a href="/admin/index.php?controller=auth&action=users"><img class="object-cover w-9 h-9 rounded-full"
+                  src="<?php echo $_SESSION["photo"] ?>" alt="profil pic"></a>
 
-              <a
-                class="btn bg-teal-500 block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+              <a class="btn bg-teal-500 block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
                 href="/admin/config/logout.php">
                 Déconnexion
               </a>
 
             </div>
-            <?php }?>
-  </nav>
-</header>
-<main>
+
+        </div>
+      </div>
+      <?php } else {?>
+         <nav aria-label="Global" class="hidden md:block">
+          <ul class="flex items-center gap-6 text-lg">
+            <li>
+              <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                href="/admin/index.php?controller=auth&action=login">
+                Login
+              </a>
+            </li>
+          </ul>
+        </nav>
+    <?php }?>
+    </div>
+
+  </header>
+  <main>

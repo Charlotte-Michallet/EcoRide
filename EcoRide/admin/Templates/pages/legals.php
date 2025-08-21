@@ -1,4 +1,3 @@
-<?php require_once "Templates/partials/_sidebar.php"?>
 <section>
     <div class="flex flex-col p-5 lg:px-48 lg:py-11">
     <div class="bg-gray-100 p-5 mb-10 rounded-2xl">

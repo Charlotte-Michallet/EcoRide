@@ -142,6 +142,7 @@
                             <button type="submit"
                             class="btn flex items-center justify-between px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Modifier le mot de passe</button>
                         </div>
+
                     </form>
                 </div>
             </div>

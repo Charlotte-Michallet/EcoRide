@@ -64,7 +64,7 @@
 
                     <div>
                         <label for="emailRegister" class="block mb-2 text-sm">Email</label>
-                        <input type="text" id="emailRegister" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="emailRegister" placeholder="nom.prénom@gmail.com" />
+                        <input type="text" id="emailRegister" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="emailRegister" placeholder="nom.prenom@gmail.com" />
                          <p class="hidden text-xs text-red-600 mt-2" id="emailError"></p>
                     </div>
 

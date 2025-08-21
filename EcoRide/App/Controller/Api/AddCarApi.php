@@ -46,7 +46,6 @@ class AddCarApi
         if ($isValid) {
 
             $user_id = $_SESSION["id"];
-
             // new car
             $carContr = new CarContr($brand, $model, $energy_type, $num_seats, $numplate, $first_register_date, $color, $user_id);
             $carError = $carContr->checkImputs();

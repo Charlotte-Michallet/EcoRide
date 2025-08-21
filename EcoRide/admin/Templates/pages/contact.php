@@ -1,4 +1,4 @@
-<?php require_once "Templates/partials/_sidebar.php"?>
+
 <section>
     <div id="titre" class="container px-6 py-10 mx-auto">
         <div>

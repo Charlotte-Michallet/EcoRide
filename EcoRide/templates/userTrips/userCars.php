@@ -175,9 +175,6 @@
         </div>
     </div>
 
-
-
-
     <!-- Modal -->
     <div id="addCarModal" class="hidden bg-gray-500/50 size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto" role="dialog" tabindex="-1" aria-labelledby="hs-modal-signup-label">
         <div id="addCaroverlay" class="hidden hs-overlay-open:mt-7  hs-overlay-open:duration-500 mt-5 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
@@ -242,7 +239,6 @@
                             <button id="btnAddCar" type="submit" name="newCar" value="newCar" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50">Ajouter la voiture</button>
                         </div>
                     </form>
-                    <!-- End Form -->
                 </div>
             </div>
         </div>

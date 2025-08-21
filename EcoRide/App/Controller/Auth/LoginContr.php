@@ -36,7 +36,7 @@ class LoginContr extends AccountContr
                 if ($user === false) {
                     $errors[] = ["Le pseudo ou l'adresse email est incorrect."];
                     return $errors;
-                } elseif ($active === "notActive") {
+                } elseif ($active === "Suspendu") {
                     $errors[] = ["Votre compte a était desactivé"];
                     return $errors;
                 } else {

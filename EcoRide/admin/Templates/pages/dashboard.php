@@ -1,5 +1,3 @@
-<?php require_once "Templates/partials/_sidebar.php"?>
-
 <section >
   <!-- id="dashboard" -->
 

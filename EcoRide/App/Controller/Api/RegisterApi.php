@@ -37,7 +37,7 @@ class RegisterApi
         $credits        = 20;
         $id_role        = $this->userRole($role);
         $photo_url      = "/assets/img/user.jpg";
-        $active         = "active";
+        $active         = "Actif";
 
         // Check token CSRF
         $token   = new TokenCsrf();
@@ -59,13 +59,10 @@ class RegisterApi
 
     }
 
-    protected function userRole(string $role)
+    public function userRole(string $role)
     {
         // if post method
         switch ($role) {
-
-            case 'admin':
-                return 1;
 
             case 'employee':
                 return 2;

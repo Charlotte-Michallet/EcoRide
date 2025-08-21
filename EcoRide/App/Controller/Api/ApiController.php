@@ -201,20 +201,20 @@ class ApiController
     {
         switch ($action) {
 
-            // case 'login':
+            // case 'createEmployee':
             //     if (isset($_SESSION["id"])) {
             //         // if post method
             //         if ($method === "POST") {
-            //             $loginControl = new LoginApiAdmin();
-            //             $loginControl->loginAdminData();
+            //             $createEmployeeControl = new CreateEmployeeApi();
+            //             $createEmployeeControl->dataEmployee();
             //         } else {
             //             Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
-            //         }
-
-            //     } else {
-            //         Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
-            //         return;
             //     }
+
+            // } else {
+            //     Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
+            //     return;
+            // }
 
             default:
 

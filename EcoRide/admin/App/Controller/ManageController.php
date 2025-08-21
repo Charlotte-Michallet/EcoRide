@@ -1,6 +1,10 @@
 <?php
 namespace Admin\App\Controller;
 
+use Admin\App\Controller\Manage\ManageEmployeesContr;
+use Admin\App\Controller\Manage\ManageUsersCont;
+use App\Controller\TokenCsrf;
+
 class ManageController extends Router
 {
     public function route()
@@ -8,17 +12,13 @@ class ManageController extends Router
         try {
             if (isset($_GET["action"])) {
                 switch ($_GET["action"]) {
-                    case 'dashboard':
-                        // $this->dashboard();
+                    case 'employees':
+                        $this->employees();
                         break;
 
-                    // case 'contact':
-                    //     $this->contact();
-                    //     break;
-
-                    // case 'legal':
-                    //     $this->legal();
-                    //     break;
+                    case 'users':
+                        $this->users();
+                        break;
 
                     default:
                         throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
@@ -28,6 +28,119 @@ class ManageController extends Router
             }
         } catch (\Exception $e) {
             $this->render("errors/error", ["error" => $e->getMessage()]);
+        }
+    }
+
+    public function employees()
+    {
+        // token CSRF
+        $tokenObj     = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
+
+        $userContr = new ManageEmployeesContr();
+        $employees = $userContr->showEmployees();
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            $resultsubmittedToken = $_POST["token"];
+            $submittedToken       = htmlspecialchars($resultsubmittedToken);
+
+            $token   = new TokenCsrf();
+            $isValid = $token->validateToken($submittedToken);
+
+            if ($isValid) {
+                if ((isset($_POST["delete"]) && $_POST["delete"])) {
+
+                    $resultsubmittedToken = $_POST["token"];
+                    $submittedToken       = htmlspecialchars($resultsubmittedToken);
+
+                    $resultsidsubmitted = $_POST["id"];
+                    $idsubmitted        = htmlspecialchars($resultsidsubmitted);
+
+                    $userContr = new ManageUsersCont();
+                    $userContr->deleteEmployee($idsubmitted);
+                    header("Location: /admin/index.php?controller=manage&action=employees");
+
+                } else {
+                    $this->employeesAccount();
+                }
+            }
+        }
+        $totalEmployees = $userContr->CountEmployees();
+        $this->render("manage/manageEmployees", ["token" => $currentToken, "employees" => $employees, "totalEmplyees" => $totalEmployees]);
+    }
+    public function users()
+    {
+        // token CSRF
+        $tokenObj     = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
+
+        $userContr = new ManageUsersCont();
+        $users     = $userContr->showUsers();
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $this->usersAccount();
+        }
+
+        $totalUsers = $userContr->CountUsers();
+        $this->render("manage/manageUsers", ["token" => $currentToken, "users" => $users, "totalUsers" => $totalUsers]);
+    }
+
+    public function usersAccount()
+    {
+
+        $account            = null;
+        $resultsidsubmitted = $_POST["id"];
+        $idsubmitted        = htmlspecialchars($resultsidsubmitted);
+
+        if (isset($_POST["activate"]) && $_POST["activate"]) {
+            $account = "Actif";
+        }
+
+        if (isset($_POST["suspend"]) && $_POST["suspend"]) {
+            $account = "Suspendu";
+        }
+
+        if ($account !== null) {
+            $userContr = new ManageUsersCont();
+            $success   = $userContr->updateUsers($account, $idsubmitted);
+
+            if ($success === true) {
+                header("Location: /admin/index.php?controller=manage&action=users");
+            }
+        }
+
+    }
+
+    public function employeesAccount()
+    {
+        $resultsubmittedToken = $_POST["token"];
+        $submittedToken       = htmlspecialchars($resultsubmittedToken);
+
+        $token   = new TokenCsrf();
+        $isValid = $token->validateToken($submittedToken);
+
+        if ($isValid) {
+            $resultsidsubmitted = $_POST["id"];
+            $idsubmitted        = htmlspecialchars($resultsidsubmitted);
+            $account            = null;
+
+            if (isset($_POST["activate"]) && $_POST["activate"]) {
+                $account = "Actif";
+            }
+
+            if (isset($_POST["suspend"]) && $_POST["suspend"]) {
+                $account = "Suspendu";
+            }
+
+            if ($account !== null) {
+                $userContr = new ManageUsersCont();
+                $success   = $userContr->updateUsers($account, $idsubmitted);
+
+                if ($success === true) {
+                    header("Location: /admin/index.php?controller=manage&action=employees");
+                }
+            }
         }
     }
 }

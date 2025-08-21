@@ -61,12 +61,16 @@ class RegisterContr extends AccountContr
             } else {
                 $repoRegister = new RegistRepository();
                 $newUser      = $repoRegister->createUser($this->username, $this->email, $this->password, $this->date_of_birth, $this->photo_url, $this->credits, $this->id_role, $this->active);
+                $role         = $this->id_role;
 
-                $_SESSION["id"]       = $newUser->getId();
-                $_SESSION["username"] = $newUser->getUsername();
-                $_SESSION["email"]    = $newUser->getEmail();
-                $_SESSION["photo"]    = $newUser->getPhotoUrl();
-                $_SESSION["role"]     = $newUser->getIdRole();
+                if ($role != 2) {
+                    $_SESSION["id"]       = $newUser->getId();
+                    $_SESSION["username"] = $newUser->getUsername();
+                    $_SESSION["email"]    = $newUser->getEmail();
+                    $_SESSION["photo"]    = $newUser->getPhotoUrl();
+                    $_SESSION["role"]     = $newUser->getIdRole();
+                }
+
             }
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

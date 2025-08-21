@@ -14,13 +14,13 @@ class AuthController extends Router
                         $this->login();
                         break;
 
-                    // case 'contact':
-                    //     $this->contact();
-                    //     break;
+                    case 'profil':
+                        $this->profil();
+                        break;
 
-                    // case 'legal':
-                    //     $this->legal();
-                    //     break;
+                    case 'modifProfil':
+                        $this->modifProfil();
+                        break;
 
                     default:
                         throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
@@ -39,5 +39,21 @@ class AuthController extends Router
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
         $this->render("auth/login", ["token" => $currentToken]);
+    }
+
+    public function profil()
+    {
+        // token CSRF
+        $tokenObj     = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
+        $this->render("auth/profil", ["token" => $currentToken]);
+    }
+
+    public function modifProfil()
+    {
+        // token CSRF
+        $tokenObj     = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
+        $this->render("auth/modifProfil", ["token" => $currentToken]);
     }
 }
