@@ -1,6 +1,7 @@
 <?php
 namespace Admin\App\Controller;
 
+use Admin\App\Controller\Manage\ManageEmployeesContr;
 use App\Controller\TokenCsrf;
 
 class PageController extends Router
@@ -43,7 +44,10 @@ class PageController extends Router
         $dashboardCrontr = new DasboardContr();
         $statistiques    = $dashboardCrontr->statistiques();
 
-        $this->render("pages/dashboard", ["token" => $currentToken, "statistiques" => $statistiques]);
+        $userContr = new ManageEmployeesContr();
+        $employees = $userContr->showEmployees();
+
+        $this->render("pages/dashboard", ["token" => $currentToken, "statistiques" => $statistiques, "employees" => $employees]);
     }
 
     protected function contact()

@@ -11,20 +11,13 @@
   <!-- links for tailwind -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-  <!-- linl leaflet.js -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-  <!-- Leaflet routing machine -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
-  <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
-
+  <!-- link Chart.js -->
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- css link -->
   <link rel="stylesheet" href="/assets/css/overridecss.css">
 
   <!-- link JavaScript -->
-
   <script type="module" src="assets/javascript/index.js"></script>
 
   <title>EcoRide Admin</title>
@@ -67,7 +60,7 @@
         </nav>
         <div class="flex items-center gap-4 text-lg">
             <div class="flex items-center gap-x-6">
-              <a href="/admin/index.php?controller=auth&action=users"><img class="object-cover w-9 h-9 rounded-full"
+              <a href="/admin/index.php?controller=auth&action=profil"><img class="object-cover w-9 h-9 rounded-full"
                   src="<?php echo $_SESSION["photo"] ?>" alt="profil pic"></a>
 
               <a class="btn bg-teal-500 block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"

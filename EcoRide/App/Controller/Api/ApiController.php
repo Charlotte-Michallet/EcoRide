@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Api;
 
+use Admin\App\Controller\Api\GraphApi;
 use App\Controller\Router;
 
 class ApiController
@@ -201,20 +202,14 @@ class ApiController
     {
         switch ($action) {
 
-            // case 'createEmployee':
-            //     if (isset($_SESSION["id"])) {
-            //         // if post method
-            //         if ($method === "POST") {
-            //             $createEmployeeControl = new CreateEmployeeApi();
-            //             $createEmployeeControl->dataEmployee();
-            //         } else {
-            //             Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
-            //     }
-
-            // } else {
-            //     Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
-            //     return;
-            // }
+            case 'graph':
+                if (isset($_SESSION["id"])) {
+                    $graphContr = new GraphApi();
+                    $graphContr->GraphData();
+                } else {
+                    Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
+                    return;
+                }
 
             default:
 

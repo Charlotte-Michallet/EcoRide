@@ -1,7 +1,4 @@
-<section id="profilPage" class="mt-5">
-
-    <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php"?>
-
+<section class="mt-5">
 
     <!-- Profil info and feedback -->
     <div class="max-w-[85rem] px-4 py-5 sm:px-2 lg:px-4 lg:py-14 mx-auto">
@@ -62,16 +59,10 @@
                 <div class="sm:flex sm:gap-4 w-full">
 
                     <a class="btn block rounded-md px-4 py-3 content-center font-medium text-white transition hover:bg-teal-700"
-                        href="/index.php?controller=auth&action=profilModify">
+                        href="/admin/index.php?controller=auth&action=modifProfil">
                         Modifier compte
                     </a>
-                    <form method="post"
-                        class="link rounded-md bg-gray-100 px-4 py-3 font-medium text-teal-600 transition hover:text-teal-600/75 sm:block">
-                        <input type="hidden" name="tokenProfil" id="tokenProfil"
-                            value="<?php echo htmlspecialchars($token) ?>">
-                        <button type="submit" name="deleteProfil" value="deleteProfil" class="content-center">Supprimer
-                            compte </button>
-                    </form>
+
                 </div>
             </div>
         </div>

@@ -46,7 +46,6 @@ class Router
                     $authRouter = new AuthController();
                     $authRouter->login();
                 }
-
             }
         } catch (\Exception $e) {
 

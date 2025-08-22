@@ -1,7 +1,9 @@
 <?php
 namespace Admin\App\Controller;
 
+use App\Controller\Auth\ProfilContr;
 use App\Controller\TokenCsrf;
+use App\Repository\UserRepository;
 
 class AuthController extends Router
 {
@@ -46,9 +48,34 @@ class AuthController extends Router
         // token CSRF
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
-        $this->render("auth/profil", ["token" => $currentToken]);
-    }
+        $userId       = $_SESSION["id"];
 
+        if ($userId) {
+
+            $userRepo = new UserRepository();
+            $user     = $userRepo->userInfo($userId);
+
+            $license = $user->isDriversLicense();
+
+            if ($license === false) {
+                $license = "Non";
+
+            } elseif ($license === true) {
+                $license = "Oui";
+
+            } else {
+                $license = "Non renseigné";
+            }
+
+            $profilContr = new ProfilContr();
+            $preferences = $profilContr->Preferences($userId);
+
+            $this->render("auth/profil", ["token" => $currentToken, "user" => $user, "license" => $license, "preferences" => $preferences]);
+
+        } else {
+            header("Location: /index.php");
+        }
+    }
     public function modifProfil()
     {
         // token CSRF

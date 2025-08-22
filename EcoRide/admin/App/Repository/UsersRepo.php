@@ -80,6 +80,7 @@ class UsersRepo extends Repository
             $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
             $query->bindValue(":active", $account, $this->pdo::PARAM_STR);
             $query->execute();
+
             return true;
         } catch (\Exception $e) {
             return false;

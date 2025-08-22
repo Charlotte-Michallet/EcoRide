@@ -20,11 +20,4 @@ class ManageEmployeesContr
 
         return $allEmployees;
     }
-
-    public function updateEmployees($account, $id)
-    {
-        // $usersRepo = new UsersRepo();
-        // $succes    = $usersRepo->updateUsers($account, $id);
-        // return $succes;
-    }
 }

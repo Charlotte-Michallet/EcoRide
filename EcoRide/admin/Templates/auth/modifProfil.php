@@ -1,55 +1,23 @@
 <section id="modifyProfilPage" class="mt-5">
-    <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php"?>
 
     <div class="max-w-[85rem] px-4 py-5 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div class="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-center lg:justify-between">
             <div class="container lg:col-span-5 min-h-screen px-6 mx-auto">
                 <h2 class="text-2xl font-semibold tracking-wider">Modifier mon profil</h2>
-                <div class="mt-6">
-                    <h3 class="text-gray-800">Selectionner votre statut</h3>
-                </div>
 
                 <div class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-4">
-                    <!-- Roles -->
-                    <form method="post" id="formRoles" class="col-span-4">
-                        <fieldset class="flex justify-between">
-                            <legend class="sr-only">Role utilisateur</legend>
-                            <div>
-                                <label for="driverAndPassenger" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
-                                    <p class="text-gray-700">Conducteur et passager</p>
-                                    <input type="radio" name="userRoles" value="driverAndPassenger" id="driverAndPassenger" class="sr-only"/>
-                                </label>
-                            </div>
-
-                            <div>
-                                <label for="driver" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
-                                    <p>Conducteur</p>
-                                     <input type="radio" name="userRoles" value="driver" id="driver" class="sr-only" />
-                                </label>
-                             </div>
-
-                            <div>
-                                <label for="passenger" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500" >
-                                    <p>Passager</p>
-                                    <input type="radio" name="userRoles" value="passenger" id="passenger"  class="sr-only" />
-                                </label>
-                            </div>
-                        </fieldset>
-
-                        <input type="hidden" id="tokenrole" value="<?php echo htmlspecialchars($token) ?>">
-                        <p class="hidden text-xs text-red-600 mt-2" id="rolesError"></p>
-                        <button type="submit" class="btn flex items-center justify-between px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg">Modifier le role</button>
-                    </form>
-
                     <!-- Username -->
                     <form method="post" id="formUsername" class="col-span-2 flex">
                         <div>
                             <label for="username" class="block mb-2 text-sm">Modifier le pseudo</label>
-                            <input type="text" id="username" class="px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="username" placeholder="Prénom" />
+                            <input type="text" id="username"
+                                class="px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
+                                name="username" placeholder="Prénom" />
                             <p class="hidden text-xs text-red-600 mt-2" id="usernameError"></p>
                             <input type="hidden" id="tokenUser" value="<?php echo htmlspecialchars($token) ?>">
                             <button type="submit"
-                            class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier le pseudo</button>
+                                class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier
+                                le pseudo</button>
                         </div>
 
                     </form>
@@ -58,10 +26,14 @@
                     <form method="post" id="formEmail" class="col-span-2 flex">
                         <div>
                             <label for="email" class="block mb-2 text-sm">Modifier email</label>
-                                <input type="text" id="email" class="px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="email" placeholder="nom.prénom@gmail.com" />
+                            <input type="text" id="email"
+                                class="px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
+                                name="email" placeholder="nom.prénom@gmail.com" />
                             <p class="hidden text-xs text-red-600 mt-2" id="emailError"></p>
                             <input type="hidden" id="tokenEmail" value="<?php echo htmlspecialchars($token) ?>">
-                            <button type="submit" class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier l'email</button>
+                            <button type="submit"
+                                class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier
+                                l'email</button>
                         </div>
                     </form>
 
@@ -69,56 +41,39 @@
                     <!-- Photo -->
                     <form method="post" id="formPhoto" class="col-span-4 flex">
                         <div>
-                            <img id="prevue" class="object-cover w-12 h-12 rounded-full" src="/assets/img/user.jpg" alt="profil pic"></a>
+                            <img id="prevue" class="object-cover w-12 h-12 rounded-full" src="/assets/img/user.jpg"
+                                alt="profil pic"></a>
                         </div>
                         <div>
                             <label for="photo" class="block mb-2 text-sm ">Ajouter une photo</label>
-                            <input type="file" class="block w-full px-3 py-2 mt-2 text-sm text-gray-600 border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40" id="photo" accept="image/png, image/jpeg, image/jpg"/>
+                            <input type="file"
+                                class="block w-full px-3 py-2 mt-2 text-sm text-gray-600 border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+                                id="photo" accept="image/png, image/jpeg, image/jpg" />
                             <p class="hidden text-xs text-red-600 mt-2" id="photoError"></p>
                             <input type="hidden" id="tokenPhoto" value="<?php echo htmlspecialchars($token) ?>">
-                            <button type="submit" class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Ajouter une photo</button>
+                            <button type="submit"
+                                class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Ajouter
+                                une photo</button>
 
                         </div>
                     </form>
-                    <?php if ($_SESSION["role"] === 3 || $_SESSION["role"] === 5 || $_SESSION["role"] === 2) {?>
-
-                    <!-- License -->
-                    <form method="post" id="formlicense" class="col-span-4 flex">
-                        <div class="col-span-2">
-                            <fieldset class="flex justify-between col-span-2">
-                                <legend class="sr-only">AVez vous le permis?</legend>
-                                <div>
-                                    <label for="gotLicense" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
-                                        <p class="text-gray-700">Oui</p>
-                                        <input type="radio" name="hasLicense" value="gotLicense" id="gotLicense" class="sr-only"/>
-                                    </label>
-                                </div>
-
-                                <div>
-                                    <label for="noLicense" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
-                                        <p>Non</p>
-                                        <input type="radio" name="hasLicense" value="noLicense" id="noLicense" class="sr-only" />
-                                    </label>
-                                </div>
-                            </fieldset>
-                            <p class="hidden text-xs text-red-600 mt-2" id="licenseError"></p>
-                            <input type="hidden" id="tokenLicense" value="<?php echo htmlspecialchars($token) ?>">
-                            <button type="submit" class="btn flex items-center justify-between px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg col-start-1">Ajouter le permis</button>
-                        </div>
-                    </form>
-                    <?php }?>
 
                     <!-- Password -->
                     <form method="post" id="formpassword" class="col-span-4">
                         <div>
                             <label for="passwordModif" class="block mb-2 text-sm">Modifier mon mot de passe</label>
                             <div class="relative">
-                                <input type="password" id="passwordModif" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="passwordModif" placeholder="8+ caractères, majuscule, chiffre" />
-                                <span id="toggleVisibility" class="absolute inset-y-3 right-3" >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                </svg>
+                                <input type="password" id="passwordModif"
+                                    class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
+                                    name="passwordModif" placeholder="8+ caractères, majuscule, chiffre" />
+                                <span id="toggleVisibility" class="absolute inset-y-3 right-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
                                 </span>
                             </div>
                             <p class="hidden text-xs text-red-600 mt-2" id="passwordError"></p>
@@ -127,20 +82,26 @@
                         <div>
                             <label for="ConfPwd" class="block mb-2 text-sm">Confirmation de mot de passe</label>
                             <div class="relative">
-                                <input type="password" id="ConfPwd" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="ConfPwd" placeholder="Retapez votre mot de passe" />
-                                <span id="toggleV" class="absolute inset-y-3 right-3" >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                </svg>
+                                <input type="password" id="ConfPwd"
+                                    class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
+                                    name="ConfPwd" placeholder="Retapez votre mot de passe" />
+                                <span id="toggleV" class="absolute inset-y-3 right-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
                                 </span>
                                 <p class="hidden text-xs text-red-600 mt-2" id="FormError"></p>
                             </div>
                         </div>
-                        <div  class="col-span-2 flex">
+                        <div class="col-span-2 flex">
                             <input type="hidden" id="tokenPwd" value="<?php echo htmlspecialchars($token) ?>">
                             <button type="submit"
-                            class="btn flex items-center justify-between px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Modifier le mot de passe</button>
+                                class="btn flex items-center justify-between px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Modifier
+                                le mot de passe</button>
                         </div>
 
                     </form>
@@ -161,16 +122,20 @@
                             <legend class="sr-only">Accepte annimal</legend>
 
                             <div>
-                                <label for="acceptAnimal" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
+                                <label for="acceptAnimal"
+                                    class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
                                     <p class="text-gray-700">Oui</p>
-                                    <input type="radio" name="animalsAllowed" value="acceptAnimal" id="acceptAnimal" class="sr-only"/>
+                                    <input type="radio" name="animalsAllowed" value="acceptAnimal" id="acceptAnimal"
+                                        class="sr-only" />
                                 </label>
                             </div>
 
                             <div>
-                                <label for="noAnimals" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
-                                        <p>Non</p>
-                                        <input type="radio" name="animalsAllowed" value="noAnimals" id="noAnimals" class="sr-only" />
+                                <label for="noAnimals"
+                                    class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
+                                    <p>Non</p>
+                                    <input type="radio" name="animalsAllowed" value="noAnimals" id="noAnimals"
+                                        class="sr-only" />
                                 </label>
                             </div>
                         </fieldset>
@@ -182,16 +147,20 @@
                             <legend class="sr-only">Accepte fumeur</legend>
 
                             <div>
-                                <label for="smoking" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
-                                        <p class="text-gray-700">Oui</p>
-                                        <input type="radio" name="allowedSmoking" value="smoking" id="smoking" class="sr-only"/>
+                                <label for="smoking"
+                                    class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
+                                    <p class="text-gray-700">Oui</p>
+                                    <input type="radio" name="allowedSmoking" value="smoking" id="smoking"
+                                        class="sr-only" />
                                 </label>
                             </div>
 
                             <div>
-                                <label for="noSmoking" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
-                                        <p>Non</p>
-                                        <input type="radio" name="allowedSmoking" value="noSmoking" id="noSmoking" class="sr-only" />
+                                <label for="noSmoking"
+                                    class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
+                                    <p>Non</p>
+                                    <input type="radio" name="allowedSmoking" value="noSmoking" id="noSmoking"
+                                        class="sr-only" />
                                 </label>
                             </div>
                         </fieldset>
@@ -202,17 +171,21 @@
                         class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Valider</button>
                 </form>
 
-                <form  class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-2" method="post" id="formotherPreferences">
+                <form class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-2" method="post" id="formotherPreferences">
                     <div>
                         <label for="otherPreferences" class="block mb-2 text-sm">Mes préference</label>
-                        <textarea name="otherPreferences" id="otherPreferences" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"></textarea>
-                         <p class="hidden text-xs text-red-600 mt-2" id="otherPreferencesError"></p>
+                        <textarea name="otherPreferences" id="otherPreferences"
+                            class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"></textarea>
+                        <p class="hidden text-xs text-red-600 mt-2" id="otherPreferencesError"></p>
                     </div>
-                    <input type="hidden" name="token_csrf" id="tokenpreference" value="<?php echo htmlspecialchars($token) ?>">
-                    <button type="submit" class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Valider mes préférences</button>
+                    <input type="hidden" name="token_csrf" id="tokenpreference"
+                        value="<?php echo htmlspecialchars($token) ?>">
+                    <button type="submit"
+                        class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Valider
+                        mes préférences</button>
                 </form>
-                <p class="hidden text-green-600 mt-2" id="succes"></p></
+                <p class="hidden text-green-600 mt-2" id="succes"></p>
+                </ </div>
             </div>
         </div>
-    </div>
 </section>
