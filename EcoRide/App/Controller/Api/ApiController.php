@@ -68,7 +68,6 @@ class ApiController
                 } else {
                     Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la connexion."], 405);
                 }
-
                 break;
 
             default:
