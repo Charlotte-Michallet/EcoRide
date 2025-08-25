@@ -42,6 +42,11 @@ class Router
                         $pageRouter->route();
                         break;
 
+                    case 'manage':
+                        $manageRouter = new ManageController();
+                        $manageRouter->route();
+                        break;
+
                     default:
                         # code...
                         break;

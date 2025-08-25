@@ -18,7 +18,7 @@
 
                             <div class="flex justify-between gap-x-2 pb-2">
                                 <div class="flex items-center gap-x-2">
-                                    <p class="font-semibold">                                                                                                                                                                                                                                                                                                                  <?php echo $trip->getDepartureDate(); ?></span></p>
+                                    <p class="font-semibold">                                                                                                                                                                                        <?php echo $trip->getDepartureDate(); ?></span></p>
                                 </div>
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold">
@@ -121,7 +121,7 @@
 
                             <div class="flex justify-between gap-x-2 pb-2">
                                 <div class="flex items-center gap-x-2">
-                                    <p class="font-semibold">                                                                                                                                                                                                                                                                                                                  <?php echo $reservation->getDepartureDate(); ?></span></p>
+                                    <p class="font-semibold">                                                                                                                                                                                        <?php echo $reservation->getDepartureDate(); ?></span></p>
                                 </div>
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold">
@@ -199,31 +199,40 @@
 
                             </div>
 
-                            <?php $status = $reservation->getStatusCarSharing();
-                                if ($status === "Programmé") {?>
                             <div class="flex justify-end mr-3">
-                                <form method="post">
-                                    <input type="hidden" name="tokenDeleteReserva"
-                                        value="<?php echo htmlspecialchars($token); ?>">
-                                    <input type="hidden" name="idReservation" value="<?php echo $reservation->getId(); ?>">
-                                    <input type="hidden" name="seatsReserved"
-                                        value="<?php echo $reservation->getNumSeatsBookes(); ?>">
-                                    <input type="hidden" name="idCarSharing"
-                                        value="<?php echo $reservation->getCarSharingId(); ?>">
 
-                                    <input type="hidden" name="credits" value="<?php echo $reservation->getPrices(); ?>">
-                                    <input type="hidden" name="carSharingStatus"
-                                        value="<?php echo $reservation->getCarSharingId(); ?>">
 
-                                    <button type="submit" name="deleteReservation" value="deleteReservation"
-                                        class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">Annuler</button>
-                                </form>
+                                <?php $status = $reservation->getStatusCarSharing();
+                                        $reservStatus                                 = $reservation->getStatus();
+                                    if ($reservStatus === "Avis en attente de validation") {} elseif ($status === "Programmé") {?>
+                                    <form method="post">
+                                        <input type="hidden" name="tokenDeleteReserva"
+                                            value="<?php echo htmlspecialchars($token); ?>">
+                                        <input type="hidden" name="idReservation" value="<?php echo $reservation->getId(); ?>">
+                                        <input type="hidden" name="seatsReserved"
+                                            value="<?php echo $reservation->getNumSeatsBookes(); ?>">
+                                        <input type="hidden" name="idCarSharing"
+                                            value="<?php echo $reservation->getCarSharingId(); ?>">
+
+                                        <input type="hidden" name="credits" value="<?php echo $reservation->getPrices(); ?>">
+                                        <input type="hidden" name="carSharingStatus"
+                                            value="<?php echo $reservation->getCarSharingId(); ?>">
+
+                                        <button type="submit" name="deleteReservation" value="deleteReservation"
+                                            class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">Annuler</button>
+                                    </form>
+
+                                <?php } elseif ($status === "Arrivée à destination") {
+                                        $id = $reservation->getId(); ?>
+                                    <a href="/index.php?controller=car-sharing&action=feedbacks&reservation=<?php echo $id ?>"
+                                        class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">Donnez
+                                        votre avis</a>
+                                <?php }?>
                             </div>
-                            <?php }?>
-                        </div>
+                        <?php }?>
                     </div>
-                <?php }?>
-            </div>
-        <?php }?>
+                </div>
+            <?php }?>
+        </div>
     </div>
 </section>

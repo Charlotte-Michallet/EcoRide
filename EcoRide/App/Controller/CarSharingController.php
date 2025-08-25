@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\CarSharing\DetailsContr;
 use App\Controller\CarSharing\ReservationContr;
+use App\Repository\ReservationRepository;
 use App\Repository\TripRepository;
 
 class CarSharingController extends Router
@@ -18,6 +19,10 @@ class CarSharingController extends Router
 
                     case 'details':
                         $this->details();
+                        break;
+
+                    case 'feedbacks':
+                        $this->feedbacks();
                         break;
 
                     default:
@@ -63,6 +68,20 @@ class CarSharingController extends Router
         $this->particiate();
 
         $this->render("carSharing/detailsCarSharing", ["token" => $currentToken, "details" => $details, "moreDetails" => $othersdetails, "totalPrice" => $cretisTotal]);
+
+    }
+    protected function feedbacks()
+    {
+        // generate token CSRF
+        $tokenObj     = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
+
+        $idreservation = $_GET["reservation"];
+
+        $reservaRepo = new ReservationRepository();
+        $reservaInfo = $reservaRepo->showReservation($idreservation);
+
+        $this->render("carSharing/feedbacks", ["token" => $currentToken, "reservation" => $reservaInfo]);
 
     }
 

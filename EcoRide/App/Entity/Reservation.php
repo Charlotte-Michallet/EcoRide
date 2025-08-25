@@ -27,6 +27,7 @@ class Reservation
     protected string $brand;
     protected string $model;
     protected string $color;
+    protected string $energie;
 
     /**
      * Get the value of id
@@ -438,6 +439,24 @@ class Reservation
     public function setTotalprice(?int $totalprice): self
     {
         $this->totalprice = $totalprice;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of energie
+     */
+    public function getEnergie(): string
+    {
+        return $this->energie;
+    }
+
+    /**
+     * Set the value of energie
+     */
+    public function setEnergie(string $energie): self
+    {
+        $this->energie = $energie;
 
         return $this;
     }

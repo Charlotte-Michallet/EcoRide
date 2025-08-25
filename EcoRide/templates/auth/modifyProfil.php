@@ -10,6 +10,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-4">
+                    <?php if ($_SESSION["role"] !== 1 && $_SESSION["role"] !== 2) {?>
                     <!-- Roles -->
                     <form method="post" id="formRoles" class="col-span-4">
                         <fieldset class="flex justify-between">
@@ -40,7 +41,7 @@
                         <p class="hidden text-xs text-red-600 mt-2" id="rolesError"></p>
                         <button type="submit" class="btn flex items-center justify-between px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg">Modifier le role</button>
                     </form>
-
+                    <?php }?>
                     <!-- Username -->
                     <form method="post" id="formUsername" class="col-span-2 flex">
                         <div>
@@ -80,13 +81,13 @@
 
                         </div>
                     </form>
-                    <?php if ($_SESSION["role"] === 3 || $_SESSION["role"] === 5 || $_SESSION["role"] === 2) {?>
+                    <?php if ($_SESSION["role"] !== 4) {?>
 
                     <!-- License -->
                     <form method="post" id="formlicense" class="col-span-4 flex">
                         <div class="col-span-2">
                             <fieldset class="flex justify-between col-span-2">
-                                <legend class="sr-only">AVez vous le permis?</legend>
+                                <legend class="sr-only">Avez vous le permis?</legend>
                                 <div>
                                     <label for="gotLicense" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
                                         <p class="text-gray-700">Oui</p>

@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Controller\Mail\SendMailContr;
 use App\Repository\CarRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\TripRepository;
@@ -46,7 +47,7 @@ class TripsController extends Router
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
-        if ($userId && ($roleid === 3 || $roleid === 5)) {
+        if ($userId && $roleid !== 4) {
             // generate token CSRF
             $carRepo  = new CarRepository();
             $carsInfo = $carRepo->showUserCars($userId);
@@ -147,6 +148,16 @@ class TripsController extends Router
             if ($isValid) {
                 $tripRepo = new TripRepository();
                 $tripRepo->updatetTrip($status, $id);
+
+                $sendmailContr = new SendMailContr();
+                $result        = $sendmailContr->sendMail($id);
+
+                if ($result === "Email demande avis envoyé") {
+                    $_SESSION["feedback"] = true;
+                } else {
+                    $_SESSION["feedback"] = false;
+                }
+
             }
         }
     }

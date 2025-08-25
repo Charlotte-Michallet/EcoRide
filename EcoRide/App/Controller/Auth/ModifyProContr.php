@@ -190,8 +190,9 @@ class ModifyProContr extends AccountContr
         }
 
         try {
-            $modifyRepo = new ModifyProfilRepo;
-            $modifyRepo->UpadateLicense($this->drivers_license, $this->id);
+            $modifyRepo          = new ModifyProfilRepo;
+            $user                = $modifyRepo->UpadateLicense($this->drivers_license, $this->id);
+            $_SESSION["license"] = $user->isDriversLicense();
 
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

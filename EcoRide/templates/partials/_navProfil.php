@@ -7,7 +7,7 @@
         <h1>Profil</h1>
     </a>
 
-    <?php if ($_SESSION["role"] === 3 || $_SESSION["role"] === 5 || $_SESSION["role"] === 2) {?>
+    <?php if ($_SESSION["role"] !== 4) {?>
         <a href="/index.php?controller=auth&action=cars"> <button
                 class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">Mes
                 voitures</button></a>
@@ -31,4 +31,11 @@
     <a href="/index.php?controller=auth&action=credits"> <button
             class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">Credits</button>
     </a>
+
+    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 2) {?>
+       <a href="index.php?controller=manage&action=manageFeedbacks"> <button
+            class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">Gérer les avis</button>
+    </a>
+   <?php }?>
+
 </div>

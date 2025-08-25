@@ -69,6 +69,7 @@ class RegisterContr extends AccountContr
                     $_SESSION["email"]    = $newUser->getEmail();
                     $_SESSION["photo"]    = $newUser->getPhotoUrl();
                     $_SESSION["role"]     = $newUser->getIdRole();
+                    $_SESSION["license"]  = $newUser->isDriversLicense();
                 }
 
             }

@@ -45,6 +45,7 @@ class LoginContr extends AccountContr
                     $_SESSION["email"]    = $user->getEmail();
                     $_SESSION["photo"]    = $user->getPhotoUrl();
                     $_SESSION["role"]     = $user->getIdRole();
+                    $_SESSION["license"]  = $user->isDriversLicense();
                 }
             }
         } catch (\Exception $e) {

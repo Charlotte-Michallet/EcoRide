@@ -170,4 +170,65 @@ class ReservationRepository extends Repository
         }
     }
 
+    public function selectPassengersMail($carSharingId)
+    {
+        $query = $this->pdo->prepare("SELECT u.username, u.email FROM reservations r INNER JOIN users u ON r.user_id = u.id WHERE car_sharing_id = :car_sharing_id;");
+        $query->bindValue(":car_sharing_id", $carSharingId, $this->pdo::PARAM_INT);
+        $query->execute();
+
+        $users = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $users;
+    }
+
+    public function showReservation($id)
+    {
+        try {
+            $query = $this->pdo->prepare("SELECT r.id, r.num_seats_bookes, r.number_reser, r.totalPrice, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, c.brand, c.model, c.color, c.energy_type, u.username FROM reservations r INNER JOIN car_sharing s on r.car_sharing_id = s.id INNER JOIN cars c on s.car_id = c.id INNER JOIN users u on c.user_id = u.id WHERE r.id = :id_reservation;");
+
+            // bind value from form to query
+            $query->bindValue(":id_reservation", $id, $this->pdo::PARAM_INT);
+            $query->execute();
+
+            $reservationData = $query->fetch(\PDO::FETCH_ASSOC);
+
+            // Hydration
+            $dateObject = new \DateTime($reservationData["departure_date"]);
+            $dateTrip   = $dateObject->format("d/m/Y");
+
+            $reservationInfo = new Reservation();
+            $reservationInfo->setId($reservationData["id"]);
+            $reservationInfo->setNumSeatsBookes($reservationData["num_seats_bookes"]);
+            $reservationInfo->setNumReser($reservationData["number_reser"]);
+            $reservationInfo->setDepartureCity($reservationData["departure_city"]);
+            $reservationInfo->setArrivalCity($reservationData["arrival_city"]);
+            $reservationInfo->setDepartureDate($dateTrip);
+            $reservationInfo->setDepartureHour($reservationData["departure_hour"]);
+            $reservationInfo->setTotalprice($reservationData["totalPrice"]);
+            $reservationInfo->setBrand($reservationData["brand"]);
+            $reservationInfo->setModel($reservationData["model"]);
+            $reservationInfo->setColor($reservationData["color"]);
+            $reservationInfo->setEnergie($reservationData["energy_type"]);
+            $reservationInfo->setUsername($reservationData["username"]);
+
+            return $reservationInfo;
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+
+    public function updateRervationStatus($reservationId, $status)
+    {
+        $query = $this->pdo->prepare("UPDATE reservations SET status = :status WHERE id = :id;");
+
+        $query->bindValue(":id", $reservationId, $this->pdo::PARAM_INT);
+        $query->bindValue(":status", $status, $this->pdo::PARAM_STR);
+        $query->execute();
+
+        // Hydration
+        $reservationInfo = new Reservation();
+        $reservationInfo->setStatus($status);
+        return $reservationInfo;
+    }
 }

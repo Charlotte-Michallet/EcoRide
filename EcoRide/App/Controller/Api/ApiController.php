@@ -180,8 +180,23 @@ class ApiController
                 if (isset($_SESSION["id"])) {
                     // if post method
                     if ($method === "POST") {
-                        $ImgControl = new CreateTripApi();
-                        $ImgControl->tripData();
+                        $createTripControl = new CreateTripApi();
+                        $createTripControl->tripData();
+                    } else {
+                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
+                    }
+
+                } else {
+                    Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
+                    return;
+                }
+
+            case 'feedback':
+                if (isset($_SESSION["id"])) {
+                    // if post method
+                    if ($method === "POST") {
+                        $feedbackControl = new FeedbackApi();
+                        $feedbackControl->feedbackData();
                     } else {
                         Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
                     }
