@@ -36,16 +36,17 @@ class LoginContr extends AccountContr
                 if ($user === false) {
                     $errors[] = ["Le pseudo ou l'adresse email est incorrect."];
                     return $errors;
+
                 } elseif ($active === "Suspendu") {
                     $errors[] = ["Votre compte a était desactivé"];
                     return $errors;
+
                 } else {
                     $_SESSION["id"]       = $user->getId();
                     $_SESSION["username"] = $user->getUsername();
                     $_SESSION["email"]    = $user->getEmail();
                     $_SESSION["photo"]    = $user->getPhotoUrl();
                     $_SESSION["role"]     = $user->getIdRole();
-                    $_SESSION["license"]  = $user->isDriversLicense();
                 }
             }
         } catch (\Exception $e) {

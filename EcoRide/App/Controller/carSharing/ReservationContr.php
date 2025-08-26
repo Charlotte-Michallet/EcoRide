@@ -1,13 +1,14 @@
 <?php
 namespace App\Controller\CarSharing;
 
+use Admin\App\Controller\CompanyContr;
 use App\Repository\ReservationRepository;
 use App\Repository\TripRepository;
 use App\Repository\UserRepository;
 
 class ReservationContr
 {
-    public function reservation($carSharingId, $userId, $reservationDate, $numSeatsBookes, $paymentStatus, $status, $creditsUsed)
+    public function reservation($carSharingId, $passengerId, $reservationDate, $numSeatsBookes, $paymentStatus, $status, $creditsUsed)
     {
         $error = [];
         // Creation reservation
@@ -16,17 +17,17 @@ class ReservationContr
         $reservationNumber = str_replace(".", "", $timestamp . $random);
 
         $reservaRepo = new ReservationRepository();
-        $reserva     = $reservaRepo->createReservation($carSharingId, $userId, $reservationDate, $numSeatsBookes, $paymentStatus, $status, $reservationNumber, $creditsUsed);
+        $reserva     = $reservaRepo->createReservation($carSharingId, $passengerId, $reservationDate, $numSeatsBookes, $paymentStatus, $status, $reservationNumber, $creditsUsed);
 
         // Update credits
         if (! empty($reserva)) {
             $user          = new UserRepository();
-            $creditsUser   = $user->usercredits($userId);
+            $creditsUser   = $user->usercredits($passengerId);
             $creditsLafted = $creditsUser - $creditsUsed;
 
-            $creditsUpdated = $user->UpdatecreditsTrip($userId, $creditsLafted);
+            $creditsUpdated = $user->UpdatecreditsTrip($passengerId, $creditsLafted);
             if (! empty($creditsUpdated)) {
-                // MAJ PLACE
+                //Update seats
                 $tripRepo = new TripRepository();
                 $seats    = $tripRepo->seatsTrip($carSharingId);
 
@@ -36,6 +37,16 @@ class ReservationContr
 
                 if (empty($updateseats)) {
                     $error[] = "la mise a jour du covoiturage n'a pas marche";
+                } else {
+                    // commision for the plateform
+                    $companyContr = new CompanyContr();
+                    $companyContr->updateCreditsCompany();
+
+                    // Create a transaction Recipecete
+                    $reservationId = $reserva->getId();
+                    $totalPrice    = $reserva->getTotalprice();
+
+                    $companyContr->createJurnalCredits($paymentStatus, $totalPrice, $reservationId, $carSharingId, $reservationDate, $passengerId, $numSeatsBookes);
                 }
 
             } else {
@@ -44,10 +55,6 @@ class ReservationContr
         } else {
             $error[] = "reservation na pas marche";
         }
-
         return $error;
     }
-}
-{
-
 }

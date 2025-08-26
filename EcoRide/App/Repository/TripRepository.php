@@ -416,8 +416,6 @@ class TripRepository extends Repository
             $tripInfo = new Trip();
             $tripInfo->setNumSeats($numSeats);
 
-            header("Location: /index.php?controller=trips&action=manageTrip");
-            echo "Modification on bien etait prise en compte";
             return $tripInfo;
 
         } catch (\Exception $e) {

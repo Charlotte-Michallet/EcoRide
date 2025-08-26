@@ -113,6 +113,9 @@ class CarSharingController extends Router
 
                         $reserContr  = new ReservationContr();
                         $reservation = $reserContr->reservation($carSharingId, $userId, $reservationDate, $numSeatsBookes, $paymentStatus, $status, $creditsUsed);
+                        if (empty($reservation)) {
+
+                        }
                     }
                 }
             }

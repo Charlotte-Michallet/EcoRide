@@ -1,4 +1,4 @@
-<section id="errorsPage" class="bg-white ">
+<section>
     <div class="container flex items-center min-h-screen px-6 py-12 mx-auto">
         <div class="flex flex-col items-center max-w-sm mx-auto text-center">
             <p class="p-3 text-sm font-medium text-blue-500 rounded-full bg-blue-50 dark:bg-gray-800">

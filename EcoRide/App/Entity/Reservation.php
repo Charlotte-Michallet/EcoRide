@@ -28,6 +28,7 @@ class Reservation
     protected string $model;
     protected string $color;
     protected string $energie;
+    protected int $driverId;
 
     /**
      * Get the value of id
@@ -457,6 +458,24 @@ class Reservation
     public function setEnergie(string $energie): self
     {
         $this->energie = $energie;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of driverId
+     */
+    public function getDriverId(): int
+    {
+        return $this->driverId;
+    }
+
+    /**
+     * Set the value of driverId
+     */
+    public function setDriverId(int $driverId): self
+    {
+        $this->driverId = $driverId;
 
         return $this;
     }

@@ -2,6 +2,7 @@
 namespace Admin\App\Controller;
 
 use Admin\App\Controller\Manage\ManageEmployeesContr;
+use Admin\App\Repository\CompanyRepository;
 use Admin\App\Repository\TripRepo;
 use Admin\App\Repository\UsersRepo;
 
@@ -22,6 +23,9 @@ class DasboardContr
         $userContr      = new ManageEmployeesContr();
         $totalEmployees = $userContr->CountEmployees();
 
+        $companyRepo  = new CompanyRepository();
+        $totalcredits = $companyRepo->showcredits();
+
         $todayObjet = new \DateTime();
         $today      = $todayObjet->format("Y-m-d");
         $trips      = $tripsRepo->tripsPerDay($today);
@@ -31,6 +35,7 @@ class DasboardContr
         $statistiques["totalTrips"]     = $totalTrips;
         $statistiques["totalEmployees"] = $totalEmployees;
         $statistiques["tripPerDays"]    = $trips;
+        $statistiques["totalcredits"]   = $totalcredits;
 
         return $statistiques;
 

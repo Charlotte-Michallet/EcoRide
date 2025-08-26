@@ -79,13 +79,23 @@ CREATE TABLE reservations(
 CREATE TABLE feedbacks(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
     user_id INT(11) NOT NULL,
-    note FLOAT NOT NULL,
+    trip_status VARCHAR(255) NOT NULL,
+    note INT,
     feedback TEXT,
     status VARCHAR(50),
     reservation_id INT(11),
     CONSTRAINT fk_user_feedback
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
         FOREIGN KEY (reservation_id) REFERENCES reservations(id)
+);
+
+CREATE TABLE company(
+    id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    address VARCHAR(255),
+    email VARCHAR(255),
+    phone_number VARCHAR(50),
+    credits INT(11)
 );
 
 -- Add on a colum on the table
@@ -105,3 +115,5 @@ VALUES ("admin", "Administrateur du systeme qui peut gerer les comptes et voir l
 ("passenger", "Utilisateur enregistre qui peut etre passager d'un trajet.", "Passager"),
 ("driverAndpassenger", "Utilisateur enregistre qui peut etre passager ou chauffeur d'un trajet.", "Conducteur ou passager"),
 ("visitor", "Utilisateur non authentifie, mais il peut tout de meme rechercher des trajets", "Visiteur");
+
+INSERT INTO company(name, address, email, phone_number, credits) VALUES ("EcoRide", "32 Rue des Passagers, 75002 Paris", "contact@ecoride.com", "01 66 77 88 99", 0);

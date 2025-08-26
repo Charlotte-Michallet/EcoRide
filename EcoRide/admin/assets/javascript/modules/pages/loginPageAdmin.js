@@ -103,10 +103,7 @@ form.addEventListener("submit", async (e) => {
                 window.location.href =
                     "/admin/index.php?controller=pages&action=dashboard";
             } else if (resp.status == 401) {
-                errorDisplay(
-                    "formcheck",
-                    responseData.message || "Email ou mot de passe incorrect."
-                );
+                errorDisplay("formcheck", responseData.message);
             } else {
                 errorDisplay(
                     "formcheck",

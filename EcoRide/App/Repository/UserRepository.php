@@ -63,7 +63,6 @@ class UserRepository extends Repository
             $userpre = $query->fetch(\PDO::FETCH_ASSOC);
 
             // Hydration
-
             $userpreferences->setSmokingAllowed($userpre["smoking_allowed"]);
             $userpreferences->setAnimalAllowed($userpre["animal_allowed"]);
             $userpreferences->setDescription($userpre["description"]);
@@ -94,7 +93,7 @@ class UserRepository extends Repository
         $query->bindValue(":credits", $creditUserd, $this->pdo::PARAM_INT);
         $query->execute();
 
-        // // Hydration
+        // Hydration
         $userinfo    = new User();
         $userCredits = $userinfo->setCredits($creditUserd);
 

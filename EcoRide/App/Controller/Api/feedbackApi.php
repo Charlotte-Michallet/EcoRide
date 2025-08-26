@@ -18,23 +18,39 @@ class FeedbackApi
         }
 
         $resultSubmittedToken = $result["token"];
-        $resultratting        = $result["ratting"];
-        $resultfeedback       = $result["feedbacktext"];
+        $resulTripStatus      = $result["tripStatus"];
         $resultreservationId  = $result["reservationId"];
+        $resultprice          = $result["price"];
+        $resultidDriver       = $result["idDriver"];
 
+        $tripStatus          = htmlspecialchars(trim($resulTripStatus));
         $submittedToken      = htmlspecialchars($resultSubmittedToken);
-        $rattingString       = htmlspecialchars(trim($resultratting));
-        $feedback            = htmlspecialchars(trim($resultfeedback));
         $reservationIdString = htmlspecialchars(trim($resultreservationId));
+        $priceString         = htmlspecialchars(trim($resultprice));
+        $driveridString      = htmlspecialchars(trim($resultidDriver));
 
-        $ratting       = (int) $rattingString;
         $reservationId = (int) $reservationIdString;
+        $price         = (int) $priceString;
+        $driverid      = (int) $driveridString;
+        $rating        = null;
+        $feedback      = null;
+
+        if (isset($result["ratting"])) {
+            $resultratting = $result["ratting"];
+            $rattingString = htmlspecialchars(trim($resultratting));
+            $rating        = (int) $rattingString;
+        }
+
+        if (isset($result["feedbacktext"])) {
+            $resultfeedback = $result["feedbacktext"];
+            $feedback       = htmlspecialchars(trim($resultfeedback));
+        }
 
         $token   = new TokenCsrf();
         $isValid = $token->validateToken($submittedToken);
 
         if ($isValid) {
-            $feedbackContr = new FeedbackContr($ratting, $feedback, $reservationId);
+            $feedbackContr = new FeedbackContr($tripStatus, $rating, $feedback, $reservationId, $driverid, $price);
             $feedback      = $feedbackContr->checkData();
 
             if (! empty($feedback)) {

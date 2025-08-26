@@ -184,7 +184,7 @@ class ReservationRepository extends Repository
     public function showReservation($id)
     {
         try {
-            $query = $this->pdo->prepare("SELECT r.id, r.num_seats_bookes, r.number_reser, r.totalPrice, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, c.brand, c.model, c.color, c.energy_type, u.username FROM reservations r INNER JOIN car_sharing s on r.car_sharing_id = s.id INNER JOIN cars c on s.car_id = c.id INNER JOIN users u on c.user_id = u.id WHERE r.id = :id_reservation;");
+            $query = $this->pdo->prepare("SELECT r.id, r.num_seats_bookes, r.number_reser, r.totalPrice, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, c.brand, c.model, c.color, c.energy_type, u.username, u.id AS id_drive FROM reservations r INNER JOIN car_sharing s on r.car_sharing_id = s.id INNER JOIN cars c on s.car_id = c.id INNER JOIN users u on c.user_id = u.id WHERE r.id = :id_reservation;");
 
             // bind value from form to query
             $query->bindValue(":id_reservation", $id, $this->pdo::PARAM_INT);
@@ -210,6 +210,7 @@ class ReservationRepository extends Repository
             $reservationInfo->setColor($reservationData["color"]);
             $reservationInfo->setEnergie($reservationData["energy_type"]);
             $reservationInfo->setUsername($reservationData["username"]);
+            $reservationInfo->setDriverId($reservationData["id_drive"]);
 
             return $reservationInfo;
 
@@ -230,5 +231,19 @@ class ReservationRepository extends Repository
         $reservationInfo = new Reservation();
         $reservationInfo->setStatus($status);
         return $reservationInfo;
+    }
+
+    public function updateRervationpayement($reservationId, $paymentStatus)
+    {
+        $query = $this->pdo->prepare("UPDATE reservations SET payment_status = :payment_status WHERE id = :id;");
+
+        $query->bindValue(":id", $reservationId, $this->pdo::PARAM_INT);
+        $query->bindValue(":payment_status", $paymentStatus, $this->pdo::PARAM_STR);
+        $query->execute();
+
+        // // Hydration
+        // $reservationInfo = new Reservation();
+        // $reservationInfo->setStatus($status);
+        // return $reservationInfo;
     }
 }

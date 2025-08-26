@@ -3,19 +3,25 @@ namespace App\Controller\CarSharing;
 
 use App\Repository\FeedbackRepository;
 use App\Repository\ReservationRepository;
+use App\Repository\UserRepository;
 
 class FeedbackContr
 {
-
-    protected int $ratting;
-    protected string $feedback;
+    protected ?int $rating;
+    protected ?string $feedback;
     protected int $reservationId;
+    protected string $tripStatus;
+    protected int $driverId;
+    protected int $price;
 
-    public function __construct(int $ratting, string $feedback, int $reservationId)
+    public function __construct(string $tripStatus, ?int $rating, ?string $feedback, int $reservationId, int $driverId, int $price)
     {
-        $this->ratting       = $ratting;
+        $this->tripStatus    = $tripStatus;
+        $this->rating        = $rating;
         $this->feedback      = $feedback;
         $this->reservationId = $reservationId;
+        $this->driverId      = $driverId;
+        $this->price         = $price;
     }
 
     public function checkData()
@@ -23,18 +29,13 @@ class FeedbackContr
         $errors = [];
         $userId = $_SESSION["id"];
 
-        if ($this->InputEmpty() === true) {
-            $errors = ["Tous les champs sont obligatoires."];
+        if ($this->TripInputsEmpty() === true) {
+            $errors = ["Le champs doit etre rempli."];
             return $errors;
         }
 
-        if ($this->numberPlacesInvalid() === true) {
-            $errors = ["Le champs nombre de place est incorrect"];
-            return $errors;
-        }
-
-        if ($this->feedbacktextInvalid() === true) {
-            $errors = ["Le champs ne doit pas avoir de caractere speciaux"];
+        if (! filter_var($this->price, FILTER_VALIDATE_INT) || ! filter_var($this->driverId, FILTER_VALIDATE_INT)) {
+            $errors = ["Ces champs doivent etre des nombres"];
             return $errors;
         }
 
@@ -43,27 +44,56 @@ class FeedbackContr
             return $errors;
         }
 
+        if ($this->tripStatusInvalid() === true) {
+            $errors = ["Vous avez pas renseigné si le trajet c'est bien passé"];
+            return $errors;
+        }
+
+        if ($this->feedback !== null && $this->feedbacktextInvalid()) {
+            $errors = ["Le champs ne doit pas avoir de caractere speciaux"];
+            return $errors;
+        }
+
+        if ($this->rating !== null && $this->numberPlacesInvalid()) {
+            $errors = ["Le champs nombre de place est incorrect"];
+            return $errors;
+        }
+
         if (! empty($errors)) {
             return $errors;
-        } else {
-            $status       = "En attente de validation";
-            $feedbackRepo = new FeedbackRepository();
-            $feedback     = $feedbackRepo->createFeedback($this->ratting, $this->feedback, $userId, $status, $this->reservationId);
 
-            if (empty($feedback)) {
-                $errors = ["Il y a eu une erreur"];
-                return $errors;
+        } else {
+
+            if ($this->tripStatus === "Oui" && $this->rating === null && $this->feedback === null) {
+                $status            = "Enregistré";
+                $statusReservation = "Note enregistré";
             } else {
-                $status   = "Avis en attente de validation";
-                $resarepo = new ReservationRepository();
-                $resarepo->updateRervationStatus($this->reservationId, $status);
+                $status            = "En attente de validation";
+                $statusReservation = "Avis en attente de validation";
+            }
+
+            $feedbackRepo = new FeedbackRepository();
+
+            $feedbackRepo->createFeedback($this->tripStatus, $this->rating, $this->feedback, $userId, $status, $this->reservationId);
+
+            $resarepo = new ReservationRepository();
+            $resarepo->updateRervationStatus($this->reservationId, $statusReservation);
+
+            if ($this->tripStatus === "Oui") {
+                $priceDriver = $this->price - 2;
+
+                $driverRepo         = new UserRepository();
+                $creditsuser        = $driverRepo->usercredits($this->driverId);
+                $updatedcreditsUser = $creditsuser + $priceDriver;
+
+                $driverRepo->UpdatecreditsTrip($this->driverId, $updatedcreditsUser);
             }
         }
     }
 
-    public function InputEmpty()
+    public function TripInputsEmpty()
     {
-        if (empty($this->ratting) || empty($this->feedback) || empty($this->reservationId)) {
+        if (empty($this->tripStatus) || empty($this->driverId) || empty($this->reservationId) || empty($this->price)) {
             $result = true;
         } else {
             $result = false;
@@ -73,7 +103,7 @@ class FeedbackContr
 
     protected function numberPlacesInvalid()
     {
-        if (filter_var($this->ratting, FILTER_VALIDATE_INT) === false || ($this->ratting < 1 || $this->ratting > 5)) {
+        if (filter_var($this->rating, FILTER_VALIDATE_INT) === false || ($this->rating < 1 || $this->rating > 5)) {
             $result = true;
         } else {
             $result = false;
@@ -94,6 +124,16 @@ class FeedbackContr
     protected function feedbacktextInvalid()
     {
         if (! preg_match("/^[a-zA-Z0-9\s\-.&+\/()[\]!,;:\é\è\à\ç\ù]+$/", $this->feedback)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    protected function tripStatusInvalid()
+    {
+        if ($this->tripStatus !== "Oui" && $this->tripStatus !== "Non") {
             $result = true;
         } else {
             $result = false;

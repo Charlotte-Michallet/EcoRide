@@ -18,7 +18,7 @@
 
                             <div class="flex justify-between gap-x-2 pb-2">
                                 <div class="flex items-center gap-x-2">
-                                    <p class="font-semibold">                                                                                                                                                                                        <?php echo $trip->getDepartureDate(); ?></span></p>
+                                    <p class="font-semibold">                                                                                                                                                                                                                                                                                                                  <?php echo $trip->getDepartureDate(); ?></span></p>
                                 </div>
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold">
@@ -121,7 +121,7 @@
 
                             <div class="flex justify-between gap-x-2 pb-2">
                                 <div class="flex items-center gap-x-2">
-                                    <p class="font-semibold">                                                                                                                                                                                        <?php echo $reservation->getDepartureDate(); ?></span></p>
+                                    <p class="font-semibold">                                                                                                                                                                                                                                                                                                                  <?php echo $reservation->getDepartureDate(); ?></span></p>
                                 </div>
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold">
@@ -204,7 +204,7 @@
 
                                 <?php $status = $reservation->getStatusCarSharing();
                                         $reservStatus                                 = $reservation->getStatus();
-                                    if ($reservStatus === "Avis en attente de validation") {} elseif ($status === "Programmé") {?>
+                                    if ($reservStatus === "Avis en attente de validation" || $reservStatus === "Note enregistré") {} elseif ($status === "Programmé") {?>
                                     <form method="post">
                                         <input type="hidden" name="tokenDeleteReserva"
                                             value="<?php echo htmlspecialchars($token); ?>">

@@ -63,7 +63,7 @@
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800">
-                92,913
+               <?php echo $statistiques["totalcredits"] ?> Crédits
               </h3>
             </div>
           </div>

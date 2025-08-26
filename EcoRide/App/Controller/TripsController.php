@@ -199,7 +199,6 @@ class TripsController extends Router
                             $update       = $tripRep->updatetSeatsTrip($seatsUpadate, $idcarsharing);
 
                             if (! empty($update)) {
-                                var_dump("yes");
                                 $userRepo          = new UserRepository();
                                 $creditsuser       = $userRepo->usercredits($user_id);
                                 $updateCredits     = $creditsuser + $credits;
