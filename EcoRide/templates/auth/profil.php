@@ -59,12 +59,14 @@
             </div>
 
             <div class="container lg:col-span-4 min-h-screen px-6 mx-auto">
+                <?php if ($_SESSION["role"] !== 1) {?>
                 <div class="sm:flex sm:gap-4 w-full">
 
                     <a class="btn block rounded-md px-4 py-3 content-center font-medium text-white transition hover:bg-teal-700"
                         href="/index.php?controller=auth&action=profilModify">
                         Modifier compte
                     </a>
+
                     <form method="post"
                         class="link rounded-md bg-gray-100 px-4 py-3 font-medium text-teal-600 transition hover:text-teal-600/75 sm:block">
                         <input type="hidden" name="tokenProfil" id="tokenProfil"
@@ -73,6 +75,16 @@
                             compte </button>
                     </form>
                 </div>
+                <?php } else {?>
+                    <div class="flex justify-center">
+
+                    <a class="btn block rounded-md px-4 py-3 content-center font-medium text-white transition hover:bg-teal-700"
+                        href="/index.php?controller=auth&action=profilModify">
+                        Modifier compte
+                    </a>
+
+                </div>
+                    <?php }?>
             </div>
         </div>
         <!-- End Grid -->

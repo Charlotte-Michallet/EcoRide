@@ -98,7 +98,6 @@ class TripRepository extends Repository
     public function showTripManage($user_id)
     {
         try {
-
             $todayTime = new \DateTime();
             $today     = $todayTime->format("Y-m-d");
 
@@ -417,6 +416,27 @@ class TripRepository extends Repository
             $tripInfo->setNumSeats($numSeats);
 
             return $tripInfo;
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+
+    public function driverIdPriceTrip($idreservation)
+    {
+        try {
+            $query = $this->pdo->prepare("SELECT r.totalPrice, c.user_id FROM reservations r INNER JOIN car_sharing s ON r.car_sharing_id = s.id INNER JOIN cars c ON s.car_id = c.id WHERE r.id =:id;");
+
+            $query->bindValue(":id", $idreservation, $this->pdo::PARAM_INT);
+            $query->execute();
+            $userData = $query->fetch(\PDO::FETCH_ASSOC);
+
+            $driverId = [
+                "user_id"    => $userData["user_id"],
+                "totalPrice" => $userData["totalPrice"],
+            ];
+
+            return $driverId;
 
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

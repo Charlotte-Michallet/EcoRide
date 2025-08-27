@@ -3,6 +3,7 @@ namespace Admin\App\Controller;
 
 use Admin\App\Controller\Manage\ManageEmployeesContr;
 use Admin\App\Controller\Manage\ManageUsersCont;
+use Admin\App\Repository\Mongo\PlateformCreditsRepository;
 use App\Controller\TokenCsrf;
 
 class ManageController extends Router
@@ -18,6 +19,10 @@ class ManageController extends Router
 
                     case 'users':
                         $this->users();
+                        break;
+
+                    case 'transactions':
+                        $this->transactions();
                         break;
 
                     default:
@@ -69,6 +74,7 @@ class ManageController extends Router
         $totalEmployees = $userContr->CountEmployees();
         $this->render("manage/manageEmployees", ["token" => $currentToken, "employees" => $employees, "totalEmplyees" => $totalEmployees]);
     }
+
     public function users()
     {
         // token CSRF
@@ -86,9 +92,30 @@ class ManageController extends Router
         $this->render("manage/manageUsers", ["token" => $currentToken, "users" => $users, "totalUsers" => $totalUsers]);
     }
 
+    public function transactions()
+    {
+        $transactionRepo = new PlateformCreditsRepository();
+        $transactionInfo = $transactionRepo->showTransation();
+
+        $numTransaction = $transactionRepo->calcTransation();
+
+        foreach ($transactionInfo as $transaction) {
+            $mongotime     = $transaction["companyPayment"]["dateTransaction"];
+            $mongoTimeTrip = $transaction["tripDetails"]["dateTrip"];
+
+            $dateObjet              = $mongotime->toDateTime();
+            $dateTransactionCompany = $dateObjet->format("d/m/Y");
+
+            $dateObjetTrip = $mongoTimeTrip->toDateTime();
+            $dateTrip      = $dateObjetTrip->format("d/m/Y H:i");
+
+        }
+
+        $this->render("manage/tripReceipts", ["transactions" => $transactionInfo, "dateCompany" => $dateTransactionCompany, "dateTrip" => $dateTrip, "numTransaction" => $numTransaction]);
+    }
+
     public function usersAccount()
     {
-
         $account            = null;
         $resultsidsubmitted = $_POST["id"];
         $idsubmitted        = htmlspecialchars($resultsidsubmitted);

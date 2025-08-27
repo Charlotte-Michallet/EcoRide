@@ -98,7 +98,7 @@
                Nombre de credit aujourd'hui
               </h2>
               <p class="text-xl sm:text-2xl font-medium text-gray-800">
-                <?php echo $statistiques["tripPerDays"] ?>
+                <?php echo $statistiques["creditstoday"] ?>
               </p>
             </div>
           </div>

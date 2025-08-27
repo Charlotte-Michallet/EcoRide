@@ -5,21 +5,24 @@ class Feedback
 {
     protected int $id;
     protected int $user_id;
-    protected ?int $note;
-    protected ?string $feedback;
+    protected ?int $note        = null;
+    protected ?string $feedback = null;
     protected string $status;
+    protected string $trip_well;
     protected int $reservationId;
     protected int $number_reser;
     protected string $payment_status;
     protected string $status_reservation;
     protected int $totalPrice;
     protected string $passengers_username;
+    protected string $passengers_email;
     protected string $passengers_photo;
     protected string $departure_city;
     protected string $arrival_city;
     protected string $departure_date;
     protected string $departure_hour;
     protected string $driver_username;
+    protected string $driver_email;
     protected string $driver_photo;
     protected int $num_places;
     protected int $carSharingId;
@@ -64,7 +67,7 @@ class Feedback
     /**
      * Get the value of note
      */
-    public function getNote(): int
+    public function getNote(): ?int
     {
         return $this->note;
     }
@@ -72,7 +75,7 @@ class Feedback
     /**
      * Set the value of note
      */
-    public function setNote(int $note): self
+    public function setNote(?int $note): self
     {
         $this->note = $note;
 
@@ -82,7 +85,7 @@ class Feedback
     /**
      * Get the value of feedback
      */
-    public function getFeedback(): string
+    public function getFeedback(): ?string
     {
         return $this->feedback;
     }
@@ -90,7 +93,7 @@ class Feedback
     /**
      * Set the value of feedback
      */
-    public function setFeedback(string $feedback): self
+    public function setFeedback(?string $feedback): self
     {
         $this->feedback = $feedback;
 
@@ -399,6 +402,60 @@ class Feedback
     public function setTripStatus(string $tripStatus): self
     {
         $this->tripStatus = $tripStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of passengers_email
+     */
+    public function getPassengersEmail(): string
+    {
+        return $this->passengers_email;
+    }
+
+    /**
+     * Set the value of passengers_email
+     */
+    public function setPassengersEmail(string $passengers_email): self
+    {
+        $this->passengers_email = $passengers_email;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of driver_email
+     */
+    public function getDriverEmail(): string
+    {
+        return $this->driver_email;
+    }
+
+    /**
+     * Set the value of driver_email
+     */
+    public function setDriverEmail(string $driver_email): self
+    {
+        $this->driver_email = $driver_email;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of trip_well
+     */
+    public function getTripWell(): string
+    {
+        return $this->trip_well;
+    }
+
+    /**
+     * Set the value of trip_well
+     */
+    public function setTripWell(string $trip_well): self
+    {
+        $this->trip_well = $trip_well;
 
         return $this;
     }

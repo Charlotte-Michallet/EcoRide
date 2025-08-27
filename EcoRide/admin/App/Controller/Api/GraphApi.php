@@ -1,6 +1,7 @@
 <?php
 namespace Admin\App\Controller\Api;
 
+use Admin\App\Repository\Mongo\PlateformCreditsRepository;
 use Admin\App\Repository\TripRepo;
 
 class GraphApi
@@ -26,11 +27,12 @@ class GraphApi
             $counts[]  = $tripPerDay["COUNT(*)"];
         }
         $tripsInfo = ["labels" => $dates, "data" => $counts];
-        $credits   = ["labels" => [1, 2, 3, 4, 5, 6, 7, 8, 9], "data" => [5, 2, 7, 8, 10, 9, 1, 12, 14]];
 
-        $dataSend = ["tripsInfo" => $tripsInfo, "credits" => $credits];
+        $compoanyRepo   = new PlateformCreditsRepository();
+        $creditsPerDate = $compoanyRepo->CreditsPerDay();
+
+        $dataSend = ["tripsInfo" => $tripsInfo, "credits" => $creditsPerDate];
 
         echo json_encode($dataSend);
-
     }
 }

@@ -5,7 +5,7 @@
     <!-- Card Section -->
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <!-- Grid -->
-        <?php if ($_SESSION["role"] === 2 || $_SESSION["role"] === 3 || $_SESSION["role"] === 5) {?>
+        <?php if ($_SESSION["role"] !== 4) {?>
             <div class="grid grid-cols-1 gap-4 sm:gap-6">
                 <h3>Conducteur :</h3>
                 <!-- Card -->
@@ -18,7 +18,7 @@
 
                             <div class="flex justify-between gap-x-2 pb-2">
                                 <div class="flex items-center gap-x-2">
-                                    <p class="font-semibold">                                                                                                                                                                                                                                                                                                                  <?php echo $trip->getDepartureDate(); ?></span></p>
+                                    <p class="font-semibold">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <?php echo $trip->getDepartureDate(); ?></span></p>
                                 </div>
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold">
@@ -108,7 +108,7 @@
                 <?php }?>
             </div>
         <?php }?>
-<?php if ($_SESSION["role"] === 2 || $_SESSION["role"] === 4 || $_SESSION["role"] === 5) {?>
+<?php if ($_SESSION["role"] !== 3) {?>
             <div class="grid grid-cols-1 gap-4 sm:gap-6">
                 <h3 class="pt-3">Passager:</h3>
 
@@ -121,7 +121,7 @@
 
                             <div class="flex justify-between gap-x-2 pb-2">
                                 <div class="flex items-center gap-x-2">
-                                    <p class="font-semibold">                                                                                                                                                                                                                                                                                                                  <?php echo $reservation->getDepartureDate(); ?></span></p>
+                                    <p class="font-semibold">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <?php echo $reservation->getDepartureDate(); ?></span></p>
                                 </div>
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold">
@@ -215,8 +215,6 @@
                                             value="<?php echo $reservation->getCarSharingId(); ?>">
 
                                         <input type="hidden" name="credits" value="<?php echo $reservation->getPrices(); ?>">
-                                        <input type="hidden" name="carSharingStatus"
-                                            value="<?php echo $reservation->getCarSharingId(); ?>">
 
                                         <button type="submit" name="deleteReservation" value="deleteReservation"
                                             class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">Annuler</button>

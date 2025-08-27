@@ -82,7 +82,6 @@ class UserRepository extends Repository
 
         $usercredit = $usercreditinfo["credits"];
         return $usercredit;
-
     }
 
     public function UpdatecreditsTrip(int $id, int $creditUserd)

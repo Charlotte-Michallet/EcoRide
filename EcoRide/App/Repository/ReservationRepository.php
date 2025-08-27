@@ -233,6 +233,27 @@ class ReservationRepository extends Repository
         return $reservationInfo;
     }
 
+    public function updateRervationidTransaction($reservationId, $transactionId)
+    {
+        $query = $this->pdo->prepare("UPDATE reservations SET transactionId = :transactionId WHERE id = :id;");
+
+        $query->bindValue(":id", $reservationId, $this->pdo::PARAM_INT);
+        $query->bindValue(":transactionId", $transactionId, $this->pdo::PARAM_STR);
+        $query->execute();
+    }
+
+    public function selectTransaction($reservationId)
+    {
+        $query = $this->pdo->prepare("SELECT transactionId FROM reservations WHERE id = :id;");
+
+        $query->bindValue(":id", $reservationId, $this->pdo::PARAM_INT);
+        $query->execute();
+        $reservationData                = $query->fetch(\PDO::FETCH_ASSOC);
+        $transactionID["transactionID"] = $reservationData["transactionId"];
+
+        return $transactionID["transactionID"];
+    }
+
     public function updateRervationpayement($reservationId, $paymentStatus)
     {
         $query = $this->pdo->prepare("UPDATE reservations SET payment_status = :payment_status WHERE id = :id;");

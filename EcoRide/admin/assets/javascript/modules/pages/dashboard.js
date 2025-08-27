@@ -18,15 +18,19 @@ const graphTrip = (datatrips) => {
     const maxValue = Math.max(...datatrips.data) + 2;
     Chart.defaults.font.size = 16;
 
-    const barCharts = new Chart(graphTripCanvas, {
-        type: "bar",
+    const lineCharts = new Chart(graphTripCanvas, {
+        type: "line",
         data: {
             labels: datatrips.labels,
             datasets: [
                 {
                     label: "Nombre de covoiturage part jour",
                     data: datatrips.data,
+                    pointStyle: "circle",
+                    borderColor: "green",
                     backgroundColor: "green",
+                    pointRadius: 5,
+                    pointHoverRadius: 10,
                 },
             ],
         },
@@ -68,19 +72,15 @@ const graphCredits = (datatrips) => {
     const maxValue = Math.max(...datatrips.data) + 2;
     Chart.defaults.font.size = 16;
 
-    const lineCharts = new Chart(graphCreditCanvas, {
-        type: "line",
+    const barCharts = new Chart(graphCreditCanvas, {
+        type: "bar",
         data: {
             labels: datatrips.labels,
             datasets: [
                 {
                     label: "Nombre de credits part jour",
                     data: datatrips.data,
-                    pointStyle: "circle",
-                    borderColor: "green",
                     backgroundColor: "green",
-                    pointRadius: 5,
-                    pointHoverRadius: 10,
                 },
             ],
         },

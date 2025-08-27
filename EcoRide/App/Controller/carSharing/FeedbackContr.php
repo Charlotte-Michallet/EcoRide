@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\CarSharing;
 
+use Admin\App\Controller\CompanyContr;
 use App\Repository\FeedbackRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\UserRepository;
@@ -86,7 +87,21 @@ class FeedbackContr
                 $creditsuser        = $driverRepo->usercredits($this->driverId);
                 $updatedcreditsUser = $creditsuser + $priceDriver;
 
-                $driverRepo->UpdatecreditsTrip($this->driverId, $updatedcreditsUser);
+                $creditsUpdate = $driverRepo->UpdatecreditsTrip($this->driverId, $updatedcreditsUser);
+                if ($creditsUpdate) {
+                    $statusPayment = "Validé";
+                } else {
+                    $statusPayment = "Une erreur est survenue Non validé";
+                }
+            } else {
+                $statusPayment = "En attente de contact avec un employé";
+            }
+            $resarepo->updateRervationpayement($this->reservationId, $statusPayment);
+            $companyContr = new CompanyContr();
+            $update       = $companyContr->updateStatusPayment($this->reservationId, $statusPayment);
+            if ($update) {
+                $errors = ["La mise à jour du recu na pas marche"];
+                return $errors;
             }
         }
     }

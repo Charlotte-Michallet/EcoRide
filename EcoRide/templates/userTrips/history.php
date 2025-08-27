@@ -3,7 +3,7 @@
     <!-- Card Section -->
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <!-- Grid -->
-          <?php if ($_SESSION["role"] === 2 || $_SESSION["role"] === 3 || $_SESSION["role"] === 5) {?>
+          <?php if ($_SESSION["role"] !== 4) {?>
         <div class="grid grid-cols-1 gap-4 sm:gap-6">
             <h3>Conducteur :</h3>
             <?php foreach ($trips as $trip) {?>
@@ -13,7 +13,7 @@
 
                         <div class="flex justify-between gap-x-2 pb-2">
                             <div class="flex items-center gap-x-2">
-                                <p class="font-semibold">                                                                                                                                                                            <?php echo $trip->getDepartureDate(); ?></span></p>
+                                <p class="font-semibold">                                                                                                                                                                                                                                     <?php echo $trip->getDepartureDate(); ?></span></p>
                             </div>
                             <div class="flex items-center gap-x-2">
                                 <p class="font-semibold">
@@ -64,7 +64,7 @@
             <?php }?>
         </div>
         <?php }?>
-<?php if ($_SESSION["role"] === 2 || $_SESSION["role"] === 4 || $_SESSION["role"] === 5) {?>
+<?php if ($_SESSION["role"] !== 3) {?>
 
             <div class="grid grid-cols-1 gap-4 sm:gap-6">
                 <h3 class="pt-3">Passager:</h3>
@@ -78,7 +78,7 @@
 
                             <div class="flex justify-between gap-x-2 pb-2">
                                 <div class="flex items-center gap-x-2">
-                                    <p class="font-semibold">                                                                                                                                                                                        <?php echo $reservation->getDepartureDate(); ?></span></p>
+                                    <p class="font-semibold">                                                                                                                                                                                                                                                     <?php echo $reservation->getDepartureDate(); ?></span></p>
                                 </div>
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold">

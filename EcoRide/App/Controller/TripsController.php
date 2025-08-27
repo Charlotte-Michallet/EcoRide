@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use Admin\App\Controller\CompanyContr;
 use App\Controller\Mail\SendMailContr;
 use App\Repository\CarRepository;
 use App\Repository\ReservationRepository;
@@ -63,7 +64,7 @@ class TripsController extends Router
         $tripRepo = new TripRepository();
         $trips    = $tripRepo->showTripManage($user_id);
 
-        $this->deleteMethod();
+        $this->deleteCarSharingMethod();
         $this->UpdateStartMethod();
         $this->UpdateEndMethod();
         $this->deletereservation();
@@ -96,7 +97,7 @@ class TripsController extends Router
         $this->render("userTrips/history", ["token" => $currentToken, "trips" => $trips, "reservations" => $reservation]);
     }
 
-    protected function deleteMethod()
+    protected function deleteCarSharingMethod()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["idDelete"]) && $_POST["idDelete"])) {
             // get data from form
@@ -181,16 +182,16 @@ class TripsController extends Router
                         $seatsReservationString = $_POST["seatsReserved"];
                         $idcarsharingString     = $_POST["idCarSharing"];
                         $creditsString          = $_POST["credits"];
-                        $carSharingStatusString = $_POST["carSharingStatus"];
 
                         $idReservation    = (int) $idReservationString;
                         $seatsReservation = (int) $seatsReservationString;
                         $idcarsharing     = (int) $idcarsharingString;
                         $credits          = (int) $creditsString;
-                        $carSharingStatus = (int) $carSharingStatusString;
 
-                        $revervaRepo = new ReservationRepository();
-                        $delete      = $revervaRepo->deleteTrip($idReservation);
+                        $revervaRepo   = new ReservationRepository();
+                        $idtransaction = $revervaRepo->selectTransaction($idReservation);
+
+                        $delete = $revervaRepo->deleteTrip($idReservation);
 
                         if ($delete === true) {
                             $tripRep      = new TripRepository();
@@ -204,13 +205,12 @@ class TripsController extends Router
                                 $updateCredits     = $creditsuser + $credits;
                                 $updateUserCredits = $userRepo->UpdatecreditsTrip($user_id, $updateCredits);
 
-                                if (empty($updateUserCredits)) {
-                                    var_dump("erreur");
+                                if (! empty($updateUserCredits)) {
+                                    $companyContr = new CompanyContr();
+                                    $companyContr->cancelCreditsCompany();
+                                    $companyContr->deleteJurnalCredits($idtransaction);
                                 }
                             }
-
-                        } else {
-                            var_dump("erreur");
                         }
                     }
                 }
