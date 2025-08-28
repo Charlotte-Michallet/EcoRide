@@ -14,7 +14,6 @@ class AccountContr
     protected string|array $photo_url;
     protected int $credits;
     protected int $id_role;
-    protected string|bool $drivers_license;
     protected string $active;
 
     // verify special caratares

@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use Admin\App\Controller\CompanyContr;
+use App\Controller\Mail\MailerContr;
 use App\Controller\Mail\SendMailContr;
 use App\Repository\CarRepository;
 use App\Repository\ReservationRepository;
@@ -103,12 +104,49 @@ class TripsController extends Router
             // get data from form
             $submittedToken = htmlspecialchars($_POST["tokenDelete"]);
             $id             = htmlspecialchars(trim($_POST["idTrip"]));
+            $dateTrip       = htmlspecialchars(trim($_POST["dateTrip"]));
+            $departureTrip  = htmlspecialchars(trim($_POST["departureTrip"]));
+            $arrivalTrip    = htmlspecialchars(trim($_POST["arrivalTrip"]));
 
             // Check token CSRF
             $token   = new TokenCsrf();
             $isValid = $token->validateToken($submittedToken);
 
             if ($isValid) {
+                $reservationRepo = new ReservationRepository();
+                $passengerRepo   = new UserRepository();
+                $driverName      = $_SESSION["username"];
+
+                // trouver les id de resa idpassager userna email
+                $passengersInfo = $reservationRepo->reservationIdPassengersInfo($id);
+                foreach ($passengersInfo as $passengerInfo) {
+
+                    $reservationId = $passengerInfo["reservation_id"];
+                    $passagerId    = $passengerInfo["user_id"];
+                    $username      = $passengerInfo["username"];
+                    $email         = $passengerInfo["email"];
+                    $totalPrice    = $passengerInfo["totalPrice"];
+
+                    // Enlever les 2 credit de lentreprise
+                    $companyContr = new CompanyContr();
+                    $companyContr->cancelCreditsCompany();
+
+                    // supprimer transaction
+                    $idTransation = $reservationRepo->selectTransaction($reservationId);
+                    $companyContr->deleteJurnalTrip($idTransation);
+
+                    // Rembourser les passager
+                    $passengersCredits      = $passengerRepo->usercredits($passagerId);
+                    $creditsForPassenger    = $totalPrice - 2;
+                    $passengeCreditsUpdated = $creditsForPassenger + $passengersCredits;
+                    $passengerRepo->UpdatecreditsTrip($passagerId, $passengeCreditsUpdated);
+
+                    // envoie mail
+                    $mailControl = new MailerContr();
+                    $mailControl->sendMailPassenger($email, $username, $driverName, $dateTrip, $departureTrip, $arrivalTrip);
+
+                }
+                // supprimer covoiturage a la fin
                 $tripRepo = new TripRepository();
                 $tripRepo->deleteTrip($id);
             }

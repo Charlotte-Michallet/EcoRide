@@ -14,29 +14,33 @@
           <p class="mt-3 text-2xl font-semibold text-pretty">Drive Green Together</p>
           <p class="mt-4 text-lg font-medium text-pretty sm:text-xl/8">Plateforme de covoiturage écologique</p>
         </div>
-        <div class="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-          <dl class="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
-            <div class="flex flex-col-reverse gap-1 bg-gray-200/80 rounded-xl p-4">
-              <dt class="text-base/7">Offices worldwide</dt>
-              <dd class="text-4xl font-semibold tracking-tight">12</dd>
+        <div class="mx-auto mt-10 max-w-3xl lg:mx-0 lg:max-w-none">
+          <div class="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="flex flex-col gap-1 bg-gray-200/85 rounded-xl p-4">
+              <p class="text-4xl font-semibold tracking-tight">6Kg de CO₂ en moins</p>
+              <p class="text-lg">pour chaque trajet en covoiturage ≈20km</p>
+              <p class="text-xs">* Selon l'estimation gouvernementale issue du plan officiel de 2023</p>
             </div>
-            <div class="flex flex-col-reverse gap-1 bg-gray-200/80 rounded-xl p-4">
-              <dt class="text-base/7">Full-time colleagues</dt>
-              <dd class="text-4xl font-semibold tracking-tight">300+</dd>
+
+            <div class="flex flex-col gap-1 bg-gray-200/85 rounded-xl p-4">
+              <p class="text-4xl font-semibold tracking-tight">~130€ /mois</p>
+              <p class="text-base/7">d'économie en utiisant le covoiturage</p>
+              <p class="text-xs">* Selon un communiquer de BlaBlaCar Daily de 2021</p>
             </div>
-            <div class="flex flex-col-reverse gap-1 bg-gray-200/80 rounded-xl p-4">
-              <dt class="text-base/7">Hours per week</dt>
-              <dd class="text-4xl font-semibold tracking-tight">40</dd>
+            <div class="flex flex-col gap-1 bg-gray-200/85 rounded-xl p-4">
+              <p class="text-4xl font-semibold tracking-tight">+47% de trajets </p>
+              <p class="text-base/7">covoiturés en 2024 part rapport à 2023</p>
+              <p class="text-xs">* Selon les chiffres de l'Observatoire du Covoiturage du Quotidien</p>
             </div>
-          </dl>
+          </div>
         </div>
       </div>
     </div>
 
 
   <!-- form -->
-  <section class="form w-3/4 mx-auto p-5 bg-white rounded-md shadow-md">
-    <form action="post">
+  <div class="form w-3/4 mx-auto p-5 bg-white rounded-md shadow-md">
+    <form method="post" action="/index.php?controller=car-sharing&action=show">
       <div class="flex gap-6 justify-around items-center">
         <div>
           <label for="departureHome">Ville de départ</label>
@@ -61,12 +65,12 @@
         <input type="hidden" name="token_csrf" value="<?php echo htmlspecialchars($token) ?>">
 
         <div>
-          <button class="btnSearch item-center px-5 py-2 leading-5 text-white transition-colors duration-300 transform rounded-md focus:outline-none">Rechercher</button>
+          <button type="submit" class="btnSearch item-center px-5 py-2 leading-5 text-white transition-colors duration-300 transform rounded-md focus:outline-none">Rechercher</button>
         </div>
 
       </div>
     </form>
-  </section>
+  </div>
 
   <!-- info -->
   <section>

@@ -89,4 +89,13 @@ class CompanyContr
             return "La mise à jour du recu na pas marche";
         }
     }
+
+    public function deleteJurnalTrip($idTransaction)
+    {
+        $mongoRepo = new PlateformCreditsRepository();
+        $delete    = $mongoRepo->deletetransactionReceipt($idTransaction);
+        if ($delete) {
+            return $delete;
+        }
+    }
 }

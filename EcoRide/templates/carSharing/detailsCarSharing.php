@@ -41,7 +41,7 @@
 
                 <div class="flex justify-between gap-x-2 pb-2">
                     <div class="flex items-center gap-x-2">
-                        <p class="text-lg font-semibold">                                                                                                                                                                                                                                                                                              <?php echo $details->getDepartureCity() ?> </p>
+                        <p class="text-lg font-semibold">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   <?php echo $details->getDepartureCity() ?> </p>
                     </div>
 
                     <div class="flex items-center gap-x-2">
@@ -86,14 +86,9 @@
                         <p class="text-xl font-semibold mr-9"><?php echo $details->getUsername() ?></p>
 
                         <div class="flex items-center text-xl font-semibold">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
-                            </svg>
-
                             <p class="text-xl font-semibold ml-2">
-                                <?php echo $moreDetails["notes"] ?>
+                                <span><?php echo $details->getNotes() ?></span>
+                                /5 Etoiles
                             </p>
                         </div>
 
@@ -180,34 +175,43 @@
         <!-- fedbacks -->
         <div class="flex mt-6">
             <div class="p-8 space-y-3 border-2 border-blue-400 rounded-xl w-full">
-                <span class="inline-block text-blue-500 ">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                    </svg>
-                </span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-                </svg>
+                <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
 
-                <h1 class="text-xl font-semibold text-gray-700 capitalize ">Simple & clean designs</h1>
+                    <h3>Les avis des passagers:</h3>
+                    <div class="grid lg:grid-cols-2 lg:gap-y-16 gap-10">
+                        <!-- Card -->
+                        <?php foreach ($feedbacks as $feedback) {?>
+                            <div class="group block rounded-xl p-3 border-2 border-green-400 m-3">
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+                                    <div class="shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
+                                        <img class="object-cover w-10 h-10 rounded-full mr-9"
+                                            src="<?php echo $feedback->getPassengersPhoto() ?>" alt="photo profil">
+                                        <p class="text font-semibold mx-2">
+                                            <?php echo $feedback->getPassengersUsername() ?>
+                                        </p>
+                                        <p class="text-sm pt-3">
+                                            Voyage le: <span><?php echo $feedback->getDepartureDate() ?></span>
+                                        </p>
+                                        <p class="text-sm pt-3">
+                                            De: <span><?php echo $feedback->getDepartureCity() ?></span> à <span><?php echo $feedback->getArrivalCity() ?></span>
+                                        </p>
+                                    </div>
 
-                <p class="text-gray-500 ">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ab nulla quod dignissimos vel non
-                    corrupti doloribus voluptatum eveniet
-                </p>
+                                    <div class="grow">
+                                        <h3 class="text-xl font-semibold text-gray-800 group-hover:text-gray-600">
+                                            <span><?php echo $feedback->getNote() ?></span>/5 Etoile
+                                        </h3>
+                                        <p class="mt-3 text-gray-600 italic"> "<span><?php echo $feedback->getFeedback() ?></span>" </p>
 
-                <a href="#"
-                    class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100  hover:underline hover:text-blue-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php }?>
+                    </div>
+                    <!-- End Grid -->
+                </div>
+
+                <!-- autre -->
             </div>
         </div>
     </div>
@@ -218,7 +222,7 @@
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <div class="mt-4">
                 <p class="text-pretty text-gray-700">
-                    Le trajet coute                                                                                                                                                                                <?php echo $totalPrice ?>. Ete vous sure de vouloir participer a ce trajet
+                    Le trajet coute                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       <?php echo $totalPrice ?>. Ete vous sure de vouloir participer a ce trajet
                 </p>
             </div>
 

@@ -15,9 +15,6 @@ class DetailsContr
         $animal_allowed  = $detailsBool->isAnimalAllowed();
         $smoking_allowed = $detailsBool->isSmokingAllowed();
         $descriptif      = $detailsBool->getDescription();
-        $notes           = $detailsBool->getNotes();
-        $notepassenger   = $detailsBool->getNote();
-        $feedback        = $detailsBool->getFeedback();
 
         if ($animal_allowed === true) {
             $details["animal"] = "Oui";
@@ -35,24 +32,6 @@ class DetailsContr
             $details["descriptif"] = "";
         } else {
             $details["descriptif"] = $descriptif;
-        }
-
-        if ($notes === null) {
-            $details["notes"] = "Aucune notes";
-        } else {
-            $details["notes"] = $notes;
-        }
-
-        if ($notepassenger === null) {
-            $details["notepassenger"] = "";
-        } else {
-            $details["notepassenger"] = $notepassenger;
-        }
-
-        if ($feedback === null) {
-            $details["feedback"] = "";
-        } else {
-            $details["feedback"] = $feedback;
         }
 
         return $details;

@@ -171,35 +171,6 @@ class ModifyProContr extends AccountContr
         }
     }
 
-    public function checkLicense($license, $id)
-    {
-
-        $this->drivers_license = $license;
-        $this->id              = $id;
-        $errors                = [];
-
-        if ($this->drivers_license === "noLicense") {
-            $this->drivers_license = false;
-
-        } elseif ($this->drivers_license === "gotLicense") {
-            $this->drivers_license = true;
-
-        } else {
-            $errors = ["Veillez cocher si vous avez le permis."];
-            return $errors;
-        }
-
-        try {
-            $modifyRepo          = new ModifyProfilRepo;
-            $user                = $modifyRepo->UpadateLicense($this->drivers_license, $this->id);
-            $_SESSION["license"] = $user->isDriversLicense();
-
-        } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
-        }
-
-    }
-
     public function checkAccept($animal, $smoking, $id)
     {
         $this->animal  = $animal;

@@ -261,10 +261,16 @@ class ReservationRepository extends Repository
         $query->bindValue(":id", $reservationId, $this->pdo::PARAM_INT);
         $query->bindValue(":payment_status", $paymentStatus, $this->pdo::PARAM_STR);
         $query->execute();
+    }
 
-        // // Hydration
-        // $reservationInfo = new Reservation();
-        // $reservationInfo->setStatus($status);
-        // return $reservationInfo;
+    public function reservationIdPassengersInfo($carSharingId)
+    {
+        $query = $this->pdo->prepare("SELECT r.id AS reservation_id, r.totalPrice, u.id AS user_id, u.username, u.email FROM reservations r INNER JOIN users u ON r.user_id = u.id WHERE car_sharing_id = :car_sharing_id;");
+        $query->bindValue(":car_sharing_id", $carSharingId, $this->pdo::PARAM_INT);
+        $query->execute();
+
+        $users = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $users;
     }
 }

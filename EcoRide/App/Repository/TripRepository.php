@@ -317,7 +317,7 @@ class TripRepository extends Repository
     public function detailsTrips($id)
     {
         try {
-            $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.status, s.kilometers, s.travel_time, c.brand, c.model, c.energy_type, c.color, u.username, u.photo FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.id = :id;");
+            $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.status, s.kilometers, s.travel_time, c.brand, c.model, c.energy_type, c.color, u.id AS driver_id, u.username, u.photo, u.notes FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.id = :id;");
 
             // bind value from form to query
             $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
@@ -348,6 +348,8 @@ class TripRepository extends Repository
             $tripInfo->setColor($tripData["color"]);
             $tripInfo->setUsername($tripData["username"]);
             $tripInfo->setPhoto($tripData["photo"]);
+            $tripInfo->setDriverId($tripData["driver_id"]);
+            $tripInfo->setNotes($tripData["notes"]);
 
             return $tripInfo;
 
@@ -359,7 +361,7 @@ class TripRepository extends Repository
     public function otherDetails($id)
     {
         try {
-            $query = $this->pdo->prepare("SELECT s.id, u.notes, p.smoking_allowed, p.animal_allowed, p.description, f.note, f.feedback FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id INNER JOIN preferences p ON p.user_id = u.id LEFT JOIN feedbacks f ON f.user_id = u.id AND f.status = 'validate' WHERE s.id = :id;");
+            $query = $this->pdo->prepare("SELECT s.id, p.smoking_allowed, p.animal_allowed, p.description FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id INNER JOIN preferences p ON p.user_id = u.id WHERE s.id = :id;");
 
             // bind value from form to query
             $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
@@ -369,12 +371,9 @@ class TripRepository extends Repository
 
             $tripInfo = new Trip();
 
-            $tripInfo->setNotes($tripData["notes"]);
             $tripInfo->setSmokingAllowed($tripData["smoking_allowed"]);
             $tripInfo->setAnimalAllowed($tripData["animal_allowed"]);
             $tripInfo->setDescription($tripData["description"]) ?? "";
-            $tripInfo->setNote($tripData["note"]);
-            $tripInfo->setFeedback($tripData["feedback"]) ?? "";
 
             return $tripInfo;
 
@@ -442,5 +441,4 @@ class TripRepository extends Repository
             throw new \Exception($e->getMessage());
         }
     }
-
 }

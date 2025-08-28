@@ -55,22 +55,10 @@ class AuthController extends Router
             $userRepo = new UserRepository();
             $user     = $userRepo->userInfo($userId);
 
-            $license = $user->isDriversLicense();
-
-            if ($license === false) {
-                $license = "Non";
-
-            } elseif ($license === true) {
-                $license = "Oui";
-
-            } else {
-                $license = "Non renseigné";
-            }
-
             $profilContr = new ProfilContr();
             $preferences = $profilContr->Preferences($userId);
 
-            $this->render("auth/profil", ["token" => $currentToken, "user" => $user, "license" => $license, "preferences" => $preferences]);
+            $this->render("auth/profil", ["token" => $currentToken, "user" => $user, "preferences" => $preferences]);
 
         } else {
             header("Location: /index.php");

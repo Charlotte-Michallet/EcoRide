@@ -18,6 +18,7 @@ class Trip
     protected string $travel_time;
     protected string $energy_ty;
     protected string $username;
+    protected int $driverId;
     protected string $photo;
     protected string $brand;
     protected string $model;
@@ -27,7 +28,6 @@ class Trip
     private string $smoking;
     private string $animal;
     private ?string $description = null;
-    private ?int $note;
     private ?string $feedback;
     protected ?float $notes;
 
@@ -466,24 +466,6 @@ class Trip
     }
 
     /**
-     * Get the value of note
-     */
-    public function getNote(): ?int
-    {
-        return $this->note;
-    }
-
-    /**
-     * Set the value of note
-     */
-    public function setNote(?int $note): self
-    {
-        $this->note = $note;
-
-        return $this;
-    }
-
-    /**
      * Get the value of feedback
      */
     public function getFeedback(): ?string
@@ -515,6 +497,24 @@ class Trip
     public function setDepartureDateFormat(string $departure_dateFormat): self
     {
         $this->departure_dateFormat = $departure_dateFormat;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of driverId
+     */
+    public function getDriverId(): int
+    {
+        return $this->driverId;
+    }
+
+    /**
+     * Set the value of driverId
+     */
+    public function setDriverId(int $driverId): self
+    {
+        $this->driverId = $driverId;
 
         return $this;
     }

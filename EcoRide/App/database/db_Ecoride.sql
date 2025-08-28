@@ -72,7 +72,7 @@ CREATE TABLE reservations(
     payment_status VARCHAR(50),
     status VARCHAR(50),
     CONSTRAINT fk_trip_user_id
-        FOREIGN KEY (car_sharing_id) REFERENCES car_sharing(id),
+        FOREIGN KEY (car_sharing_id) REFERENCES car_sharing(id) ON DELETE CASCADE,
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -98,7 +98,7 @@ CREATE TABLE company(
     credits INT(11)
 );
 
--- Add on a colum on the table
+-- Add on or delete a colum on the table
 ALTER TABLE car_sharing ADD status VARCHAR(255);
 ALTER TABLE car_sharing ADD kilometers INT(11);
 ALTER TABLE reservations ADD totalPrice INT(11);
@@ -106,6 +106,7 @@ ALTER TABLE car_sharing ADD travel_time TIME;
 ALTER TABLE users ADD notes VARCHAR(255);
 ALTER TABLE users ADD active VARCHAR(255);
 ALTER TABLE reservations ADD  transactionId VARCHAR(255);
+ALTER TABLE users DROP COLUMN drivers_license;
 
 
 -- Insert data in tables

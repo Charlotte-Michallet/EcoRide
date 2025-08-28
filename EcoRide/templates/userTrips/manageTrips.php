@@ -1,5 +1,4 @@
-<section id="manageTripPage" class="mt-5">
-
+<section class="mt-5">
     <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php"?>
 
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -57,25 +56,34 @@
                                         <?php $satus = $trip->getStatus();
                                             if ($satus === "Programmé") {?>
                                             <form method="post">
-                                                <input type="hidden" name="tokenDelete" value="<?php echo htmlspecialchars($token); ?>">
+                                                <input type="hidden" name="tokenDelete"
+                                                    value="<?php echo htmlspecialchars($token); ?>">
                                                 <input type="hidden" name="idTrip" value="<?php echo $trip->getId(); ?>">
-                                                <button type="submit" name="idDelete" value="idDelete" class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">
+                                                <input type="hidden" name="dateTrip" value="<?php echo $trip->getDepartureDate(); ?>">
+                                                <input type="hidden" name="departureTrip" value="<?php echo $trip->getDepartureCity(); ?>">
+                                                <input type="hidden" name="arrivalTrip" value="<?php echo $trip->getArrivalCity(); ?>">
+                                                <button type="submit" name="idDelete" value="idDelete"
+                                                    class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">
                                                     Annuler
                                                 </button>
                                             </form>
 
                                             <form method="post">
-                                                <input type="hidden" name="tokenStart" value="<?php echo htmlspecialchars($token); ?>">
+                                                <input type="hidden" name="tokenStart"
+                                                    value="<?php echo htmlspecialchars($token); ?>">
                                                 <input type="hidden" name="idTripStart" value="<?php echo $trip->getId(); ?>">
-                                                <button type="submit" name="idStart" value="idStart" class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                                <button type="submit" name="idStart" value="idStart"
+                                                    class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                                                     Démarré
                                                 </button>
                                             </form>
                                         <?php } elseif ($satus === "Démarrer") {?>
                                             <form method="post">
-                                                <input type="hidden" name="tokenEnd" value="<?php echo htmlspecialchars($token); ?>">
+                                                <input type="hidden" name="tokenEnd"
+                                                    value="<?php echo htmlspecialchars($token); ?>">
                                                 <input type="hidden" name="idTripEnd" value="<?php echo $trip->getId(); ?>">
-                                                <button type="submit" name="endSubmit" value="endSubmit" class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                                <button type="submit" name="endSubmit" value="endSubmit"
+                                                    class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                                                     Arrivé à destination
                                                 </button>
                                             </form>
@@ -170,16 +178,22 @@
                                         if ($reservStatus === "Avis en attente de validation" || $reservStatus === "Note enregistré") {
                                     } elseif ($status === "Programmé") {?>
                                     <form method="post">
-                                        <input type="hidden" name="tokenDeleteReserva" value="<?php echo htmlspecialchars($token); ?>">
+                                        <input type="hidden" name="tokenDeleteReserva"
+                                            value="<?php echo htmlspecialchars($token); ?>">
                                         <input type="hidden" name="idReservation" value="<?php echo $reservation->getId(); ?>">
-                                        <input type="hidden" name="seatsReserved" value="<?php echo $reservation->getNumSeatsBookes(); ?>">
-                                        <input type="hidden" name="idCarSharing" value="<?php echo $reservation->getCarSharingId(); ?>">
+                                        <input type="hidden" name="seatsReserved"
+                                            value="<?php echo $reservation->getNumSeatsBookes(); ?>">
+                                        <input type="hidden" name="idCarSharing"
+                                            value="<?php echo $reservation->getCarSharingId(); ?>">
                                         <input type="hidden" name="credits" value="<?php echo $reservation->getPrices(); ?>">
-                                        <button type="submit" name="deleteReservation" value="deleteReservation" class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">Annuler</button>
+                                        <button type="submit" name="deleteReservation" value="deleteReservation"
+                                            class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">Annuler</button>
                                     </form>
                                 <?php } elseif ($status === "Arrivée à destination") {
                                         $id = $reservation->getId(); ?>
-                                    <a href="/index.php?controller=car-sharing&action=feedbacks&reservation=<?php echo $id ?>" class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">Donnez votre avis</a>
+                                    <a href="/index.php?controller=car-sharing&action=feedbacks&reservation=<?php echo $id ?>"
+                                        class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">Donnez
+                                        votre avis</a>
                                 <?php }?>
                             </div>
                         </div>

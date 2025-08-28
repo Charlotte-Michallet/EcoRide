@@ -27,9 +27,6 @@
                         <p class="block w-full py-3 text-gray-700"> Role
                             <?php echo " : " . htmlspecialchars($user->getRole()); ?>
                         </p>
-                        <p class="block w-full py-3 text-gray-700"> A le permis
-                            <?php echo " : " . htmlspecialchars($license); ?>
-                        </p>
                     </div>
 
                 </div>

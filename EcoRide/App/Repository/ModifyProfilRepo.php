@@ -63,20 +63,6 @@ class ModifyProfilRepo extends Repository
         return $userInfo;
     }
 
-    public function UpadateLicense(bool $drivers_license, int $id)
-    {
-        $query = $this->pdo->prepare("UPDATE users SET drivers_license = :license WHERE id = :id;");
-
-        $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
-        $query->bindValue(":license", $drivers_license, $this->pdo::PARAM_BOOL);
-        $query->execute();
-
-        // Hydration
-        $userInfo = new User();
-        $userInfo->setDriversLicense($drivers_license);
-        return $userInfo;
-    }
-
     public function UpadatePassword(string $password, int $id)
     {
         $query = $this->pdo->prepare("UPDATE users SET password = :password WHERE id = :id;");

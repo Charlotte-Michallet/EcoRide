@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\CarSharing\DetailsContr;
 use App\Controller\CarSharing\ReservationContr;
+use App\Repository\FeedbackRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\TripRepository;
 
@@ -58,6 +59,10 @@ class CarSharingController extends Router
         $detailsCont   = new DetailsContr();
         $othersdetails = $detailsCont->details($id);
 
+        $userId       = $details->getDriverId();
+        $feedbackRepo = new FeedbackRepository();
+        $feedbacks    = $feedbackRepo->showFeedbackTrips($userId);
+
         $cretis = $details->getPrice();
 
         $numSeatsBookesString = $_GET["seats"];
@@ -67,7 +72,7 @@ class CarSharingController extends Router
 
         $this->particiate();
 
-        $this->render("carSharing/detailsCarSharing", ["token" => $currentToken, "details" => $details, "moreDetails" => $othersdetails, "totalPrice" => $cretisTotal]);
+        $this->render("carSharing/detailsCarSharing", ["token" => $currentToken, "details" => $details, "moreDetails" => $othersdetails, "totalPrice" => $cretisTotal, "feedbacks" => $feedbacks]);
 
     }
     protected function feedbacks()

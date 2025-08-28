@@ -2,6 +2,7 @@
 namespace App\Repository;
 
 use App\Entity\Preferences;
+use App\Entity\Trip;
 use App\Entity\User;
 
 class UserRepository extends Repository
@@ -9,7 +10,7 @@ class UserRepository extends Repository
     public function userInfo(int $id)
     {
 
-        $query = $this->pdo->prepare("SELECT u.id, u.username, u.email, u.date_of_birth, u.photo, r.role, u.credits, u.drivers_license FROM users u INNER JOIN roles r ON u.id_role = r.id WHERE u.id = :id;");
+        $query = $this->pdo->prepare("SELECT u.id, u.username, u.email, u.date_of_birth, u.photo, r.role, u.credits FROM users u INNER JOIN roles r ON u.id_role = r.id WHERE u.id = :id;");
 
         // bind value from form to query
         $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
@@ -28,7 +29,6 @@ class UserRepository extends Repository
         $userInfo->setPhotoUrl($user["photo"]);
         $userInfo->setCredits($user["credits"]);
         $userInfo->setRole($user["role"]);
-        $userInfo->setDriversLicense($user["drivers_license"]);
 
         return $userInfo;
     }
@@ -97,6 +97,23 @@ class UserRepository extends Repository
         $userCredits = $userinfo->setCredits($creditUserd);
 
         return $userCredits;
+    }
+
+    public function driverNotes(float $notes, int $id)
+    {
+        $query = $this->pdo->prepare("UPDATE users SET notes = :notes WHERE id = :id ");
+
+        $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
+        $query->bindValue(":notes", $notes);
+        $query->execute();
+
+        $drivernotes = $query->fetch(\PDO::FETCH_ASSOC);
+
+        // Hydration
+        $userInfo = new Trip();
+        $userInfo->setNotes($drivernotes["notes"]);
+
+        return $userInfo;
     }
 
 }

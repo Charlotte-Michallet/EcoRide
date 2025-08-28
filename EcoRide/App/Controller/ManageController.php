@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use Admin\App\Controller\CompanyContr;
+use App\Controller\Auth\NotesContr;
 use App\Repository\FeedbackRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\TripRepository;
@@ -128,6 +129,10 @@ class ManageController extends Router
             if (isset($_POST["validateFeedback"]) && $_POST["validateFeedback"]) {
                 $statusReservation = "Note enregistré";
                 $feedbackstatus    = "Validé";
+
+                $notesContr = new NotesContr();
+                $notesContr->notesAverageDriver($idFeedback, $idreservation);
+
             }
 
             $resarepo          = new ReservationRepository();

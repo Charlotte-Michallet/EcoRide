@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\Auth\ProfilContr;
 use App\Repository\CarRepository;
+use App\Repository\FeedbackRepository;
 use App\Repository\UserRepository;
 
 class AuthController extends Router
@@ -79,22 +80,13 @@ class AuthController extends Router
             $userRepo = new UserRepository();
             $user     = $userRepo->userInfo($userId);
 
-            $license = $user->isDriversLicense();
-
-            if ($license === false) {
-                $license = "Non";
-
-            } elseif ($license === true) {
-                $license = "Oui";
-
-            } else {
-                $license = "Non renseigné";
-            }
-
             $profilContr = new ProfilContr();
             $preferences = $profilContr->Preferences($userId);
 
-            $this->render("auth/profil", ["token" => $currentToken, "user" => $user, "license" => $license, "preferences" => $preferences]);
+            $feedbackRepo = new FeedbackRepository();
+            $feedbacks    = $feedbackRepo->showFeedback($userId);
+
+            $this->render("auth/profil", ["token" => $currentToken, "user" => $user, "preferences" => $preferences, "feedbacks" => $feedbacks]);
 
             $this->deleteUserMethod();
         } else {

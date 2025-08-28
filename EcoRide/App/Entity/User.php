@@ -12,7 +12,6 @@ class User
     protected ?int $credits;
     protected int $id_role;
     protected string $role;
-    protected ?bool $drivers_license = null;
     protected string $active;
 
     /**
@@ -173,24 +172,6 @@ class User
     public function setRole(string $role): self
     {
         $this->role = $role;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of drivers_license
-     */
-    public function isDriversLicense(): ?bool
-    {
-        return $this->drivers_license;
-    }
-
-    /**
-     * Set the value of drivers_license
-     */
-    public function setDriversLicense(?bool $drivers_license): self
-    {
-        $this->drivers_license = $drivers_license;
 
         return $this;
     }

@@ -54,6 +54,7 @@ class ShowTripContr extends TripContr
         if (isset($_SESSION["id"]) && ! empty($_SESSION["id"])) {
             $user_id = $_SESSION["id"];
         }
+
         $tripRepo = new TripRepository();
 
         $checkTrip = $tripRepo->findTrip($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id);
