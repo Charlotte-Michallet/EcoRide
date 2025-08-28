@@ -73,18 +73,6 @@ class ModifyApi
                     return;
                 }
 
-            } elseif (isset($result["license"])) {
-                $resultLicense = $result["license"];
-                $license       = htmlspecialchars(trim($resultLicense));
-
-                $userError = $userModify->checkLicense($license, $user_id);
-                if (! empty($userError)) {
-                    Router::jsonResponse(["status" => "error", "message" => $userError], 422);
-                    return;
-                } else {
-                    Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
-                    return;
-                }
             } elseif (isset($result["password"])) {
                 $resultPassword  = $result["password"];
                 $resultPwdVerify = $result["pwdVerify"];

@@ -4,7 +4,7 @@
 
 
     <!-- Profil info and feedback -->
-    <div class="max-w-[85rem] px-4 py-5 sm:px-2 lg:px-4 lg:py-14 mx-auto">
+    <div class="max-w-[85rem] px-4 py-5 sm:px-2 mx-auto">
 
         <div class="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-center lg:justify-between">
 
@@ -12,7 +12,7 @@
             <div class="container lg:col-span-4 lg:col-start-1 min-h-screen px-6 mx-auto">
                 <div class="w-full max-w-md">
 
-                    <h2 class="mb-2 text-3xl text-gray-800 font-bold lg:text-4xl dark:text-neutral-200">
+                    <h2 class="mb-2 text-3xl text-gray-800 font-bold lg:text-4xl">
                         Mon profil
                     </h2>
 
@@ -30,9 +30,6 @@
                         <p class="block w-full py-3 text-gray-700"> Role
                             <?php echo " : " . htmlspecialchars($user->getRole()); ?>
                         </p>
-                        <p class="block w-full py-3 text-gray-700"> A le permis
-                            <?php echo " : " . htmlspecialchars($license); ?>
-                        </p>
                     </div>
 
                 </div>
@@ -42,7 +39,7 @@
             <div class="container lg:col-span-4 min-h-screen px-6 mx-auto">
                 <div class="w-full max-w-md">
 
-                    <h2 class="mb-2 text-3xl text-gray-800 font-bold lg:text-4xl dark:text-neutral-200">
+                    <h2 class="mb-2 text-3xl text-gray-800 font-bold lg:text-4xl">
                         Mes préferences
                     </h2>
 
@@ -88,5 +85,11 @@
             </div>
         </div>
         <!-- End Grid -->
+    </div>
+
+    <div>
+        <h2 class="mb-2 text-3xl text-gray-800 font-bold lg:text-4xl dark:text-neutral-200">
+                        Mes avis
+                    </h2>
     </div>
 </section>

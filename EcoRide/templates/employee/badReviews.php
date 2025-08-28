@@ -13,7 +13,7 @@
         <div class="mx-auto mt-8 xl:mt-10 max-w-7xl">
 
             <?php foreach ($feedbacks as $feedback) {?>
-                <div class="p-6 bg-gray-100 rounded-lg">
+                <div class="p-6 bg-gray-100 rounded-lg my-8">
                     <div class="flex justify-between">
                         <h2 class="font-semibold"> Notes et avis passager</h2>
                         <p>Numéro de reservation : <span><?php echo $feedback->getNumberReser() ?></span> </p>
@@ -31,8 +31,6 @@
                                 <p class="leading-loose"><?php echo $feedback->getFeedback() ?></p>
                             <?php }?>
 
-
-
                             <div class="flex items-center mt-3">
                                 <img class="object-cover rounded-full w-10 h-10"
                                     src="<?php echo $feedback->getPassengersPhoto() ?>" alt="passager photo">
@@ -42,7 +40,7 @@
                                 </div>
 
                                 <div class="mx-4">
-                                    <h3 class="font-semibold"> Email :                                                                                                                                             <?php echo $feedback->getPassengersEmail() ?></h3>
+                                    <h3 class="font-semibold">Email : <span><?php echo $feedback->getPassengersEmail() ?></span></h3>
                                 </div>
                             </div>
                         </div>
@@ -67,8 +65,6 @@
                             </p>
                         </div>
                     </div>
-
-                    <div class="leading-loose text-gray-500"></div>
 
                     <div class="mt-7">
                         <h2 class="font-semibold">Conducteur : </h2>

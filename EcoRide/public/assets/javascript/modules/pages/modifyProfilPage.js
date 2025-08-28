@@ -8,7 +8,6 @@ const forms = document.querySelectorAll("form");
 const inputs = document.querySelectorAll("input");
 
 const selectRoles = document.querySelectorAll("input[name='userRoles']");
-const selectLicense = document.querySelectorAll("input[name='hasLicense']");
 
 const selectAniamls = document.querySelectorAll("input[name='animalsAllowed']");
 const selectSmocking = document.querySelectorAll(
@@ -17,7 +16,7 @@ const selectSmocking = document.querySelectorAll(
 const textPref = document.getElementById("otherPreferences");
 
 let data, token;
-let role, username, email, photo, license, password, pwdVerify;
+let role, username, email, photo, password, pwdVerify;
 let animal, smoking, preferences;
 
 // Visibility of password and verify
@@ -155,20 +154,6 @@ const photoCheck = (files) => {
     }
 };
 
-selectLicense.forEach((radio) => {
-    radio.addEventListener("input", (e) => {
-        let hasLicense = e.target.value;
-
-        if (!hasLicense) {
-            errorDisplay("license", "Veillez cocher si vous avez le permis.");
-            license = null;
-        } else {
-            license = hasLicense;
-            errorDisplay("license", "", true);
-        }
-    });
-});
-
 // PASSWORD
 //verify password
 const passwordCheck = (value) => {
@@ -304,20 +289,6 @@ forms.forEach((form) => {
                 }
                 break;
 
-            case "formlicense":
-                data = checkFormLicense(license, token);
-
-                if (license) {
-                    errorDisplay("license", "", true);
-                    API(data, token, "license");
-                } else {
-                    errorDisplay(
-                        "license",
-                        "Veillez cocher si vous avez le permis."
-                    );
-                }
-                break;
-
             case "formpassword":
                 data = checkFormPwd(password, pwdVerify, token);
 
@@ -397,18 +368,6 @@ const checkFormEmail = (email, token) => {
 
     const data = {
         email: emailSanitized,
-        token,
-    };
-    return data;
-};
-
-const checkFormLicense = (license, token) => {
-    // if empty dont send
-    token = tokenLicense.value;
-    const licenseSanitized = escapeHtml(license);
-
-    const data = {
-        license: licenseSanitized,
         token,
     };
     return data;

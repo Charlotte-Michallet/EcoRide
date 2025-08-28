@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use Admin\App\Controller\CompanyContr;
-use App\Controller\Employee\ManageFeedbacksContr;
 use App\Repository\FeedbackRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\TripRepository;
@@ -42,13 +41,14 @@ class ManageController extends Router
         $currentToken = $tokenObj->getGenerateToken();
 
         $feedbackRepo = new FeedbackRepository();
-        $feedbacks    = $feedbackRepo->showAllFeedback();
+        $feedbacks    = $feedbackRepo->validationFeedback();
+        $allfeedbacks = $feedbackRepo->showAllFeedbacks();
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->manageFeedbackMethod();
         }
 
-        $this->render("employee/manageFeedback", ["token" => $currentToken, "feedbacks" => $feedbacks]);
+        $this->render("employee/manageFeedback", ["token" => $currentToken, "feedbacks" => $feedbacks, "allfeedbacks" => $allfeedbacks]);
     }
     protected function badReviews()
     {
@@ -113,29 +113,32 @@ class ManageController extends Router
         $isValid        = $token->validateToken($submittedToken);
 
         if ($isValid) {
-            $feedbackidString      = $_POST["idFeedback"];
-            $idreservationidstring = $_POST["idreservation"];
-            //                 $numSeatsBookesString = $_GET["refuseFeedback"];
-            //                 $creditsUsedString    = $_POST["creditsUsed"];
-            $carSharingIdString = $_POST["idcarsharing"];
 
-            $feedbackid      = (int) $feedbackidString;
-            $idreservationid = (int) $idreservationidstring;
-            $carSharingId    = (int) $carSharingIdString;
+            $idFeedbackString    = $_POST["idFeedback"];
+            $idreservationString = $_POST["idreservation"];
+
+            $idreservation = (int) $idreservationString;
+            $idFeedback    = (int) $idFeedbackString;
 
             if (isset($_POST["refuseFeedback"]) && $_POST["refuseFeedback"]) {
-                $statusfeedback    = "Refusé";
-                $statusreservation = "L'avis est refusé";
-                $paymentStatus     = "Payement Refusé en attente de contact";
-                $manageContr       = new ManageFeedbacksContr();
-                $manageContr->manageFeedback($statusfeedback, $feedbackid, $idreservationid, $statusreservation, $paymentStatus);
+                $statusReservation = "Note enregistré";
+                $feedbackstatus    = "Refusé";
             }
 
-            // if (isset($_POST["refuseFeedback"]) && $_POST["refuseFeedback"]) {
-            //     # code...
-            // }
+            if (isset($_POST["validateFeedback"]) && $_POST["validateFeedback"]) {
+                $statusReservation = "Note enregistré";
+                $feedbackstatus    = "Validé";
+            }
 
-            header("Location: /index.php?controller=manage&action=manageFeedbacks");
+            $resarepo          = new ReservationRepository();
+            $reservationStatus = $resarepo->updateRervationStatus($idreservation, $statusReservation);
+
+            $feedbackRepo   = new FeedbackRepository();
+            $statusFeedback = $feedbackRepo->Upadatefeedback($feedbackstatus, $idFeedback);
+
+            if ($reservationStatus && $statusFeedback) {
+                header("Location: /index.php?controller=manage&action=manageFeedbacks");
+            }
         }
     }
 }

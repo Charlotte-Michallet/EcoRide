@@ -1,12 +1,11 @@
 <section id="credit" class="mt-5">
-
     <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php"?>
 
-    <div class="bg-white dark:bg-gray-900">
+    <div class="bg-white">
         <div class="container px-6 py-8 mx-auto">
             <h2 class="text-3xl font-semibold text-center capitalize">Crédit</h2>
 
-            <p class="max-w-2xl mx-auto mt-4 text-center xl:mt-6">
+            <p class="text-4xl mx-auto mt-4 text-center xl:mt-6">
                 Vous pous remettre du credis
             </p>
 
@@ -14,8 +13,8 @@
                 <div class="w-full p-8 space-y-8 text-center border border-gray-200 rounded-lg">
                     <p class="font-medium text-gray-500 uppercase ">Votre crédits</p>
 
-                    <p class="text-4xl font-semibold text-gray-800">
-                        votre credits
+                    <p class="text-3xl font-semibold text-gray-800">
+                       <span><?php echo $credits ?> </span> Crédits
                     </p>
                 </div>
 

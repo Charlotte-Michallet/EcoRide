@@ -81,33 +81,6 @@
 
                         </div>
                     </form>
-                    <?php if ($_SESSION["role"] !== 4) {?>
-
-                    <!-- License -->
-                    <form method="post" id="formlicense" class="col-span-4 flex">
-                        <div class="col-span-2">
-                            <fieldset class="flex justify-between col-span-2">
-                                <legend class="sr-only">Avez vous le permis?</legend>
-                                <div>
-                                    <label for="gotLicense" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
-                                        <p class="text-gray-700">Oui</p>
-                                        <input type="radio" name="hasLicense" value="gotLicense" id="gotLicense" class="sr-only"/>
-                                    </label>
-                                </div>
-
-                                <div>
-                                    <label for="noLicense" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
-                                        <p>Non</p>
-                                        <input type="radio" name="hasLicense" value="noLicense" id="noLicense" class="sr-only" />
-                                    </label>
-                                </div>
-                            </fieldset>
-                            <p class="hidden text-xs text-red-600 mt-2" id="licenseError"></p>
-                            <input type="hidden" id="tokenLicense" value="<?php echo htmlspecialchars($token) ?>">
-                            <button type="submit" class="btn flex items-center justify-between px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg col-start-1">Ajouter le permis</button>
-                        </div>
-                    </form>
-                    <?php }?>
 
                     <!-- Password -->
                     <form method="post" id="formpassword" class="col-span-4">

@@ -197,8 +197,8 @@ const api = async (feedbackData) => {
             succes.classList.remove("hidden");
             succes.textContent = `Votre message a bienété envoyé.`;
             setTimeout(() => {
-                // window.location.href =
-                //     "/index.php?controller=trips&action=manageTrip";
+                window.location.href =
+                    "/index.php?controller=trips&action=manageTrip";
                 succes.classList.add("hidden");
                 succes.textContent = "";
             }, 1000);

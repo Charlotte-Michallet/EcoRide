@@ -13,7 +13,7 @@
 
                         <div class="flex justify-between gap-x-2 pb-2">
                             <div class="flex items-center gap-x-2">
-                                <p class="font-semibold">                                                                                                                                                                                                                                     <?php echo $trip->getDepartureDate(); ?></span></p>
+                                <p class="font-semibold">                                                                                                                                                                                                                                                                                                                                                                                                                <?php echo $trip->getDepartureDate(); ?></span></p>
                             </div>
                             <div class="flex items-center gap-x-2">
                                 <p class="font-semibold">
@@ -78,7 +78,7 @@
 
                             <div class="flex justify-between gap-x-2 pb-2">
                                 <div class="flex items-center gap-x-2">
-                                    <p class="font-semibold">                                                                                                                                                                                                                                                     <?php echo $reservation->getDepartureDate(); ?></span></p>
+                                    <p class="font-semibold">                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php echo $reservation->getDepartureDate(); ?></span></p>
                                 </div>
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold">
@@ -153,7 +153,14 @@
                                         <p class="font-semibold"><?php echo $reservation->getStatusCarSharing(); ?></p>
                                     </div>
                                 </div>
-
+                                <?php $status = $reservation->getStatusCarSharing();
+                                        $reservStatus                                 = $reservation->getStatus();
+                                        if ($reservStatus === "Avis en attente de validation" || $reservStatus === "Note enregistré") {
+                                    } else {?>
+                                 <div class="flex items-center gap-x-2 ">
+                                    <a href="/index.php?controller=car-sharing&action=feedbacks&reservation=<?php echo $id ?>" class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">Donnez votre avis</a>
+                                 </div>
+                                        <?php }?>
                             </div>
                         </div>
                     </div>

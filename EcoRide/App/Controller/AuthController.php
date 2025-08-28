@@ -150,8 +150,11 @@ class AuthController extends Router
             $tokenObj     = new TokenCsrf();
             $currentToken = $tokenObj->getGenerateToken();
 
-            // // show page
-            $this->render("auth/credit", ["token" => $currentToken]);
+            $userRepo = new UserRepository();
+            $credits  = $userRepo->usercredits($user_id);
+
+            // show page
+            $this->render("auth/credit", ["token" => $currentToken, "credits" => $credits]);
         } else {
             header("Location: /index.php");
         }
