@@ -20,8 +20,8 @@ class FilterApi
         $filter = [
             "ecoTrip"     => htmlspecialchars(trim($result["btnEco"] ?? '')),
             "starsNumber" => isset($result["starsNumber"]) ? (int) $result["starsNumber"] : null,
-            "priceMax"    => isset($result["priceMaxValue"]) ? (int) $result["priceMaxValue"] : null,
-            "timeMax"     => htmlspecialchars(trim($result["timeMaxValue"] ?? '')),
+            "priceMax"    => isset($result["priceMax"]) ? (int) $result["priceMax"] : null,
+            "timeMax"     => htmlspecialchars(trim($result["timeMax"] ?? '')),
         ];
 
         $departureCity = $result["departure"];

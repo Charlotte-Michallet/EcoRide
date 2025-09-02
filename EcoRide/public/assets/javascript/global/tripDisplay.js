@@ -36,28 +36,35 @@ export function show(trips, seats) {
     starsContainer.className = "w-1/7";
     filterForm.appendChild(starsContainer);
 
+    const labelstarsNum = document.createElement("label");
+    labelstarsNum.htmlFor = "starsNum";
+    labelstarsNum.textContent = "Etoiles minimum";
+    starsContainer.appendChild(labelstarsNum);
+
     const starsSelect = document.createElement("select");
     starsSelect.className =
-        "py-3 px-3 pe-3 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none";
+        "py-3 px-3 pe-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none";
+    starsSelect.name = "starsNum";
+    starsSelect.id = "starsNum";
     starsContainer.appendChild(starsSelect);
 
     const optionDefault = document.createElement("option");
-    optionDefault.textContent = "Nombre min étoiles";
+    optionDefault.textContent = "Nombre d'étoiles";
     optionDefault.value = "";
     optionDefault.selected = true;
     starsSelect.appendChild(optionDefault);
 
     const optionData = [
-        { text: "⭐", value: 1 },
-        { text: "⭐⭐", value: 2 },
-        { text: "⭐⭐⭐", value: 3 },
-        { text: "⭐⭐⭐⭐", value: 4 },
-        { text: "⭐⭐⭐⭐⭐", value: 5 },
+        { text: "1 étoile", value: 1 },
+        { text: "2 étoiles", value: 2 },
+        { text: "3 étoiles", value: 3 },
+        { text: "4 étoiles", value: 4 },
+        { text: "5 étoiles", value: 5 },
     ];
 
     optionData.forEach((data) => {
         const option = document.createElement("option");
-        option.text = data.text;
+        option.textContent = data.text;
         option.value = data.value;
         starsSelect.appendChild(option);
     });
@@ -321,20 +328,21 @@ export function show(trips, seats) {
     });
 
     starsSelect.addEventListener("change", (e) => {
-        let stars = e.target.value;
-        console.log(stars);
+        let starsstring = e.target.value;
 
-        if (stars === "") {
+        if (starsstring === "") {
             starsNumber = null;
             errortext.textContent = "";
-        } else if (stars < 1 || stars > 5) {
-            errortext.textContent =
-                "Les étoiles doit etre compris entre 1 et 5.";
-            starsNumber = null;
         } else {
-            stars = parseInt(e.target.value, 10);
-            starsNumber = stars;
-            errortext.textContent = "";
+            let stars = parseInt(starsstring, 10);
+            if (stars < 1 || stars > 5) {
+                errortext.textContent =
+                    "Les étoiles doit etre compris entre 1 et 5.";
+                starsNumber = null;
+            } else {
+                starsNumber = stars;
+                errortext.textContent = "";
+            }
         }
     });
 
@@ -386,6 +394,7 @@ export function show(trips, seats) {
 
         if (
             btnEco !== null ||
+            starsNumber !== null ||
             priceMaxValue !== null ||
             timeMaxValue !== null
         ) {
@@ -398,8 +407,8 @@ export function show(trips, seats) {
             filterData = {
                 btnEco: btnEco || null,
                 starsNumber: starsNumber || null,
-                priceMaxValue: priceMaxValue || null,
-                timeMaxValue: timeMaxValue || null,
+                priceMax: priceMaxValue || null,
+                timeMax: timeMaxValue || null,
                 departure: trips[0].departure,
                 arrival: trips[0].arrival,
                 date: dateTrip,

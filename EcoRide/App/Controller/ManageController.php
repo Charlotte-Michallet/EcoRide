@@ -132,7 +132,6 @@ class ManageController extends Router
 
                 $notesContr = new NotesContr();
                 $notesContr->notesAverageDriver($idFeedback, $idreservation);
-
             }
 
             $resarepo          = new ReservationRepository();

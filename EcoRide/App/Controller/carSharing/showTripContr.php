@@ -139,10 +139,14 @@ class ShowTripContr
 
     public function InputfilterEmpty()
     {
-        if (empty($this->filter["ecoTrip"]) && empty($this->filter["numberStars"]) && empty($this->filter["priceMax"]) && empty($this->filter["timeMax"])) {
-            $result = true;
-        } else {
+        if ((isset($this->filter["ecoTrip"]) && $this->filter["ecoTrip"] !== null) ||
+            (isset($this->filter["numberStars"]) && $this->filter["numberStars"] !== null) ||
+            (isset($this->filter["priceMax"]) && $this->filter["priceMax"] !== null) ||
+            (isset($this->filter["timeMax"]) && $this->filter["timeMax"] !== null)
+        ) {
             $result = false;
+        } else {
+            $result = true;
         }
         return $result;
     }
