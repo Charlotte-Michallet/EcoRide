@@ -88,7 +88,15 @@ class ApiController
                 } else {
                     Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour l'inscription."], 405);
                 }
+                break;
 
+            case 'filter':
+                if ($method === "POST") {
+                    $showApiControl = new FilterApi();
+                    $showApiControl->filterData();
+                } else {
+                    Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour l'inscription."], 405);
+                }
                 break;
 
             case 'participate':

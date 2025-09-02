@@ -9,7 +9,6 @@ class FindItinaryApi
 {
     public function findItinary()
     {
-
         $data   = file_get_contents("php://input");
         $result = json_decode($data, true);
 
@@ -20,8 +19,8 @@ class FindItinaryApi
 
         // get data from form
         $resultSubmittedToken = $result["token"];
-        $resultnumPlaces      = $result["numPlaces"];
-        $arrivalCity          = $result["arrivalCity"];
+        $resultnumPlaces      = $result["numberPlaces"];
+        $arrivalCity          = $result["arriCity"];
         $resultdateDeparture  = $result["dateDeparture"];
         $departCity           = $result["departCity"];
 
@@ -31,19 +30,19 @@ class FindItinaryApi
         $numPlacesString = htmlspecialchars(trim($resultnumPlaces));
 
         $numPlaces = (int) $numPlacesString;
+        $filter    = [];
 
         // Check token CSRF
         $token   = new TokenCsrf();
         $isValid = $token->validateToken($submittedToken);
 
         if ($isValid) {
-            $showTripContr = new ShowTripContr($departCity, $arrivalCity, $dateDeparture, $numPlaces);
+            $showTripContr = new ShowTripContr($departCity, $arrivalCity, $dateDeparture, $numPlaces, $filter);
             $checkInputs   = $showTripContr->checkInputs();
 
             if (! empty($checkInputs)) {
                 Router::jsonResponse(["status" => "error", "message" => $checkInputs], 402);
                 return;
-
             } else {
                 $trips = $showTripContr->getTrips();
 
@@ -71,6 +70,7 @@ class FindItinaryApi
                             "photo"      => $trip->getPhoto(),
                             "kilometers" => $trip->getKilometers(),
                             "travelTime" => $trip->getTravel_time(),
+                            "notes"      => $trip->getNotes(),
                         ];
                     }
                     Router::jsonResponse(["status" => "success", "message" => "La création de trajer réussi", "trips" => $tripsArray], 200);
@@ -79,6 +79,5 @@ class FindItinaryApi
         } else {
             Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);
         }
-
     }
 }

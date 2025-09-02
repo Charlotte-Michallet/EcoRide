@@ -80,7 +80,7 @@ CREATE TABLE feedbacks(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
     user_id INT(11) NOT NULL,
     trip_status VARCHAR(255) NOT NULL,
-    note INT,
+    note INT(11),
     feedback TEXT,
     status VARCHAR(50),
     reservation_id INT(11),
@@ -103,7 +103,7 @@ ALTER TABLE car_sharing ADD status VARCHAR(255);
 ALTER TABLE car_sharing ADD kilometers INT(11);
 ALTER TABLE reservations ADD totalPrice INT(11);
 ALTER TABLE car_sharing ADD travel_time TIME;
-ALTER TABLE users ADD notes VARCHAR(255);
+ALTER TABLE users ADD notes FLOAT;
 ALTER TABLE users ADD active VARCHAR(255);
 ALTER TABLE reservations ADD  transactionId VARCHAR(255);
 ALTER TABLE users DROP COLUMN drivers_license;

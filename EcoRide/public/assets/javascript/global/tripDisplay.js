@@ -1,6 +1,134 @@
+const API_ENDPOINT = "index.php?controller=api&resource=search&action=filter";
+// filter
 export function show(trips, seats) {
     tripResults.textContent = "";
 
+    // filter
+    const filterContainer = document.createElement("div");
+    filterContainer.className = "items-center w-7/10";
+    tripResults.appendChild(filterContainer);
+
+    const errorContainer = document.createElement("div");
+    errorContainer.className = "items-center w-full";
+    filterContainer.appendChild(errorContainer);
+
+    const errortext = document.createElement("p");
+    errortext.className = "text-xs text-red-600 mt-2";
+    errorContainer.appendChild(errortext);
+
+    // ajouter form
+    const filterForm = document.createElement("form");
+    filterForm.className = "flex justify-between items-center w-full";
+    filterContainer.appendChild(filterForm);
+
+    const EcoContainer = document.createElement("div");
+    EcoContainer.className = "w-1/7";
+    filterForm.appendChild(EcoContainer);
+
+    const EcoBtn = document.createElement("button");
+    EcoBtn.className =
+        "py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-600 focus:outline-hidden focus:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none";
+    EcoBtn.textContent = "Voyage écologique";
+    EcoBtn.setAttribute("type", "button");
+    EcoContainer.appendChild(EcoBtn);
+
+    const starsContainer = document.createElement("div");
+    starsContainer.className = "w-1/7";
+    filterForm.appendChild(starsContainer);
+
+    const starsSelect = document.createElement("select");
+    starsSelect.className =
+        "py-3 px-3 pe-3 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none";
+    starsContainer.appendChild(starsSelect);
+
+    const optionDefault = document.createElement("option");
+    optionDefault.textContent = "Nombre min étoiles";
+    optionDefault.value = "";
+    optionDefault.selected = true;
+    starsSelect.appendChild(optionDefault);
+
+    const optionData = [
+        { text: "⭐", value: 1 },
+        { text: "⭐⭐", value: 2 },
+        { text: "⭐⭐⭐", value: 3 },
+        { text: "⭐⭐⭐⭐", value: 4 },
+        { text: "⭐⭐⭐⭐⭐", value: 5 },
+    ];
+
+    optionData.forEach((data) => {
+        const option = document.createElement("option");
+        option.text = data.text;
+        option.value = data.value;
+        starsSelect.appendChild(option);
+    });
+
+    const priceMaxContainer = document.createElement("div");
+    priceMaxContainer.className = "w-1/7";
+    filterForm.appendChild(priceMaxContainer);
+
+    const labelPricesMax = document.createElement("label");
+    labelPricesMax.htmlFor = "maxPrice";
+    labelPricesMax.textContent = "Prix max";
+    priceMaxContainer.appendChild(labelPricesMax);
+
+    const priceInputContainer = document.createElement("div");
+    priceInputContainer.className = "flex items-center mt-2";
+    priceMaxContainer.appendChild(priceInputContainer);
+
+    const imputPricesMax = document.createElement("input");
+    imputPricesMax.type = "number";
+    imputPricesMax.id = "priceMax";
+    imputPricesMax.placeholder = "45 Crédits";
+    imputPricesMax.setAttribute("min", "1");
+    imputPricesMax.className =
+        "block w-full py-2.5 px-3 text-gray-700 placeholder-gray-400/70 border border-gray-200 rounded-lg focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40";
+    priceInputContainer.appendChild(imputPricesMax);
+
+    const timeMaxContainer = document.createElement("div");
+    timeMaxContainer.className = "w-1/7";
+    filterForm.appendChild(timeMaxContainer);
+
+    const labelTimeMax = document.createElement("label");
+    labelTimeMax.htmlFor = "timePrice";
+    labelTimeMax.textContent = "Temps trajets max";
+    timeMaxContainer.appendChild(labelTimeMax);
+
+    const timeInputContainer = document.createElement("div");
+    timeInputContainer.className = "relative flex items-center mt-2";
+    timeMaxContainer.appendChild(timeInputContainer);
+
+    const imputTimeMax = document.createElement("input");
+    imputTimeMax.type = "text";
+    imputTimeMax.id = "timeMax";
+    imputTimeMax.placeholder = "01:00";
+    imputTimeMax.className =
+        "block w-full py-2.5 px-3 text-gray-700 placeholder-gray-400/70 border border-gray-200 rounded-lg focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40";
+    timeInputContainer.appendChild(imputTimeMax);
+
+    const resetContainer = document.createElement("div");
+    resetContainer.className = "w-1/7";
+    filterForm.appendChild(resetContainer);
+
+    const resetBtn = document.createElement("button");
+    resetBtn.className =
+        "py-3 px-4 w-9/10 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-600 focus:outline-hidden focus:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none";
+    resetBtn.textContent = "Réinitialiser";
+    resetBtn.setAttribute("type", "reset");
+    resetContainer.appendChild(resetBtn);
+
+    const submitContainer = document.createElement("div");
+    submitContainer.className = "w-1/7";
+    filterForm.appendChild(submitContainer);
+
+    const submitBtn = document.createElement("button");
+    submitBtn.className =
+        "py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-600 focus:outline-hidden focus:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none";
+    submitBtn.textContent = "Appliquer les filtres";
+    submitBtn.setAttribute("type", "submit");
+    submitContainer.appendChild(submitBtn);
+
+    // TRIPS
+    // Date trip
     const containerDate = document.createElement("div");
     containerDate.className = "p-4 md:p-5";
     tripResults.appendChild(containerDate);
@@ -10,6 +138,7 @@ export function show(trips, seats) {
     textDate.textContent = trips[0].date;
     containerDate.appendChild(textDate);
 
+    // trip container
     trips.forEach((trip) => {
         const card = document.createElement("div");
         card.className = "pt-2 border border-gray-200 w-1/2 rounded-xl";
@@ -117,7 +246,7 @@ export function show(trips, seats) {
         containernotes.className = "flex items-center gap-x-2";
         const textNotes = document.createElement("p");
         textNotes.className = "font-semibold";
-        textNotes.textContent = "notes";
+        textNotes.textContent = `${trip.notes}/5 étoiles`;
         containernotes.appendChild(textNotes);
 
         containerUserInfo.appendChild(containerUsername);
@@ -162,5 +291,145 @@ export function show(trips, seats) {
 
         // insert all
         tripResults.appendChild(card);
+    });
+
+    // event listners
+    const formatTime = (time) => {
+        const parts = time.split(":");
+        if (parts.length === 2) {
+            let hour = parseInt(parts[0], 10);
+            let minutes = parseInt(parts[1], 10);
+
+            let hourFormated = hour < 10 ? "0" + hour : hour;
+            let minutesFormated = minutes < 10 ? "0" + minutes : minutes;
+
+            time = `${hourFormated}:${minutesFormated}:00`;
+        }
+        return time;
+    };
+
+    let btnEco = null;
+    let starsNumber = null;
+    let priceMaxValue = null;
+    let timeMaxValue = null;
+    let filterData = {};
+
+    EcoBtn.addEventListener("click", () => {
+        EcoBtn.className =
+            "py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-800 text-white hover:bg-teal-600 focus:outline-hidden focus:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none";
+        btnEco = "Electrique";
+    });
+
+    starsSelect.addEventListener("change", (e) => {
+        let stars = e.target.value;
+        console.log(stars);
+
+        if (stars === "") {
+            starsNumber = null;
+            errortext.textContent = "";
+        } else if (stars < 1 || stars > 5) {
+            errortext.textContent =
+                "Les étoiles doit etre compris entre 1 et 5.";
+            starsNumber = null;
+        } else {
+            stars = parseInt(e.target.value, 10);
+            starsNumber = stars;
+            errortext.textContent = "";
+        }
+    });
+
+    imputPricesMax.addEventListener("input", (e) => {
+        let price = parseFloat(e.target.value);
+
+        if (isNaN(price) || !Number.isInteger(price)) {
+            priceMaxValue = null;
+            errortext.textContent = "Veuillez entrer un nombre entier valide.";
+        } else if (price.length === 0) {
+            priceMaxValue = null;
+            errortext.textContent = "";
+        } else if (price < 0) {
+            priceMaxValue = null;
+            errortext.textContent = "Le prix doit être supérieur à zéro.";
+        } else {
+            priceMaxValue = price;
+            errortext.textContent = "";
+        }
+    });
+
+    imputTimeMax.addEventListener("change", (e) => {
+        let time = e.target.value;
+
+        if (!time.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)) {
+            timeMaxValue = null;
+            errortext.textContent = "Veillez remplir comme ce formmat 01:30";
+        } else if (time.length === 0) {
+            timeMaxValue = null;
+            errortext.textContent = "";
+        } else {
+            let timeformated = formatTime(time);
+            timeMaxValue = timeformated;
+            errortext.textContent = "";
+        }
+    });
+
+    resetBtn.addEventListener("click", () => {
+        btnEco = null;
+        starsNumber = null;
+        priceMaxValue = null;
+        timeMaxValue = null;
+
+        filterData = {};
+    });
+
+    filterForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (
+            btnEco !== null ||
+            priceMaxValue !== null ||
+            timeMaxValue !== null
+        ) {
+            errortext.textContent = "";
+
+            let datestring = trips[0].date;
+            const [day, month, year] = datestring.split("/");
+            let dateTrip = `${year}-${month}-${day}`;
+
+            filterData = {
+                btnEco: btnEco || null,
+                starsNumber: starsNumber || null,
+                priceMaxValue: priceMaxValue || null,
+                timeMaxValue: timeMaxValue || null,
+                departure: trips[0].departure,
+                arrival: trips[0].arrival,
+                date: dateTrip,
+                seats: seats,
+            };
+
+            try {
+                // fetch api entry point
+                const resp = await fetch(API_ENDPOINT, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(filterData),
+                });
+
+                const responseData = await resp.json();
+
+                if (resp.ok) {
+                    let trips = responseData.trips;
+                    let seats = filterData.seats;
+
+                    show(trips, seats);
+                    errortext.textContent = "";
+                } else {
+                    errortext.textContent = responseData.message;
+                }
+            } catch (error) {
+                alert(`Connexion echouer : ${error.message}`);
+            }
+        } else {
+            errortext.textContent = "Veuillez remplir au moins un champs.";
+        }
     });
 }

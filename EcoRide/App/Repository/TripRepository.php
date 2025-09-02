@@ -177,7 +177,8 @@ class TripRepository extends Repository
     public function findTrip($departCity, $arrival_city, $date_trip, $num_seats, $user_id)
     {
         try {
-            $check = $this->pdo->prepare("SELECT COUNT(*) FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' AND u.id != :user_id ;");
+
+            $check = $this->pdo->prepare("SELECT COUNT(*) FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city = :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' AND (u.id != :user_id OR :user_id IS NULL);");
 
             $check->bindValue(":departure", $departCity, $this->pdo::PARAM_STR);
             $check->bindValue(":arrival", $arrival_city, $this->pdo::PARAM_STR);
@@ -192,7 +193,7 @@ class TripRepository extends Repository
                 return "trajet trouvés";
 
             } else {
-                $check = $this->pdo->prepare("SELECT COUNT(*) FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date > :date ANDs. departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' AND u.id != :user_id;");
+                $check = $this->pdo->prepare("SELECT COUNT(*) FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date > :date AND s.departure_city = :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' AND (u.id != :user_id OR :user_id IS NULL);");
 
                 $check->bindValue(":departure", $departCity, $this->pdo::PARAM_STR);
                 $check->bindValue(":arrival", $arrival_city, $this->pdo::PARAM_STR);
@@ -218,17 +219,10 @@ class TripRepository extends Repository
     public function findotherTrip($departCity, $arrival_city, $date_trip, $num_seats, $userId)
     {
         try {
-            if (isset($userId) && ! empty($userId)) {
-                $query = $this->pdo->prepare("SELECT s.id, s.departure_date FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date > :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' AND u.id != :user_id ORDER BY departure_date ASC LIMIT 1;");
+            $query = $this->pdo->prepare("SELECT s.id, s.departure_date FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date > :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' AND (u.id != :user_id OR :user_id IS NULL) ORDER BY departure_date ASC LIMIT 1;");
 
-                // bind value from form to query
-                $query->bindValue(":user_id", $userId, $this->pdo::PARAM_INT);
-
-            } else {
-                $query = $this->pdo->prepare("SELECT s.id, s.departure_date FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' ORDER BY departure_date ASC, departure_hour ASC;");
-            }
-
-            // // bind value from form to query
+            // bind value from form to query
+            $query->bindValue(":user_id", $userId, $this->pdo::PARAM_INT);
             $query->bindValue(":departure", $departCity, $this->pdo::PARAM_STR);
             $query->bindValue(":arrival", $arrival_city, $this->pdo::PARAM_STR);
             $query->bindValue(":date", $date_trip, $this->pdo::PARAM_STR);
@@ -249,17 +243,10 @@ class TripRepository extends Repository
     public function showAllTrips($departCity, $arrival_city, $date_trip, $num_seats, $userId)
     {
         try {
-            if (isset($userId) && ! empty($userId)) {
-                $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.status, s.kilometers, s.travel_time, c.energy_type, u.username, u.photo, u.notes FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' AND u.id != :user_id ORDER BY departure_date ASC, departure_hour ASC;");
+            $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.status, s.kilometers, s.travel_time, c.energy_type, u.username, u.photo, u.notes FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' AND (u.id != :user_id OR :user_id IS NULL) ORDER BY departure_date ASC, departure_hour ASC;");
 
-                // bind value from form to query
-                $query->bindValue(":user_id", $userId, $this->pdo::PARAM_INT);
-
-            } else {
-                $query = $this->pdo->prepare("SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.status, s.kilometers, s.travel_time, c.energy_type, u.username, u.photo, u.notes FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' ORDER BY departure_date ASC, departure_hour ASC;");
-            }
-
-            // // bind value from form to query
+            // bind value from form to query
+            $query->bindValue(":user_id", $userId, $this->pdo::PARAM_INT);
             $query->bindValue(":departure", $departCity, $this->pdo::PARAM_STR);
             $query->bindValue(":arrival", $arrival_city, $this->pdo::PARAM_STR);
             $query->bindValue(":date", $date_trip, $this->pdo::PARAM_STR);
@@ -288,7 +275,97 @@ class TripRepository extends Repository
                     $tripInfo->setEnergyTy($tripData["energy_type"]);
                     $tripInfo->setUsername($tripData["username"]);
                     $tripInfo->setPhoto($tripData["photo"]);
-                    // $tripInfo->setNotes($tripData["notes"]);  beug avec note null
+                    $tripInfo->setNotes($tripData["notes"]);
+                    $tripInfo->setKilometers($tripData["kilometers"]);
+                    $tripInfo->setTravel_time($tripData["travel_time"]);
+                    $trips[] = $tripInfo;
+                }
+            }
+            return $trips;
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+
+    public function showAllTripsFilter($departCity, $arrival_city, $date_trip, $num_seats, $userId, $filter)
+    {
+        try {
+            $sql = "SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.status, s.kilometers, s.travel_time, c.energy_type, u.username, u.photo, u.notes FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' ";
+
+            if ($userId !== null) {
+                $sql .= " AND u.id != :user_id";
+            }
+
+            if (! empty($filter["ecoTrip"])) {
+                $sql .= " AND c.energy_type = :energy";
+            }
+
+            if (! empty($filter["starsNumber"])) {
+                $sql .= " AND u.notes >= :stars";
+            }
+
+            if (! empty($filter["priceMax"])) {
+                $sql .= " AND s.price <= :priceMax";
+            }
+
+            if (! empty($filter["timeMax"])) {
+                $sql .= " AND s.travel_time <= :travelTimeMax";
+            }
+            $sql .= " ORDER BY s.departure_date ASC, s.departure_hour ASC;";
+
+            $query = $this->pdo->prepare($sql);
+
+            // bind value from form to query
+            $query->bindValue(":departure", $departCity, $this->pdo::PARAM_STR);
+            $query->bindValue(":arrival", $arrival_city, $this->pdo::PARAM_STR);
+            $query->bindValue(":date", $date_trip, $this->pdo::PARAM_STR);
+            $query->bindValue(":seats", $num_seats, $this->pdo::PARAM_INT);
+
+            if ($userId !== null) {
+                $query->bindValue(":user_id", $userId, $this->pdo::PARAM_INT);
+            }
+
+            if ($filter["ecoTrip"] !== null && $filter["ecoTrip"] !== '') {
+                $query->bindValue(":energy", $filter["ecoTrip"], $this->pdo::PARAM_STR);
+            }
+
+            if ($filter["starsNumber"] !== null && $filter["starsNumber"] !== '') {
+                $query->bindValue(":stars", $filter["starsNumber"], $this->pdo::PARAM_INT);
+            }
+
+            if ($filter["priceMax"] !== null && $filter["priceMax"] !== '') {
+                $query->bindValue(":priceMax", $filter["priceMax"], $this->pdo::PARAM_INT);
+            }
+
+            if ($filter["timeMax"] !== null && $filter["timeMax"] !== '') {
+                $query->bindValue(":travelTimeMax", $filter["timeMax"], $this->pdo::PARAM_STR);
+            }
+
+            $query->execute();
+
+            $tripsData = $query->fetchAll(\PDO::FETCH_ASSOC);
+            $trips     = [];
+            if ($tripsData) {
+                // Hydration
+                foreach ($tripsData as $tripData) {
+                    $dateObject = new \DateTime($tripData["departure_date"]);
+                    $tripDate   = $dateObject->format("d/m/Y");
+
+                    $tripInfo = new Trip();
+                    $tripInfo->setId($tripData["id"]);
+                    $tripInfo->setDepartureCity($tripData["departure_city"]);
+                    $tripInfo->setArrivalCity($tripData["arrival_city"]);
+                    $tripInfo->setDepartureDate($tripDate);
+                    $tripInfo->setDepartureHour($tripData["departure_hour"]);
+                    $tripInfo->setArrivalTime($tripData["arrival_time"]);
+                    $tripInfo->setPrice($tripData["price"]);
+                    $tripInfo->setNumSeats($tripData["num_seats"]);
+                    $tripInfo->setStatus($tripData["status"]);
+                    $tripInfo->setEnergyTy($tripData["energy_type"]);
+                    $tripInfo->setUsername($tripData["username"]);
+                    $tripInfo->setPhoto($tripData["photo"]);
+                    $tripInfo->setNotes($tripData["notes"]);
                     $tripInfo->setKilometers($tripData["kilometers"]);
                     $tripInfo->setTravel_time($tripData["travel_time"]);
                     $trips[] = $tripInfo;

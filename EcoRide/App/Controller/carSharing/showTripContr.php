@@ -3,15 +3,22 @@ namespace App\Controller\CarSharing;
 
 use App\Repository\TripRepository;
 
-class ShowTripContr extends TripContr
+class ShowTripContr
 {
-    public function __construct($departure_city, $arrival_city, $date_trip, int $numPlaces)
+    protected int $id;
+    protected string|array $departure_city;
+    protected string|array $arrival_city;
+    protected int $num_places;
+    protected string $date_trip;
+    protected array $filter = [];
+
+    public function __construct($departure_city, $arrival_city, $date_trip, int $numPlaces, $filter)
     {
         $this->departure_city = $departure_city;
         $this->arrival_city   = $arrival_city;
         $this->num_places     = $numPlaces;
         $this->date_trip      = $date_trip;
-
+        $this->filter         = $filter;
     }
 
     public function checkInputs()
@@ -36,13 +43,40 @@ class ShowTripContr extends TripContr
         }
 
         if ($this->departuredateInvalid() === true) {
-            $errors = ["Le champs date de dapart est incorrect"];
+            $errors[] = ["Le champs date de dapart est incorrect"];
             return $errors;
         }
 
         if ($this->numberPlacesInvalid() === true) {
-            $errors = ["Le champs nombre de place est incorrect"];
+            $errors[] = ["Le champs nombre de place est incorrect"];
             return $errors;
+        }
+    }
+
+    public function checkFilterInputs()
+    {
+
+        $errors = [];
+
+        if ($this->InputfilterEmpty() === true) {
+            $errors = ["Au moins un champs doit etre rempli."];
+            return $errors;
+        }
+
+        if (! empty($this->filter["ecoTrip"]) && $this->filter["ecoTrip"] !== "Electrique") {
+            $errors[] = ["La valeur du boutton est incorrect"];
+        }
+
+        if (! empty($this->filter["numberStars"]) && $this->numberInvalid() === true) {
+            $errors[] = ["Les étoiles doit etre compris entre 1 et 5"];
+        }
+
+        if (! empty($this->filter["priceMax"]) && $this->priceInvalid() === true) {
+            $errors[] = ["La valeur du prix est incorrect"];
+        }
+
+        if (! empty($this->filter["timeMax"]) && $this->timeInvalid() === true) {
+            $errors[] = ["La valeur du temps max est incorrect"];
         }
         return $errors;
     }
@@ -55,20 +89,40 @@ class ShowTripContr extends TripContr
             $user_id = $_SESSION["id"];
         }
 
-        $tripRepo = new TripRepository();
-
+        $tripRepo  = new TripRepository();
         $checkTrip = $tripRepo->findTrip($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id);
 
         if ($checkTrip === "trajet trouvés") {
             $trips = $tripRepo->showAllTrips($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id);
             return $trips;
-        } elseif ($checkTrip === true) {
 
+        } elseif ($checkTrip === true) {
             $newDateTrip      = $tripRepo->findotherTrip($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id);
             $errors["errors"] = ["Des covoiturage sont dispobles au " . $newDateTrip];
             return $errors;
+
         } else {
             $errors["errors"] = ["Aucun trajet trouver a cette date et ces villes"];
+            return $errors;
+        }
+    }
+
+    public function getTripsFilter()
+    {
+
+        $user_id = null;
+
+        if (isset($_SESSION["id"]) && ! empty($_SESSION["id"])) {
+            $user_id = $_SESSION["id"];
+        }
+
+        $tripRepo = new TripRepository();
+        $trips    = $tripRepo->showAllTripsFilter($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id, $this->filter);
+
+        if (! empty($trips)) {
+            return $trips;
+        } else {
+            $errors["errors"] = ["Aucun trajet trouver avec c'est parametres"];
             return $errors;
         }
     }
@@ -76,6 +130,16 @@ class ShowTripContr extends TripContr
     public function InputEmpty()
     {
         if (empty($this->departure_city) || empty($this->arrival_city) || empty($this->date_trip) || empty($this->num_places)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    public function InputfilterEmpty()
+    {
+        if (empty($this->filter["ecoTrip"]) && empty($this->filter["numberStars"]) && empty($this->filter["priceMax"]) && empty($this->filter["timeMax"])) {
             $result = true;
         } else {
             $result = false;
@@ -178,4 +242,35 @@ class ShowTripContr extends TripContr
         return $result;
 
     }
+
+    private function numberInvalid()
+    {
+        if (filter_var($this->filter["numberStars"], FILTER_VALIDATE_INT) === false || ($this->filter["numberStars"] < 1 || $this->filter["numberStars"] > 5)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    private function timeInvalid()
+    {
+        if (! preg_match("/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/", $this->filter["timeMax"])) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    private function priceInvalid()
+    {
+        if (filter_var($this->filter["priceMax"], FILTER_VALIDATE_INT) === false || ($this->filter["priceMax"] < 0)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
 }
