@@ -4,19 +4,19 @@ const API_ENDPOINT =
 const modal = document.getElementById("modal");
 const cancel = document.getElementById("cancel");
 const participateBtn = document.getElementById("participateBtn");
+const participateDetailsBtn = document.getElementById("participate");
 
 const errorLoggin = document.getElementById("errorLoggin");
 const credits = document.getElementById("credits");
 let creditsData = credits.textContent;
 
-participate.addEventListener("click", async () => {
+participateDetailsBtn.addEventListener("click", async () => {
     try {
         let creditsObjet = {
             credits: creditsData,
         };
 
-        // API
-        // fetch api entry point
+        // fetch API entry point
         const resp = await fetch(API_ENDPOINT, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -28,7 +28,7 @@ participate.addEventListener("click", async () => {
             modal.classList.remove("hidden");
         } else if (resp.status == 402) {
             errorLoggin.classList.remove("hidden");
-            errorLoggin.textContent = "Vous avez pas assez de credit";
+            errorLoggin.textContent = "Vous n’avez pas assez de crédits.";
 
             setTimeout(() => {
                 window.location.href =
@@ -37,7 +37,7 @@ participate.addEventListener("click", async () => {
         } else if (resp.status == 403) {
             errorLoggin.classList.remove("hidden");
             errorLoggin.textContent =
-                "Vous devez etre passager ou conducteur et passager";
+                "Vous devez être passager, ou conducteur et passager.";
 
             setTimeout(() => {
                 window.location.href =
@@ -46,14 +46,14 @@ participate.addEventListener("click", async () => {
         } else {
             errorLoggin.classList.remove("hidden");
             errorLoggin.textContent =
-                "Veilleiz vous connecter ou creer un compte d'abord";
+                "Veuillez vous connecter ou créer un compte d'abord.";
             setTimeout(() => {
                 window.location.href =
                     "/index.php?controller=auth&action=login";
             }, 1500);
         }
     } catch (error) {
-        alert(`une erreur est survenue : ${error.message}`);
+        alert(`Une erreur est survenue : ${error.message}`);
     }
 });
 

@@ -78,7 +78,6 @@
                             <p class="hidden text-xs text-red-600 mt-2" id="photoError"></p>
                             <input type="hidden" id="tokenPhoto" value="<?php echo htmlspecialchars($token) ?>">
                             <button type="submit" class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Ajouter une photo</button>
-
                         </div>
                     </form>
 
@@ -184,7 +183,7 @@
                     <input type="hidden" name="token_csrf" id="tokenpreference" value="<?php echo htmlspecialchars($token) ?>">
                     <button type="submit" class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Valider mes préférences</button>
                 </form>
-                <p class="hidden text-green-600 mt-2" id="succes"></p></
+                <p class="hidden text-green-600 mt-2" id="succes"></p>
             </div>
         </div>
     </div>

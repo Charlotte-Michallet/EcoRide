@@ -4,7 +4,6 @@
             <div class="-m-1.5 overflow-x-auto">
                 <div class="p-1.5 min-w-full inline-block align-middle">
                     <div class="bg-white border border-gray-200 rounded-xl shadow-2xs overflow-hidden">
-                        <!-- Header -->
                         <div
                             class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
                             <div>
@@ -15,7 +14,7 @@
                             <div class="inline-flex gap-x-2">
 
                                 <div id="modal"
-                                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                    class="btn py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent text-white ">
                                     <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -31,7 +30,6 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
-
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
@@ -51,7 +49,7 @@
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
-                                                credits
+                                                Credits
                                             </span>
                                         </div>
                                     </th>
@@ -59,7 +57,7 @@
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
-                                                Status
+                                                Statut
                                             </span>
                                         </div>
                                     </th>
@@ -179,10 +177,9 @@
                             <div>
                                 <p class="text-sm text-gray-600">
                                     <span class="font-semibold text-gray-800"><?php echo $totalEmplyees ?> </span>
-                                    employées
+                                    employés
                                 </p>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -198,9 +195,7 @@
             <div class="bg-white border border-gray-200 rounded-xl shadow-2xs">
                 <div class="p-4 sm:p-7">
                     <div class="text-center">
-                        <h3 id="hs-modal-signup-label" class="block text-2xl font-bold ">Créer un compte employée</h3>
-                        <button id="closeModal"
-                            class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">X</button>
+                        <h3 id="hs-modal-signup-label" class="block text-2xl font-bold ">Créer un compte employé</h3>
                     </div>
 
                     <!-- Form -->
@@ -271,9 +266,13 @@
 
                             <input type="hidden" id="tokenCsrf" name="tokenCsrf"
                                 value="<?php echo htmlspecialchars($token) ?>">
-                            <button id="Create" type="submit"
-                                class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50">Créer
+                                <div class="flex justify-between">
+                                    <button type="button" id="closeModal"
+                            class="btn py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent text-white">Annuler</button>
+                                                    <button id="Create" type="submit"
+                                class="btn py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent text-white">Créer
                                 le compte</button>
+                                </div>
                         </div>
                     </form>
                 </div>

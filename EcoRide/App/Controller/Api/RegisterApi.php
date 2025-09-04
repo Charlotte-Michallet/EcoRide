@@ -77,7 +77,7 @@ class RegisterApi
                 return 5;
 
             default:
-                return 6;
+                null;
         }
     }
 }

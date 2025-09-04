@@ -199,7 +199,7 @@ class FeedbackRepository extends Repository
     public function showFeedback(int $userId)
     {
         try {
-            $query = $this->pdo->prepare("SELECT f.id, f.trip_status, f.note, f.feedback, f.status, f.status, r.number_reser, f.reservation_id, r.totalPrice, r.num_seats_bookes, r.car_sharing_id, u_passe.username AS passengers_username, u_passe.photo AS passengers_photo, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, u_driver.username AS driver_username, u_driver.photo as driver_photo FROM feedbacks f INNER JOIN reservations r ON f.reservation_id = r.id INNER JOIN users u_passe ON f.user_id = u_passe.id INNER JOIN car_sharing s ON r.car_sharing_id = s.id INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u_driver ON c.user_id = u_driver.id WHERE f.user_id = :user_id ORDER BY departure_date ASC, departure_hour ASC;");
+            $query = $this->pdo->prepare("SELECT f.id, f.trip_status, f.note, f.feedback, f.status, f.status, r.number_reser, f.reservation_id, r.totalPrice, r.num_seats_bookes, r.car_sharing_id, u_passe.username AS passengers_username, u_passe.photo AS passengers_photo, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, u_driver.username AS driver_username, u_driver.photo as driver_photo FROM feedbacks f INNER JOIN reservations r ON f.reservation_id = r.id INNER JOIN users u_passe ON f.user_id = u_passe.id INNER JOIN car_sharing s ON r.car_sharing_id = s.id INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u_driver ON c.user_id = u_driver.id WHERE f.user_id = :user_id ORDER BY departure_date ASC, departure_hour ASC;");
 
             $query->bindValue(":user_id", $userId, $this->pdo::PARAM_INT);
             $query->execute();
@@ -231,6 +231,7 @@ class FeedbackRepository extends Repository
                     $feedbackinfo->setDriverPhoto($feedbackData["driver_photo"]);
                     $feedbackinfo->setCarSharingId($feedbackData["car_sharing_id"]);
                     $feedbackinfo->setStatus($feedbackData["status"]);
+                    $feedbackinfo->setArrivalHour($feedbackData["arrival_time"]);
 
                     $feedbacks[] = $feedbackinfo;
                 }

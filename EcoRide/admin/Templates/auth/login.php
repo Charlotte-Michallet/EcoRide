@@ -18,8 +18,6 @@
 
                 <div class="mb-4">
                     <label class="block mb-2 text-sm">Mot de passe</label>
-
-
                         <div class="relative">
                             <input type="password" id="pwdLogin" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="pwdLogin" placeholder="8+ caractères, majuscule, chiffre" />
                             <span id="toggleVisibility" class="absolute inset-y-3 right-3" >
@@ -40,5 +38,4 @@
             </form>
         </div>
     </div>
-
 </section>

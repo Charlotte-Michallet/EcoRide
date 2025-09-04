@@ -7,9 +7,7 @@ class Router
 {
     public function router()
     {
-
         try {
-
             // routage for redirecting pages
             if (isset($_GET["controller"])) {
 
@@ -62,7 +60,6 @@ class Router
                 self::jsonResponse(["status" => "error", "message" => "Erreur interne du serveur API: " . $e->getMessage()], 500);
 
             } else {
-
                 $this->render("errors/default", ["error" => $e->getMessage()]);
             }
         }
@@ -85,7 +82,6 @@ class Router
                 require_once $header;
                 require_once $filePath;
                 require_once $footer;
-
             }
         } catch (\Exception $e) {
             $this->render("errors/default", ["error" => $e->getMessage()]);

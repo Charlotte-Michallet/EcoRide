@@ -33,14 +33,14 @@ class LoginApi
 
         if ($isValid) {
 
-            // check user
+            // Check user
             $login = new LoginContr($email, $password);
-            $user  = $login->checkImputLoginUser();
+            $user  = $login->checkInputLoginUser();
 
             if (is_array($user)) {
                 Router::jsonResponse(["status" => "error", "message" => $user], 401);
             } else {
-                Router::jsonResponse(["status" => "success", "message" => "Login success"], 200);
+                Router::jsonResponse(["status" => "success", "message" => "Connexion réussie."], 200);
             }
 
         } else {

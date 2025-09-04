@@ -108,7 +108,6 @@ class ManageController extends Router
 
             $dateObjetTrip = $mongoTimeTrip->toDateTime();
             $dateTrip      = $dateObjetTrip->format("d/m/Y H:i");
-
         }
 
         $this->render("manage/tripReceipts", ["transactions" => $transactionInfo, "dateCompany" => $dateTransactionCompany, "dateTrip" => $dateTrip, "numTransaction" => $numTransaction]);

@@ -50,25 +50,27 @@ class AuthController extends Router
         $currentToken = $tokenObj->getGenerateToken();
         $userId       = $_SESSION["id"];
 
-        if ($userId) {
-
+        if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
             $userRepo = new UserRepository();
             $user     = $userRepo->userInfo($userId);
 
             $profilContr = new ProfilContr();
             $preferences = $profilContr->Preferences($userId);
-
             $this->render("auth/profil", ["token" => $currentToken, "user" => $user, "preferences" => $preferences]);
-
         } else {
-            header("Location: /index.php");
+            header("Location: /admin/index.php?controller=auth&action=login");
         }
     }
+
     public function modifProfil()
     {
-        // token CSRF
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
-        $this->render("auth/modifProfil", ["token" => $currentToken]);
+
+        if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
+            $this->render("auth/modifProfil", ["token" => $currentToken]);
+        } else {
+            header("Location: /admin/index.php?controller=auth&action=login");
+        }
     }
 }

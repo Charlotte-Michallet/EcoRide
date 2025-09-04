@@ -7,7 +7,7 @@
 
             <div class="text-center py-10 px-4 sm:px-6 lg:px-8">
                 <h1 class="block text-3xl font-bold text-gray-800 ">Veuillez Ajouter les preferences avant de
-                    creer un voyage ou renseigner votre permis</h1>
+                    creer un voyage</h1>
 
                 <div class="mt-5 flex flex-col justify-center items-center gap-2 sm:flex-row sm:gap-3">
                     <a class="w-full sm:w-auto py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
@@ -29,11 +29,9 @@
                         Créer votre trajet
                     </h1>
 
-
                     <p class="mt-2 text-sm text-gray-500">Aider la planet a etre plus verte</p>
 
                     <form class="grid grid-cols-1 mt-3 gap-6 md:grid-cols-2" method="post">
-
                         <div>
                             <label for="departureCity" class="block mb-2 text-sm">Point de départ</label>
                             <div class="relative">
@@ -109,7 +107,7 @@
                             <div class="inline-flex gap-x-2 text-sm">
                                 <img class="w-auto h-7 w-7" src="<?php ROOT_PATH?> /assets/img/logo/form.png"
                                     alt="logo EcoRide">
-                                <p>* Voyage écologique = voyage en éléctrique</p>
+                                <p>* Voyage écologique = voyage en électrique</p>
                             </div>
                         </div>
 
@@ -135,7 +133,7 @@
                         <p class="hidden text-green-600 mt-2" id="succes"></p>
 
                         <button type="submit"
-                            class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform rounded-lg md:col-start-1">
+                            class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">
                             <span>Créer le trajet</span>
 
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 rtl:-scale-x-100" viewBox="0 0 20 20"

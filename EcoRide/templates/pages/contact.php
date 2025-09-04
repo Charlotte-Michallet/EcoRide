@@ -15,8 +15,8 @@
                     </span>
 
                     <h2 class="mt-2 text-base font-medium">Email</h2>
-                    <a href="mailto:contact@ecoride.com">
-                        <p class="mt-2 text-sm text-emerald-600">contact@ecoride.com</p>
+                    <a href="mailto:ecoridejose@gmail.com">
+                        <p class="mt-2 text-sm text-emerald-600">ecoridejose@gmail.com</p>
                     </a>
                 </div>
 

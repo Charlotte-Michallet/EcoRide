@@ -75,9 +75,11 @@ class CarSharingController extends Router
         $this->render("carSharing/detailsCarSharing", ["token" => $currentToken, "details" => $details, "moreDetails" => $othersdetails, "totalPrice" => $cretisTotal, "feedbacks" => $feedbacks]);
 
     }
+
     protected function feedbacks()
     {
-        // generate token CSRF
+        $userId = $_SESSION["id"];
+
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
@@ -86,8 +88,11 @@ class CarSharingController extends Router
         $reservaRepo = new ReservationRepository();
         $reservaInfo = $reservaRepo->showReservation($idreservation);
 
-        $this->render("carSharing/feedbacks", ["token" => $currentToken, "reservation" => $reservaInfo]);
-
+        if ($userId) {
+            $this->render("carSharing/feedbacks", ["token" => $currentToken, "reservation" => $reservaInfo]);
+        } else {
+            header("Location: /index.php");
+        }
     }
 
     protected function particiate()

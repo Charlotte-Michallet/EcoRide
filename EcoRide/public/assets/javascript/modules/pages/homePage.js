@@ -13,7 +13,7 @@ const tokenHome = document.getElementById("tokenHome");
 const numPlaces = document.getElementById("numPlacesError");
 const date = document.getElementById("dateError");
 const arrivalCity = document.getElementById("arrivalCityError");
-const depatureCity = document.getElementById("depatureCityError");
+const departureCity = document.getElementById("departureCityError");
 const cityArrFound = document.getElementById("cityArrFound");
 const cityFound = document.getElementById("cityDepFound");
 const form = document.getElementById("formError");
@@ -23,7 +23,7 @@ inputs.forEach((input) => {
     input.addEventListener("input", (e) => {
         switch (e.target.id) {
             case "departureHome":
-                departureCityCheck(e.target.value, "depatureCity", cityFound);
+                departureCityCheck(e.target.value, "departureCity", cityFound);
                 break;
 
             case "arrivalHome":

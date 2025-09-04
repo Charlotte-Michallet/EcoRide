@@ -11,7 +11,7 @@ class LoginContr extends AccountContr
         $this->password = $password;
     }
 
-    public function checkImputLoginUser()
+    public function checkInputLoginUser()
     {
         $errors = [];
 
@@ -21,7 +21,7 @@ class LoginContr extends AccountContr
             }
 
             if ($this->emailInvalid() === true) {
-                $errors[] = ["L'adresse email est invalide."];
+                $errors[] = ["L'adresse e-mail est invalide."];
             }
 
             if (! empty($errors)) {
@@ -30,17 +30,18 @@ class LoginContr extends AccountContr
             } else {
                 $repoLogin = new LoginRepository();
 
-                $user   = $repoLogin->getUser($this->email, $this->password);
-                $active = $user->getActive();
+                $user = $repoLogin->getUser($this->email, $this->password);
 
                 if ($user === false) {
-                    $errors[] = ["Le pseudo ou l'adresse email est incorrect."];
+                    $errors[] = ["Le pseudo ou l’adresse e-mail sont incorrects."];
                     return $errors;
+                }
 
-                } elseif ($active === "Suspendu") {
-                    $errors[] = ["Votre compte a était desactivé"];
+                $active = $user->getActive();
+
+                if ($active === "Suspendu") {
+                    $errors[] = ["Votre compte a été désactivé."];
                     return $errors;
-
                 } else {
                     $_SESSION["id"]       = $user->getId();
                     $_SESSION["username"] = $user->getUsername();

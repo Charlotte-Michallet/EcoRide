@@ -15,10 +15,6 @@ class PageController extends Router
                         $this->dashboard();
                         break;
 
-                    case 'contact':
-                        $this->contact();
-                        break;
-
                     case 'legal':
                         $this->legal();
                         break;
@@ -27,7 +23,13 @@ class PageController extends Router
                         throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
                 }
             } else {
-                // home page
+                if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
+                    $pageRouter = new PageController();
+                    $pageRouter->dashboard();
+                } else {
+                    $authRouter = new AuthController();
+                    $authRouter->login();
+                }
             }
         } catch (\Exception $e) {
             $this->render("errors/error", ["error" => $e->getMessage()]);
@@ -39,7 +41,6 @@ class PageController extends Router
         // token CSRF
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
-        // $id           = $_SESSION["id"];
 
         $dashboardCrontr = new DasboardContr();
         $statistiques    = $dashboardCrontr->statistiques();
@@ -47,12 +48,11 @@ class PageController extends Router
         $userContr = new ManageEmployeesContr();
         $employees = $userContr->showEmployees();
 
-        $this->render("pages/dashboard", ["token" => $currentToken, "statistiques" => $statistiques, "employees" => $employees]);
-    }
-
-    protected function contact()
-    {
-        $this->render("pages/contact");
+        if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
+            $this->render("pages/dashboard", ["token" => $currentToken, "statistiques" => $statistiques, "employees" => $employees]);
+        } else {
+            header("Location: /admin/index.php?controller=auth&action=login");
+        }
     }
 
     protected function legal()

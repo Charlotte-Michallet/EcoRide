@@ -21,6 +21,7 @@ class Feedback
     protected string $arrival_city;
     protected string $departure_date;
     protected string $departure_hour;
+    protected string $arrival_hour;
     protected string $driver_username;
     protected string $driver_email;
     protected string $driver_photo;
@@ -456,6 +457,24 @@ class Feedback
     public function setTripWell(string $trip_well): self
     {
         $this->trip_well = $trip_well;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of arrival_hour
+     */
+    public function getArrivalHour(): string
+    {
+        return $this->arrival_hour;
+    }
+
+    /**
+     * Set the value of arrival_hour
+     */
+    public function setArrivalHour(string $arrival_hour): self
+    {
+        $this->arrival_hour = $arrival_hour;
 
         return $this;
     }

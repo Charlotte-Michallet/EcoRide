@@ -1,15 +1,12 @@
 <section id="dashboard">
-
-  <!-- Content -->
   <div class="w-full px-20">
     <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
-      <!-- Grid -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <div class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
           <div class="p-4 md:p-5">
             <div class="flex items-center gap-x-2">
               <p class="text-xs uppercase text-gray-500">
-                Utilisateur total
+              Nombre total d'utilisateurs
               </p>
             </div>
 
@@ -25,7 +22,7 @@
           <div class="p-4 md:p-5">
             <div class="flex items-center gap-x-2">
               <p class="text-xs uppercase text-gray-500">
-                Employées total
+               Nombre total d'employés
               </p>
             </div>
 
@@ -41,7 +38,7 @@
           <div class="p-4 md:p-5">
             <div class="flex items-center gap-x-2">
               <p class="text-xs uppercase text-gray-500">
-                Nombre de covoiturage total
+                Nombre total de covoiturages
               </p>
             </div>
 
@@ -57,7 +54,7 @@
           <div class="p-4 md:p-5">
             <div class="flex items-center gap-x-2">
               <p class="text-xs uppercase text-gray-500">
-                Credit de la plateforme
+                Crédits de la plateforme
               </p>
             </div>
 
@@ -69,7 +66,6 @@
           </div>
         </div>
       </div>
-      <!-- End Grid -->
 
       <!-- graphiques -->
       <div class="grid lg:grid-cols-2 gap-4 sm:gap-6">
@@ -78,7 +74,7 @@
           <div class="flex flex-wrap justify-between items-center gap-2">
             <div>
               <h2 class="text-sm text-gray-500">
-                Nombre de covoiturage aujourd'hui
+                Nombre de covoiturages aujourd'hui
               </h2>
               <p class="text-xl sm:text-2xl font-medium text-gray-800">
                 <?php echo $statistiques["tripPerDays"] ?>
@@ -95,7 +91,7 @@
           <div class="flex flex-wrap justify-between items-center gap-2">
             <div>
               <h2 class="text-sm text-gray-500">
-               Nombre de credit aujourd'hui
+              Nombre de crédits aujourd'hui
               </h2>
               <p class="text-xl sm:text-2xl font-medium text-gray-800">
                 <?php echo $statistiques["creditstoday"] ?>
@@ -115,7 +111,6 @@
           <div class="-m-1.5 overflow-x-auto">
             <div class="p-1.5 min-w-full inline-block align-middle">
               <div class="bg-white border border-gray-200 rounded-xl shadow-2xs overflow-hidden">
-                <!-- Header -->
                 <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
                   <div>
                     <h2 class="text-xl font-semibold text-gray-800">
@@ -125,7 +120,7 @@
                   <div class="inline-flex gap-x-2">
 
                     <a href="/admin/index.php?controller=manage&action=employees"
-                      class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                      class="btn py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent text-white">
                       <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -137,7 +132,6 @@
                   </div>
                 </div>
 
-                <!-- Table -->
                 <table class="min-w-full divide-y divide-gray-200">
                   <thead class="bg-gray-50">
                     <tr>
@@ -160,7 +154,7 @@
                       <th scope="col" class="px-6 py-3 text-start">
                         <div class="flex items-center gap-x-2">
                           <span class="text-xs font-semibold uppercase text-gray-800">
-                            credits
+                            Credits
                           </span>
                         </div>
                       </th>
@@ -240,15 +234,13 @@
                   </tbody>
                 </table>
 
-                <!-- Footer -->
                 <div class="px-6 py-4 grid gap-3 md:flex md:justify-start md:items-center border-t border-gray-200">
                   <div>
                     <p class="text-sm text-gray-600">
                       <span class="font-semibold text-gray-800"><?php echo $statistiques["totalEmployees"] ?> </span>
-                      employées
+                      employés
                     </p>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -258,5 +250,4 @@
     </div>
   </div>
   </div>
-  <!-- End Content -->
 </section>

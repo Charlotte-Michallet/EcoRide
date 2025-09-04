@@ -18,35 +18,30 @@ class MailerContr
 
     public function configureSmtp()
     {
-        // require dirname(__DIR__, 3) . ".env";
-
         $this->mail->isSMTP();
         $this->mail->Host       = "smtp.gmail.com";
         $this->mail->SMTPAuth   = true;
         $this->mail->Username   = "ecoridejose@gmail.com";
-        $this->mail->Password   = "dzvydvqijbsgklsr";
+        $this->mail->Password   = "hyctsdmpsecmphrh";
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $this->mail->Port       = 465;
-
     }
 
     public function sendMail($recipientEmail, $recipientName)
     {
         try {
-            // require dirname(__DIR__, 3) . ".env";
-
             $this->mail->CharSet = 'UTF-8';
 
-            // destinataire
+            // Recipient
             $this->mail->setFrom("ecoridejose@gmail.com", "Ecoride");
             $this->mail->addAddress($recipientEmail, $recipientName);
 
-            // contenue
+            // Content
             $this->mail->isHTML(true);
             $this->mail->Subject = "Votre avis sur le trajet en covoiturage";
-            $this->mail->Body    = "Bonjour $recipientName," . "<br> Pourriez-vous prendre quelques instants pour nous laisser votre avis sur votre expérience ? Vos commentaires sont précieux pour améliorer les futurs trajets. <br> Vous pouvez le faire en vous rendant sur votre espace personnel sur http://localhost:8080/index.php. <br> Merci d'avance pour votre retour ! <br> Cordialement, <br> l'équipe Ecoride";
+            $this->mail->Body    = "Bonjour $recipientName," . "<br> Pourriez-vous prendre quelques instants pour nous laisser votre avis sur votre expérience ? Vos commentaires sont précieux pour améliorer les futurs trajets. <br> Vous pouvez le faire en vous rendant sur votre espace personnel, dans la section 'Mes trajets', puis en cliquant sur le bouton 'Donnez votre avis' du site. <br> Merci d'avance pour votre retour ! <br> Cordialement, <br> l'équipe Ecoride";
 
-            $this->mail->AltBody = "Bonjour $recipientName," . "Pourriez-vous prendre quelques instants pour nous laisser votre avis sur votre expérience ? Vos commentaires sont précieux pour améliorer les futurs trajets. Vous pouvez le faire en vous rendant sur votre espace personnel sur http://localhost:8080/index.php. Merci d'avance pour votre retour ! Cordialement, l'équipe Ecoride";
+            $this->mail->AltBody = "Bonjour $recipientName," . "Pourriez-vous prendre quelques instants pour nous laisser votre avis sur votre expérience ? Vos commentaires sont précieux pour améliorer les futurs trajets. Vous pouvez le faire en vous rendant sur votre espace personnel, dans la section 'Mes trajets', puis en cliquant sur le bouton 'Donnez votre avis' du site. Merci d'avance pour votre retour ! Cordialement, L'équipe Ecoride";
 
             $this->mail->send();
 
@@ -59,15 +54,13 @@ class MailerContr
     public function sendMailPassenger($recipientEmail, $recipientName, $driverName, $dateTrip, $departureTrip, $arrivalTrip)
     {
         try {
-            // require dirname(__DIR__, 3) . ".env";
-
             $this->mail->CharSet = 'UTF-8';
 
-            // destinataire
+            // Recipient
             $this->mail->setFrom("ecoridejose@gmail.com", "Ecoride");
             $this->mail->addAddress($recipientEmail, $recipientName);
 
-            // contenue
+            // Content
             $this->mail->isHTML(true);
             $this->mail->Subject = "Annulation de votre trajet du $dateTrip";
             $this->mail->Body    = "Bonjour $recipientName," . "<br><br> Nous vous informons que le covoiturage que vous avez reservé a été annulé par le conducteur $driverName. <br> Voici les détails du trajet qui a été annulé : <br> Date : $dateTrip. <br> De $departureTrip à $arrivalTrip. <br> Nous sommes désolées pour ce dérangement.Vous serez remboursé dans les prochaines heures.<br> Cordialement, <br> l'équipe Ecoride";
@@ -81,5 +74,4 @@ class MailerContr
             return "Erreur lors de l'envoi de l'email : " . $this->mail->ErrorInfo;
         }
     }
-
 }

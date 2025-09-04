@@ -33,21 +33,19 @@ class IsLoggedIn
             $userRepo = new UserRepository();
             $credits  = $userRepo->usercredits($id);
 
-            if ($role === 2 || $role === 4 || $role === 5) {
-                Router::jsonResponse(["status" => "success", "message" => "credit suffisant"], 200);
+            if ($role === 1 || $role === 2 || $role === 4 || $role === 5) {
+                if ($credits < $creditsTrip) {
+                    Router::jsonResponse(["status" => "error", "message" => "Vous n’avez pas assez de crédits."], 402);
+                } else {
+                    Router::jsonResponse(["status" => "success", "message" => "credit suffisant"], 200);
+                }
 
             } else {
-                Router::jsonResponse(["status" => "error", "message" => "Vous devais etre passager ou conducteur passager"], 403);
-            }
-
-            if ($credits < $creditsTrip) {
-                Router::jsonResponse(["status" => "error", "message" => "pas assez de credit"], 402);
-            } else {
-                Router::jsonResponse(["status" => "success", "message" => "credit suffisant"], 200);
+                Router::jsonResponse(["status" => "error", "message" => "Vous devais etre passager ou conducteur passager"], 401);
             }
 
         } else {
-            Router::jsonResponse(["status" => "error", "message" => "utilisateur pas connecter"], 401);
+            Router::jsonResponse(["status" => "error", "message" => "Veuillez vous connecter pour accéder à cette fonctionnalité."], 403);
         }
     }
 }

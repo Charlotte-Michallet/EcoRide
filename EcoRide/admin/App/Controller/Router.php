@@ -48,12 +48,10 @@ class Router
                 }
             }
         } catch (\Exception $e) {
-
             if (isset($_GET["controller"]) && $_GET["controller"] === "api") {
                 self::jsonResponse(["status" => "error", "message" => "Erreur interne du serveur API: " . $e->getMessage()], 500);
 
             } else {
-
                 $this->render("errors/default", ["error" => $e->getMessage()]);
             }
         }

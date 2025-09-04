@@ -16,10 +16,8 @@
                             <p class="hidden text-xs text-red-600 mt-2" id="usernameError"></p>
                             <input type="hidden" id="tokenUser" value="<?php echo htmlspecialchars($token) ?>">
                             <button type="submit"
-                                class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier
-                                le pseudo</button>
+                                class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier le pseudo</button>
                         </div>
-
                     </form>
 
                     <!-- Email -->
@@ -54,7 +52,6 @@
                             <button type="submit"
                                 class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Ajouter
                                 une photo</button>
-
                         </div>
                     </form>
 
@@ -103,23 +100,22 @@
                                 class="btn flex items-center justify-between px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Modifier
                                 le mot de passe</button>
                         </div>
-
                     </form>
                 </div>
             </div>
 
             <!-- preference -->
             <div class="container lg:col-span-5 min-h-screen px-6 mx-auto">
-                <h2 class="text-2xl font-semibold tracking-wider">Ajouter ou modifier mes preference </h2>
+                <h2 class="text-2xl font-semibold tracking-wider">Ajouter ou modifier mes préférences </h2>
                 <div class="mt-6">
                     <h3 class="text-gray-800">Selectionner votre préférences</h3>
                 </div>
 
                 <form class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-2" method="post" id="formPreferences">
                     <div class="col-span-2">
-                        <h2 class="text-gray-800">Accepte annimals</h2>
+                        <h2 class="text-gray-800">Accepte animaux</h2>
                         <fieldset class="flex justify-between">
-                            <legend class="sr-only">Accepte annimal</legend>
+                            <legend class="sr-only">Accepte animaux</legend>
 
                             <div>
                                 <label for="acceptAnimal"
@@ -173,7 +169,7 @@
 
                 <form class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-2" method="post" id="formotherPreferences">
                     <div>
-                        <label for="otherPreferences" class="block mb-2 text-sm">Mes préference</label>
+                        <label for="otherPreferences" class="block mb-2 text-sm">Mes préférences</label>
                         <textarea name="otherPreferences" id="otherPreferences"
                             class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"></textarea>
                         <p class="hidden text-xs text-red-600 mt-2" id="otherPreferencesError"></p>
@@ -185,7 +181,7 @@
                         mes préférences</button>
                 </form>
                 <p class="hidden text-green-600 mt-2" id="succes"></p>
-                </ </div>
+                </div>
             </div>
         </div>
 </section>

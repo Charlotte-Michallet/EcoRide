@@ -13,6 +13,7 @@ class User
     protected int $id_role;
     protected string $role;
     protected string $active;
+    protected ?float $notes;
 
     /**
      * Get the value of id
@@ -190,6 +191,24 @@ class User
     public function setActive(string $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of notes
+     */
+    public function getNotes(): ?float
+    {
+        return $this->notes;
+    }
+
+    /**
+     * Set the value of notes
+     */
+    public function setNotes(?float $notes): self
+    {
+        $this->notes = $notes;
 
         return $this;
     }

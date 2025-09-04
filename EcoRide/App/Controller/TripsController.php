@@ -42,7 +42,6 @@ class TripsController extends Router
     // Methods for redirecting pages
     protected function createTrip()
     {
-
         $userId = $_SESSION["id"];
         $roleid = $_SESSION["role"];
 
@@ -50,18 +49,18 @@ class TripsController extends Router
         $currentToken = $tokenObj->getGenerateToken();
 
         if ($userId && $roleid !== 4) {
-            // generate token CSRF
             $carRepo  = new CarRepository();
             $carsInfo = $carRepo->showUserCars($userId);
+            $this->render("userTrips/createTrip", ["token" => $currentToken, "cars" => $carsInfo]);
+        } else {
+            header("Location: /index.php");
         }
-        // show page
-        $this->render("userTrips/createTrip", ["token" => $currentToken, "cars" => $carsInfo]);
     }
 
     protected function manageTrip()
     {
+        $user_id = $_SESSION["id"];
 
-        $user_id  = $_SESSION["id"];
         $tripRepo = new TripRepository();
         $trips    = $tripRepo->showTripManage($user_id);
 
@@ -70,21 +69,23 @@ class TripsController extends Router
         $this->UpdateEndMethod();
         $this->deletereservation();
 
-        // generate token CSRF
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
         $reservaRepo = new ReservationRepository();
         $reservation = $reservaRepo->ReservaManage($user_id);
 
-        // show page
-        $this->render("userTrips/manageTrips", ["token" => $currentToken, "trips" => $trips, "reservations" => $reservation]);
+        if ($user_id) {
+            $this->render("userTrips/manageTrips", ["token" => $currentToken, "trips" => $trips, "reservations" => $reservation]);
+        } else {
+            header("Location: /index.php");
+        }
     }
 
     protected function history()
     {
         $user_id = $_SESSION["id"];
-        // generate token CSRF
+
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
@@ -94,8 +95,11 @@ class TripsController extends Router
         $reservaRepo = new ReservationRepository();
         $reservation = $reservaRepo->showReservationHistory($user_id);
 
-        // show page
-        $this->render("userTrips/history", ["token" => $currentToken, "trips" => $trips, "reservations" => $reservation]);
+        if ($user_id) {
+            $this->render("userTrips/history", ["token" => $currentToken, "trips" => $trips, "reservations" => $reservation]);
+        } else {
+            header("Location: /index.php");
+        }
     }
 
     protected function deleteCarSharingMethod()
@@ -117,7 +121,7 @@ class TripsController extends Router
                 $passengerRepo   = new UserRepository();
                 $driverName      = $_SESSION["username"];
 
-                // trouver les id de resa idpassager userna email
+                // Find id reservation and passengers + email
                 $passengersInfo = $reservationRepo->reservationIdPassengersInfo($id);
                 foreach ($passengersInfo as $passengerInfo) {
 
@@ -127,26 +131,26 @@ class TripsController extends Router
                     $email         = $passengerInfo["email"];
                     $totalPrice    = $passengerInfo["totalPrice"];
 
-                    // Enlever les 2 credit de lentreprise
+                    // Update credits for company
                     $companyContr = new CompanyContr();
                     $companyContr->cancelCreditsCompany();
 
-                    // supprimer transaction
+                    // Delete transaction
                     $idTransation = $reservationRepo->selectTransaction($reservationId);
                     $companyContr->deleteJurnalTrip($idTransation);
 
-                    // Rembourser les passager
+                    // Reimburse passengers
                     $passengersCredits      = $passengerRepo->usercredits($passagerId);
                     $creditsForPassenger    = $totalPrice - 2;
                     $passengeCreditsUpdated = $creditsForPassenger + $passengersCredits;
                     $passengerRepo->UpdatecreditsTrip($passagerId, $passengeCreditsUpdated);
 
-                    // envoie mail
+                    // Send email
                     $mailControl = new MailerContr();
                     $mailControl->sendMailPassenger($email, $username, $driverName, $dateTrip, $departureTrip, $arrivalTrip);
 
                 }
-                // supprimer covoiturage a la fin
+                // Delete trip
                 $tripRepo = new TripRepository();
                 $tripRepo->deleteTrip($id);
             }

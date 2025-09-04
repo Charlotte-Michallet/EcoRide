@@ -20,18 +20,10 @@
       <!-- Copyright text -->
       <p class="my-auto mx-auto max-w-md text-center text-gray-500 lg:text-left">EcoRide &copy; 2025. Tous droits réservés</p>
 
-      <!-- Linkes for pages -->
+      <!-- Links for pages -->
       <ul class="flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-0 lg:justify-end lg:gap-12">
         <li>
           <a class="text-gray-700 transition hover:text-gray-700/75" href="/admin/index.php?controller=pages&action=legal"> Mentions légales </a>
-        </li>
-
-        <li>
-          <a class="contact text-gray-700 transition hover:text-gray-700/75" href="/admin/index.php?controller=pages&action=contact"> Contact </a>
-        </li>
-
-        <li>
-          <a class="contact text-gray-700 transition hover:text-gray-700/75" href="mailto:contact@ecoride.com">contact@ecoride.com</a>
         </li>
       </ul>
     </div>

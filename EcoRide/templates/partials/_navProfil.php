@@ -1,7 +1,5 @@
 <!-- pages -->
-<div class="flex overflow-x-auto overflow-y-hidden border-b border-gray-200 whitespace-nowrap">
-    <!-- Page title -->
-
+<div class="flex overflow-x-auto overflow-y-hidden border-b border-gray-200 whitespace-nowrap pl-8">
     <a class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1  whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400"
         href="/index.php?controller=auth&action=profil">
         <h1>Profil</h1>
@@ -40,7 +38,6 @@
      <a href="/index.php?controller=manage&action=badReviews"> <button
             class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">Gérer les mauvais avis</button>
     </a>
-
    <?php }?>
 
 </div>

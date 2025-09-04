@@ -98,11 +98,11 @@ class ShowTripContr
 
         } elseif ($checkTrip === true) {
             $newDateTrip      = $tripRepo->findotherTrip($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id);
-            $errors["errors"] = ["Des covoiturage sont dispobles au " . $newDateTrip];
+            $errors["errors"] = ["Des covoiturages sont dispobles au " . $newDateTrip];
             return $errors;
 
         } else {
-            $errors["errors"] = ["Aucun trajet trouver a cette date et ces villes"];
+            $errors["errors"] = ["Aucun trajet trouver."];
             return $errors;
         }
     }

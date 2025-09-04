@@ -8,9 +8,10 @@ import {
 
 const savedData = sessionStorage.getItem("tripData");
 
-const formItineray = document.getElementById("formItineray");
+const formItinerary = document.getElementById("formItinerary");
+
 const inputs = document.querySelectorAll("input");
-const tokenItineray = document.getElementById("tokenItineray");
+const tokenItinerary = document.getElementById("tokenItinerary");
 
 const numPlaces = document.getElementById("numPlacesError");
 const date = document.getElementById("dateError");
@@ -27,7 +28,7 @@ let departCity, arriCity, numberPlaces, dateDeparture;
 inputs.forEach((input) => {
     input.addEventListener("input", async (e) => {
         switch (e.target.id) {
-            case "departureItineray":
+            case "departureItinerary":
                 departCity = await departureCityCheck(
                     e.target.value,
                     "depatureCity",
@@ -35,7 +36,7 @@ inputs.forEach((input) => {
                 );
                 break;
 
-            case "arrivalItineray":
+            case "arrivalItinerary":
                 arriCity = await arrivalCityCheck(
                     e.target.value,
                     "arrivalCity",
@@ -43,11 +44,11 @@ inputs.forEach((input) => {
                 );
                 break;
 
-            case "departureDateItineray":
+            case "departureDateItinerary":
                 dateDeparture = await dateTripCheck(e.target.value, "date");
                 break;
 
-            case "numPassengersItineray":
+            case "numPassengersItinerary":
                 numberPlaces = await numPlacesCheck(
                     e.target.value,
                     "numPlaces"
@@ -62,21 +63,21 @@ inputs.forEach((input) => {
 });
 
 if (savedData) {
-    const ItineryData = JSON.parse(savedData);
-    let token = tokenItineray.value;
-    let departCity = ItineryData.departCity;
-    let arriCity = ItineryData.arriCity;
-    let dateDeparture = ItineryData.dateDeparture;
-    let numberPlaces = ItineryData.numberPlaces;
+    const ItineraryData = JSON.parse(savedData);
+    let token = tokenItinerary.value;
+    let departCity = ItineraryData.departCity;
+    let arriCity = ItineraryData.arriCity;
+    let dateDeparture = ItineraryData.dateDeparture;
+    let numberPlaces = ItineraryData.numberPlaces;
 
     searchBar(departCity, arriCity, dateDeparture, numberPlaces, token);
     sessionStorage.removeItem("tripData");
 }
 
 // submit form
-formItineray.addEventListener("submit", (e) => {
+formItinerary.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    let token = tokenItineray.value;
+    let token = tokenItinerary.value;
     searchBar(departCity, arriCity, dateDeparture, numberPlaces, token);
 });

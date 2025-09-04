@@ -37,6 +37,9 @@ class ManageController extends Router
 
     protected function manageFeedbacks()
     {
+        $userId = $_SESSION["id"];
+        $roleid = $_SESSION["role"];
+
         // token CSRF
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
@@ -49,10 +52,18 @@ class ManageController extends Router
             $this->manageFeedbackMethod();
         }
 
-        $this->render("employee/manageFeedback", ["token" => $currentToken, "feedbacks" => $feedbacks, "allfeedbacks" => $allfeedbacks]);
+        if ($userId && ($roleid === 2 || $roleid === 1)) {
+            $this->render("employee/manageFeedback", ["token" => $currentToken, "feedbacks" => $feedbacks, "allfeedbacks" => $allfeedbacks]);
+        } else {
+            header("Location: /index.php");
+        }
     }
+
     protected function badReviews()
     {
+        $userId = $_SESSION["id"];
+        $roleid = $_SESSION["role"];
+
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
@@ -62,8 +73,13 @@ class ManageController extends Router
             $this->paymentMethod();
         }
 
-        $this->render("employee/badReviews", ["token" => $currentToken, "feedbacks" => $feedbacks]);
+        if ($userId && ($roleid === 2 || $roleid === 1)) {
+            $this->render("employee/badReviews", ["token" => $currentToken, "feedbacks" => $feedbacks]);
+        } else {
+            header("Location: /index.php");
+        }
     }
+
     protected function paymentMethod()
     {
         $submittedToken = $_POST["token"];

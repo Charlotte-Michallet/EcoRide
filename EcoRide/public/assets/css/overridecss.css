@@ -16,7 +16,7 @@
     --turquoise2:#14a789;
     --blue: #0080E3;
     --blue2: #0063FF;
-    --blue3:#4a58d4f3;
+    --blue3:#0754acf3;
     --blue4: #05A8FA;
     --beige: #f7f4efe1;
 }
@@ -34,6 +34,8 @@ body {
    margin: 0;
    display: flex;
    flex-direction: column;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+   font-weight: 400;
 }
 
 main{

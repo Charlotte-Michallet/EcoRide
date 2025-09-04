@@ -9,7 +9,7 @@ let lastSearchedCity = "";
 //verify departure city
 export const departureCityCheck = async (value, error, cityFound) => {
     if (value.length === 0) {
-        errorDisplay(error, "Veillez renseigné la ville");
+        errorDisplay(error, "Veuillez renseigner la ville");
         apiCityFail(cityFound);
         lastSearchedCity = "";
         departCity = null;
@@ -19,7 +19,7 @@ export const departureCityCheck = async (value, error, cityFound) => {
     ) {
         errorDisplay(
             error,
-            "La ville ne doit pas contenir de caractère spéciaux."
+            "La ville ne doit pas contenir de caractères spéciaux."
         );
         apiCityFail(cityFound);
         departCity = null;
@@ -33,22 +33,24 @@ export const departureCityCheck = async (value, error, cityFound) => {
             error,
             cityFound
         );
+
+        if (value !== lastSearchedCity) {
+            apiCityFail(cityFound);
+            return;
+        }
+
         if (cityData) {
             departCity = cityData;
             return departCity;
         } else {
             departCity = null;
         }
-        if (value !== lastSearchedCity) {
-            apiCityFail(cityFound);
-            return;
-        }
     }
 };
 
 export const arrivalCityCheck = async (value, error, cityArrFound) => {
     if (value.length === 0) {
-        errorDisplay(error, "Veillez renseigné la ville");
+        errorDisplay(error, "Veuillez renseigner la ville");
         apiCityFail(cityArrFound);
         lastSearchedCity = "";
         arriCity = null;
@@ -58,7 +60,7 @@ export const arrivalCityCheck = async (value, error, cityArrFound) => {
     ) {
         errorDisplay(
             error,
-            "La ville ne doit pas contenir de caractère spéciaux."
+            "La ville ne doit pas contenir de caractères spéciaux"
         );
         apiCityFail(cityArrFound);
 
@@ -96,7 +98,7 @@ export const dateTripCheck = (value, error) => {
     if (dateTrip < today) {
         errorDisplay(
             error,
-            "Veillez mettre une date superieur ou egal a aujourd'hui."
+            "Veuillez mettre une date supérieure ou égale à aujourd'hui."
         );
         dateDeparture = null;
     } else {
@@ -108,13 +110,13 @@ export const dateTripCheck = (value, error) => {
 
 export const numPlacesCheck = (value, error) => {
     if (isNaN(value)) {
-        errorDisplay(error, "Ce champs doit contenir que des chiffre");
+        errorDisplay(error, "Ce champ doit contenir uniquement des chiffres.");
         numberPlaces = null;
     } else if (value.length === 0) {
-        errorDisplay(error, "Le champs doit etre renseigne");
+        errorDisplay(error, "Le champ doit être renseigné.");
         numberPlaces = null;
     } else if (value < 1 || value > 8) {
-        errorDisplay(error, "Le nombre de place doit etre entre 1 et 8");
+        errorDisplay(error, "Le nombre de places doit être entre 1 et 8.");
         numberPlaces = null;
     } else {
         errorDisplay(error, "", true);
@@ -135,7 +137,7 @@ function debounce(func, delay) {
         return new Promise((resolve, rejet) => {
             timeoutId = setTimeout(async () => {
                 try {
-                    const result = func.apply(this, args);
+                    const result = await func.apply(this, args);
                     resolve(result);
                 } catch (error) {
                     rejet(error);
@@ -165,25 +167,25 @@ const checkForm = (
     return data;
 };
 
-const apiTrip = async (ItineryData) => {
+const apiTrip = async (ItineraryData) => {
     try {
         // API
         const resp = await fetch(API_ENDPOINT, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(ItineryData),
+            body: JSON.stringify(ItineraryData),
         });
         const responseData = await resp.json();
         if (resp.ok) {
             let trips = responseData.trips;
-            let seats = ItineryData.numberPlaces;
+            let seats = ItineraryData.numberPlaces;
             show(trips, seats);
         } else {
             errorDisplay("form", responseData.message);
             tripResults.textContent = "";
         }
     } catch (error) {
-        alert(`Un probleme est survenue : ${error.message}`);
+        alert(`Un problème est survenu : ${error.message}`);
     }
 };
 
@@ -198,7 +200,7 @@ export function searchBar(
     if (departCity && arriCity && dateDeparture && numberPlaces && token) {
         errorDisplay("form", "", true);
 
-        let ItineryData = checkForm(
+        let ItineraryData = checkForm(
             departCity,
             arriCity,
             dateDeparture,
@@ -206,9 +208,9 @@ export function searchBar(
             token
         );
 
-        apiTrip(ItineryData);
+        apiTrip(ItineraryData);
     } else {
-        errorDisplay("form", "Veillez remplir tout les champs.");
+        errorDisplay("form", "Veuillez remplir tous les champs.");
     }
 }
 
@@ -217,17 +219,17 @@ export function searchBarHome(token) {
     if (departCity && arriCity && dateDeparture && numberPlaces) {
         errorDisplay("form", "", true);
 
-        let ItineryData = {
+        let ItineraryData = {
             departCity,
             arriCity,
             dateDeparture,
             numberPlaces,
             token,
         };
-        sessionStorage.setItem("tripData", JSON.stringify(ItineryData));
+        sessionStorage.setItem("tripData", JSON.stringify(ItineraryData));
         window.location.href = "/index.php?controller=car-sharing&action=show";
     } else {
-        errorDisplay("form", "Veillez remplir tout les champs.");
+        errorDisplay("form", "Veuillez remplir tous les champs.");
     }
 }
 
@@ -236,7 +238,7 @@ const apiCity = async (city, paragraphe, citysFound) => {
     const API_CITY_FRANCE = `https://nominatim.openstreetmap.org/search?q=${encodeCity}&countrycodes=fr&format=json`;
 
     if (!city) {
-        errorDisplay(paragraphe, `Veillez renseigner la ville`);
+        errorDisplay(paragraphe, `"Veuillez renseigner la ville.`);
         apiCityFail(citysFound);
         return null;
     }
@@ -273,7 +275,7 @@ const apiCity = async (city, paragraphe, citysFound) => {
 
             return data[0];
         } else {
-            errorDisplay(paragraphe, `${city} n'a pas été trouvée en france.`);
+            errorDisplay(paragraphe, `${city} n'a pas été trouvée en France.`);
             apiCityFail(citysFound);
             return null;
         }

@@ -4,12 +4,11 @@
             <div class="-m-1.5 overflow-x-auto">
                 <div class="p-1.5 min-w-full inline-block align-middle">
                     <div class="bg-white border border-gray-200 rounded-xl shadow-2xs overflow-hidden">
-                        <!-- Header -->
                         <div
                             class="px-6 py-4 grid gap-2 md:flex md:justify-start md:items-center border-b border-gray-200">
                             <div>
                                 <h2 class="text-xl font-semibold text-gray-800">
-                                    Tous les transactions
+                                    Toutes les transactions
                                 </h2>
                             </div>
                         </div>
@@ -18,7 +17,6 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
-
                                     <th scope="col" class="px-4 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
@@ -30,7 +28,7 @@
                                     <th scope="col" class="px-4 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
-                                                Status payment pour l'entreprise
+                                               Statut de paiement pour l’entreprise
                                             </span>
                                         </div>
                                     </th>
@@ -38,7 +36,7 @@
                                     <th scope="col" class="px-4 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
-                                                Prix pour l'entreprise
+                                                Prix pour l’entreprise
                                             </span>
                                         </div>
                                     </th>
@@ -54,7 +52,7 @@
                                     <th scope="col" class="px-3 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
-                                                N° reservation
+                                                N° réservation
                                             </span>
                                         </div>
                                     </th>
@@ -62,7 +60,7 @@
                                     <th scope="col" class="px-4 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
-                                                Status payment de la reservation
+                                                Statut de paiement de la réservation
                                             </span>
                                         </div>
                                     </th>
@@ -70,7 +68,7 @@
                                     <th scope="col" class="px-4 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
-                                                N° place reserver
+                                               N° de places réservées
                                             </span>
                                         </div>
                                     </th>
@@ -78,7 +76,7 @@
                                     <th scope="col" class="px-3 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
-                                                Prix de la reservation
+                                                Prix de la réservation
                                             </span>
                                         </div>
                                     </th>
@@ -102,7 +100,7 @@
                                     <th scope="col" class="px-3 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
-                                                N° Passager
+                                                N° passager
                                             </span>
                                         </div>
                                     </th>
@@ -126,13 +124,12 @@
                                     <th scope="col" class="px-4 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
-                                                Ville d'arriver
+                                                Ville d’arrivée
                                             </span>
                                         </div>
                                     </th>
                                 </tr>
                             </thead>
-
 
                             <tbody class="divide-y divide-gray-200">
                                 <?php foreach ($transactions as $transaction) {?>
@@ -145,7 +142,6 @@
                                                 </div>
                                             </div>
                                         </td>
-
 
                                         <td class="size-px whitespace-nowrap">
                                             <div class="px-4 py-3">
@@ -242,7 +238,6 @@
                                                     class="text-sm text-gray-600"><?php echo $transaction["tripDetails"]["arrivalCity"]; ?></span>
                                             </div>
                                         </td>
-
                                     </tr>
                                 <?php }?>
                             </tbody>
@@ -254,10 +249,9 @@
                             <div>
                                 <p class="text-sm text-gray-600">
                                     <span class="font-semibold text-gray-800"><?php echo $numTransaction ?></span>
-                                    Nombre de transaction total
+                                   Nombre total de transactions
                                 </p>
                             </div>
-
                         </div>
                     </div>
                 </div>

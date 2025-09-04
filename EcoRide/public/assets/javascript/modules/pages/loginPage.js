@@ -35,11 +35,11 @@ inputs.forEach((input) => {
     });
 });
 
-//function verification mail
+//email validation function
 const emailcheck = function (value) {
     // verify if email format is correct
-    if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
-        errorDisplay("emailLogin", "Le mail n'est pas valid.");
+    if (!value.match(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/)) {
+        errorDisplay("emailLogin", "L'adresse e-mail n'est pas valide.");
         email = null;
     } else {
         errorDisplay("emailLogin", "", true);
@@ -48,7 +48,7 @@ const emailcheck = function (value) {
     }
 };
 
-//function verification password
+//password validation function
 const passwordCheck = (value) => {
     if (
         !value.match(
@@ -57,7 +57,7 @@ const passwordCheck = (value) => {
     ) {
         errorDisplay(
             "pwdLogin",
-            "Le mot de passe doit avoir au moins 8 caractère, une majuscule, une minuscule, un chiffre et un caracteres special."
+            "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial."
         );
         password = null;
     } else {
@@ -66,6 +66,7 @@ const passwordCheck = (value) => {
     }
 };
 
+// check and sanitize form data
 const checkForm = (email, password, token) => {
     const emailSanitized = escapeHtml(email);
     const pwdSanitized = escapeHtml(password);
@@ -82,15 +83,14 @@ const checkForm = (email, password, token) => {
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // if variable are true
+    // check if variables are valid
     if (email && password && token) {
         errorDisplay("formcheck", "", true);
 
         let loginData = checkForm(email, password, token);
 
         try {
-            // API
-            // fetch api entry point
+            // fetch API endpoint
             const resp = await fetch(API_ENDPOINT, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -114,7 +114,7 @@ form.addEventListener("submit", async (e) => {
                 );
             }
         } catch (error) {
-            alert(`Connexion echouer : ${error.message}`);
+            alert(`Connexion echouée : ${error.message}`);
         }
     } else {
         errorDisplay("formcheck", "Veuillez remplir tous les champs.");

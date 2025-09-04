@@ -38,7 +38,7 @@
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
-                                                Role
+                                                Rôle
                                             </span>
                                         </div>
                                     </th>
@@ -46,7 +46,7 @@
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
-                                                Status
+                                                Statut
                                             </span>
                                         </div>
                                     </th>
@@ -62,7 +62,6 @@
                                     <th scope="col" class="px-6 py-3 text-end"></th>
                                 </tr>
                             </thead>
-
 
                             <tbody class="divide-y divide-gray-200">
                                 <?php foreach ($users as $user) {?>
@@ -80,7 +79,6 @@
                                             </div>
                                         </td>
 
-
                                         <td class="size-px whitespace-nowrap">
                                             <div class="px-6 py-3">
                                                 <span class="text-sm text-gray-600"><?php echo $user->getEmail(); ?></span>
@@ -95,7 +93,6 @@
 
                                         <?php $active = $user->getActive();
                                             if ($active === "Suspendu") {?>
-
                                             <td class="size-px whitespace-nowrap">
                                                 <div class="px-6 py-3">
                                                     <span

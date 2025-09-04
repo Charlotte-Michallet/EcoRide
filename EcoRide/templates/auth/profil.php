@@ -1,4 +1,4 @@
-<section id="profilPage" class="mt-5 min-h-9/10">
+<section class="mt-5 min-h-9/10">
     <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php"?>
 
     <div class="max-w-[85rem] px-4 py-5 sm:px-2 mx-auto">
@@ -12,21 +12,29 @@
                     </h2>
 
                     <div class="flex flex-col items-center mt-8">
-                        <p class="block w-full py-3 text-gray-700"> Pseudo
-                            <?php echo " : " . htmlspecialchars($user->getUsername()) ?>
+                        <p class="block w-full py-3 text-gray-700 font-medium"> Pseudo <span class="font-normal">
+                                <?php echo " : " . htmlspecialchars($user->getUsername()) ?></span>
                         </p>
-                        <p class="block w-full py-3 text-gray-700"> Email
-                            <?php echo " : " . htmlspecialchars($user->getEmail()); ?>
+
+                        <p class="block w-full py-3 text-gray-700 font-medium"> Email <span class="font-normal">
+                                <?php echo " : " . htmlspecialchars($user->getEmail()); ?></span>
                         </p>
-                        <p class="block w-full py-3 text-gray-700"> Date de
-                            naissance<?php echo " : " . htmlspecialchars($user->getDateOfBirth()); ?></p>
-                        <p class="block w-full py-3 text-gray-700">
-                            Credits<?php echo " : " . htmlspecialchars($user->getCredits()); ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Role
-                            <?php echo " : " . htmlspecialchars($user->getRole()); ?>
+
+                        <p class="block w-full py-3 text-gray-700 font-medium"> Date de
+                            naissance <span
+                                class="font-normal"><?php echo " : " . htmlspecialchars($user->getDateOfBirth()); ?></span>
+                        </p>
+                        <p class="block w-full py-3 text-gray-700 font-medium">
+                            Credits <span
+                                class="font-normal"><?php echo " : " . htmlspecialchars($user->getCredits()); ?></span>
+                        </p>
+                        <p class="block w-full py-3 text-gray-700 font-medium"> Role <span
+                                class="font-normal"><?php echo " : " . htmlspecialchars($user->getRole()); ?></span>
+                        </p>
+                        <p class="block w-full py-3 text-gray-700 font-medium"> Notes <span
+                                class="font-normal"><?php echo " : " . $user->getNotes(); ?></span>
                         </p>
                     </div>
-
                 </div>
             </div>
 
@@ -38,12 +46,20 @@
                     </h2>
 
                     <div class="flex flex-col items-center mt-8">
-                        <p class="block w-full py-3 text-gray-700"> Animal
-                            acepter<?php echo " : " . htmlspecialchars($preferences["animal"]); ?> </p>
-                        <p class="block w-full py-3 text-gray-700"> Fumer
-                            acepeter<?php echo " : " . htmlspecialchars($preferences["smoking"]); ?></p>
-                        <p class="block w-full py-3 text-gray-700"> Mes autre
-                            preferences<?php echo " : " . htmlspecialchars($preferences["descriptif"]); ?></p>
+                        <p class="block w-full py-3 text-gray-700 font-medium"> Animal
+                            acepter
+                            <span
+                                class="font-normal"><?php echo " : " . htmlspecialchars($preferences["animal"]); ?></span>
+                        </p>
+                        <p class="block w-full py-3 text-gray-700 font-medium"> Fumer
+                            acepeter <span
+                                class="font-normal"><?php echo " : " . htmlspecialchars($preferences["smoking"]); ?></span>
+                        </p>
+                        <p class="block w-full py-3 text-gray-700 font-medium"> Mes autre
+                            preferences
+                            <span class="font-normal">
+                                <?php echo " : " . htmlspecialchars($preferences["descriptif"]); ?></span>
+                        </p>
                     </div>
 
                 </div>
@@ -96,29 +112,18 @@
 
                         <div class="flex justify-between mt-2">
                             <div>
-                                <?php $note = $allfeedback->getNote();
-                                    if ($note) {?>
-                                    <p class="leading-loose"><?php echo $allfeedback->getNote() ?>/5 Etoiles</p>
-                                <?php } else {
-                                    }?>
+                                <p class="leading-loose"><?php echo $allfeedback->getNote() ?>/5 Etoiles</p>
+
                                 <p class="leading-loose">
                                     <?php echo $allfeedback->getFeedback() ?>
                                 </p>
-
-                                <div class="flex items-center mt-3">
-                                    <img class="object-cover rounded-full w-10 h-10"
-                                        src="<?php echo $allfeedback->getPassengersPhoto() ?>" alt="passager photo">
-
-                                    <div class="mx-4">
-                                        <h2 class="font-semibold"><?php echo $allfeedback->getPassengersUsername() ?></h2>
-                                    </div>
-                                </div>
                             </div>
 
                             <div>
                                 <p class="font-semibold">Voyage le
                                     <span><?php echo $allfeedback->getDepartureDate() ?></span> à
-                                    <span><?php echo $allfeedback->getDepartureHour() ?></span>
+                                    <span><?php echo $allfeedback->getDepartureHour() ?></span> -
+                                    <span><?php echo $allfeedback->getArrivalHour() ?></span>
                                 </p>
                                 <p class="font-semibold">De <span><?php echo $allfeedback->getDepartureCity() ?></span> à
                                     <span><?php echo $allfeedback->getArrivalCity() ?>

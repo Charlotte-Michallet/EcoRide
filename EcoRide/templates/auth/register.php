@@ -1,6 +1,6 @@
 <section id="registerPage" class="m-5">
     <div class="flex justify-center">
-        <div class="hidden bg-cover lg:block lg:w-2/5">
+        <div class="hidden lg:block lg:mx-auto">
             <img src="/assets/img/cercle-personnes.png" alt="groupe en cercle" class="w-100 h-130">
         </div>
 

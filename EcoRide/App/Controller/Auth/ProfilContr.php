@@ -20,7 +20,6 @@ class ProfilContr
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
-
     }
 
     public function Preferences($id)

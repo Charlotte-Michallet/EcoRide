@@ -20,31 +20,30 @@
       <div class="mx-auto max-w-2xl lg:mx-0 bg-gray-200/80 rounded-xl p-4">
         <h1 class="text-5xl font-semibold tracking-tight sm:text-7xl">EcoRide</h1>
         <p class="mt-3 text-2xl font-semibold text-pretty">Drive Green Together</p>
-        <p class="mt-4 text-lg font-medium text-pretty sm:text-xl/8">Plateforme de covoiturage écologique</p>
+        <strong class="mt-4 text-lg font-medium text-pretty sm:text-xl/8">Plateforme de covoiturage écologique</strong>
       </div>
       <div class="mx-auto mt-10 max-w-3xl lg:mx-0 lg:max-w-none">
         <div class="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-3">
           <div class="flex flex-col gap-1 bg-gray-200/85 rounded-xl p-4">
-            <p class="text-4xl font-semibold tracking-tight">6Kg de CO₂ en moins</p>
+            <p class="text-4xl font-semibold tracking-tight">6 kg de CO₂ en moins</p>
             <p class="text-lg">pour chaque trajet en covoiturage ≈20km</p>
             <p class="text-xs">* Selon l'estimation gouvernementale issue du plan officiel de 2023</p>
           </div>
 
           <div class="flex flex-col gap-1 bg-gray-200/85 rounded-xl p-4">
-            <p class="text-4xl font-semibold tracking-tight">~130€ /mois</p>
-            <p class="text-base/7">d'économie en utiisant le covoiturage</p>
+            <p class="text-4xl font-semibold tracking-tight">~130€/mois</p>
+            <p class="text-base/7">d'économie en utilisant le covoiturage</p>
             <p class="text-xs">* Selon un communiquer de BlaBlaCar Daily de 2021</p>
           </div>
           <div class="flex flex-col gap-1 bg-gray-200/85 rounded-xl p-4">
             <p class="text-4xl font-semibold tracking-tight">+47% de trajets </p>
-            <p class="text-base/7">covoiturés en 2024 part rapport à 2023</p>
+            <p class="text-base/7">covoiturés en 2024 par rapport à 2023</p>
             <p class="text-xs">* Selon les chiffres de l'Observatoire du Covoiturage du Quotidien</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 
   <!-- form -->
   <div class="form w-3/4 mx-auto p-5 bg-white rounded-md shadow-md">
@@ -54,16 +53,16 @@
           <label for="departureHome">Ville de départ</label>
           <input type="text" id="departureHome"
             class="block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring"
-            name="departureHome">
+            name="departureHome" placeholder="Ex: Paris">
           <p class="hidden text-xs text-green-600 mt-2" id="cityDepFound"></p>
-          <p class="hidden text-xs text-red-600 mt-2" id="depatureCityError"></p>
+          <p class="hidden text-xs text-red-600 mt-2" id="departureCityError"></p>
         </div>
 
         <div>
-          <label for="arrivalHome">Ville d'arriver</label>
+          <label for="arrivalHome">Ville d'arrivée</label>
           <input type="text" id="arrivalHome"
             class="block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring"
-            name="arrivalHome">
+            name="arrivalHome" placeholder="Ex: Lyon">
           <p class="hidden text-xs text-green-600 mt-2" id="cityArrFound"></p>
           <p class="hidden text-xs text-red-600 mt-2" id="arrivalCityError"></p>
         </div>
@@ -80,7 +79,7 @@
           <label for="numPassengers">Nombre de passagers</label>
           <input type="number" id="numPassengers"
             class="block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring"
-            name="numPassengers" min="1" placeholder="4" >
+            name="numPassengers" min="1" max="8" placeholder="4" >
           <p class="hidden text-xs text-red-600 mt-2" id="numPlacesError"></p>
         </div>
         <input type="hidden" id="tokenHome" name="tokenHome" value="<?php echo htmlspecialchars($token) ?>">
@@ -98,7 +97,6 @@
   </div>
 
   <!-- info -->
-  <section>
     <div class="max-w-6xl px-6 mx-auto">
       <div class="relative z-20 w-full mt-8 md:flex md:items-center">
         <div class="absolute w-full bg-green-600 -z-10 md:h-75 rounded-2xl"></div>
@@ -110,11 +108,11 @@
             alt="route en foret" />
 
           <div class="mt-2 md:mx-6">
-            <p class="text-lg leading-relaxed text-white md:text-xl"> EcoRide est une entreprise française dédiée à une
-              mobilité plus durable. En favorisant le covoiturage, nous réduisons l’empreinte carbone. Notre mission est
-              de simplifier la mise en relation entre conducteurs et passagers afin de réduire l'empreinte carbone. Avec
-              EcoRide, voyagez de façon plus responsable et contribuez à un avenir plus vert.
-              Drive Green Together!</p>
+            <p class="text-lg leading-relaxed text-white md:text-xl"><b>EcoRide</b> est une entreprise française dédiée à une
+              mobilité plus durable. En favorisant le <b>covoiturage</b>, nous réduisons l’empreinte carbone. Notre mission est
+              de simplifier la mise en relation entre conducteurs et passagers pour des <b>trajets plus écologiques</b>. Avec
+              EcoRide, voyagez de manière  écoresponsable et participez à un avenir plus vert.
+             <b>Drive Green Together!</b></p>
           </div>
         </div>
       </div>
@@ -133,10 +131,8 @@
           </div>
           <img
             class="md:mx-6 rounded-full object-cover shadow-lg md:h-[20rem] md:w-60 lg:h-[27rem] lg:w-[17rem] md:rounded-2xl"
-            src="/assets/img/sourire-femmes-et-homme-positif-assis-dans-la-voiture.jpg" alt="voyage heureux" />
+            src="/assets/img/sourire-femmes-et-homme-positif-assis-dans-la-voiture.jpg" alt="groupe de personnes dans une voiture en covoiturage" />
         </div>
       </div>
     </div>
-  </section>
-
 </section>

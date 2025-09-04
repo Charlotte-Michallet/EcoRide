@@ -9,8 +9,7 @@ class UserRepository extends Repository
 {
     public function userInfo(int $id)
     {
-
-        $query = $this->pdo->prepare("SELECT u.id, u.username, u.email, u.date_of_birth, u.photo, r.role, u.credits FROM users u INNER JOIN roles r ON u.id_role = r.id WHERE u.id = :id;");
+        $query = $this->pdo->prepare("SELECT u.id, u.username, u.email, u.date_of_birth, u.photo, r.role, u.credits, u.notes FROM users u INNER JOIN roles r ON u.id_role = r.id WHERE u.id = :id;");
 
         // bind value from form to query
         $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
@@ -29,6 +28,7 @@ class UserRepository extends Repository
         $userInfo->setPhotoUrl($user["photo"]);
         $userInfo->setCredits($user["credits"]);
         $userInfo->setRole($user["role"]);
+        $userInfo->setNotes($user["notes"]);
 
         return $userInfo;
     }

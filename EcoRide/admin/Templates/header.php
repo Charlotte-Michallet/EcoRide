@@ -25,7 +25,6 @@
 
 <body>
   <header>
-
     <div class="flex justify-around items-center gap-8 mx-10 text-gray-900">
 
       <div class="block">
@@ -52,14 +51,14 @@
             <li>
               <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
                 href="/admin/index.php?controller=manage&action=employees">
-                Compte employée
+                Compte employés
               </a>
             </li>
 
             <li>
               <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
                 href="/admin/index.php?controller=manage&action=transactions">
-                Reçu transaction
+                Reçus de transactions
               </a>
             </li>
 
@@ -68,7 +67,7 @@
         <div class="flex items-center gap-4 text-lg">
             <div class="flex items-center gap-x-6">
               <a href="/admin/index.php?controller=auth&action=profil"><img class="object-cover w-9 h-9 rounded-full"
-                  src="<?php echo $_SESSION["photo"] ?>" alt="profil pic"></a>
+                  src="<?php echo htmlspecialchars($_SESSION["photo"]) ?>" alt="profil pic"></a>
 
               <a class="btn bg-teal-500 block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
                 href="/admin/config/logout.php">
@@ -85,7 +84,7 @@
             <li>
               <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
                 href="/admin/index.php?controller=auth&action=login">
-                Login
+                Se conneter
               </a>
             </li>
           </ul>
