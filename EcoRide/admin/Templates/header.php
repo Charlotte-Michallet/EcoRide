@@ -20,7 +20,10 @@
   <!-- link JavaScript -->
   <script type="module" src="assets/javascript/index.js"></script>
 
-  <title>EcoRide Admin</title>
+  <title><?php echo $meta["title"] ?> </title>
+  <meta name="description" content="<?php echo $meta["description"] ?>">
+  <meta name="robots" content="<?php echo $meta["robots"] ?>">
+
 </head>
 
 <body>

@@ -3,7 +3,7 @@ const API_ENDPOINT = "index.php?controller=api&resource=admin&action=graph";
 const graphCreditCanvas = document.getElementById("graphCredit");
 const graphTripCanvas = document.getElementById("graphTrip");
 
-export async function init(firstday, lastday) {
+export async function init() {
     const resp = await fetch(API_ENDPOINT);
 
     if (!resp.ok) {
@@ -24,7 +24,7 @@ const graphTrip = (datatrips) => {
             labels: datatrips.labels,
             datasets: [
                 {
-                    label: "Nombre de covoiturage part jour",
+                    label: "Nombre de covoiturages par jour",
                     data: datatrips.data,
                     pointStyle: "circle",
                     borderColor: "green",
@@ -39,7 +39,7 @@ const graphTrip = (datatrips) => {
             plugins: {
                 title: {
                     display: true,
-                    text: "Nombre de covoiturage par jour",
+                    text: "Nombre de covoiturages par jour",
                     font: {
                         size: 20,
                     },
@@ -49,7 +49,7 @@ const graphTrip = (datatrips) => {
                 x: {
                     title: {
                         display: true,
-                        text: "jours et mois",
+                        text: "Jours et mois",
                     },
                 },
                 y: {
@@ -78,7 +78,7 @@ const graphCredits = (datatrips) => {
             labels: datatrips.labels,
             datasets: [
                 {
-                    label: "Nombre de credits part jour",
+                    label: "Nombre de crédits par jour",
                     data: datatrips.data,
                     backgroundColor: "green",
                 },
@@ -89,7 +89,7 @@ const graphCredits = (datatrips) => {
             plugins: {
                 title: {
                     display: true,
-                    text: "Nombre de covoiturage par jour",
+                    text: "Nombre de crédits par jour",
                     font: {
                         size: 20,
                     },
@@ -99,10 +99,7 @@ const graphCredits = (datatrips) => {
                 x: {
                     title: {
                         display: true,
-                        text: "jours et mois",
-                        font: {
-                            size: 20,
-                        },
+                        text: "Jours et mois",
                     },
                 },
                 y: {

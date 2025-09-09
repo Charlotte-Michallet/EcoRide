@@ -39,8 +39,12 @@ inputs.forEach((input) => {
 //function verification mail
 const emailcheck = function (value) {
     // verify if email format is correct
-    if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
-        errorDisplay("emailLogin", "Le mail n'est pas valid.");
+    if (
+        !value.match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+    ) {
+        errorDisplay("emailLogin", "L'adresse e-mail n'est pas valide.");
         email = null;
     } else {
         errorDisplay("emailLogin", "", true);
@@ -57,7 +61,7 @@ const passwordCheck = (value) => {
     ) {
         errorDisplay(
             "pwdLogin",
-            "Le mot de passe doit avoir au moins 8 caractère, une majuscule, une minuscule, un chiffre et un caracteres special."
+            "Le mot de passe doit comporter au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial."
         );
         password = null;
     } else {

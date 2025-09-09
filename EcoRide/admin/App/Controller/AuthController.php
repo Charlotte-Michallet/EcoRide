@@ -7,45 +7,43 @@ use App\Repository\UserRepository;
 
 class AuthController extends Router
 {
-    public function route()
+    public function route($meta)
     {
         try {
             if (isset($_GET["action"])) {
                 switch ($_GET["action"]) {
                     case 'login':
-                        $this->login();
+                        $this->login($meta);
                         break;
 
                     case 'profil':
-                        $this->profil();
+                        $this->profil($meta);
                         break;
 
                     case 'modifProfil':
-                        $this->modifProfil();
+                        $this->modifProfil($meta);
                         break;
 
                     default:
                         throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
                 }
             } else {
-                // home page
+                throw new \Exception("Acune action détéctée");
             }
         } catch (\Exception $e) {
             $this->render("errors/error", ["error" => $e->getMessage()]);
         }
     }
 
-    public function login()
+    public function login($meta)
     {
-        // token CSRF
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
-        $this->render("auth/login", ["token" => $currentToken]);
+        $this->render("auth/login", ["token" => $currentToken, "meta" => $meta["login"]]);
     }
 
-    public function profil()
+    public function profil($meta)
     {
-        // token CSRF
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
         $userId       = $_SESSION["id"];
@@ -56,19 +54,19 @@ class AuthController extends Router
 
             $profilContr = new ProfilContr();
             $preferences = $profilContr->Preferences($userId);
-            $this->render("auth/profil", ["token" => $currentToken, "user" => $user, "preferences" => $preferences]);
+            $this->render("auth/profil", ["token" => $currentToken, "user" => $user, "preferences" => $preferences, "meta" => $meta["profil"]]);
         } else {
             header("Location: /admin/index.php?controller=auth&action=login");
         }
     }
 
-    public function modifProfil()
+    public function modifProfil($meta)
     {
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
         if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
-            $this->render("auth/modifProfil", ["token" => $currentToken]);
+            $this->render("auth/modifProfil", ["token" => $currentToken, "meta" => $meta["profilModify"]]);
         } else {
             header("Location: /admin/index.php?controller=auth&action=login");
         }

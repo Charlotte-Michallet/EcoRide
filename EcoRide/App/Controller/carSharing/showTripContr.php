@@ -109,7 +109,6 @@ class ShowTripContr
 
     public function getTripsFilter()
     {
-
         $user_id = null;
 
         if (isset($_SESSION["id"]) && ! empty($_SESSION["id"])) {
@@ -117,14 +116,15 @@ class ShowTripContr
         }
 
         $tripRepo = new TripRepository();
-        $trips    = $tripRepo->showAllTripsFilter($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id, $this->filter);
 
-        if (! empty($trips)) {
-            return $trips;
+        $trips = $tripRepo->showAllTripsFilter($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id, $this->filter);
+
+        if ($trips === "Aucun trajet trouvé avec ces paramètres.") {
+            return "Aucun trajet trouvé avec ces paramètres.";
         } else {
-            $errors["errors"] = ["Aucun trajet trouver avec c'est parametres"];
-            return $errors;
+            return $trips;
         }
+
     }
 
     public function InputEmpty()
@@ -235,16 +235,15 @@ class ShowTripContr
 
     protected function departuredateInvalid()
     {
-        $today    = new \DateTimeImmutable();
+        $today    = new \DateTimeImmutable("today");
         $dateTrip = \DateTimeImmutable::createFromFormat('Y-m-d', $this->date_trip);
 
-        if ($dateTrip <= $today) {
+        if ($dateTrip < $today) {
             $result = true;
         } else {
             $result = false;
         }
         return $result;
-
     }
 
     private function numberInvalid()

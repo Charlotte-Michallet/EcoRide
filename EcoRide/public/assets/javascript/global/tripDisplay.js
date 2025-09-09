@@ -436,6 +436,9 @@ export function show(trips, seats) {
 
                     show(trips, seats);
                     errortext.textContent = "";
+                    console.log(responseData);
+                } else if (responseData === 204) {
+                    console.log("no");
                 } else {
                     errortext.textContent = responseData.message;
                 }

@@ -19,15 +19,21 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
   <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
 
-
   <!-- css link -->
   <link rel="stylesheet" href="/assets/css/overridecss.css">
 
   <!-- link JavaScript -->
-
   <script type="module" src="/assets/javascript/index.js"></script>
 
-  <title>EcoRide</title>
+  <title><?php echo $meta["title"] ?> </title>
+  <meta name="description" content="<?php echo $meta["description"] ?>">
+  <?php if (isset($meta["keywords"])) {?>
+    <meta name="keywords" content="<?php echo $meta["keywords"] ?>">
+  <?php }?>
+  <?php if (isset($meta["robots"])) {?>
+    <meta name="robots" content="<?php echo $meta["robots"] ?>">
+  <?php }?>
+
 </head>
 
 <body>
@@ -42,11 +48,13 @@
         <nav aria-label="Global" class="hidden md:block">
           <ul class="flex items-center gap-6 text-lg">
             <li>
-              <a class="transition hover:text-gray-700/75" href="/index.php?controller=car-sharing&action=show">Covoiturage </a>
+              <a class="transition hover:text-gray-700/75"
+                href="/index.php?controller=car-sharing&action=show">Covoiturage </a>
             </li>
 
             <li>
-              <a class="transition hover:text-gray-500/75" href="/index.php?controller=pages&action=contact"> Contact </a>
+              <a class="transition hover:text-gray-500/75" href="/index.php?controller=pages&action=contact"> Contact
+              </a>
             </li>
 
           </ul>
@@ -56,10 +64,10 @@
           <?php if (isset($_SESSION["username"])) {?>
 
             <div class="flex items-center gap-x-6">
-              <a href="/index.php?controller=auth&action=profil"><img class="object-cover w-12 h-12 rounded-full" src="<?php echo $_SESSION["photo"] ?>" alt="profil pic"></a>
+              <a href="/index.php?controller=auth&action=profil"><img class="object-cover w-12 h-12 rounded-full"
+                  src="<?php echo $_SESSION["photo"] ?>" alt="profil pic"></a>
 
-              <a
-                class="btn block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+              <a class="btn block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
                 href="/conf/logout.php">
                 Déconnexion
               </a>
@@ -68,14 +76,12 @@
 
           <?php } else {?>
             <div class="sm:flex sm:gap-4">
-              <a
-                class="btn block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+              <a class="btn block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
                 href="/index.php?controller=auth&action=login">
                 Connexion
               </a>
 
-              <a
-                class="link hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
+              <a class="link hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
                 href="/index.php?controller=auth&action=register">
                 Inscription
               </a>

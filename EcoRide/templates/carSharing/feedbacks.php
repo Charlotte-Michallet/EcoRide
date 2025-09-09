@@ -12,15 +12,19 @@
                 <div class="mt-8">
                     <div class="flex justify-between">
                         <h2 class="text-lg font-semibold text-gray-800">
-                            Le trajet du                                                                                                                         <?php echo $reservation->getDepartureDate() ?>
+                            Le trajet du                                                                                                                                                                 <?php echo $reservation->getDepartureDate() ?>
                         </h2>
-                        <h3>Numéro reservations :                                                                                                                                                       <?php echo $reservation->getNumReser() ?></h3>
+                        <h3>Numéro reservations :                                                                                                                                                                                                         <?php echo $reservation->getNumReser() ?></h3>
                     </div>
 
-
                     <ul class="mt-2 space-y-2">
-                        <li class="flex gap-x-3">
-                            <span>                                                                                                       <?php echo $reservation->getDepartCity() ?></span> ->
+                        <li class="flex gap-x-3 items-center">
+                            <span><?php echo $reservation->getDepartCity() ?></span>
+                             <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                            </svg></span>
                             <span><?php echo $reservation->getArriCity() ?></span>
                         </li>
                         <li class="flex gap-x-3">
@@ -28,11 +32,11 @@
                         </li>
 
                         <li class="flex gap-x-3">
-                            Nom du chauffeur :                                                                                                                                           <?php echo $reservation->getUsername() ?>
+                            Nom du chauffeur :                                                                                                                                                                                         <?php echo $reservation->getUsername() ?>
                         </li>
 
                         <li class="flex gap-x-3">
-                            Heure de départ :                                                                                                                                           <?php echo $reservation->getDepartHour() ?>
+                            Heure de départ :                                                                                                                                                                                         <?php echo $reservation->getDepartHour() ?>
                         </li>
 
                         <li class="flex gap-x-3">
@@ -41,13 +45,12 @@
                             <span><?php echo $reservation->getColor() ?></span>
                         </li>
                         <li class="flex gap-x-3">
-                            Type d'énergie :                                                                                                                                        <?php echo $reservation->getEnergie() ?>
+                            Type d'énergie :                                                                                                                                                                                     <?php echo $reservation->getEnergie() ?>
                         </li>
 
                         <li class="flex gap-x-3">
-                            Nombre de places réserver :                                                                                                                                                                         <?php echo $reservation->getNumSeatsBookes() ?>
+                            Nombre de places réserver :                                                                                                                                                                                                                                 <?php echo $reservation->getNumSeatsBookes() ?>
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -61,12 +64,10 @@
                     <form>
                         <div class="mt-6 grid gap-4 lg:gap-6">
 
-                            <!-- Rate review -->
                             <div class="text-center">
                                 <h3 class="text-gray-800">
                                     Est ce que le trajet c'est bien passé?
                                 </h3>
-                                <!-- Rating -->
                                 <div class="mt-2 flex justify-center items-center">
 
                                     <fieldset class="flex justify-between gap-6">
@@ -112,7 +113,6 @@
                                 </div>
                             </div>
 
-                            <!-- Rating -->
                             <div>
                                 <h3 class="text-gray-800">
                                     Vous voulez mettre une note?
@@ -190,7 +190,7 @@
                                 <label for="feedbackTextArea" class="block mb-2 text-sm text-gray-700 font-medium">Vous
                                     voulez mettre un commentaire?</label>
                                 <textarea id="feedbackTextArea" name="feedbackTextArea" rows="4"
-                                    class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"></textarea>
+                                    class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"></textarea>
                                 <p class="hidden text-green-600 mt-2" id="sendSuccess"></p>
                                 <p class="hidden text-xs text-red-600 mt-2" id="feedbackError"></p>
                             </div>
@@ -199,13 +199,13 @@
                             <input type="hidden" name="token" id="token" value="<?php echo htmlspecialchars($token) ?>">
                             <input type="hidden" name="reservationId" id="reservationId"
                                 value="<?php echo $reservation->getId() ?>">
-                                <input type="hidden" name="price" id="price"
+                            <input type="hidden" name="price" id="price"
                                 value="<?php echo $reservation->getTotalprice() ?>">
-                                <input type="hidden" name="idDriver" id="idDriver"
+                            <input type="hidden" name="idDriver" id="idDriver"
                                 value="<?php echo $reservation->getDriverId() ?>">
 
                             <button type="submit"
-                                class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Envoyer
+                                class="btnSearch w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 rounded-lg border text-white">Envoyer
                                 votre avis </button>
                         </div>
                     </form>

@@ -33,8 +33,6 @@ class DetailsContr
         } else {
             $details["descriptif"] = $descriptif;
         }
-
         return $details;
     }
-
 }

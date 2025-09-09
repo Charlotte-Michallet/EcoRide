@@ -40,7 +40,8 @@
                                 </div>
 
                                 <div class="mx-4">
-                                    <h3 class="font-semibold">Email : <span><?php echo $feedback->getPassengersEmail() ?></span></h3>
+                                    <h3 class="font-semibold">Email :
+                                        <span><?php echo $feedback->getPassengersEmail() ?></span></h3>
                                 </div>
                             </div>
                         </div>
@@ -85,17 +86,21 @@
                             </div>
 
                             <?php $paymentStatus = $feedback->getPaymentStatus();
-                                if ($paymentStatus === "en attente") {?>
-                                <div class="flex items-center mt-2">
+                                if ($paymentStatus === "En attente de contact avec un employé") {?>
+                                <div class="items-center mt-2">
                                     <p>Quand vous aurez resolu le deconvenue vous pouvez payé le conducteur</p>
-                                    <form method="post">
-                                        <input type="hidden" name="token" value="<?php echo htmlspecialchars($token) ?>">
-                                        <input type="hidden" name="idreservation"
-                                            value="<?php echo $feedback->getReservationId() ?>">
-                                        <button name="driverPayment" value="driverPayment"
-                                            class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">Payer
-                                            le conducteur</button>
-                                    </form>
+                                    <div class="flex justify-center mt-3">
+                                        <form method="post">
+                                            <input type="hidden" name="token" value="<?php echo htmlspecialchars($token) ?>">
+                                            <input type="hidden" name="idreservation"
+                                                value="<?php echo $feedback->getReservationId() ?>">
+                                                 <input type="hidden" name="idfeedback"
+                                                value="<?php echo $feedback->getId() ?>">
+                                            <button name="driverPayment" value="driverPayment"
+                                                class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">Payer
+                                                le conducteur</button>
+                                        </form>
+                                    </div>
                                 </div>
                             <?php } else {
                                 }?>

@@ -345,34 +345,37 @@ class TripRepository extends Repository
             $query->execute();
 
             $tripsData = $query->fetchAll(\PDO::FETCH_ASSOC);
-            $trips     = [];
-            if ($tripsData) {
-                // Hydration
-                foreach ($tripsData as $tripData) {
-                    $dateObject = new \DateTime($tripData["departure_date"]);
-                    $tripDate   = $dateObject->format("d/m/Y");
+            if (empty($tripsData)) {
+                return "Aucun trajet trouvé avec ces paramètres.";
+            } else {
+                $trips = [];
+                if ($tripsData) {
+                    // Hydration
+                    foreach ($tripsData as $tripData) {
+                        $dateObject = new \DateTime($tripData["departure_date"]);
+                        $tripDate   = $dateObject->format("d/m/Y");
 
-                    $tripInfo = new Trip();
-                    $tripInfo->setId($tripData["id"]);
-                    $tripInfo->setDepartureCity($tripData["departure_city"]);
-                    $tripInfo->setArrivalCity($tripData["arrival_city"]);
-                    $tripInfo->setDepartureDate($tripDate);
-                    $tripInfo->setDepartureHour($tripData["departure_hour"]);
-                    $tripInfo->setArrivalTime($tripData["arrival_time"]);
-                    $tripInfo->setPrice($tripData["price"]);
-                    $tripInfo->setNumSeats($tripData["num_seats"]);
-                    $tripInfo->setStatus($tripData["status"]);
-                    $tripInfo->setEnergyTy($tripData["energy_type"]);
-                    $tripInfo->setUsername($tripData["username"]);
-                    $tripInfo->setPhoto($tripData["photo"]);
-                    $tripInfo->setNotes($tripData["notes"]);
-                    $tripInfo->setKilometers($tripData["kilometers"]);
-                    $tripInfo->setTravel_time($tripData["travel_time"]);
-                    $trips[] = $tripInfo;
+                        $tripInfo = new Trip();
+                        $tripInfo->setId($tripData["id"]);
+                        $tripInfo->setDepartureCity($tripData["departure_city"]);
+                        $tripInfo->setArrivalCity($tripData["arrival_city"]);
+                        $tripInfo->setDepartureDate($tripDate);
+                        $tripInfo->setDepartureHour($tripData["departure_hour"]);
+                        $tripInfo->setArrivalTime($tripData["arrival_time"]);
+                        $tripInfo->setPrice($tripData["price"]);
+                        $tripInfo->setNumSeats($tripData["num_seats"]);
+                        $tripInfo->setStatus($tripData["status"]);
+                        $tripInfo->setEnergyTy($tripData["energy_type"]);
+                        $tripInfo->setUsername($tripData["username"]);
+                        $tripInfo->setPhoto($tripData["photo"]);
+                        $tripInfo->setNotes($tripData["notes"]);
+                        $tripInfo->setKilometers($tripData["kilometers"]);
+                        $tripInfo->setTravel_time($tripData["travel_time"]);
+                        $trips[] = $tripInfo;
+                    }
                 }
+                return $trips;
             }
-            return $trips;
-
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }

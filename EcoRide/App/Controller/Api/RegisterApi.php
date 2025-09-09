@@ -26,7 +26,7 @@ class RegisterApi
         $resultPassword       = $result["password"];
         $resultPwdVerify      = $result["pwdVerify"];
 
-        // escape special caractares
+        // escape special charactares
         $submittedToken = htmlspecialchars($resultSubmittedToken);
         $role           = htmlspecialchars(trim($resultRole));
         $username       = htmlspecialchars(trim($resultUsername));
@@ -46,12 +46,12 @@ class RegisterApi
         if ($isValid) {
             // Create user
             $register      = new RegisterContr($username, $email, $password, $passwordVerif, $date_of_birth, $photo_url, $credits, $id_role, $active);
-            $registererror = $register->checkImputRegisterUser();
+            $registererror = $register->checkInputRegisterUser();
 
             if (! empty($registererror)) {
                 Router::jsonResponse(["status" => "error", "message" => $registererror], 401);
             } else {
-                Router::jsonResponse(["status" => "success", "message" => "L'inscription réussi."], 200);
+                Router::jsonResponse(["status" => "success", "message" => "L'inscription a réussi."], 200);
             }
         } else {
             Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);
@@ -77,7 +77,7 @@ class RegisterApi
                 return 5;
 
             default:
-                null;
+                return null;
         }
     }
 }

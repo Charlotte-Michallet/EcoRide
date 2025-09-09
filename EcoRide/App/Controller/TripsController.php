@@ -11,21 +11,21 @@ use App\Repository\UserRepository;
 
 class TripsController extends Router
 {
-    public function route()
+    public function route($meta)
     {
         try {
             if (isset($_GET["action"])) {
                 switch ($_GET["action"]) {
                     case 'createTrip':
-                        $this->createTrip();
+                        $this->createTrip($meta);
                         break;
 
                     case 'manageTrip':
-                        $this->manageTrip();
+                        $this->manageTrip($meta);
                         break;
 
                     case 'history':
-                        $this->history();
+                        $this->history($meta);
                         break;
 
                     default:
@@ -40,7 +40,7 @@ class TripsController extends Router
     }
 
     // Methods for redirecting pages
-    protected function createTrip()
+    protected function createTrip($meta)
     {
         $userId = $_SESSION["id"];
         $roleid = $_SESSION["role"];
@@ -51,13 +51,13 @@ class TripsController extends Router
         if ($userId && $roleid !== 4) {
             $carRepo  = new CarRepository();
             $carsInfo = $carRepo->showUserCars($userId);
-            $this->render("userTrips/createTrip", ["token" => $currentToken, "cars" => $carsInfo]);
+            $this->render("userTrips/createTrip", ["token" => $currentToken, "cars" => $carsInfo, "meta" => $meta["createTrip"]]);
         } else {
             header("Location: /index.php");
         }
     }
 
-    protected function manageTrip()
+    protected function manageTrip($meta)
     {
         $user_id = $_SESSION["id"];
 
@@ -76,13 +76,13 @@ class TripsController extends Router
         $reservation = $reservaRepo->ReservaManage($user_id);
 
         if ($user_id) {
-            $this->render("userTrips/manageTrips", ["token" => $currentToken, "trips" => $trips, "reservations" => $reservation]);
+            $this->render("userTrips/manageTrips", ["token" => $currentToken, "trips" => $trips, "reservations" => $reservation, "meta" => $meta["manageTrip"]]);
         } else {
             header("Location: /index.php");
         }
     }
 
-    protected function history()
+    protected function history($meta)
     {
         $user_id = $_SESSION["id"];
 
@@ -96,7 +96,7 @@ class TripsController extends Router
         $reservation = $reservaRepo->showReservationHistory($user_id);
 
         if ($user_id) {
-            $this->render("userTrips/history", ["token" => $currentToken, "trips" => $trips, "reservations" => $reservation]);
+            $this->render("userTrips/history", ["token" => $currentToken, "trips" => $trips, "reservations" => $reservation, "meta" => $meta["history"]]);
         } else {
             header("Location: /index.php");
         }
@@ -148,7 +148,6 @@ class TripsController extends Router
                     // Send email
                     $mailControl = new MailerContr();
                     $mailControl->sendMailPassenger($email, $username, $driverName, $dateTrip, $departureTrip, $arrivalTrip);
-
                 }
                 // Delete trip
                 $tripRepo = new TripRepository();
@@ -193,14 +192,13 @@ class TripsController extends Router
                 $tripRepo->updatetTrip($status, $id);
 
                 $sendmailContr = new SendMailContr();
-                $result        = $sendmailContr->sendMail($id);
+                $result        = $sendmailContr->sendMailForeach($id);
 
                 if ($result === "Email demande avis envoyé") {
                     $_SESSION["feedback"] = true;
                 } else {
                     $_SESSION["feedback"] = false;
                 }
-
             }
         }
     }

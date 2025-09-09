@@ -13,9 +13,8 @@
             </div>
 
             <div class="flex  justify-end ">
-                <p class="hidden text-lg text-red-600 mt-2" id="errorLoggin"></p>
+                <p class="hidden text-lg text-red-600 mt-2" id="errorDetails"></p>
             </div>
-
         </div>
 
         <!-- trip -->
@@ -94,13 +93,13 @@
 
                         <div class="flex items-center text-xl font-semibold">
                             <?php $notes = $details->getNotes();
-                            if ($notes !== null) { ?>
+                            if ($notes !== null) {?>
                                 <p class="text-xl font-semibold ml-2">
                                     <span><?php echo $details->getNotes() ?></span>
                                     /5 Etoiles
                                 </p>
                             <?php } else {
-                            } ?>
+                            }?>
                         </div>
                     </div>
 
@@ -193,9 +192,8 @@
                 <div class="max-w-[85rem] px-4 py-5 mx-auto">
 
                     <div class="grid lg:grid-cols-2 lg:gap-y-16 gap-10">
-                        <!-- Card -->
-                        <?php foreach ($feedbacks as $feedback) { ?>
-                            <div class="group block rounded-xl p-3 border-2 border-gray-400 bg-gray-100 m-3">
+                        <?php foreach ($feedbacks as $feedback) {?>
+                            <div class="cardFeeback group block rounded-xl p-3 m-3 shadow-md ">
                                 <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
                                     <div class="shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
                                         <img class="object-cover w-10 h-10 rounded-full mr-9"
@@ -203,26 +201,25 @@
                                         <p class="text font-semibold mx-2">
                                             <?php echo $feedback->getPassengersUsername() ?>
                                         </p>
-                                        <p class="text-sm pt-3">
+                                        <p class="text-sm pt-3 font-medium">
                                             Voyage le: <span><?php echo $feedback->getDepartureDate() ?></span>
                                         </p>
-                                        <p class="text-sm pt-3">
+                                        <p class="text-sm pt-3 font-medium">
                                             De: <span><?php echo $feedback->getDepartureCity() ?></span> à
                                             <span><?php echo $feedback->getArrivalCity() ?></span>
                                         </p>
                                     </div>
 
                                     <div class="grow">
-                                        <h3 class="text-xl font-semibold text-gray-800 group-hover:text-gray-600">
+                                        <h3 class="text-xl font-semibold">
                                             <span><?php echo $feedback->getNote() ?></span>/5 Etoile
                                         </h3>
-                                        <p class="mt-3 text-gray-600 italic">
+                                        <p class="mt-3 italic font-semibold">
                                             "<span><?php echo $feedback->getFeedback() ?></span>" </p>
-
                                     </div>
                                 </div>
                             </div>
-                        <?php } ?>
+                        <?php }?>
                     </div>
                 </div>
             </div>
@@ -235,7 +232,7 @@
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <div class="mt-4">
                 <p class="text-pretty text-gray-700">
-                    Le trajet coute <span> <?php echo $totalPrice ?></span> . Ete vous sure de vouloir participer a ce
+                    Le trajet coute <span>                                                                                     <?php echo $totalPrice ?></span> . Ete vous sure de vouloir participer a ce
                     trajet</p>
             </div>
 

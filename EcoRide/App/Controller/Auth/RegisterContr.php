@@ -19,7 +19,7 @@ class RegisterContr extends AccountContr
 
     }
 
-    public function checkImputRegisterUser()
+    public function checkInputRegisterUser()
     {
         $errors = [];
         try {

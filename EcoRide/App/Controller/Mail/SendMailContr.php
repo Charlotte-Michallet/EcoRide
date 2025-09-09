@@ -5,20 +5,29 @@ use App\Repository\ReservationRepository;
 
 class SendMailContr
 {
-    public function sendMail($idCarsharing)
+    public function sendMailForeach($idCarsharing)
     {
         $reservaRepo = new ReservationRepository();
         $usersinfo   = $reservaRepo->selectPassengersMail($idCarsharing);
-        $mailer      = new MailerContr();
 
-        $usernames = [];
-        $emails    = [];
-        $results   = [];
+        $sentEmails = [];
+        $results    = [];
+
+        if (empty($usersinfo)) {
+            return "Aucun passager trouvé, aucun mail envoyé!";
+        }
 
         foreach ($usersinfo as $userinfo) {
-            $usernames = $userinfo["username"];
-            $emails    = $userinfo["email"];
-            $results[] = $mailer->sendMail($emails, $usernames);
+            $username = $userinfo["username"];
+            $email    = $userinfo["email"];
+
+            if (! in_array($email, $sentEmails)) {
+                $mailer     = new MailerContr();
+                $sendResult = $mailer->sendMail($email, $username);
+                $results[]  = ["email" => $email, "result" => $sendResult];
+
+                $sentEmails[] = $email;
+            }
         }
         if (empty($results)) {
             return "Aucun passager trouvé aucun mail envoyé!";

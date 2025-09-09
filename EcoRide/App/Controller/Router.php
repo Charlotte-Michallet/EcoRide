@@ -5,9 +5,13 @@ use App\Controller\Api\ApiController;
 
 class Router
 {
+    protected $meta;
     public function router()
     {
         try {
+            $this->meta = require_once ROOT_PATH . "/config/meta.php";
+            $meta       = $this->meta;
+
             // routage for redirecting pages
             if (isset($_GET["controller"])) {
 
@@ -22,37 +26,36 @@ class Router
 
                     case 'pages':
                         $pageRouter = new PageController();
-                        $pageRouter->route();
+                        $pageRouter->route($meta);
                         break;
 
                     case 'car-sharing':
                         $carRouter = new CarSharingController();
-                        $carRouter->route();
+                        $carRouter->route($meta);
                         break;
 
                     case 'auth':
                         $authRouter = new AuthController();
-                        $authRouter->route();
+                        $authRouter->route($meta);
                         break;
 
                     case 'trips':
                         $pageRouter = new TripsController();
-                        $pageRouter->route();
+                        $pageRouter->route($meta);
                         break;
 
                     case 'manage':
                         $manageRouter = new ManageController();
-                        $manageRouter->route();
+                        $manageRouter->route($meta);
                         break;
 
                     default:
-                        # code...
-                        break;
+                        throw new \Exception(("Le controleur n'existe pas"));
                 }
             } else {
                 // home page
                 $pageRouter = new PageController();
-                $pageRouter->home();
+                $pageRouter->home($meta);
             }
         } catch (\Exception $e) {
 
@@ -78,7 +81,7 @@ class Router
             } else {
                 // recuperer si fichier
                 extract($params);
-                // extract tranforme le tableau en plusieu  r variable
+
                 require_once $header;
                 require_once $filePath;
                 require_once $footer;

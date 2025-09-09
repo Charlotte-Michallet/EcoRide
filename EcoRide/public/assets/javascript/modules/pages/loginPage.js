@@ -38,7 +38,11 @@ inputs.forEach((input) => {
 //email validation function
 const emailcheck = function (value) {
     // verify if email format is correct
-    if (!value.match(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/)) {
+    if (
+        !value.match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+    ) {
         errorDisplay("emailLogin", "L'adresse e-mail n'est pas valide.");
         email = null;
     } else {

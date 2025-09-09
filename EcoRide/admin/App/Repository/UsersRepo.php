@@ -64,7 +64,7 @@ class UsersRepo extends Repository
             $userInfo->setUsername($user["username"]);
             $userInfo->setEmail($user["email"]);
             $userInfo->setPhotoUrl($user["photo"]);
-            // $userInfo->setNotes($user["notes"]);
+            $userInfo->setNotes($user["notes"]);
             $userInfo->setRole($user["role"]);
             $userInfo->setActive($user["active"]);
             $allUsers[] = $userInfo;

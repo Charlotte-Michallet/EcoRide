@@ -89,6 +89,7 @@
                                         <input type="hidden" name="token" value="<?php echo htmlspecialchars($token) ?>">
                                         <input type="hidden" name="idFeedback" value="<?php echo $feedback->getId() ?>">
                                         <input type="hidden" name="idreservation" value="<?php echo $feedback->getReservationId() ?>">
+                                        <input type="hidden" name="noteFeedback" value="<?php echo $feedback->getNote() ?>">
                                         <button name="validateFeedback" value="validateFeedback"
                                             class="px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">Valider
                                             avis</button>
@@ -100,7 +101,6 @@
                     </div>
                 </div>
             <?php }?>
-
         </div>
 
         <div class="mx-auto mt-8 xl:mt-10 max-w-7xl">
@@ -134,7 +134,6 @@
                             <div class="flex items-center mt-3">
                                 <img class="object-cover rounded-full w-10 h-10"
                                     src="<?php echo $allfeedback->getPassengersPhoto() ?>" alt="passager photo">
-
                                 <div class="mx-4">
                                     <h2 class="font-semibold"><?php echo $allfeedback->getPassengersUsername() ?></h2>
                                 </div>

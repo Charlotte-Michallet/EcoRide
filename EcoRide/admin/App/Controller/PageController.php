@@ -6,39 +6,32 @@ use App\Controller\TokenCsrf;
 
 class PageController extends Router
 {
-    public function route()
+    public function route($meta)
     {
         try {
             if (isset($_GET["action"])) {
                 switch ($_GET["action"]) {
                     case 'dashboard':
-                        $this->dashboard();
+                        $this->dashboard($meta);
                         break;
 
                     case 'legal':
-                        $this->legal();
+                        $this->legal($meta);
                         break;
 
                     default:
-                        throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
+                        throw new \Exception("Cette action n'existe pas :" . $_GET["action"]);
                 }
             } else {
-                if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
-                    $pageRouter = new PageController();
-                    $pageRouter->dashboard();
-                } else {
-                    $authRouter = new AuthController();
-                    $authRouter->login();
-                }
+                throw new \Exception("Acune action détéctée");
             }
         } catch (\Exception $e) {
             $this->render("errors/error", ["error" => $e->getMessage()]);
         }
     }
 
-    public function dashboard()
+    public function dashboard($meta)
     {
-        // token CSRF
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
@@ -49,14 +42,14 @@ class PageController extends Router
         $employees = $userContr->showEmployees();
 
         if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
-            $this->render("pages/dashboard", ["token" => $currentToken, "statistiques" => $statistiques, "employees" => $employees]);
+            $this->render("pages/dashboard", ["token" => $currentToken, "statistiques" => $statistiques, "employees" => $employees, "meta" => $meta["dashbaord"]]);
         } else {
             header("Location: /admin/index.php?controller=auth&action=login");
         }
     }
 
-    protected function legal()
+    protected function legal($meta)
     {
-        $this->render("pages/legals");
+        $this->render("pages/legals", ["meta" => $meta["legals"]]);
     }
 }

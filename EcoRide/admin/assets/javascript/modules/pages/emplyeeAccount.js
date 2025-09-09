@@ -74,13 +74,13 @@ const usernamecheck = (value) => {
     if (value.length > 0 && (value.length < 3 || value.length > 20)) {
         errorDisplay(
             "username",
-            "Le pseudo doit faire entre 3 et 20 caractère"
+            "Le pseudo doit contenir entre 3 et 20 caractères."
         );
         username = null;
     } else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
         errorDisplay(
             "username",
-            "Le pseudo doit ne doit pas contenir de caractère spéciaux."
+            "Le pseudo ne doit pas contenir de caractères spéciaux."
         );
         username = null;
     } else {
@@ -91,13 +91,15 @@ const usernamecheck = (value) => {
 
 //verify email
 const emailcheck = (value) => {
-    // verify if email format is correct
-    if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
-        errorDisplay("email", "Le mail n'est pas valid.");
+    if (
+        !value.match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+    ) {
+        errorDisplay("email", "L'adresse e-mail n'est pas valide.");
         email = null;
     } else {
         errorDisplay("email", "", true);
-        // initiat variable email from the form
         email = value;
     }
 };
@@ -111,7 +113,7 @@ const dobCheck = (value) => {
     if (age < 18) {
         errorDisplay(
             "dob",
-            "Vous devez avoir majeur pour vous inscrir sur notre site"
+            "L'employé doit être majeur pour s'inscrire sur ce site."
         );
     } else {
         errorDisplay("dob", "", true);
@@ -128,7 +130,7 @@ const passwordCheck = (value) => {
     ) {
         errorDisplay(
             "pwd",
-            "Le mot de passe doit avoir au moins 8 caractère, une majuscule, une minuscule, un chiffre et un caracteres special."
+            "Le mot de passe doit comporter au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caracteres special."
         );
         password = null;
     } else {
@@ -204,7 +206,7 @@ form.addEventListener("submit", async (e) => {
                 errorDisplay(
                     "form",
                     responseData.message ||
-                        "Le pseudo ou l'adresse mail exist déjà."
+                        "Le pseudo ou l'adresse e-mail exist déjà."
                 );
             } else if (resp.ok) {
                 window.location.href =
@@ -212,13 +214,13 @@ form.addEventListener("submit", async (e) => {
             } else {
                 errorDisplay(
                     "form",
-                    responseData.message || "L'inscription a échouée."
+                    responseData.message || "Échec de l'inscription"
                 );
             }
         } catch (error) {
             alert(`Inscription échouer : ${error.message}`);
         }
     } else {
-        errorDisplay("form", "Veillez remplir tout les champs.");
+        errorDisplay("form", "Veuillez remplir tous les champs.");
     }
 });

@@ -355,6 +355,16 @@ async function showItinerary() {
         return;
     }
 
+    if (currentRoute) {
+        map.removeLayer(currentRoute);
+    }
+    if (startMarker) {
+        map.removeLayer(startMarker);
+    }
+    if (endMarker) {
+        map.removeLayer(endMarker);
+    }
+
     try {
         const resp = await fetch(
             `https://api.openrouteservice.org/v2/directions/driving-car?api_key=eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjZiZmRiZmQ0YmY0NDQ2MDBiMjU2YzM0ZDQ4NDk2ZThjIiwiaCI6Im11cm11cjY0In0=&start=${start.join(

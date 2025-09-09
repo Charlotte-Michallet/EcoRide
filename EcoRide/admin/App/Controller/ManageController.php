@@ -8,35 +8,35 @@ use App\Controller\TokenCsrf;
 
 class ManageController extends Router
 {
-    public function route()
+    public function route($meta)
     {
         try {
             if (isset($_GET["action"])) {
                 switch ($_GET["action"]) {
                     case 'employees':
-                        $this->employees();
+                        $this->employees($meta);
                         break;
 
                     case 'users':
-                        $this->users();
+                        $this->users($meta);
                         break;
 
                     case 'transactions':
-                        $this->transactions();
+                        $this->transactions($meta);
                         break;
 
                     default:
-                        throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
+                        throw new \Exception("Cette action n'existe pas :" . $_GET["action"]);
                 }
             } else {
-                // home page
+                throw new \Exception("Acune action détéctée");
             }
         } catch (\Exception $e) {
             $this->render("errors/error", ["error" => $e->getMessage()]);
         }
     }
 
-    public function employees()
+    public function employees($meta)
     {
         // token CSRF
         $tokenObj     = new TokenCsrf();
@@ -72,10 +72,10 @@ class ManageController extends Router
             }
         }
         $totalEmployees = $userContr->CountEmployees();
-        $this->render("manage/manageEmployees", ["token" => $currentToken, "employees" => $employees, "totalEmplyees" => $totalEmployees]);
+        $this->render("manage/manageEmployees", ["token" => $currentToken, "employees" => $employees, "totalEmplyees" => $totalEmployees, "meta" => $meta["employee"]]);
     }
 
-    public function users()
+    public function users($meta)
     {
         // token CSRF
         $tokenObj     = new TokenCsrf();
@@ -89,10 +89,10 @@ class ManageController extends Router
         }
 
         $totalUsers = $userContr->CountUsers();
-        $this->render("manage/manageUsers", ["token" => $currentToken, "users" => $users, "totalUsers" => $totalUsers]);
+        $this->render("manage/manageUsers", ["token" => $currentToken, "users" => $users, "totalUsers" => $totalUsers, "meta" => $meta["users"]]);
     }
 
-    public function transactions()
+    public function transactions($meta)
     {
         $transactionRepo = new PlateformCreditsRepository();
         $transactionInfo = $transactionRepo->showTransation();
@@ -110,7 +110,7 @@ class ManageController extends Router
             $dateTrip      = $dateObjetTrip->format("d/m/Y H:i");
         }
 
-        $this->render("manage/tripReceipts", ["transactions" => $transactionInfo, "dateCompany" => $dateTransactionCompany, "dateTrip" => $dateTrip, "numTransaction" => $numTransaction]);
+        $this->render("manage/tripReceipts", ["transactions" => $transactionInfo, "dateCompany" => $dateTransactionCompany, "dateTrip" => $dateTrip, "numTransaction" => $numTransaction, "meta" => $meta["transaction"]]);
     }
 
     public function usersAccount()

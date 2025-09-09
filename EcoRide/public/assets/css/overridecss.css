@@ -22,7 +22,6 @@
 }
 
 /* All */
-
 html {
     scroll-behavior: smooth;
 }
@@ -56,13 +55,14 @@ main{
 .btnSearch {
     background: var(--turquoise);
     cursor: pointer;
+    border: none;
 }
 
 .btnSearch:hover {
     background: var(--turquoise2);
     cursor: pointer;
+    border: none;
 }
-
 
 /* Links */
 .link {
@@ -78,7 +78,6 @@ a {
 }
 
 
-
 /* Pages */
 
 /* Page home */
@@ -92,7 +91,6 @@ a {
 }
 
 /* Page login */
-
 .login {
     background: var(--beige);
     min-height: 71vh;
@@ -101,7 +99,6 @@ a {
 
 
 /* Page userCars */
-
 .modal-active {
     visibility: visible;
     display: flex;
@@ -113,7 +110,6 @@ a {
 }
 
 /* Page Create Trip */
-
 #mapid {
     height: 90%;
     width: 100%; 
@@ -159,4 +155,11 @@ a {
     display: inline-block;
     top: -7px;
     right: -9px;
+}
+
+/* Page details */
+
+.cardFeeback {
+    background: var(--beige);
+    border: solid 1px var(--beige);
 }

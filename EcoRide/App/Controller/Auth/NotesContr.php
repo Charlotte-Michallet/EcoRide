@@ -7,7 +7,7 @@ use App\Repository\UserRepository;
 
 class NotesContr
 {
-    public function notesAverageDriver($idFeedback, $idreservation)
+    public function notesAverageDriver($idreservation, $noteFeedback)
     {
         $tripRepo   = new TripRepository();
         $driverInfo = $tripRepo->driverIdPriceTrip($idreservation);
@@ -18,7 +18,13 @@ class NotesContr
 
         $notes = $feedbackRepo->sumNotesDriver($driverId);
 
-        $averageNoteDriver = $notes / $countNotes;
+        if (is_null($notes)) {
+            $averageNoteDriver = $noteFeedback;
+        } else {
+            $totalnotes        = $notes + $noteFeedback;
+            $totalFeedbacks    = $countNotes + 1;
+            $averageNoteDriver = $totalnotes / $totalFeedbacks;
+        }
 
         $userRepo = new UserRepository();
         $userRepo->driverNotes($averageNoteDriver, $driverId);

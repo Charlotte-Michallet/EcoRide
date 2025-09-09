@@ -13,8 +13,6 @@ const selectSmocking = document.querySelectorAll(
 );
 const textPref = document.getElementById("otherPreferences");
 
-// console.log(selectAniamls, selectSmocking, textPref);
-
 let data, token;
 let username, email, photo, password, pwdVerify;
 let animal, smoking, preferences;
@@ -72,13 +70,13 @@ const usernamecheck = (value) => {
     if (value.length > 0 && (value.length < 3 || value.length > 20)) {
         errorDisplay(
             "username",
-            "Le pseudo doit faire entre 3 et 20 caractère"
+            "Le pseudo doit contenir entre 3 et 20 caractères"
         );
         username = null;
     } else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
         errorDisplay(
             "username",
-            "Le pseudo doit ne doit pas contenir de caractère spéciaux."
+            "Le pseudo ne doit pas contenir de caractères spéciaux."
         );
         username = null;
     } else {
@@ -89,12 +87,11 @@ const usernamecheck = (value) => {
 
 //verify email
 const emailcheck = (value) => {
-    // verify if email format is correct
     if (value.length === 0) {
-        errorDisplay("email", "", true);
-        email = "";
+        errorDisplay("email", "Veuillez remplir le champ e-mail.");
+        email = null;
     } else if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
-        errorDisplay("email", "Le mail n'est pas valid.");
+        errorDisplay("email", "L'adresse e-mail n'est pas valide");
         email = null;
     } else {
         errorDisplay("email", "", true);
@@ -120,14 +117,14 @@ const photoCheck = (files) => {
             } else {
                 errorDisplay(
                     "photo",
-                    "La taille de l'image ne doit pas dépasser 3Mo"
+                    "La taille de l'image ne doit pas dépasser 3 Mo."
                 );
                 photo = null;
             }
         } else {
             errorDisplay(
                 "photo",
-                "Veuillez sélectionner une image au format png, jepg ou jpg"
+                "Veuillez sélectionner une image au format PNG, JPEG ou JPG."
             );
             photo = null;
         }
@@ -147,7 +144,7 @@ const passwordCheck = (value) => {
     ) {
         errorDisplay(
             "password",
-            "Le mot de passe doit avoir au moins 8 caractère, une majuscule, une minuscule, un chiffre et un caracteres special."
+            "Le mot de passe doit comporter au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial."
         );
         password = null;
     } else {
@@ -177,7 +174,7 @@ selectAniamls.forEach((radio) => {
         let acceptValue = e.target.value;
 
         if (!acceptValue) {
-            errorDisplay("preferences", "Veillez choisir une préférence.");
+            errorDisplay("preferences", "Veuillez choisir une préférence.");
             animal = null;
         } else {
             animal = acceptValue;
@@ -192,7 +189,7 @@ selectSmocking.forEach((radio) => {
         let acceptValue = e.target.value;
 
         if (!acceptValue) {
-            errorDisplay("preferences", "Veillez choisir une préférence.");
+            errorDisplay("preferences", "Veuillez choisir une préférence.");
             smoking = null;
         } else {
             smoking = acceptValue;
@@ -204,7 +201,7 @@ selectSmocking.forEach((radio) => {
 textPref.addEventListener("input", (e) => {
     let value = e.target.value;
     if (value.length === 0) {
-        errorDisplay("otherPreferences", "Le champs ne doit pas etre vide.");
+        errorDisplay("otherPreferences", "Veuillez remplir ce champ.");
         preferences = null;
     } else if (!value.match(/^[a-zA-Z0-9\s\-.&+\/()[\]!,;:\é\è\à\ç\ù]+$/)) {
         errorDisplay(
@@ -246,7 +243,7 @@ forms.forEach((form) => {
                     errorDisplay("email", "", true);
                     API(data, "email", "L'adresse mail exist déjà.");
                 } else {
-                    errorDisplay("email", "Veillez remplir le champs email.");
+                    errorDisplay("email", "L'adresse mail exist déjà.");
                 }
                 break;
 
@@ -268,7 +265,10 @@ forms.forEach((form) => {
                     errorDisplay("Form", "", true);
                     API(data, "Form");
                 } else {
-                    errorDisplay("Form", "Veillez remplir les mot de passe.");
+                    errorDisplay(
+                        "Form",
+                        "Veuillez remplir les champs mot de passe."
+                    );
                 }
                 break;
 
@@ -295,7 +295,7 @@ forms.forEach((form) => {
                 } else {
                     errorDisplay(
                         "otherPreferences",
-                        "Veillez remplir ce champs."
+                        "Veillez remplir ce champ."
                     );
                 }
                 break;
@@ -387,7 +387,7 @@ const API = async (data, error, message = "") => {
         if (resp.ok) {
             const succes = document.getElementById("succes");
             succes.classList.remove("hidden");
-            succes.textContent = `La modification a bien était prise en compte.`;
+            succes.textContent = `La modification a bien été prise en compte.`;
 
             setTimeout(() => {
                 window.location.href =
@@ -400,12 +400,12 @@ const API = async (data, error, message = "") => {
             errorDisplay(
                 error,
                 responseData.message ||
-                    `La modification n'a pas etait prise en compte. ${message}`
+                    `La modification n'a pas été prise en compte ${message}`
             );
         }
     } catch (error) {
         alert(
-            `Les modifications n'ont pas etaient pris en compte : ${error.message}`
+            `Les modifications n'ont pas été prises en compte: ${error.message}`
         );
     }
 };
@@ -427,7 +427,7 @@ const imgAPI = async (photofile, token, error, message = "") => {
         if (resp.ok) {
             const succes = document.getElementById("succes");
             succes.classList.remove("hidden");
-            succes.textContent = `La modification a bien était prise en compte.`;
+            succes.textContent = `La modification a bien été prise en compte.`;
 
             setTimeout(() => {
                 window.location.href =
@@ -440,12 +440,12 @@ const imgAPI = async (photofile, token, error, message = "") => {
             errorDisplay(
                 error,
                 responseData.message ||
-                    `La modification n'a pas etait prise en compte. ${message}`
+                    `La modification n'a pas été prise en compte. ${message}`
             );
         }
     } catch (error) {
         alert(
-            `Les modifications n'ont pas etaient pris en compte : ${error.message}`
+            `Les modifications n'ont pas été prises en compte : ${error.message}`
         );
     }
 };

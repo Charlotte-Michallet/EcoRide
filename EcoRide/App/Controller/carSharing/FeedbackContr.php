@@ -65,7 +65,11 @@ class FeedbackContr
 
         } else {
 
-            if ($this->tripStatus === "Oui" && $this->rating === null && $this->feedback === null) {
+            if ($this->tripStatus === "Non" && $this->rating === null && $this->feedback === null) {
+                $status            = "En attente de contact avec un employé";
+                $statusReservation = "En attente de contact avec un employé";
+
+            } elseif ($this->tripStatus === "Oui" && $this->rating === null && $this->feedback === null) {
                 $status            = "Enregistré";
                 $statusReservation = "Note enregistré";
             } else {
@@ -87,15 +91,11 @@ class FeedbackContr
                 $creditsuser        = $driverRepo->usercredits($this->driverId);
                 $updatedcreditsUser = $creditsuser + $priceDriver;
 
-                $creditsUpdate = $driverRepo->UpdatecreditsTrip($this->driverId, $updatedcreditsUser);
-                if ($creditsUpdate) {
-                    $statusPayment = "Validé";
-                } else {
-                    $statusPayment = "Une erreur est survenue Non validé";
-                }
+                $driverRepo->UpdatecreditsTrip($this->driverId, $updatedcreditsUser);
             } else {
                 $statusPayment = "En attente de contact avec un employé";
             }
+
             $resarepo->updateRervationpayement($this->reservationId, $statusPayment);
             $companyContr = new CompanyContr();
             $update       = $companyContr->updateStatusPayment($this->reservationId, $statusPayment);

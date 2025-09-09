@@ -283,7 +283,7 @@ class FeedbackRepository extends Repository
     public function countNotesDriver(int $driverId)
     {
         try {
-            $query = $this->pdo->prepare("SELECT COUNT(*) FROM feedbacks f INNER JOIN reservations r ON f.reservation_id = r.id INNER JOIN car_sharing s ON r.car_sharing_id= s.id INNER JOIN cars c ON s.car_id= c.id WHERE f.status = 'Validé' AND f.note IS NOT NULL AND c.user_id = :driverId;");
+            $query = $this->pdo->prepare("SELECT COUNT(*) FROM feedbacks f INNER JOIN reservations r ON f.reservation_id = r.id INNER JOIN car_sharing s ON r.car_sharing_id= s.id INNER JOIN cars c ON s.car_id= c.id WHERE f.status = 'Validé' AND f.note IS NOT NULL AND c.user_id = :driver_id;");
 
             $query->bindValue(":driver_id", $driverId, $this->pdo::PARAM_INT);
             $query->execute();
@@ -298,7 +298,7 @@ class FeedbackRepository extends Repository
     public function sumNotesDriver(int $driverId)
     {
         try {
-            $query = $this->pdo->prepare("SELECT SUM(f.note) FROM feedbacks f INNER JOIN reservations r ON f.reservation_id = r.id INNER JOIN car_sharing s ON r.car_sharing_id= s.id INNER JOIN cars c ON s.car_id= c.id WHERE f.status = 'Validé' AND f.note IS NOT NULL AND c.user_id = :driverId;");
+            $query = $this->pdo->prepare("SELECT SUM(f.note) FROM feedbacks f INNER JOIN reservations r ON f.reservation_id = r.id INNER JOIN car_sharing s ON r.car_sharing_id= s.id INNER JOIN cars c ON s.car_id= c.id WHERE f.status = 'Validé' AND f.note IS NOT NULL AND c.user_id = :driver_id;");
 
             $query->bindValue(":driver_id", $driverId, $this->pdo::PARAM_INT);
             $query->execute();

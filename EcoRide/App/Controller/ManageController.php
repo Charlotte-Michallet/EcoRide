@@ -10,18 +10,18 @@ use App\Repository\UserRepository;
 
 class ManageController extends Router
 {
-    public function route()
+    public function route($meta)
     {
         try {
             if (isset($_GET["action"])) {
                 switch ($_GET["action"]) {
 
                     case 'manageFeedbacks':
-                        $this->manageFeedbacks();
+                        $this->manageFeedbacks($meta);
                         break;
 
                     case 'badReviews':
-                        $this->badReviews();
+                        $this->badReviews($meta);
                         break;
 
                     default:
@@ -35,7 +35,7 @@ class ManageController extends Router
         }
     }
 
-    protected function manageFeedbacks()
+    protected function manageFeedbacks($meta)
     {
         $userId = $_SESSION["id"];
         $roleid = $_SESSION["role"];
@@ -53,13 +53,13 @@ class ManageController extends Router
         }
 
         if ($userId && ($roleid === 2 || $roleid === 1)) {
-            $this->render("employee/manageFeedback", ["token" => $currentToken, "feedbacks" => $feedbacks, "allfeedbacks" => $allfeedbacks]);
+            $this->render("employee/manageFeedback", ["token" => $currentToken, "feedbacks" => $feedbacks, "allfeedbacks" => $allfeedbacks, "meta" => $meta["manageFeedbacks"]]);
         } else {
             header("Location: /index.php");
         }
     }
 
-    protected function badReviews()
+    protected function badReviews($meta)
     {
         $userId = $_SESSION["id"];
         $roleid = $_SESSION["role"];
@@ -74,7 +74,7 @@ class ManageController extends Router
         }
 
         if ($userId && ($roleid === 2 || $roleid === 1)) {
-            $this->render("employee/badReviews", ["token" => $currentToken, "feedbacks" => $feedbacks]);
+            $this->render("employee/badReviews", ["token" => $currentToken, "feedbacks" => $feedbacks, "meta" => $meta["badReviews"]]);
         } else {
             header("Location: /index.php");
         }
@@ -88,7 +88,10 @@ class ManageController extends Router
 
         if ($isValid) {
             $idreservationString = $_POST["idreservation"];
-            $idreservation       = (int) $idreservationString;
+            $feedbackIdString    = $_POST["idfeedback"];
+
+            $idreservation = (int) $idreservationString;
+            $feedbackId    = (int) $feedbackIdString;
 
             if (isset($_POST["driverPayment"]) && $_POST["driverPayment"]) {
 
@@ -96,7 +99,8 @@ class ManageController extends Router
                 $tripinfo       = $tripRepo->driverIdPriceTrip($idreservation);
                 $driverId       = $tripinfo["user_id"];
                 $totalPriceTrip = $tripinfo["totalPrice"];
-                $priceDriver    = $totalPriceTrip - 2;
+
+                $priceDriver = $totalPriceTrip - 2;
 
                 $driverRepo         = new UserRepository();
                 $creditsuser        = $driverRepo->usercredits($driverId);
@@ -104,16 +108,17 @@ class ManageController extends Router
 
                 $creditsUpdate = $driverRepo->UpdatecreditsTrip($driverId, $updatedcreditsUser);
                 if ($creditsUpdate) {
-                    $statusPayment = "Validé";
+                    $statusPayment     = "Validé";
+                    $statusReservation = "Note enregistré";
                 } else {
                     $statusPayment = "Une erreur est survenue Non validé";
                 }
                 $resarepo = new ReservationRepository();
                 $resarepo->updateRervationpayement($idreservation, $statusPayment);
+                $resarepo->updateRervationStatus($idreservation, $statusReservation);
 
                 $companyContr = new CompanyContr();
-                $companyContr->updateCreditsCompany();
-                $update = $companyContr->updateStatusPayment($idreservation, $statusPayment);
+                $update       = $companyContr->updateStatusPayment($idreservation, $statusPayment);
                 if ($update) {
                     $errors = ["La mise à jour du recu na pas marche"];
                     return $errors;
@@ -133,9 +138,11 @@ class ManageController extends Router
 
             $idFeedbackString    = $_POST["idFeedback"];
             $idreservationString = $_POST["idreservation"];
+            $noteFeedbackString  = $_POST["noteFeedback"];
 
             $idreservation = (int) $idreservationString;
             $idFeedback    = (int) $idFeedbackString;
+            $noteFeedback  = (int) $noteFeedbackString;
 
             if (isset($_POST["refuseFeedback"]) && $_POST["refuseFeedback"]) {
                 $statusReservation = "Note enregistré";
@@ -147,7 +154,7 @@ class ManageController extends Router
                 $feedbackstatus    = "Validé";
 
                 $notesContr = new NotesContr();
-                $notesContr->notesAverageDriver($idFeedback, $idreservation);
+                $notesContr->notesAverageDriver($idreservation, $noteFeedback);
             }
 
             $resarepo          = new ReservationRepository();
@@ -158,6 +165,8 @@ class ManageController extends Router
 
             if ($reservationStatus && $statusFeedback) {
                 header("Location: /index.php?controller=manage&action=manageFeedbacks");
+            } else {
+                echo "Une erreur est survenue";
             }
         }
     }

@@ -9,13 +9,14 @@ use DateTime;
 
 class CompanyContr
 {
+    private int $creditsForCompany = 2;
     public function updateCreditsCompany()
     {
-        $creditsForCompany = 2;
-        $companyRepo       = new CompanyRepository();
-        $creditsCompany    = $companyRepo->showcredits();
 
-        $updatedCreditsCompany = $creditsForCompany + $creditsCompany;
+        $companyRepo    = new CompanyRepository();
+        $creditsCompany = $companyRepo->showcredits();
+
+        $updatedCreditsCompany = $this->creditsForCompany + $creditsCompany;
 
         $companyRepo->updateCredits($updatedCreditsCompany);
     }
@@ -24,7 +25,6 @@ class CompanyContr
     {
         $transactionId         = $this->generateTransactionId();
         $paymmentStatusCompany = "validé";
-        $priceCompany          = 2;
 
         $tripRepo = new TripRepo();
         $tripInfo = $tripRepo->getInfoJurnal($carSharingId);
@@ -38,7 +38,7 @@ class CompanyContr
         $dateTransaction = $today->format("Y-m-d");
 
         $mongoRepo  = new PlateformCreditsRepository();
-        $documentId = $mongoRepo->transactionReceipt($transactionId, $paymmentStatusCompany, $dateTransaction, $priceCompany, $reservationId, $paymentStatusTrip, $totalPrice, $passengerId, $reservationDate, $hourTrip, $numSeatsBookes, $carSharingId, $driverId, $citydeparture, $cityarrival);
+        $documentId = $mongoRepo->transactionReceipt($transactionId, $paymmentStatusCompany, $dateTransaction, $this->creditsForCompany, $reservationId, $paymentStatusTrip, $totalPrice, $passengerId, $reservationDate, $hourTrip, $numSeatsBookes, $carSharingId, $driverId, $citydeparture, $cityarrival);
 
         if ($documentId) {
             $reservaRepo = new ReservationRepository();
@@ -46,8 +46,7 @@ class CompanyContr
             header("Location: /index.php?controller=trips&action=manageTrip");
 
         } else {
-            header("Location: /index.php?controller=car-sharing&action=show");
-            exit();
+            return false;
         }
     }
 
@@ -60,11 +59,10 @@ class CompanyContr
 
     public function cancelCreditsCompany()
     {
-        $creditsForCompany = 2;
-        $companyRepo       = new CompanyRepository();
-        $creditsCompany    = $companyRepo->showcredits();
+        $companyRepo    = new CompanyRepository();
+        $creditsCompany = $companyRepo->showcredits();
 
-        $updatedCreditsCompany = $creditsCompany - $creditsForCompany;
+        $updatedCreditsCompany = $creditsCompany - $this->creditsForCompany;
 
         $companyRepo->updateCredits($updatedCreditsCompany);
     }
@@ -86,7 +84,7 @@ class CompanyContr
         $update    = $mongoRepo->updatetransactionReceipt($reservationId, $statusPayment);
 
         if (empty($update)) {
-            return "La mise à jour du recu na pas marche";
+            return "La mise à jour du reçu n'a pas fonctionné";
         }
     }
 

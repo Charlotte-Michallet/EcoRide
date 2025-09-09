@@ -98,7 +98,11 @@ const usernamecheck = (value) => {
 //verify email
 const emailcheck = (value) => {
     // verify if email format is correct
-    if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
+    if (
+        !value.match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+    ) {
         errorDisplay("email", "Le mail n'est pas valid.");
         email = null;
     } else {

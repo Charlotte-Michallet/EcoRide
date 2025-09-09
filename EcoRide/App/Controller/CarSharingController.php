@@ -9,21 +9,21 @@ use App\Repository\TripRepository;
 
 class CarSharingController extends Router
 {
-    public function route()
+    public function route($meta)
     {
         try {
             if (isset($_GET["action"])) {
                 switch ($_GET["action"]) {
                     case 'show':
-                        $this->show();
+                        $this->show($meta);
                         break;
 
                     case 'details':
-                        $this->details();
+                        $this->details($meta);
                         break;
 
                     case 'feedbacks':
-                        $this->feedbacks();
+                        $this->feedbacks($meta);
                         break;
 
                     default:
@@ -37,16 +37,16 @@ class CarSharingController extends Router
         }
     }
 
-    protected function show()
+    protected function show($meta)
     {
         // generate token CSRF
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
-        $this->render("carSharing/showItinerary", ["token" => $currentToken]);
+        $this->render("carSharing/showItinerary", ["token" => $currentToken, "meta" => $meta["showItinerary"]]);
     }
 
-    protected function details()
+    protected function details($meta)
     {
         // generate token CSRF
         $tokenObj     = new TokenCsrf();
@@ -70,13 +70,13 @@ class CarSharingController extends Router
 
         $cretisTotal = $numSeatsBookes * $cretis;
 
-        $this->particiate();
+        $this->particiateTrip();
 
-        $this->render("carSharing/detailsCarSharing", ["token" => $currentToken, "details" => $details, "moreDetails" => $othersdetails, "totalPrice" => $cretisTotal, "feedbacks" => $feedbacks]);
+        $this->render("carSharing/detailsCarSharing", ["token" => $currentToken, "details" => $details, "moreDetails" => $othersdetails, "totalPrice" => $cretisTotal, "feedbacks" => $feedbacks, "meta" => $meta["details"]]);
 
     }
 
-    protected function feedbacks()
+    protected function feedbacks($meta)
     {
         $userId = $_SESSION["id"];
 
@@ -89,13 +89,13 @@ class CarSharingController extends Router
         $reservaInfo = $reservaRepo->showReservation($idreservation);
 
         if ($userId) {
-            $this->render("carSharing/feedbacks", ["token" => $currentToken, "reservation" => $reservaInfo]);
+            $this->render("carSharing/feedbacks", ["token" => $currentToken, "reservation" => $reservaInfo, "meta" => $meta["feedback"]]);
         } else {
             header("Location: /index.php");
         }
     }
 
-    protected function particiate()
+    protected function particiateTrip()
     {
         $id = $_GET["id"];
 
@@ -123,8 +123,8 @@ class CarSharingController extends Router
 
                         $reserContr  = new ReservationContr();
                         $reservation = $reserContr->reservation($carSharingId, $userId, $reservationDate, $numSeatsBookes, $paymentStatus, $status, $creditsUsed);
-                        if (empty($reservation)) {
-
+                        if (! empty($reservation)) {
+                            echo $reservation["error"];
                         }
                     }
                 }

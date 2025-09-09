@@ -8,7 +8,6 @@ require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
 class MailerContr
 {
     private $mail;
-    private $envVars = [];
 
     public function __construct()
     {
@@ -18,13 +17,25 @@ class MailerContr
 
     public function configureSmtp()
     {
-        $this->mail->isSMTP();
-        $this->mail->Host       = "smtp.gmail.com";
-        $this->mail->SMTPAuth   = true;
-        $this->mail->Username   = "ecoridejose@gmail.com";
-        $this->mail->Password   = "hyctsdmpsecmphrh";
-        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $this->mail->Port       = 465;
+        try {
+            $this->mail->isSMTP();
+            $this->mail->Host       = "smtp.gmail.com";
+            $this->mail->SMTPAuth   = true;
+            $this->mail->Username   = "ecoridejose@gmail.com";
+            $this->mail->Password   = "odghprphrbfahnyz";
+            $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $this->mail->Port       = 587;
+
+            $this->mail->SMTPOptions = [
+                'ssl' => [
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false,
+                    'allow_self_signed' => true,
+                ],
+            ];
+        } catch (\Exception $e) {
+            error_log("Erreur de configuration SMTP: " . $e->getMessage());
+        }
     }
 
     public function sendMail($recipientEmail, $recipientName)

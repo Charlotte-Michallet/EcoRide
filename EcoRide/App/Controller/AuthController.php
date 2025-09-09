@@ -8,33 +8,34 @@ use App\Repository\UserRepository;
 
 class AuthController extends Router
 {
-    public function route()
+
+    public function route($meta)
     {
         try {
             if (isset($_GET["action"])) {
                 switch ($_GET["action"]) {
                     case 'login':
-                        $this->login();
+                        $this->login($meta);
                         break;
 
                     case 'register':
-                        $this->register();
+                        $this->register($meta);
                         break;
 
                     case 'profil':
-                        $this->profil();
+                        $this->profil($meta);
                         break;
 
                     case 'profilModify':
-                        $this->profilModify();
+                        $this->profilModify($meta);
                         break;
 
                     case 'cars':
-                        $this->cars();
+                        $this->cars($meta);
                         break;
 
                     case 'credits':
-                        $this->credits();
+                        $this->credits($meta);
                         break;
 
                     default:
@@ -49,27 +50,27 @@ class AuthController extends Router
     }
 
     // Methods for redirecting pages
-    protected function login()
+    protected function login($meta)
     {
         // generate token CSRF
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
         // show page
-        $this->render("auth/login", ["token" => $currentToken]);
+        $this->render("auth/login", ["token" => $currentToken, "meta" => $meta["login"]]);
     }
 
-    protected function register()
+    protected function register($meta)
     {
         // generate token CSRF
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
         // show page
-        $this->render("auth/register", ["token" => $currentToken]);
+        $this->render("auth/register", ["token" => $currentToken, "meta" => $meta["register"]]);
     }
 
-    protected function profil()
+    protected function profil($meta)
     {
         $userId       = $_SESSION["id"];
         $tokenObj     = new TokenCsrf();
@@ -86,7 +87,7 @@ class AuthController extends Router
             $feedbackRepo = new FeedbackRepository();
             $feedbacks    = $feedbackRepo->showFeedback($userId);
 
-            $this->render("auth/profil", ["token" => $currentToken, "user" => $user, "preferences" => $preferences, "feedbacks" => $feedbacks]);
+            $this->render("auth/profil", ["token" => $currentToken, "user" => $user, "preferences" => $preferences, "feedbacks" => $feedbacks, "meta" => $meta["profil"]]);
 
             $this->deleteUserMethod();
         } else {
@@ -94,7 +95,7 @@ class AuthController extends Router
         }
     }
 
-    protected function profilModify()
+    protected function profilModify($meta)
     {
         $userId       = $_SESSION["id"];
         $tokenObj     = new TokenCsrf();
@@ -106,13 +107,13 @@ class AuthController extends Router
             $user     = $userRepo->userInfo($userId);
 
             // show page
-            $this->render("auth/modifyProfil", ["user" => $user, "token" => $currentToken]);
+            $this->render("auth/modifyProfil", ["user" => $user, "token" => $currentToken, "meta" => $meta["profilModify"]]);
         } else {
             header("Location: /index.php");
         }
     }
 
-    protected function cars()
+    protected function cars($meta)
     {
         $user_id = $_SESSION["id"];
 
@@ -126,14 +127,14 @@ class AuthController extends Router
 
             $this->deleteCarMethod();
 
-            // // show page
-            $this->render("userTrips/userCars", ["token" => $currentToken, "cars" => $carsInfo]);
+            // show page
+            $this->render("userTrips/userCars", ["token" => $currentToken, "cars" => $carsInfo, "meta" => $meta["cars"]]);
         } else {
             header("Location: index.php");
         }
     }
 
-    protected function credits()
+    protected function credits($meta)
     {
         $user_id = $_SESSION["id"];
 
@@ -146,14 +147,13 @@ class AuthController extends Router
             $credits  = $userRepo->usercredits($user_id);
 
             // show page
-            $this->render("auth/credit", ["token" => $currentToken, "credits" => $credits]);
+            $this->render("auth/credit", ["token" => $currentToken, "credits" => $credits, "meta" => $meta["credits"]]);
         } else {
             header("Location: /index.php");
         }
     }
 
     // Methods for getting data
-
     protected function deleteCarMethod()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["submitDeleteCar"]) && $_POST["submitDeleteCar"])) {
@@ -190,7 +190,6 @@ class AuthController extends Router
                 $profilContr = new ProfilContr();
                 $profilContr->deleteUser($id);
             }
-
         }
     }
 

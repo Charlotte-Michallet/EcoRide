@@ -195,7 +195,7 @@ const api = async (feedbackData) => {
         } else if (resp.ok) {
             const succes = document.getElementById("sendSuccess");
             succes.classList.remove("hidden");
-            succes.textContent = `Votre message a bienété envoyé.`;
+            succes.textContent = `Votre message a bien été envoyé.`;
             setTimeout(() => {
                 window.location.href =
                     "/index.php?controller=trips&action=manageTrip";

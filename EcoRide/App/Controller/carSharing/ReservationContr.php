@@ -26,6 +26,7 @@ class ReservationContr
             $creditsLafted = $creditsUser - $creditsUsed;
 
             $creditsUpdated = $user->UpdatecreditsTrip($passengerId, $creditsLafted);
+
             if (! empty($creditsUpdated)) {
                 //Update seats
                 $tripRepo = new TripRepository();

@@ -62,7 +62,6 @@ class PlateformCreditsRepository extends MongoRepository
 
             $result = $collection->updateOne($filter, $update);
             return $result->getModifiedCount() > 0;
-
         } catch (Exception $e) {
             error_log("Erreur lors de l'insertion du document MongoDB: " . $e->getMessage());
             return null;

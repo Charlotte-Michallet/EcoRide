@@ -15,8 +15,8 @@ class DasboardContr
 
         $usersRepos = new UsersRepo();
 
-        $users    = $usersRepos->totalUsers();
-        $employes = $usersRepos->totalemployees();
+        $users     = $usersRepos->totalUsers();
+        $employees = $usersRepos->totalemployees();
 
         $tripsRepo  = new TripRepo();
         $totalTrips = $tripsRepo->totalTrips();
@@ -35,7 +35,7 @@ class DasboardContr
         $creditsToday = $compoanyRepo->CreditsToday($todayObjet);
 
         $statistiques["users"]          = $users;
-        $statistiques["employees"]      = $employes;
+        $statistiques["employees"]      = $employees;
         $statistiques["totalTrips"]     = $totalTrips;
         $statistiques["totalEmployees"] = $totalEmployees;
         $statistiques["tripPerDays"]    = $trips;
@@ -43,6 +43,5 @@ class DasboardContr
         $statistiques["creditstoday"]   = $creditsToday;
 
         return $statistiques;
-
     }
 }

@@ -10,14 +10,13 @@
                     creer un voyage</h1>
 
                 <div class="mt-5 flex flex-col justify-center items-center gap-2 sm:flex-row sm:gap-3">
-                    <a class="w-full sm:w-auto py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                    <a class="btn w-full sm:w-auto py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg text-white"
                         href="/index.php?controller=auth&action=profilModify">
                         Ajouter les preferences
                     </a>
                 </div>
             </div>
         </div>
-
     <?php } else {?>
 
 
@@ -113,7 +112,7 @@
 
                         <div>
                             <label for="chooseCar" class="block text-sm mb-2">Choisissez votre voiture</label>
-                            <select name="chooseCar" id="chooseCar">
+                            <select name="chooseCar" id="chooseCar" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none">
                                 <option value="choose"> --- Choisissez une Voiture --- </option>
                                 <?php foreach ($cars as $car) {?>
                                     <option value="<?php echo $car->getId() ?>"><?php echo $car->getBrand() ?>

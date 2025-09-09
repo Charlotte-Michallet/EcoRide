@@ -5,10 +5,13 @@ use App\Controller\Api\ApiController;
 
 class Router
 {
+    protected $meta;
+
     public function router()
     {
+        $this->meta = require_once ROOT_PATHS . "/config/meta.php";
+        $meta       = $this->meta;
         try {
-            // routage for redirecting pages
             if (isset($_GET["controller"])) {
 
                 // if controller for API
@@ -21,17 +24,17 @@ class Router
 
                     case 'pages':
                         $pageRouter = new PageController();
-                        $pageRouter->route();
+                        $pageRouter->route($meta);
                         break;
 
                     case 'auth':
                         $authRouter = new AuthController();
-                        $authRouter->route();
+                        $authRouter->route($meta);
                         break;
 
                     case 'manage':
                         $manageRouter = new ManageController();
-                        $manageRouter->route();
+                        $manageRouter->route($meta);
                         break;
 
                     default:
@@ -41,10 +44,10 @@ class Router
             } else {
                 if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
                     $pageRouter = new PageController();
-                    $pageRouter->dashboard();
+                    $pageRouter->dashboard($meta);
                 } else {
                     $authRouter = new AuthController();
-                    $authRouter->login();
+                    $authRouter->login($meta);
                 }
             }
         } catch (\Exception $e) {
@@ -65,16 +68,13 @@ class Router
 
         try {
             if (! file_exists($filePath) || ! file_exists($header) || ! file_exists($footer)) {
-                // generer erreure
-                throw new \Exception(message: "Fichier non trouver :" . $filePath . $header . $footer);
+                throw new \Exception(message: "Fichier non trouvé:" . $filePath . $header . $footer);
             } else {
-                // recuperer si fichier
                 extract($params);
-                // extract tranforme le tableau en plusieu  r variable
+
                 require_once $header;
                 require_once $filePath;
                 require_once $footer;
-
             }
         } catch (\Exception $e) {
             $this->render("errors/default", ["error" => $e->getMessage()]);
