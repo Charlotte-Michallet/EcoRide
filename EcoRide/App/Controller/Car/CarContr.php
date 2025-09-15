@@ -38,37 +38,37 @@ class CarContr
             }
 
             if ($this->brandModelInvalid() === true) {
-                $errors = ["La marque ou model sont invalid"];
+                $errors = ["La marque ou le modèle est invalide"];
                 return $errors;
             }
 
             if ($this->energyInvalid() === true) {
-                $errors = ["L'energie doit etre renseigner"];
+                $errors = ["Le type d'énergie doit être renseigné"];
                 return $errors;
             }
 
             if ($this->numSeatsInvalid() === true) {
-                $errors = ["Ce champs doit etre un nombre entier et positif"];
+                $errors = ["e champ doit être un nombre entier positif"];
                 return $errors;
             }
 
             if ($this->numPlateInvalid() === true) {
-                $errors = ["Les champs sont invalid"];
+                $errors = ["Le champ est invalide"];
                 return $errors;
             }
 
             if ($this->dateRegisterInvalid() === true) {
-                $errors = ["Les champs sont invalid"];
+                $errors = ["Le champ est invalide"];
                 return $errors;
             }
 
             if ($this->colorInvalid() === true) {
-                $errors = ["Les champs sont invalid"];
+                $errors = ["Le champ est invalide"];
                 return $errors;
             }
 
             if ($this->carTaken() === true) {
-                $errors = ["La voiture est déjà enregistrer"];
+                $errors = ["Cette voiture est déjà enregistrée"];
                 return $errors;
             }
 

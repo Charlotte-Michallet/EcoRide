@@ -44,6 +44,7 @@ class CompanyContr
             $reservaRepo = new ReservationRepository();
             $reservaRepo->updateRervationidTransaction($reservationId, $transactionId);
             header("Location: /index.php?controller=trips&action=manageTrip");
+            exit();
 
         } else {
             return false;

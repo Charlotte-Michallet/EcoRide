@@ -27,10 +27,10 @@ class CarSharingController extends Router
                         break;
 
                     default:
-                        throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
+                        throw new \Exception("Cette action n'existe pas : " . $_GET["action"]);
                 }
             } else {
-                // home page
+                throw new \Exception("Aucune action détectée");
             }
         } catch (\Exception $e) {
             $this->render("errors/default", ["error" => $e->getMessage()]);
@@ -63,16 +63,16 @@ class CarSharingController extends Router
         $feedbackRepo = new FeedbackRepository();
         $feedbacks    = $feedbackRepo->showFeedbackTrips($userId);
 
-        $cretis = $details->getPrice();
+        $credits = $details->getPrice();
 
         $numSeatsBookesString = $_GET["seats"];
         $numSeatsBookes       = (int) $numSeatsBookesString;
 
-        $cretisTotal = $numSeatsBookes * $cretis;
+        $creditsTotal = $numSeatsBookes * $credits;
 
         $this->particiateTrip();
 
-        $this->render("carSharing/detailsCarSharing", ["token" => $currentToken, "details" => $details, "moreDetails" => $othersdetails, "totalPrice" => $cretisTotal, "feedbacks" => $feedbacks, "meta" => $meta["details"]]);
+        $this->render("carSharing/detailsCarSharing", ["token" => $currentToken, "details" => $details, "moreDetails" => $othersdetails, "totalPrice" => $creditsTotal, "feedbacks" => $feedbacks, "meta" => $meta["details"]]);
 
     }
 

@@ -66,7 +66,7 @@ selectRadio.forEach((radio) => {
         let roleValue = e.target.value;
 
         if (!roleValue) {
-            errorDisplay("registerForm", "Veillez choisir un role");
+            errorDisplay("registerForm", "Veuillez choisir un rôle");
             role = null;
         } else {
             role = roleValue;
@@ -80,13 +80,13 @@ const usernamecheck = (value) => {
     if (value.length > 0 && (value.length < 3 || value.length > 20)) {
         errorDisplay(
             "username",
-            "Le pseudo doit faire entre 3 et 20 caractère"
+            "Le nom d’utilisateur doit comporter entre 3 et 20 caractères."
         );
         username = null;
     } else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
         errorDisplay(
             "username",
-            "Le pseudo doit ne doit pas contenir de caractère spéciaux."
+            "Le nom d’utilisateur ne doit pas contenir de caractères spéciaux."
         );
         username = null;
     } else {
@@ -103,7 +103,7 @@ const emailcheck = (value) => {
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         )
     ) {
-        errorDisplay("email", "Le mail n'est pas valid.");
+        errorDisplay("email", "L’adresse e-mail n’est pas valide.");
         email = null;
     } else {
         errorDisplay("email", "", true);
@@ -121,7 +121,7 @@ const dobCheck = (value) => {
     if (age < 18) {
         errorDisplay(
             "dob",
-            "Vous devez avoir majeur pour vous inscrir sur notre site"
+            "Vous devez être majeur pour vous inscrire sur notre site."
         );
     } else {
         errorDisplay("dob", "", true);
@@ -138,7 +138,7 @@ const passwordCheck = (value) => {
     ) {
         errorDisplay(
             "pwd",
-            "Le mot de passe doit avoir au moins 8 caractère, une majuscule, une minuscule, un chiffre et un caracteres special."
+            "Le mot de passe doit comporter au moins 8 caractères, dont une majuscule, une minuscule, un chiffre et un caractère spécial."
         );
         password = null;
     } else {
@@ -214,20 +214,20 @@ form.addEventListener("submit", async (e) => {
                 errorDisplay(
                     "registerForm",
                     responseData.message ||
-                        "Le pseudo ou l'adresse mail exist déjà."
+                        "Le nom d’utilisateur ou l'adresse e-mail exist déjà."
                 );
             } else if (resp.ok) {
                 window.location.href = "/index.php";
             } else {
                 errorDisplay(
                     "registerForm",
-                    responseData.message || "L'inscription a échouée."
+                    responseData.message || "L'inscription a échoué.."
                 );
             }
         } catch (error) {
-            alert(`Inscription échouer : ${error.message}`);
+            alert(`Inscription échouée : ${error.message}`);
         }
     } else {
-        errorDisplay("registerForm", "Veillez remplir tout les champs.");
+        errorDisplay("registerForm", "Veuillez remplir tous les champs.");
     }
 });

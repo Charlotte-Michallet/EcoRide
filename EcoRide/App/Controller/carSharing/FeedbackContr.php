@@ -31,32 +31,32 @@ class FeedbackContr
         $userId = $_SESSION["id"];
 
         if ($this->TripInputsEmpty() === true) {
-            $errors = ["Le champs doit etre rempli."];
+            $errors = ["Le champ doit être rempli."];
             return $errors;
         }
 
         if (! filter_var($this->price, FILTER_VALIDATE_INT) || ! filter_var($this->driverId, FILTER_VALIDATE_INT)) {
-            $errors = ["Ces champs doivent etre des nombres"];
+            $errors = ["Ces champs doivent être des nombres"];
             return $errors;
         }
 
         if ($this->reservationidInvalid() === true) {
-            $errors = ["La reservation id est manquand ou incorrect"];
+            $errors = ["L'ID de réservation est manquant ou incorrect."];
             return $errors;
         }
 
         if ($this->tripStatusInvalid() === true) {
-            $errors = ["Vous avez pas renseigné si le trajet c'est bien passé"];
+            $errors = ["Vous n'avez pas renseigné si le trajet s'est bien passé"];
             return $errors;
         }
 
         if ($this->feedback !== null && $this->feedbacktextInvalid()) {
-            $errors = ["Le champs ne doit pas avoir de caractere speciaux"];
+            $errors = ["Le champ ne doit pas contenir de caractères spéciaux"];
             return $errors;
         }
 
         if ($this->rating !== null && $this->numberPlacesInvalid()) {
-            $errors = ["Le champs nombre de place est incorrect"];
+            $errors = ["Le champ nombre de places est incorrect."];
             return $errors;
         }
 
@@ -66,26 +66,20 @@ class FeedbackContr
         } else {
 
             if ($this->tripStatus === "Non" && $this->rating === null && $this->feedback === null) {
-                $status            = "En attente de contact avec un employé";
-                $statusReservation = "En attente de contact avec un employé";
+                $feedbackStatus    = "En attente de contact";
+                $statusReservation = "En attente de contact";
 
             } elseif ($this->tripStatus === "Oui" && $this->rating === null && $this->feedback === null) {
-                $status            = "Enregistré";
+                $feedbackStatus    = "Enregistré";
                 $statusReservation = "Note enregistré";
             } else {
-                $status            = "En attente de validation";
+                $feedbackStatus    = "En attente de validation";
                 $statusReservation = "Avis en attente de validation";
             }
 
-            $feedbackRepo = new FeedbackRepository();
-
-            $feedbackRepo->createFeedback($this->tripStatus, $this->rating, $this->feedback, $userId, $status, $this->reservationId);
-
-            $resarepo = new ReservationRepository();
-            $resarepo->updateRervationStatus($this->reservationId, $statusReservation);
-
             if ($this->tripStatus === "Oui") {
-                $priceDriver = $this->price - 2;
+                $statusPayment = "Validé";
+                $priceDriver   = $this->price - 2;
 
                 $driverRepo         = new UserRepository();
                 $creditsuser        = $driverRepo->usercredits($this->driverId);
@@ -93,14 +87,21 @@ class FeedbackContr
 
                 $driverRepo->UpdatecreditsTrip($this->driverId, $updatedcreditsUser);
             } else {
-                $statusPayment = "En attente de contact avec un employé";
+                $statusPayment = "En attente de contact";
             }
+
+            $feedbackRepo = new FeedbackRepository();
+            $feedbackRepo->createFeedback($this->tripStatus, $this->rating, $this->feedback, $userId, $feedbackStatus, $this->reservationId);
+
+            $resarepo = new ReservationRepository();
+            $resarepo->updateRervationStatus($this->reservationId, $statusReservation);
 
             $resarepo->updateRervationpayement($this->reservationId, $statusPayment);
             $companyContr = new CompanyContr();
             $update       = $companyContr->updateStatusPayment($this->reservationId, $statusPayment);
+
             if ($update) {
-                $errors = ["La mise à jour du recu na pas marche"];
+                $errors = ["La mise à jour du reçu n'a pas marché"];
                 return $errors;
             }
         }

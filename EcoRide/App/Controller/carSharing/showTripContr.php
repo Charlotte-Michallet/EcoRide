@@ -59,24 +59,24 @@ class ShowTripContr
         $errors = [];
 
         if ($this->InputfilterEmpty() === true) {
-            $errors = ["Au moins un champs doit etre rempli."];
+            $errors = ["Au moins un champ doit être rempli."];
             return $errors;
         }
 
         if (! empty($this->filter["ecoTrip"]) && $this->filter["ecoTrip"] !== "Electrique") {
-            $errors[] = ["La valeur du boutton est incorrect"];
+            $errors[] = ["La valeur du bouton est incorrecte"];
         }
 
         if (! empty($this->filter["numberStars"]) && $this->numberInvalid() === true) {
-            $errors[] = ["Les étoiles doit etre compris entre 1 et 5"];
+            $errors[] = ["Les étoiles doivent être comprises entre 1 et 5"];
         }
 
         if (! empty($this->filter["priceMax"]) && $this->priceInvalid() === true) {
-            $errors[] = ["La valeur du prix est incorrect"];
+            $errors[] = ["La valeur du prix est incorrecte"];
         }
 
         if (! empty($this->filter["timeMax"]) && $this->timeInvalid() === true) {
-            $errors[] = ["La valeur du temps max est incorrect"];
+            $errors[] = ["La valeur du temps maximum est incorrecte"];
         }
         return $errors;
     }
@@ -98,11 +98,11 @@ class ShowTripContr
 
         } elseif ($checkTrip === true) {
             $newDateTrip      = $tripRepo->findotherTrip($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id);
-            $errors["errors"] = ["Des covoiturages sont dispobles au " . $newDateTrip];
+            $errors["errors"] = ["Des covoiturages sont disponibles le " . $newDateTrip];
             return $errors;
 
         } else {
-            $errors["errors"] = ["Aucun trajet trouver."];
+            $errors["errors"] = ["Aucun trajet trouvé."];
             return $errors;
         }
     }
@@ -119,12 +119,7 @@ class ShowTripContr
 
         $trips = $tripRepo->showAllTripsFilter($this->departure_city, $this->arrival_city, $this->date_trip, $this->num_places, $user_id, $this->filter);
 
-        if ($trips === "Aucun trajet trouvé avec ces paramètres.") {
-            return "Aucun trajet trouvé avec ces paramètres.";
-        } else {
-            return $trips;
-        }
-
+        return $trips;
     }
 
     public function InputEmpty()

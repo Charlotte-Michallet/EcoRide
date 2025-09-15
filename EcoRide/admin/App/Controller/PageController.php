@@ -23,7 +23,7 @@ class PageController extends Router
                         throw new \Exception("Cette action n'existe pas :" . $_GET["action"]);
                 }
             } else {
-                throw new \Exception("Acune action détéctée");
+                throw new \Exception("Aucune action détectée");
             }
         } catch (\Exception $e) {
             $this->render("errors/error", ["error" => $e->getMessage()]);
@@ -42,9 +42,10 @@ class PageController extends Router
         $employees = $userContr->showEmployees();
 
         if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
-            $this->render("pages/dashboard", ["token" => $currentToken, "statistiques" => $statistiques, "employees" => $employees, "meta" => $meta["dashbaord"]]);
+            $this->render("pages/dashboard", ["token" => $currentToken, "statistiques" => $statistiques, "employees" => $employees, "meta" => $meta["dashboard"]]);
         } else {
             header("Location: /admin/index.php?controller=auth&action=login");
+            exit();
         }
     }
 

@@ -45,28 +45,28 @@ class CreateTripContr
 
             $departureValidation = $this->departureCityInvalid();
             if ($departureValidation === true || isset($departureValidation["valide"]) && $departureValidation["valide"] === false) {
-                $errors = ["Les informations de la ville de depart sont incorrect"];
+                $errors = ["Les informations de la ville de départ sont incorrectes"];
                 return $errors;
             }
 
             $arrivalalidation = $this->arrivalCityInvalid();
             if ($arrivalalidation === true || isset($arrivalalidation["valide"]) && $arrivalalidation["valide"] === false) {
-                $errors = ["Les informations de la ville de depart sont incorrect"];
+                $errors = ["Les informations de la ville de départ sont incorrectes"];
                 return $errors;
             }
 
             if ($this->numberPlacesInvalid() === true) {
-                $errors = ["Le champs numero place est incorrect"];
+                $errors = ["Le champ nombre de places est incorrect"];
                 return $errors;
             }
 
             if ($this->departurehourInvalid() === true) {
-                $errors = ["Le champs heure de depart est incorrect"];
+                $errors = ["Le champ heure de départ est incorrect"];
                 return $errors;
             }
 
             if ($this->departuredateInvalid() === true) {
-                $errors = ["Le champs date de dapart est incorrect"];
+                $errors = ["Le champ date de départ est incorrect"];
                 return $errors;
             }
 
@@ -76,16 +76,16 @@ class CreateTripContr
             }
 
             if ($this->carIdInvalid() === true) {
-                $errors = ["La voiture doit etre choisi."];
+                $errors = ["La voiture doit être choisie."];
                 return $errors;
             }
 
             if (is_int($this->kilometers) === false) {
-                $errors = ["Les kilometres sont incorrect"];
+                $errors = ["Les kilomètres sont incorrects"];
                 return $errors;
             }
             if ($this->travelTileInvalid() === true) {
-                $errors = ["Le temps de trajet est incorrect."];
+                $errors = ["Le temps de voyage est incorrect."];
                 return $errors;
             }
 
@@ -105,7 +105,7 @@ class CreateTripContr
                 $tripError = $tripRepo->CreateTrip($this->departure_city, $this->arrival_city, $this->num_places, $this->date_trip, $this->hour_trip, $this->price, $this->car_id, $this->arrival_time, $this->kilometers, $this->travel_time);
 
                 if (empty($tripError)) {
-                    $errors = ["Il faut remplir les champs avant."];
+                    $errors = ["Il faut remplir les champs avant de créer le trajet."];
                     return $errors;
                 }
             }

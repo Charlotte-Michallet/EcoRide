@@ -17,7 +17,7 @@ class ModifyProContr extends AccountContr
 
         try {
             if ($this->id_role === null) {
-                $errors = ["Le champs doit etre rempli"];
+                $errors = ["Le champ doit être rempli"];
                 return $errors;
 
             } else {
@@ -38,7 +38,7 @@ class ModifyProContr extends AccountContr
         $errors = [];
         try {
             if (empty($this->username)) {
-                $errors = ["Le champs doit etre rempli"];
+                $errors = ["Le champ doit être rempli"];
             }
             if ($this->userInvalid() === true) {
                 $errors = ["Le nom d'utilisateur est invalide. Utilisez uniquement des lettres et des chiffres."];
@@ -179,7 +179,7 @@ class ModifyProContr extends AccountContr
         $errors        = [];
 
         if ($this->animal === "") {
-            $errors = ["Choisissez les préferennces."];
+            $errors = ["Choisissez les préférences."];
 
         } elseif ($this->animal === "acceptAnimal") {
             $this->animal = true;
@@ -189,7 +189,7 @@ class ModifyProContr extends AccountContr
         }
 
         if ($this->smoking === "") {
-            $errors = ["Choisissez les préferennces."];
+            $errors = ["Choisissez les préférences."];
 
         } elseif ($this->smoking === "smoking") {
             $this->smoking = true;
@@ -219,11 +219,11 @@ class ModifyProContr extends AccountContr
         $errors            = [];
 
         if (empty($this->description)) {
-            $errors = ["Le champs doit etre rempli"];
+            $errors = ["Le champ doit être rempli"];
         }
 
         if (! preg_match("/^[a-zA-Z0-9\s\-.&+\/()[\]!,;:\é\è\à\ç\ù]+$/", $this->description)) {
-            $errors = ["Le champs ne doit pas contenir de caractère spéciaux."];
+            $errors = ["Le champ ne doit pas contenir de caractères spéciaux."];
         }
 
         try {

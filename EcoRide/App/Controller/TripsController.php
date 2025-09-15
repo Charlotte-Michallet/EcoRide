@@ -29,10 +29,10 @@ class TripsController extends Router
                         break;
 
                     default:
-                        throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
+                        throw new \Exception("Cette action n'existe pas : " . $_GET["action"]);
                 }
             } else {
-                // home page
+                throw new \Exception("Aucune action détectée");
             }
         } catch (\Exception $e) {
             $this->render("errors/default", ["error" => $e->getMessage()]);
@@ -54,6 +54,7 @@ class TripsController extends Router
             $this->render("userTrips/createTrip", ["token" => $currentToken, "cars" => $carsInfo, "meta" => $meta["createTrip"]]);
         } else {
             header("Location: /index.php");
+            exit();
         }
     }
 
@@ -79,6 +80,7 @@ class TripsController extends Router
             $this->render("userTrips/manageTrips", ["token" => $currentToken, "trips" => $trips, "reservations" => $reservation, "meta" => $meta["manageTrip"]]);
         } else {
             header("Location: /index.php");
+            exit();
         }
     }
 
@@ -99,6 +101,7 @@ class TripsController extends Router
             $this->render("userTrips/history", ["token" => $currentToken, "trips" => $trips, "reservations" => $reservation, "meta" => $meta["history"]]);
         } else {
             header("Location: /index.php");
+            exit();
         }
     }
 
@@ -141,7 +144,7 @@ class TripsController extends Router
 
                     // Reimburse passengers
                     $passengersCredits      = $passengerRepo->usercredits($passagerId);
-                    $creditsForPassenger    = $totalPrice - 2;
+                    $creditsForPassenger    = $totalPrice;
                     $passengeCreditsUpdated = $creditsForPassenger + $passengersCredits;
                     $passengerRepo->UpdatecreditsTrip($passagerId, $passengeCreditsUpdated);
 
@@ -194,7 +197,7 @@ class TripsController extends Router
                 $sendmailContr = new SendMailContr();
                 $result        = $sendmailContr->sendMailForeach($id);
 
-                if ($result === "Email demande avis envoyé") {
+                if ($result === "Email de demande d'avis envoyé") {
                     $_SESSION["feedback"] = true;
                 } else {
                     $_SESSION["feedback"] = false;

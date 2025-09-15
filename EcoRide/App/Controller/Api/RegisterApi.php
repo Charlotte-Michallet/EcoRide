@@ -51,7 +51,7 @@ class RegisterApi
             if (! empty($registererror)) {
                 Router::jsonResponse(["status" => "error", "message" => $registererror], 401);
             } else {
-                Router::jsonResponse(["status" => "success", "message" => "L'inscription a réussi."], 200);
+                Router::jsonResponse(["status" => "success", "message" => "Inscription réussie."], 200);
             }
         } else {
             Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);

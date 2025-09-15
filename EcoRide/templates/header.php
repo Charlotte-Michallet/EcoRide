@@ -11,7 +11,7 @@
   <!-- links for tailwind -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-  <!-- linl leaflet.js -->
+  <!-- link leaflet.js -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
@@ -19,10 +19,10 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
   <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
 
-  <!-- css link -->
+  <!-- CSS link -->
   <link rel="stylesheet" href="/assets/css/overridecss.css">
 
-  <!-- link JavaScript -->
+  <!-- JavaScript link -->
   <script type="module" src="/assets/javascript/index.js"></script>
 
   <title><?php echo $meta["title"] ?> </title>
@@ -37,24 +37,21 @@
 </head>
 
 <body>
-
   <header>
-
     <div class="flex justify-around items-center gap-8 mx-10 text-gray-900">
       <a class="block" href="/index.php">
-        <img class="h-20 w-35 object-contain" src="assets/img/logo/logo.png" alt="Ecoride logo">
+        <img class="h-20 w-36 object-contain" src="assets/img/logo/logo.png" alt="Ecoride logo">
       </a>
       <div class="flex flex-1 items-center justify-end md:justify-between">
         <nav aria-label="Global" class="hidden md:block">
           <ul class="flex items-center gap-6 text-lg">
             <li>
               <a class="transition hover:text-gray-700/75"
-                href="/index.php?controller=car-sharing&action=show">Covoiturage </a>
+                href="/index.php?controller=car-sharing&action=show">Covoiturage</a>
             </li>
 
             <li>
-              <a class="transition hover:text-gray-500/75" href="/index.php?controller=pages&action=contact"> Contact
-              </a>
+              <a class="transition hover:text-gray-500/75" href="/index.php?controller=pages&action=contact">Contact</a>
             </li>
 
           </ul>

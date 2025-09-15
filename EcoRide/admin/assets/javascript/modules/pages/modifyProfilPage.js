@@ -70,13 +70,13 @@ const usernamecheck = (value) => {
     if (value.length > 0 && (value.length < 3 || value.length > 20)) {
         errorDisplay(
             "username",
-            "Le pseudo doit contenir entre 3 et 20 caractères"
+            "Le nom d’utilisateur doit contenir entre 3 et 20 caractères"
         );
         username = null;
     } else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
         errorDisplay(
             "username",
-            "Le pseudo ne doit pas contenir de caractères spéciaux."
+            "Le nom d’utilisateur ne doit pas contenir de caractères spéciaux."
         );
         username = null;
     } else {
@@ -206,7 +206,7 @@ textPref.addEventListener("input", (e) => {
     } else if (!value.match(/^[a-zA-Z0-9\s\-.&+\/()[\]!,;:\é\è\à\ç\ù]+$/)) {
         errorDisplay(
             "otherPreferences",
-            "Le champs ne doit pas contenir de caractère spéciaux."
+            "Le champ ne doit pas contenir de caractère spéciaux."
         );
         preferences = null;
     } else {
@@ -227,11 +227,11 @@ forms.forEach((form) => {
 
                 if (username) {
                     errorDisplay("username", "", true);
-                    API(data, "username", "Le pseudo exist déjà.");
+                    API(data, "username", "Le nom d’utilisateur exist déjà.");
                 } else {
                     errorDisplay(
                         "username",
-                        "Veillez remplir le champs pseudo."
+                        "Veillez remplir le champs nom d’utilisateur."
                     );
                 }
                 break;
@@ -295,7 +295,7 @@ forms.forEach((form) => {
                 } else {
                     errorDisplay(
                         "otherPreferences",
-                        "Veillez remplir ce champ."
+                        "Veuillez remplir le champ."
                     );
                 }
                 break;

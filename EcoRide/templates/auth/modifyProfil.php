@@ -6,7 +6,7 @@
             <div class="container lg:col-span-5 min-h-screen px-6 mx-auto">
                 <h2 class="text-2xl font-semibold tracking-wider">Modifier mon profil</h2>
                 <div class="mt-6">
-                    <h3 class="text-gray-800">Selectionner votre statut</h3>
+                    <h3 class="text-gray-800">Sélectionnez votre statut</h3>
                 </div>
 
                 <div class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-4">
@@ -14,7 +14,7 @@
                     <!-- Roles -->
                     <form method="post" id="formRoles" class="col-span-4">
                         <fieldset class="flex justify-between">
-                            <legend class="sr-only">Role utilisateur</legend>
+                            <legend class="sr-only">Rôle utilisateur</legend>
                             <div>
                                 <label for="driverAndPassenger" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
                                     <p class="text-gray-700">Conducteur et passager</p>
@@ -39,30 +39,29 @@
 
                         <input type="hidden" id="tokenrole" value="<?php echo htmlspecialchars($token) ?>">
                         <p class="hidden text-xs text-red-600 mt-2" id="rolesError"></p>
-                        <button type="submit" class="btn flex items-center justify-between px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg">Modifier le role</button>
+                        <button type="submit" class="btn flex items-center justify-between px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg">Modifier le rôle</button>
                     </form>
                     <?php }?>
                     <!-- Username -->
                     <form method="post" id="formUsername" class="col-span-2 flex">
                         <div>
-                            <label for="username" class="block mb-2 text-sm">Modifier le pseudo</label>
+                            <label for="username" class="block mb-2 text-sm">Modifier le nom d’utilisateur</label>
                             <input type="text" id="username" class="px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="username" placeholder="Prénom" />
                             <p class="hidden text-xs text-red-600 mt-2" id="usernameError"></p>
                             <input type="hidden" id="tokenUser" value="<?php echo htmlspecialchars($token) ?>">
                             <button type="submit"
-                            class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier le pseudo</button>
+                            class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier le nom d’utilisateurr</button>
                         </div>
-
                     </form>
 
                     <!-- Email -->
                     <form method="post" id="formEmail" class="col-span-2 flex">
                         <div>
-                            <label for="email" class="block mb-2 text-sm">Modifier email</label>
+                            <label for="email" class="block mb-2 text-sm">Modifier l'e-mail</label>
                                 <input type="text" id="email" class="px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="email" placeholder="nom.prénom@gmail.com" />
                             <p class="hidden text-xs text-red-600 mt-2" id="emailError"></p>
                             <input type="hidden" id="tokenEmail" value="<?php echo htmlspecialchars($token) ?>">
-                            <button type="submit" class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier l'email</button>
+                            <button type="submit" class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier l'e-mail</button>
                         </div>
                     </form>
 
@@ -74,7 +73,7 @@
                         </div>
                         <div>
                             <label for="photo" class="block mb-2 text-sm ">Ajouter une photo</label>
-                            <input type="file" class="block w-full px-3 py-2 mt-2 text-sm text-gray-600 border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40" id="photo" accept="image/png, image/jpeg, image/jpg"/>
+                            <input type="file" class="block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring" id="photo" accept="image/png, image/jpeg, image/jpg"/>
                             <p class="hidden text-xs text-red-600 mt-2" id="photoError"></p>
                             <input type="hidden" id="tokenPhoto" value="<?php echo htmlspecialchars($token) ?>">
                             <button type="submit" class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Ajouter une photo</button>
@@ -86,7 +85,7 @@
                         <div>
                             <label for="passwordModif" class="block mb-2 text-sm">Modifier mon mot de passe</label>
                             <div class="relative">
-                                <input type="password" id="passwordModif" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="passwordModif" placeholder="8+ caractères, majuscule, chiffre" />
+                                <input type="password" id="passwordModif" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="passwordModif" placeholder="8+ caractères, une majuscule, un chiffre" />
                                 <span id="toggleVisibility" class="absolute inset-y-3 right-3" >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
@@ -121,16 +120,16 @@
 
             <!-- preference -->
             <div class="container lg:col-span-5 min-h-screen px-6 mx-auto">
-                <h2 class="text-2xl font-semibold tracking-wider">Ajouter ou modifier mes preference </h2>
+                <h2 class="text-2xl font-semibold tracking-wider">Ajouter ou modifier mes préférences</h2>
                 <div class="mt-6">
-                    <h3 class="text-gray-800">Selectionner votre préférences</h3>
+                    <h3 class="text-gray-800">Sélectionnez vos préférences</h3>
                 </div>
 
                 <form class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-2" method="post" id="formPreferences">
                     <div class="col-span-2">
-                        <h2 class="text-gray-800">Accepte annimals</h2>
+                        <h2 class="text-gray-800">Animaux acceptés</h2>
                         <fieldset class="flex justify-between">
-                            <legend class="sr-only">Accepte annimal</legend>
+                            <legend class="sr-only">Animaux acceptés</legend>
 
                             <div>
                                 <label for="acceptAnimal" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
@@ -149,9 +148,9 @@
                     </div>
 
                     <div class="col-span-2">
-                        <h2 class="text-gray-800">Accepte fumeur</h2>
+                        <h2 class="text-gray-800">Fumeur accepté</h2>
                         <fieldset class="flex justify-between">
-                            <legend class="sr-only">Accepte fumeur</legend>
+                            <legend class="sr-only">Fumeur accepté</legend>
 
                             <div>
                                 <label for="smoking" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
@@ -176,7 +175,7 @@
 
                 <form  class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-2" method="post" id="formotherPreferences">
                     <div>
-                        <label for="otherPreferences" class="block mb-2 text-sm">Mes préference</label>
+                        <label for="otherPreferences" class="block mb-2 text-sm">Mes préférences</label>
                         <textarea name="otherPreferences" id="otherPreferences" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"></textarea>
                          <p class="hidden text-xs text-red-600 mt-2" id="otherPreferencesError"></p>
                     </div>

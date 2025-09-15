@@ -54,7 +54,7 @@
             <li>
               <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
                 href="/admin/index.php?controller=manage&action=employees">
-                Compte employés
+                Comptes employés
               </a>
             </li>
 
@@ -87,7 +87,7 @@
             <li>
               <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
                 href="/admin/index.php?controller=auth&action=login">
-                Se conneter
+                Se connecter
               </a>
             </li>
           </ul>

@@ -47,7 +47,7 @@
         </div>
 
         <div class="flex items-center justify-center py-4 text-center bg-gray-50">
-            <span class="text-sm text-gray-600">Vous n'avez pas de compte. Créez-en un !</span>
+            <span class="text-sm text-gray-600">Pas encore de compte ? Inscrivez-vous !</span>
             <a href="/index.php?controller=auth&action=register" class="link mx-2 text-sm font-bold">Inscription</a>
         </div>
     </div>

@@ -40,5 +40,4 @@ class ImgApi
             return;
         }
     }
-
 }

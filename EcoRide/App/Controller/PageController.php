@@ -21,10 +21,10 @@ class PageController extends Router
                         break;
 
                     default:
-                        throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
+                        throw new \Exception("Cette action n'existe pas : " . $_GET["action"]);
                 }
             } else {
-                // home page
+                throw new \Exception("Aucune action détectée");
             }
         } catch (\Exception $e) {
             $this->render("errors/default", ["error" => $e->getMessage()]);

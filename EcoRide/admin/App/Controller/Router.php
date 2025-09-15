@@ -38,7 +38,7 @@ class Router
                         break;
 
                     default:
-
+                        $this->render("errors/error", ["error" => $e->getMessage()]);
                         break;
                 }
             } else {
@@ -52,10 +52,10 @@ class Router
             }
         } catch (\Exception $e) {
             if (isset($_GET["controller"]) && $_GET["controller"] === "api") {
-                self::jsonResponse(["status" => "error", "message" => "Erreur interne du serveur API: " . $e->getMessage()], 500);
+                self::jsonResponse(["status" => "error", "message" => "Erreur interne du serveur API : " . $e->getMessage()], 500);
 
             } else {
-                $this->render("errors/default", ["error" => $e->getMessage()]);
+                $this->render("errors/error", ["error" => $e->getMessage()]);
             }
         }
     }
@@ -68,7 +68,7 @@ class Router
 
         try {
             if (! file_exists($filePath) || ! file_exists($header) || ! file_exists($footer)) {
-                throw new \Exception(message: "Fichier non trouvé:" . $filePath . $header . $footer);
+                throw new \Exception(message: "Fichier non trouvé :" . $filePath . $header . $footer);
             } else {
                 extract($params);
 
@@ -77,7 +77,7 @@ class Router
                 require_once $footer;
             }
         } catch (\Exception $e) {
-            $this->render("errors/default", ["error" => $e->getMessage()]);
+            $this->render("errors/error", ["error" => $e->getMessage()]);
         }
     }
 
@@ -86,7 +86,6 @@ class Router
         http_response_code($statusCode);
         header("Content-Type: application/json");
         echo json_encode($data);
-
         exit();
     }
 }

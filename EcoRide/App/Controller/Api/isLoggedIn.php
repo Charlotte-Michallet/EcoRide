@@ -31,13 +31,13 @@ class IsLoggedIn
                 if ($credits < $creditsTrip) {
                     Router::jsonResponse(["status" => "error", "message" => "Vous n’avez pas assez de crédits."], 402);
                 } else {
-                    Router::jsonResponse(["status" => "success", "message" => "credit suffisant"], 200);
+                    Router::jsonResponse(["status" => "success", "message" => "Credit suffisant"], 200);
                 }
             } else {
-                Router::jsonResponse(["status" => "error", "message" => "Vous devais etre passager ou conducteur passager"], 405);
+                Router::jsonResponse(["status" => "error", "message" => "Vous devez être passager ou conducteur-passager."], 405);
             }
         } else {
-            Router::jsonResponse(["status" => "error", "message" => "Connecter vous pour participez a un voyage"], 401);
+            Router::jsonResponse(["status" => "error", "message" => "Connectez-vous pour participer à un voyage."], 401);
         }
     }
 }

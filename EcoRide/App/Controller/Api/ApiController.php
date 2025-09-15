@@ -34,7 +34,7 @@ class ApiController
                     break;
 
                 case 'admin':
-                    $this->adminRequests($method, $action);
+                    $this->adminRequests($action);
                     break;
 
                 default:
@@ -71,7 +71,7 @@ class ApiController
                 break;
 
             default:
-
+                Router::jsonResponse(["status" => "info", "message" => "Aucune action détectée."], 405);
                 break;
         }
 
@@ -86,7 +86,7 @@ class ApiController
                     $showApiControl = new FindItinaryApi();
                     $showApiControl->findItinary();
                 } else {
-                    Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour l'inscription."], 405);
+                    Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la recherche."], 405);
                 }
                 break;
 
@@ -95,7 +95,7 @@ class ApiController
                     $showApiControl = new FilterApi();
                     $showApiControl->filterData();
                 } else {
-                    Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour l'inscription."], 405);
+                    Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour le filtre."], 405);
                 }
                 break;
 
@@ -105,7 +105,7 @@ class ApiController
                 break;
 
             default:
-
+                Router::jsonResponse(["status" => "info", "message" => "Aucune action détectée."], 405);
                 break;
         }
     }
@@ -121,7 +121,7 @@ class ApiController
                         $ModifyApiControl = new ModifyApi();
                         $ModifyApiControl->modifyData();
                     } else {
-                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
+                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la modification."], 405);
                     }
                     break;
                 } else {
@@ -151,7 +151,7 @@ class ApiController
                         $ImgControl = new ImgApi();
                         $ImgControl->imgData();
                     } else {
-                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
+                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour cette action."], 405);
                     }
                     break;
                 } else {
@@ -166,7 +166,7 @@ class ApiController
                         $CreditsControl = new CreditsApi();
                         $CreditsControl->creditsData();
                     } else {
-                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
+                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour le rechargement de crédits."], 405);
                     }
                     break;
                 } else {
@@ -175,7 +175,7 @@ class ApiController
                 }
 
             default:
-
+                Router::jsonResponse(["status" => "info", "message" => "Aucune action détectée."], 405);
                 break;
         }
     }
@@ -206,7 +206,7 @@ class ApiController
                         $feedbackControl = new FeedbackApi();
                         $feedbackControl->feedbackData();
                     } else {
-                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour la création."], 405);
+                        Router::jsonResponse(["status" => "info", "message" => "Méthode non autorisée pour l'envoie de votre avis."], 405);
                     }
 
                 } else {
@@ -215,27 +215,21 @@ class ApiController
                 }
 
             default:
-
+                Router::jsonResponse(["status" => "info", "message" => "Aucune action détectée."], 405);
                 break;
         }
     }
 
-    private function adminRequests($method, $action)
+    private function adminRequests($action)
     {
-        switch ($action) {
-
-            case 'graph':
-                if (isset($_SESSION["id"])) {
-                    $graphContr = new GraphApi();
-                    $graphContr->GraphData();
-                } else {
-                    Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
-                    return;
-                }
-
-            default:
-
-                break;
+        if ($action === "graph") {
+            if (isset($_SESSION["id"])) {
+                $graphContr = new GraphApi();
+                $graphContr->GraphData();
+            } else {
+                Router::jsonResponse(["status" => "error", "message" => "Authentification requise. Veuillez vous connecter."], 401);
+                return;
+            }
         }
     }
 

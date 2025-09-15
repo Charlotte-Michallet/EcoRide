@@ -1,7 +1,7 @@
 <!-- intro -->
 <section id="homePage">
   <div class="hero relative isolate overflow-hidden py-10 sm:py-24 mt-5">
-    <img src="/assets/img/groupe-d-amis-levant-les-bras-dans-la-voiture.jpg" alt="image covoiturage"
+   <img src="/assets/img/groupe-d-amis-levant-les-bras-dans-la-voiture.jpg" alt="image covoiturage"
       class="absolute inset-0 -z-10 size-full object-cover object-right md:object-center" />
     <div class="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
       aria-hidden="true">
@@ -26,14 +26,14 @@
         <div class="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-3">
           <div class="flex flex-col gap-1 bg-gray-200/85 rounded-xl p-4">
             <p class="text-4xl font-semibold tracking-tight">6 kg de CO₂ en moins</p>
-            <p class="text-lg">pour chaque trajet en covoiturage ≈20km</p>
+            <p class="text-lg">pour chaque trajet en covoiturage ≈ 20km</p>
             <p class="text-xs">* Selon l'estimation gouvernementale issue du plan officiel de 2023</p>
           </div>
 
           <div class="flex flex-col gap-1 bg-gray-200/85 rounded-xl p-4">
             <p class="text-4xl font-semibold tracking-tight">~130€/mois</p>
             <p class="text-base/7">d'économie en utilisant le covoiturage</p>
-            <p class="text-xs">* Selon un communiquer de BlaBlaCar Daily de 2021</p>
+            <p class="text-xs">* Selon un communiqué de BlaBlaCar Daily, 2021</p>
           </div>
           <div class="flex flex-col gap-1 bg-gray-200/85 rounded-xl p-4">
             <p class="text-4xl font-semibold tracking-tight">+47% de trajets </p>
@@ -108,11 +108,11 @@
             alt="route en foret" />
 
           <div class="mt-2 md:mx-6">
-            <p class="text-lg leading-relaxed text-white md:text-xl"><b>EcoRide</b> est une entreprise française dédiée à une
-              mobilité plus durable. En favorisant le <b>covoiturage</b>, nous réduisons l’empreinte carbone. Notre mission est
-              de simplifier la mise en relation entre conducteurs et passagers pour des <b>trajets plus écologiques</b>. Avec
-              EcoRide, voyagez de manière  écoresponsable et participez à un avenir plus vert.
-             <b>Drive Green Together!</b></p>
+            <p class="text-lg leading-relaxed text-white md:text-xl"><strong>EcoRide</strong> est une entreprise française dédiée à une
+              mobilité plus durable. En favorisant le <strong>covoiturage</strong>, nous réduisons l’empreinte carbone. Notre mission est
+              de simplifier la mise en relation entre conducteurs et passagers pour des <strong>trajets plus écologiques</strong>. Avec
+              EcoRide, voyagez de manière écoresponsable et participez à un avenir plus vert.
+             <strong>Drive Green Together!</strong></p>
           </div>
         </div>
       </div>

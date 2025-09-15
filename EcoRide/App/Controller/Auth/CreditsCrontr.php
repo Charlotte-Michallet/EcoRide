@@ -12,7 +12,7 @@ class CreditsCrontr extends AccountContr
     public function checkCredits()
     {
         if (empty($this->credits) && filter_var($this->credits, FILTER_VALIDATE_INT, ["options" => ["min_range" => 0]])) {
-            $errors = "Le montant des credits est incorrecte";
+            $errors = "Le montant des credits est incorrect";
             return $errors;
         } else {
             $userId     = $_SESSION["id"];

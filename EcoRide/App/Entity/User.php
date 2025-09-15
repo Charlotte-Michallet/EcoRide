@@ -6,7 +6,6 @@ class User
     protected int $id;
     protected string $username;
     protected string $email;
-    protected string $password;
     protected string $date_of_birth;
     protected array|string $photo_url;
     protected ?int $credits;
@@ -65,24 +64,6 @@ class User
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of password
-     */
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set the value of password
-     */
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
 
         return $this;
     }

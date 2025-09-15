@@ -38,12 +38,9 @@ class FilterApi
             return;
         } else {
             $trips = $showTripContr->getTripsFilter();
-            if ($trips === "Aucun trajet trouvé avec ces paramètres.") {
-                Router::jsonResponse(["status" => "error", "message" => $trips], 204);
-                return;
-            } elseif (isset($trips["errors"])) {
-                $error = $trips["errors"];
-                Router::jsonResponse(["status" => "error", "message" => $error], 422);
+
+            if (empty($trips)) {
+                Router::jsonResponse(["status" => "error", "message" => "Aucun trajet trouvé avec ces paramètres."]);
                 return;
             } else {
                 $tripsArray = [];

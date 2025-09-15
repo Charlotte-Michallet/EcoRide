@@ -13,7 +13,7 @@ class MySql
 
     private function __construct()
     {
-        // get .env and convert in to an array
+        // Read .env and convert in to an array
         $config = parse_ini_file(dirname(__DIR__, 2) . "/" . ".env");
 
         if (isset($config["DB_NAME"])) {
@@ -57,7 +57,7 @@ class MySql
 
             return $this->pdo;
         } catch (\PDOException $e) {
-            die("Connexion echouer:" . $e->getMessage());
+            die("Connexion echouée :" . $e->getMessage());
         }
     }
 }

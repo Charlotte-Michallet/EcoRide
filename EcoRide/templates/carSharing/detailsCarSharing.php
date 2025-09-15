@@ -34,7 +34,7 @@
                         <p class="text-lg font-semibold"><?php echo $details->getTravel_time() ?> </p>
                     </div>
 
-                    <div class="lineRigth my-2 mr-4"></div>
+                    <div class="lineRight my-2 mr-4"></div>
                     <div class="flex items-center gap-x-2">
                         <p class="text-lg font-semibold"><?php echo $details->getArrivalTime() ?> </p>
                     </div>
@@ -58,7 +58,7 @@
 
             <div class="p-6 space-y-3 border-2 border-emerald-600 shadow-xs rounded-xl w-1/3">
                 <div>
-                    <p class="text-lg font-semibold">Information sur le trajet: </p>
+                    <p class="text-lg font-semibold">Informations sur le trajet: </p>
                 </div>
                 <div class="flex justify-between">
                     <p class="text-2xl font-semibold"> <span
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="flex justify-between">
-                    <p class="text-xs font-semibold">* 1 Crédits = 1€</p>
+                    <p class="text-xs font-semibold">* 1 Crédit = 1€</p>
                     <button id="participate"
                         class="btnSearch item-center px-5 py-2 leading-5 text-white transition-colors duration-300 transform rounded-md focus:outline-none">Participer</button>
                 </div>
@@ -96,7 +96,7 @@
                             if ($notes !== null) {?>
                                 <p class="text-xl font-semibold ml-2">
                                     <span><?php echo $details->getNotes() ?></span>
-                                    /5 Etoiles
+                                    /5 Étoiles
                                 </p>
                             <?php } else {
                             }?>
@@ -105,12 +105,12 @@
 
                     <div class="w-1/2">
                         <p class="text-xl font-semibold">
-                            Preferences:
+                            Préférences :
                         </p>
                         <div class="flex gap-6 justify-between mt-3">
                             <div>
                                 <p class="text-lg font-semibold">
-                                    Animaux autorisée :
+                                    Animaux autorisés :
                                 </p>
                                 <p class="text-lg font-semibold">
                                     <?php echo $moreDetails["animal"] ?>
@@ -119,7 +119,7 @@
 
                             <div class="mx-9">
                                 <p class="text-lg font-semibold">
-                                    Fumeur autorisée :
+                                    Fumeur autorisé :
                                 </p>
                                 <p class="text-lg font-semibold">
                                     <?php echo $moreDetails["smoking"] ?>
@@ -140,7 +140,7 @@
         <div class="flex mt-6">
             <div class="p-8 space-y-3 border-2 border-emerald-600 shadow-xs rounded-xl w-full">
                 <div>
-                    <p class="text-lg font-semibold">Information sur la voiture: </p>
+                    <p class="text-lg font-semibold">Informations sur la voiture: </p>
                 </div>
                 <div class="flex w-full items-center">
                     <div class="flex w-1/2">
@@ -156,7 +156,7 @@
                             <path d="m44.75 46.748 2.5 2 4-3.5" style="fill:none;stroke:#0754acf3;stroke-width:2px" />
                         </svg>
                         <div class="flex items-center">
-                            <p class="text-lg font-semibold mx-2">Marque, modele et couleur</p>
+                            <p class="text-lg font-semibold mx-2">Marque, modèle et couleur</p>
                             <p class="text-lg font-semibold mx-2">
                                 <?php echo $details->getBrand() ?>
                             </p>
@@ -172,7 +172,7 @@
 
                     </div>
                     <div class="flex w-1/2">
-                        <p class="text-lg font-semibold mx-2">Energie de la voiture:
+                        <p class="text-lg font-semibold mx-2">Énergie de la voiture :
                             <span><?php echo $details->getEnergyTy() ?></span>
                         </p>
                         <p class="mx-2 text-sm">
@@ -187,13 +187,12 @@
         <div class="flex mt-6">
             <div class="p-8 space-y-3 border-2 border-emerald-600 shadow-xs rounded-xl w-full">
                 <div>
-                    <p class="text-lg font-semibold">Les avis des passagers:</p>
+                    <p class="text-lg font-semibold">Les avis des passagers :</p>
                 </div>
                 <div class="max-w-[85rem] px-4 py-5 mx-auto">
-
                     <div class="grid lg:grid-cols-2 lg:gap-y-16 gap-10">
                         <?php foreach ($feedbacks as $feedback) {?>
-                            <div class="cardFeeback group block rounded-xl p-3 m-3 shadow-md ">
+                            <div class="group block rounded-xl p-3 m-3 shadow-md border border-gray-200 bg-gray-100">
                                 <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
                                     <div class="shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
                                         <img class="object-cover w-10 h-10 rounded-full mr-9"
@@ -202,7 +201,7 @@
                                             <?php echo $feedback->getPassengersUsername() ?>
                                         </p>
                                         <p class="text-sm pt-3 font-medium">
-                                            Voyage le: <span><?php echo $feedback->getDepartureDate() ?></span>
+                                            Voyage effectué le: <span><?php echo $feedback->getDepartureDate() ?></span>
                                         </p>
                                         <p class="text-sm pt-3 font-medium">
                                             De: <span><?php echo $feedback->getDepartureCity() ?></span> à
@@ -212,7 +211,7 @@
 
                                     <div class="grow">
                                         <h3 class="text-xl font-semibold">
-                                            <span><?php echo $feedback->getNote() ?></span>/5 Etoile
+                                            <span><?php echo $feedback->getNote() ?></span>/5 Étoiles
                                         </h3>
                                         <p class="mt-3 italic font-semibold">
                                             "<span><?php echo $feedback->getFeedback() ?></span>" </p>
@@ -232,7 +231,7 @@
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <div class="mt-4">
                 <p class="text-pretty text-gray-700">
-                    Le trajet coute <span>                                                                                     <?php echo $totalPrice ?></span> . Ete vous sure de vouloir participer a ce
+                    Le trajet coûte <span>                                                                                                                                                                                                                                                                                                             <?php echo $totalPrice ?></span> . Êtes-vous sûr de vouloir participer a ce
                     trajet</p>
             </div>
 
@@ -252,11 +251,10 @@
                     <input type="hidden" id="reservation_date" name="reservation_date"
                         value="<?php echo $details->getDepartureDateFormat() ?>">
                     <button type="submit" id="participateBtn" name="participateBtn" value="participateBtn"
-                        class="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700">
+                        class="btn rounded px-4 py-2 text-sm font-medium text-white transition-colors ">
                         Participer
                     </button>
                 </form>
-
             </div>
         </div>
     </div>

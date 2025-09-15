@@ -66,7 +66,7 @@ carInputs.forEach((input) => {
 //verify brand and model
 const brandCheck = (value) => {
     if (value.length > 0 && value.length > 30) {
-        errorDisplay("brand", "La marque doit pas faire plus 30 caractère");
+        errorDisplay("brand", "La marque ne doit pas dépasser 30 caractères.");
         brand = null;
     } else if (!value.match(/^[a-zA-Z0-9\s\-.&+\/()[\]]+$/)) {
         errorDisplay(
@@ -83,12 +83,12 @@ const brandCheck = (value) => {
 //verify model
 const modelCheck = (value) => {
     if (value.length > 0 && value.length > 30) {
-        errorDisplay("model", "Le model doit pas faire plus 30 caractère");
+        errorDisplay("model", "Le modèle ne doit pas dépasser 30 caractères.");
         model = null;
     } else if (!value.match(/^[a-zA-Z0-9\s\-.&+\/()[\]]+$/)) {
         errorDisplay(
             "model",
-            "Le model doit ne doit pas contenir de caractère spéciaux."
+            "Le modèle ne doit pas contenir de caractères spéciaux."
         );
         model = null;
     } else {
@@ -102,7 +102,7 @@ energyType.addEventListener("change", (e) => {
     let energyType = e.target.value;
 
     if (energyType === "Energy") {
-        errorDisplay("form", "Veillez choisir un type d'energie");
+        errorDisplay("form", "Veuillez choisir un type d'énergie");
         energy = null;
     } else {
         energy = energyType;
@@ -113,13 +113,16 @@ energyType.addEventListener("change", (e) => {
 // verify number seats
 const seatsCheck = (value) => {
     if (isNaN(value)) {
-        errorDisplay("seats", "Ce champs doit contenir que des chiffre");
+        errorDisplay("seats", "Ce champ doit contenir uniquement des chiffres");
         seats = null;
     } else if (value.length === 0) {
-        errorDisplay("seats", "Le champs doit etre renseigne");
+        errorDisplay("seats", "Le champ doit être renseigné");
         seats = null;
     } else if (value < 2 || value > 9) {
-        errorDisplay("seats", "Le nombre de place doit etre entre 2 et 9");
+        errorDisplay(
+            "seats",
+            "Le nombre de places doit être compris entre 2 et 9"
+        );
         seats = null;
     } else {
         errorDisplay("seats", "", true);
@@ -154,7 +157,7 @@ const dateRegisterCheck = (value) => {
     if (dateR > today) {
         errorDisplay(
             "datenumplate",
-            "Veillez mettre une date anterieur ou égale a aujourd'hui."
+            "Veuillez mettre une date antérieure ou égale à aujourd'hui."
         );
         dateRegister = null;
     } else {
@@ -166,12 +169,12 @@ const dateRegisterCheck = (value) => {
 //verify color
 const colorCheck = (value) => {
     if (value.length === 0) {
-        errorDisplay("form", "Le champs doit etre renseigne");
+        errorDisplay("form", "Le champ doit être renseigné");
         color = null;
     } else if (!value.match(/^[a-zA-Z\s]*[a-zA-Z][a-zA-Z\s]*$/)) {
         errorDisplay(
             "form",
-            "La couleur ne doit pas contenir de caractère spéciaux."
+            "La couleur ne doit pas contenir de caractères spéciaux"
         );
         color = null;
     } else {
@@ -251,15 +254,14 @@ addCarForm.addEventListener("submit", async (e) => {
             const responseData = await resp.json();
 
             if (resp.ok) {
-                window.location.href =
-                    "/index.php?controller=auth&action=cars";
+                window.location.href = "/index.php?controller=auth&action=cars";
             } else {
                 errorDisplay("form", responseData.message);
             }
         } catch (error) {
-            alert(`L'ajout de la voiture a échouée : ${error.message}`);
+            alert(`L'ajout de la voiture a échoué : ${error.message}`);
         }
     } else {
-        errorDisplay("form", "Veillez remplir tout les champs.");
+        errorDisplay("form", "Veuillez remplir tous les champs.");
     }
 });

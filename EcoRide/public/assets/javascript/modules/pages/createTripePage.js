@@ -75,7 +75,7 @@ const departureCityCheck = async (value) => {
     const cityFound = document.getElementById("cityFound");
 
     if (value.length === 0) {
-        errorDisplay("depatureCity", "Veillez renseigné la ville");
+        errorDisplay("depatureCity", "Veuillez renseigner la ville");
         apiCityFail(cityFound);
         lastSearchedCity = "";
         departCity = null;
@@ -86,7 +86,7 @@ const departureCityCheck = async (value) => {
     ) {
         errorDisplay(
             "depatureCity",
-            "La ville ne doit pas contenir de caractère spéciaux."
+            "La ville ne doit pas contenir de caractères spéciaux."
         );
         apiCityFail(cityFound);
         departCity = null;
@@ -124,7 +124,7 @@ const arrivalCityCheck = async (value) => {
     const cityFound = document.getElementById("CitFound");
 
     if (value.length === 0) {
-        errorDisplay("arrivalCity", "Veillez renseigné la ville");
+        errorDisplay("arrivalCity", "Veuillez renseigner la ville");
         apiCityFail(cityFound);
         lastSearchedCity = "";
         arrivalCity = null;
@@ -135,7 +135,7 @@ const arrivalCityCheck = async (value) => {
     ) {
         errorDisplay(
             "arrivalCity",
-            "La ville ne doit pas contenir de caractère spéciaux."
+            "La ville ne doit pas contenir de caractères spéciaux."
         );
         apiCityFail(cityFound);
         arrivalCity = null;
@@ -170,13 +170,19 @@ const arrivalCityCheck = async (value) => {
 
 const numPlacesCheck = (value) => {
     if (isNaN(value)) {
-        errorDisplay("numPlaces", "Ce champs doit contenir que des chiffre");
+        errorDisplay(
+            "numPlaces",
+            "Ce champ doit contenir uniquement des chiffres"
+        );
         numPlaces = null;
     } else if (value.length === 0) {
-        errorDisplay("numPlaces", "Le champs doit etre renseigne");
+        errorDisplay("numPlaces", "Le champ doit être renseigné");
         numPlaces = null;
     } else if (value < 1 || value > 8) {
-        errorDisplay("numPlaces", "Le nombre de place doit etre entre 1 et 8");
+        errorDisplay(
+            "numPlaces",
+            "Le nombre de places doit être compris entre 1 et 8"
+        );
         numPlaces = null;
     } else {
         errorDisplay("numPlaces", "", true);
@@ -194,7 +200,7 @@ const dateTripCheck = (value) => {
     if (dateTrip < today) {
         errorDisplay(
             "date",
-            "Veillez mettre une date superieur ou egal a aujourd'hui."
+            "Veuillez mettre une date supérieure ou égale à aujourd'hui."
         );
         dateDeparture = null;
     } else {
@@ -211,7 +217,7 @@ const hourDepartureCheck = (value) => {
         );
         hourDeparture = null;
     } else if (value.length === 0) {
-        errorDisplay("hourDeparture", "Le champs doit etre renseigné");
+        errorDisplay("hourDeparture", "Le champ doit être renseigné");
         hourDeparture = null;
     } else {
         errorDisplay("hourDeparture", "", true);
@@ -242,10 +248,10 @@ const priceTripCheck = (value) => {
 selectchooseCar.addEventListener("change", (e) => {
     let choosecar = e.target.value;
     if (choosecar === "choose") {
-        errorDisplay("TripForm", "Veillez choisir une voiture");
+        errorDisplay("TripForm", "Veuillez choisir une voiture");
         carId = null;
     } else if (!choosecar.match(/^[0-9]+$/)) {
-        errorDisplay("TripForm", "La valeur doit etre un nombre");
+        errorDisplay("TripForm", "La valeur doit être un nombre");
         carId = null;
     } else {
         carId = choosecar;
@@ -307,7 +313,7 @@ const apiCity = async (city, paragraphe, para) => {
     const API_CITY_FRANCE = `https://nominatim.openstreetmap.org/search?q=${encodeCity}&countrycodes=fr&format=json`;
 
     if (!city) {
-        errorDisplay(paragraphe, `Veillez renseigner la ville`);
+        errorDisplay(paragraphe, `Veuillez renseigner la ville.`);
         apiCityFail(citysFound);
         return null;
     }
@@ -409,7 +415,7 @@ async function showItinerary() {
         endMarker = L.marker([end[1], end[0]]).addTo(map).bindPopup("Arrivée");
         return kilometers, hour, minites, travelTime;
     } catch (error) {
-        alert(`La creation du trajet: ${error}`);
+        alert(`Une erreur est survenue : ${error}`);
     }
 }
 
@@ -511,9 +517,9 @@ form.addEventListener("submit", async (e) => {
                 errorDisplay("TripForm", responseData.message);
             }
         } catch (error) {
-            alert(`La creation du trajet a échoué : ${error.message}`);
+            alert(`La création du trajet a échoué : ${error.message}`);
         }
     } else {
-        errorDisplay("TripForm", "Veillez remplir tout les champs.");
+        errorDisplay("TripForm", "Veuillez remplir tous les champs.");
     }
 });

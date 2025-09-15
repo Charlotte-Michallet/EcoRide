@@ -118,7 +118,7 @@ form.addEventListener("submit", async (e) => {
                 );
             }
         } catch (error) {
-            alert(`Connexion echouée : ${error.message}`);
+            alert(`Connexion échouée : ${error.message}`);
         }
     } else {
         errorDisplay("formcheck", "Veuillez remplir tous les champs.");

@@ -1,3 +1,4 @@
+// Escape HTML to prevent XSS attacks
 export function escapeHtml(unsafe) {
     const unsafeTrim = String(unsafe || "").trim();
     return unsafeTrim
@@ -8,7 +9,7 @@ export function escapeHtml(unsafe) {
         .replace(/'/g, "&#039;");
 }
 
-// error paragraph with message
+// Display error message in a paragraph
 export function errorDisplay(tag, message, valid) {
     const paragrapheError = document.getElementById(tag + "Error");
     if (!valid) {
@@ -20,6 +21,7 @@ export function errorDisplay(tag, message, valid) {
     }
 }
 
+// Hide API city error message
 export function apiCityFail(paragraphe) {
     paragraphe.classList.add("hidden");
     paragraphe.textContent = "";

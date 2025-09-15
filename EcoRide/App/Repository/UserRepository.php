@@ -37,7 +37,7 @@ class UserRepository extends Repository
     {
         try {
             $query = $this->pdo->prepare("DELETE FROM users WHERE id = :id;");
-            $query->bindValue(":id", $id, $this->pdo::PARAM_STR);
+            $query->bindValue(":id", $id, $this->pdo::PARAM_INT);
             $query->execute();
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

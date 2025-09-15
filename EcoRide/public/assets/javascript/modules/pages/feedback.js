@@ -70,13 +70,16 @@ inputs.forEach((input) => {
 
 const rattingCheck = (value) => {
     if (isNaN(value)) {
-        errorDisplay("feedback", "Ce champs doit contenir que des chiffre");
+        errorDisplay(
+            "feedback",
+            "Ce champ doit contenir uniquement des chiffres"
+        );
         ratting = false;
     } else if (value.length === 0) {
-        errorDisplay("feedback", "Le champs doit etre renseigne");
+        errorDisplay("feedback", "Le champ doit être renseigné");
         ratting = null;
     } else if (value < 1 || value > 5) {
-        errorDisplay("feedback", "Le nombre de place doit etre entre 1 et 8");
+        errorDisplay("feedback", "Le nombre d’étoiles doit être entre 1 et 5");
         ratting = null;
     } else {
         errorDisplay("feedback", "", true);
@@ -88,12 +91,12 @@ feedbackTextArea.addEventListener("input", (e) => {
     let value = e.target.value;
 
     if (value.length === 0) {
-        errorDisplay("feedback", "Le champs ne doit pas etre vide.");
+        errorDisplay("feedback", "Le champ ne doit pas être vide.");
         feedbacktext = false;
     } else if (!value.match(/^[a-zA-Z0-9\s\-.&+\/()[\]!,;:\é\è\à\ç\ù]+$/)) {
         errorDisplay(
             "feedback",
-            "Le champs ne doit pas contenir de caractère spéciaux."
+            "Le champ ne doit pas contenir de caractères spéciaux."
         );
         feedbacktext = null;
     } else {
@@ -104,7 +107,7 @@ feedbackTextArea.addEventListener("input", (e) => {
 
 const checkInput = (value) => {
     if (value !== "Oui" && value !== "Non") {
-        errorDisplay("feedback", "Le champs ne doit pas etre vide.");
+        errorDisplay("feedback", "Le champ ne doit pas être vide.");
         tripStatus = null;
     } else {
         errorDisplay("feedback", "", true);
@@ -206,7 +209,7 @@ const api = async (feedbackData) => {
             errorDisplay("feedback", responseData.message);
         }
     } catch (error) {
-        alert(`L'envoie a échoue : ${error.message}`);
+        alert(`L'envoi a échoué : ${error.message}`);
     }
 };
 
@@ -272,6 +275,6 @@ form.addEventListener("submit", async (e) => {
         api(feedbackData);
         errorDisplay("feedback", "", true);
     } else {
-        errorDisplay("feedback", "Veillez remplir les champs.");
+        errorDisplay("feedback", "Veuillez remplir les champs.");
     }
 });

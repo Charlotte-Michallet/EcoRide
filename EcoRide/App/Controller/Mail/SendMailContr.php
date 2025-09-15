@@ -30,7 +30,7 @@ class SendMailContr
             }
         }
         if (empty($results)) {
-            return "Aucun passager trouvé aucun mail envoyé!";
+            return "Aucun passager trouvé, aucun mail envoyé!";
         } else {
             return $results;
         }

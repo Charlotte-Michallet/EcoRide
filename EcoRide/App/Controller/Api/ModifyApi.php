@@ -39,7 +39,7 @@ class ModifyApi
 
                 $userError = $userModify->checkRole($id_role, $user_id);
                 if (! empty($userError)) {
-                    Router::jsonResponse(["status" => "error", "message" => "Le champs doit etre rempli"], 422);
+                    Router::jsonResponse(["status" => "error", "message" => "Le champ doit être rempli."], 422);
                     return;
                 } else {
                     Router::jsonResponse(["status" => "success", "message" => "La modification a été prise en compte."], 200);
@@ -121,7 +121,7 @@ class ModifyApi
                     return;
                 }
             } else {
-                Router::jsonResponse(["status" => "error", "message" => "aucune donnée ne correspond"], 401);
+                Router::jsonResponse(["status" => "error", "message" => "Aucune donnée ne correspond."], 401);
                 return;
             }
 

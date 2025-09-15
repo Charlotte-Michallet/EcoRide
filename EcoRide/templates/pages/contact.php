@@ -28,7 +28,7 @@
                         </svg>
                     </span>
 
-                    <h2 class="mt-2 text-base font-medium">Bureau</h2>
+                    <h2 class="mt-2 text-base font-medium">Adresse</h2>
                     <p class="mt-2 text-sm text-emerald-600">32 Rue des Passagers, 75002 Paris</p>
                 </div>
 
@@ -39,7 +39,7 @@
                         </svg>
                     </span>
 
-                    <h2 class="mt-2 text-base font-medium">Phone</h2>
+                    <h2 class="mt-2 text-base font-medium">Téléphone</h2>
                     <a href="tel:+33166778899">
                         <p class="mt-2 text-sm text-emerald-600">01 66 77 88 99</p>
                     </a>

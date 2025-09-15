@@ -63,7 +63,7 @@ class PlateformCreditsRepository extends MongoRepository
             $result = $collection->updateOne($filter, $update);
             return $result->getModifiedCount() > 0;
         } catch (Exception $e) {
-            error_log("Erreur lors de l'insertion du document MongoDB: " . $e->getMessage());
+            error_log("Une erreur est survenue : " . $e->getMessage());
             return null;
         }
     }
@@ -82,7 +82,7 @@ class PlateformCreditsRepository extends MongoRepository
             return $result->getDeletedCount() > 0;
 
         } catch (Exception $e) {
-            error_log("Erreur lors de l'insertion du document MongoDB: " . $e->getMessage());
+            error_log("Une erreur est survenue : " . $e->getMessage());
             return null;
         }
     }
@@ -103,7 +103,7 @@ class PlateformCreditsRepository extends MongoRepository
             return $transactions;
 
         } catch (Exception $e) {
-            error_log("Erreur lors de l'insertion du document MongoDB: " . $e->getMessage());
+            error_log("Une erreur est survenue : " . $e->getMessage());
             return null;
         }
     }
@@ -118,7 +118,7 @@ class PlateformCreditsRepository extends MongoRepository
             return $count;
 
         } catch (Exception $e) {
-            error_log("Erreur lors de l'insertion du document MongoDB: " . $e->getMessage());
+            error_log("Une erreur est survenue : " . $e->getMessage());
             return null;
         }
     }
@@ -161,7 +161,7 @@ class PlateformCreditsRepository extends MongoRepository
             return 0;
 
         } catch (Exception $e) {
-            error_log("Erreur lors de l'insertion du document MongoDB: " . $e->getMessage());
+            error_log("Une erreur est survenue : " . $e->getMessage());
             return null;
         }
     }
@@ -216,12 +216,10 @@ class PlateformCreditsRepository extends MongoRepository
                 $data[]   = $document['data'];
             }
 
-            return ["labels" => $labels,
-                "data"           => $data,
-            ];
+            return ["labels" => $labels, "data" => $data];
 
         } catch (Exception $e) {
-            error_log("Erreur lors de l'insertion du document MongoDB: " . $e->getMessage());
+            error_log("Une erreur est survenue : " . $e->getMessage());
             return ["labels" => [], "data" => []];
         }
     }

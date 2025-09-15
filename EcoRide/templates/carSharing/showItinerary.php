@@ -4,7 +4,7 @@
         <div class="max-w-3xl flex flex-col mx-auto size-full">
 
             <div class="text-center py-10 px-4 sm:px-6 lg:px-8">
-                <h1 class="block text-3xl font-bold text-gray-800 ">Veuillez changer de rôle pour accéder aux fonctionnalités.
+                <h1 class="block text-3xl font-bold text-gray-800 ">Veuillez changer de rôle pour accéder à cette fonctionnalité.
                 </h1>
 
                 <div class="mt-5 flex flex-col justify-center items-center gap-2 sm:flex-row sm:gap-3">
@@ -90,7 +90,7 @@
                             Partagez
                         </h3>
                         <p class="mt-5 text-gray-600">
-                           Vivez l’expérience du covoiturage en partageant vos trajets avec une communauté solidaire. Rencontrez des conducteurs et passagers qui veulent voyager de manière responsable tout en tissant des liens.
+                           Vivez l’expérience du covoiturage en partageant vos trajets avec une communauté solidaire et en créant de nouveaux liens. Rencontrez des conducteurs et passagers qui veulent voyager de manière responsable tout en tissant des liens.
                         </p>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                             Respirez
                         </h3>
                         <p class="mt-5 text-gray-600">
-                            Voyagez responsablement, respirez la nature et agissez pour la planète grâce à un covoiturage écologique et convivial.
+                            Voyagez de manière responsable, respirez la nature et agissez pour la planète grâce à un covoiturage écologique et convivial.
                         </p>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
         </div>
 
         <div class="flex justify-end mx-5 mb-10">
-            <p class="text-xs text-gray-500">* Voyage écologique = voyage en électrique </p>
+            <p class="text-xs text-gray-500">* Voyage écologique = voyage en électrique</p>
         </div>
 
     <?php }?>

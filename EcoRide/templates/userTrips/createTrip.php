@@ -6,13 +6,12 @@
         <div class="max-w-3xl flex flex-col mx-auto size-full">
 
             <div class="text-center py-10 px-4 sm:px-6 lg:px-8">
-                <h1 class="block text-3xl font-bold text-gray-800 ">Veuillez Ajouter les preferences avant de
-                    creer un voyage</h1>
+                <h1 class="block text-3xl font-bold text-gray-800 ">Veuillez ajouter vos préférences avant de créer un voyage</h1>
 
                 <div class="mt-5 flex flex-col justify-center items-center gap-2 sm:flex-row sm:gap-3">
                     <a class="btn w-full sm:w-auto py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg text-white"
                         href="/index.php?controller=auth&action=profilModify">
-                        Ajouter les preferences
+                        Ajouter les préférences
                     </a>
                 </div>
             </div>
@@ -28,7 +27,7 @@
                         Créer votre trajet
                     </h1>
 
-                    <p class="mt-2 text-sm text-gray-500">Aider la planet a etre plus verte</p>
+                    <p class="mt-2 text-sm text-gray-500">Aidez la planète à être plus verte</p>
 
                     <form class="grid grid-cols-1 mt-3 gap-6 md:grid-cols-2" method="post">
                         <div>
@@ -56,11 +55,11 @@
                         </div>
 
                         <div>
-                            <label for="numPlaces" class="block mb-2 text-sm">Nombre de passager</label>
+                            <label for="numPlaces" class="block mb-2 text-sm">Nombre de passagers</label>
                             <div>
                                 <input type="number" id="numPlaces" name="numPlaces"
                                     class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
-                                    min="1" max="9" aria-describedby="numspaceerror" placeholder="4">
+                                    min="1" max="9" placeholder="4">
                             </div>
 
                             <p class="hidden text-xs text-red-600 mt-2" id="numPlacesError"></p>
@@ -70,8 +69,7 @@
                             <label for="dateDeparture" class="block mb-2 text-sm">Date de départ</label>
                             <div class="relative">
                                 <input type="date" id="dateDeparture" name="dateDeparture"
-                                    class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
-                                    placeholder="Basic time picker">
+                                    class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none">
                             </div>
 
                             <p class="hidden text-xs text-red-600 mt-2" id="dateError"></p>
@@ -93,9 +91,9 @@
                             <div class="relative">
                                 <input type="number" id="priceTrip"
                                     class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
-                                    name="priceTrip" min="2" placeholder="4 Crédit" />
+                                    name="priceTrip" min="2" placeholder="4 Crédits" />
                                 <p class="text-sm mt-2" id="calcperson"> ~0,10 Crédits / km</p>
-                                <p class="text-sm mt-2" id="CitFound">* Frais de services 2 Crédits / 1Crédits = 1€</p>
+                                <p class="text-sm mt-2" id="CitFound">* Frais de service : 2 Crédits / 1 Crédits = 1 €</p>
 
                                 <p class="hidden text-xs text-red-600 mt-2" id="pricesError"></p>
 
@@ -106,14 +104,14 @@
                             <div class="inline-flex gap-x-2 text-sm">
                                 <img class="w-auto h-7 w-7" src="<?php ROOT_PATH?> /assets/img/logo/form.png"
                                     alt="logo EcoRide">
-                                <p>* Voyage écologique = voyage en électrique</p>
+                                <p>* Voyage écologique = voyage électrique</p>
                             </div>
                         </div>
 
                         <div>
                             <label for="chooseCar" class="block text-sm mb-2">Choisissez votre voiture</label>
                             <select name="chooseCar" id="chooseCar" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none">
-                                <option value="choose"> --- Choisissez une Voiture --- </option>
+                                <option value="choose"> --- Choisissez une voiture --- </option>
                                 <?php foreach ($cars as $car) {?>
                                     <option value="<?php echo $car->getId() ?>"><?php echo $car->getBrand() ?>
                                         /<?php echo $car->getModel() ?> /<?php echo $car->getNumplate() ?>
@@ -122,7 +120,7 @@
                             </select>
 
                             <a href="/index.php?controller=auth&action=cars">
-                                <p class="text-xs mt-3" id="newCar">Vous voulez ajoutez une nouvelle voiture</p>
+                                <p class="text-xs mt-3" id="newCar">Vous voulez ajouter une nouvelle voiture ?</p>
                             </a>
                             <p class="hidden text-xs text-red-600 mt-2" id="TripFormError"></p>
                         </div>

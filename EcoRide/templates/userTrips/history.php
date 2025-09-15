@@ -2,15 +2,15 @@
     <?php require_once ROOT_PATH . "/templates/partials/_navProfil.php"?>
 
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <?php if ($_SESSION["role"] !== 4) {?>
+
             <div class="grid grid-cols-1 gap-4 sm:gap-6">
-                <p class="text-2xl font-semibold">Conducteur :</p>
+                <p class="text-2xl font-semibold">Mes trajets conduits :</p>
                 <?php foreach ($trips as $trip) {?>
                     <div class="pt-2 border border-gray-200 rounded-xl">
                         <div class="p-4 md:p-5">
                             <div class="flex justify-between gap-x-2 pb-2">
                                 <div class="flex items-center gap-x-2">
-                                    <p class="font-semibold text-xl">                                                                      <?php echo $trip->getDepartureDate(); ?></span></p>
+                                    <p class="font-semibold text-xl">                                                                                                                                                                                                                                                                                     <?php echo $trip->getDepartureDate(); ?></span></p>
                                 </div>
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold text-lg">
@@ -28,7 +28,7 @@
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold text-lg"><?php echo $trip->getKilometers(); ?> km</p>
                                 </div>
-                                <div class="lineRigth my-2 mx-6"></div>
+                                <div class="lineRight my-2 mx-6"></div>
 
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold text-lg"><?php echo $trip->getArrivalCity(); ?></p>
@@ -51,7 +51,7 @@
 
                             <div class="flex justify-between gap-x-2">
                                 <div class="flex items-center gap-x-2 ">
-                                    <p class="font-semibold text-lg">Places disponible :
+                                    <p class="font-semibold text-lg">Places disponibles :
                                         <span><?php echo $trip->getNumSeats(); ?></span>
                                     </p>
                                 </div>
@@ -60,10 +60,9 @@
                     </div>
                 <?php }?>
             </div>
-        <?php }?>
-<?php if ($_SESSION["role"] !== 3) {?>
+
             <div class="grid grid-cols-1 gap-4 sm:gap-6">
-                <h3 class="text-2xl font-semibold pt-3">Passager:</h3>
+                <h3 class="text-2xl font-semibold pt-3">Mes trajets en passager :</h3>
                 <?php
                     foreach ($reservations as $reservation) {
                     ?>
@@ -77,9 +76,9 @@
                                 </div>
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold text-lg">
-                                        <span><?php echo $reservation->getNumSeatsBookes(); ?></span> place reservé
+                                        <span><?php echo $reservation->getNumSeatsBookes(); ?></span> places réservées
                                     </p>
-                                    <p class="font-semibold text-xl"><?php echo $reservation->getPrices(); ?> credit</p>
+                                    <p class="font-semibold text-xl"><?php echo $reservation->getPrices(); ?> credits</p>
                                 </div>
                             </div>
 
@@ -92,13 +91,12 @@
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold text-lg"><?php echo $reservation->getKilometer(); ?> km</p>
                                 </div>
-                                <div class="lineRigth my-2 mr-2"></div>
+                                <div class="lineRight my-2 mr-2"></div>
 
                                 <div class="flex items-center gap-x-2">
                                     <p class="font-semibold text-lg"><?php echo $reservation->getArriCity(); ?></p>
                                 </div>
                             </div>
-
 
                             <div class="flex justify-between gap-x-2 px-5 pb-3">
                                 <div class="flex items-center gap-x-2 ">
@@ -116,18 +114,18 @@
 
                             <div class="flex justify-between gap-x-2 bg-gray-200 p-5">
                                 <div class="flex items-center gap-x-2 ">
-                                    <p class="font-semibold text-lg">Numero de reservation :
+                                    <p class="font-semibold text-lg">Numéro de réservation :
                                     </p>
                                     <span class="font-semibold text-lg"><?php echo $reservation->getNumReser(); ?></span>
                                 </div>
 
                                 <div class="flex items-center gap-x-2 ">
                                     <p class="font-semibold text-lg">
-                                        Status de payment : <span><?php echo $reservation->getPaymentStatus(); ?></span></p>
+                                        Statut de paiement : <span><?php echo $reservation->getPaymentStatus(); ?></span></p>
                                 </div>
 
                                 <div class="flex items-center gap-x-2 ">
-                                    <p class="font-semibold text-lg">Statut de reservation :
+                                    <p class="font-semibold text-lg">Statut de réservation :
                                         <span><?php echo $reservation->getStatus(); ?></span>
                                     </p>
                                 </div>
@@ -148,7 +146,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <p class="font-semibold"> covoiturage status :</p>
+                                    <p class="font-semibold"> Statut du covoiturage :</p>
                                     <div class="flex items-center gap-x-2 ">
                                         <p class="font-semibold"><?php echo $reservation->getStatusCarSharing(); ?></p>
                                     </div>
@@ -172,6 +170,6 @@
                     </div>
                 <?php }?>
             </div>
-        <?php }?>
+
     </div>
 </section>

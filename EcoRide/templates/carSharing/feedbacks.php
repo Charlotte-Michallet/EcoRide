@@ -6,25 +6,25 @@
                     Donnez votre avis
                 </h1>
                 <p class="mt-1 md:text-lg text-gray-800">
-                    On peux vous aidez a ameliorer lexperience.
+                    Nous pouvons vous aider à améliorer votre expérience
                 </p>
 
                 <div class="mt-8">
                     <div class="flex justify-between">
                         <h2 class="text-lg font-semibold text-gray-800">
-                            Le trajet du                                                                                                                                                                 <?php echo $reservation->getDepartureDate() ?>
+                            Le trajet du                                         <?php echo $reservation->getDepartureDate() ?>
                         </h2>
-                        <h3>Numéro reservations :                                                                                                                                                                                                         <?php echo $reservation->getNumReser() ?></h3>
+                        <h3>Numéro de réservation :                                                      <?php echo $reservation->getNumReser() ?></h3>
                     </div>
 
                     <ul class="mt-2 space-y-2">
                         <li class="flex gap-x-3 items-center">
                             <span><?php echo $reservation->getDepartCity() ?></span>
-                             <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="size-4">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg></span>
+                            <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                </svg></span>
                             <span><?php echo $reservation->getArriCity() ?></span>
                         </li>
                         <li class="flex gap-x-3">
@@ -32,11 +32,11 @@
                         </li>
 
                         <li class="flex gap-x-3">
-                            Nom du chauffeur :                                                                                                                                                                                         <?php echo $reservation->getUsername() ?>
+                            Nom du chauffeur :                                               <?php echo $reservation->getUsername() ?>
                         </li>
 
                         <li class="flex gap-x-3">
-                            Heure de départ :                                                                                                                                                                                         <?php echo $reservation->getDepartHour() ?>
+                            Heure de départ :                                               <?php echo $reservation->getDepartHour() ?>
                         </li>
 
                         <li class="flex gap-x-3">
@@ -45,11 +45,11 @@
                             <span><?php echo $reservation->getColor() ?></span>
                         </li>
                         <li class="flex gap-x-3">
-                            Type d'énergie :                                                                                                                                                                                     <?php echo $reservation->getEnergie() ?>
+                            Type d'énergie :                                              <?php echo $reservation->getEnergie() ?>
                         </li>
 
                         <li class="flex gap-x-3">
-                            Nombre de places réserver :                                                                                                                                                                                                                                 <?php echo $reservation->getNumSeatsBookes() ?>
+                            Nombre de places réserver :                                                         <?php echo $reservation->getNumSeatsBookes() ?>
                         </li>
                     </ul>
                 </div>
@@ -58,7 +58,7 @@
             <div class="relative">
                 <div class="flex flex-col border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-10">
                     <h2 class="text-xl font-semibold text-gray-800">
-                        Remplissez le formulaire pour donnez votre avis
+                        Remplissez le formulaire pour donner votre avis
                     </h2>
 
                     <form>
@@ -66,12 +66,12 @@
 
                             <div class="text-center">
                                 <h3 class="text-gray-800">
-                                    Est ce que le trajet c'est bien passé?
+                                    Est-ce que le trajet s’est bien passé ?
                                 </h3>
                                 <div class="mt-2 flex justify-center items-center">
 
                                     <fieldset class="flex justify-between gap-6">
-                                        <legend class="sr-only">Trajet c'est bien passer?</legend>
+                                        <legend class="sr-only">Trajet s’est bien passé ?</legend>
 
                                         <div>
                                             <label for="tripNotOk"
@@ -109,13 +109,12 @@
                                             </label>
                                         </div>
                                     </fieldset>
-
                                 </div>
                             </div>
 
                             <div>
                                 <h3 class="text-gray-800">
-                                    Vous voulez mettre une note?
+                                    Voulez-vous attribuer une note ?
                                 </h3>
 
                                 <div class="flex flex-row-reverse justify-end items-center mt-2">
@@ -187,8 +186,9 @@
                             </div>
 
                             <div>
-                                <label for="feedbackTextArea" class="block mb-2 text-sm text-gray-700 font-medium">Vous
-                                    voulez mettre un commentaire?</label>
+                                <label for="feedbackTextArea"
+                                    class="block mb-2 text-sm text-gray-700 font-medium">Souhaitez-vous laisser un
+                                    commentaire ?</label>
                                 <textarea id="feedbackTextArea" name="feedbackTextArea" rows="4"
                                     class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"></textarea>
                                 <p class="hidden text-green-600 mt-2" id="sendSuccess"></p>

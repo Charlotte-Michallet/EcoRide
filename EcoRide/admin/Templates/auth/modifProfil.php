@@ -9,21 +9,21 @@
                     <!-- Username -->
                     <form method="post" id="formUsername" class="col-span-2 flex">
                         <div>
-                            <label for="username" class="block mb-2 text-sm">Modifier le pseudo</label>
+                            <label for="username" class="block mb-2 text-sm">Modifier le nom d’utilisateur</label>
                             <input type="text" id="username"
                                 class="px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
                                 name="username" placeholder="Prénom" />
                             <p class="hidden text-xs text-red-600 mt-2" id="usernameError"></p>
                             <input type="hidden" id="tokenUser" value="<?php echo htmlspecialchars($token) ?>">
                             <button type="submit"
-                                class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier le pseudo</button>
+                                class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier le nom d’utilisateur</button>
                         </div>
                     </form>
 
                     <!-- Email -->
                     <form method="post" id="formEmail" class="col-span-2 flex">
                         <div>
-                            <label for="email" class="block mb-2 text-sm">Modifier email</label>
+                            <label for="email" class="block mb-2 text-sm">Modifier l'e-mail</label>
                             <input type="text" id="email"
                                 class="px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
                                 name="email" placeholder="nom.prénom@gmail.com" />
@@ -31,7 +31,7 @@
                             <input type="hidden" id="tokenEmail" value="<?php echo htmlspecialchars($token) ?>">
                             <button type="submit"
                                 class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier
-                                l'email</button>
+                                l'e-mail</button>
                         </div>
                     </form>
 
@@ -45,7 +45,7 @@
                         <div>
                             <label for="photo" class="block mb-2 text-sm ">Ajouter une photo</label>
                             <input type="file"
-                                class="block w-full px-3 py-2 mt-2 text-sm text-gray-600 border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+                                class=" block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring"
                                 id="photo" accept="image/png, image/jpeg, image/jpg" />
                             <p class="hidden text-xs text-red-600 mt-2" id="photoError"></p>
                             <input type="hidden" id="tokenPhoto" value="<?php echo htmlspecialchars($token) ?>">
@@ -58,7 +58,7 @@
                     <!-- Password -->
                     <form method="post" id="formpassword" class="col-span-4">
                         <div>
-                            <label for="passwordModif" class="block mb-2 text-sm">Modifier mon mot de passe</label>
+                            <label for="passwordModif" class="block mb-2 text-sm">Modifier le mot de passe</label>
                             <div class="relative">
                                 <input type="password" id="passwordModif"
                                     class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
@@ -113,9 +113,9 @@
 
                 <form class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-2" method="post" id="formPreferences">
                     <div class="col-span-2">
-                        <h2 class="text-gray-800">Accepte animaux</h2>
+                        <h2 class="text-gray-800">Animaux acceptés</h2>
                         <fieldset class="flex justify-between">
-                            <legend class="sr-only">Accepte animaux</legend>
+                            <legend class="sr-only">Animaux acceptés</legend>
 
                             <div>
                                 <label for="acceptAnimal"
@@ -138,9 +138,9 @@
                     </div>
 
                     <div class="col-span-2">
-                        <h2 class="text-gray-800">Accepte fumeur</h2>
+                        <h2 class="text-gray-800">Fumeur accepté</h2>
                         <fieldset class="flex justify-between">
-                            <legend class="sr-only">Accepte fumeur</legend>
+                            <legend class="sr-only">Fumeur accepté</legend>
 
                             <div>
                                 <label for="smoking"

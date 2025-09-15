@@ -25,10 +25,10 @@ class ManageController extends Router
                         break;
 
                     default:
-                        throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
+                        // throw new \Exception("Cette action n'existe pas : " . $_GET["action"]);
                 }
             } else {
-                // home page
+                throw new \Exception("Aucune action détectée");
             }
         } catch (\Exception $e) {
             $this->render("errors/default", ["error" => $e->getMessage()]);
@@ -56,6 +56,7 @@ class ManageController extends Router
             $this->render("employee/manageFeedback", ["token" => $currentToken, "feedbacks" => $feedbacks, "allfeedbacks" => $allfeedbacks, "meta" => $meta["manageFeedbacks"]]);
         } else {
             header("Location: /index.php");
+            exit();
         }
     }
 
@@ -77,6 +78,7 @@ class ManageController extends Router
             $this->render("employee/badReviews", ["token" => $currentToken, "feedbacks" => $feedbacks, "meta" => $meta["badReviews"]]);
         } else {
             header("Location: /index.php");
+            exit();
         }
     }
 
@@ -110,12 +112,23 @@ class ManageController extends Router
                 if ($creditsUpdate) {
                     $statusPayment     = "Validé";
                     $statusReservation = "Note enregistré";
+
                 } else {
                     $statusPayment = "Une erreur est survenue Non validé";
                 }
                 $resarepo = new ReservationRepository();
                 $resarepo->updateRervationpayement($idreservation, $statusPayment);
                 $resarepo->updateRervationStatus($idreservation, $statusReservation);
+
+                $feedbackrepo  = new FeedbackRepository();
+                $feedbackempty = $feedbackrepo->feedbackEmpty($feedbackId);
+
+                if ($feedbackempty === null) {
+                    $statusFeedback = "Enregistré";
+                } else {
+                    $statusFeedback = "Payé";
+                }
+                $feedbackrepo->Upadatefeedback($statusFeedback, $feedbackId);
 
                 $companyContr = new CompanyContr();
                 $update       = $companyContr->updateStatusPayment($idreservation, $statusPayment);

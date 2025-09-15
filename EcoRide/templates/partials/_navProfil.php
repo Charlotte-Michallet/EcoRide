@@ -12,8 +12,7 @@
 
 
         <a href="/index.php?controller=trips&action=createTrip"> <button
-                class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1  whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">Creer
-                un voyage </button>
+                class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1  whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">Créer un voyage</button>
         </a>
     <?php }?>
 
@@ -27,7 +26,7 @@
     </a>
 
     <a href="/index.php?controller=auth&action=credits"> <button
-            class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">Credits</button>
+            class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">Crédits</button>
     </a>
 
     <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 2 || $_SESSION["role"] === 1) {?>
@@ -39,5 +38,4 @@
             class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">Gérer les mauvais avis</button>
     </a>
    <?php }?>
-
 </div>

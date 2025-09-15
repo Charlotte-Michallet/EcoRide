@@ -1,23 +1,13 @@
-/* Initiate varibles  */
+/* Initialize variables */
 /* Colors */
 :root { 
-    --green: #00CD35;
-    --green2: #00FF5B;
     --green3:#33CC66;
-    --green4: #54D64D;
     --green5: #2BB667;
-    --darkGreen:#0D787A;
     --darkGreen2: #186E51;
-    --darkGreen3: #17343D;
-    --darkGreen4: #47B885;
-    --darkGreen: #287E40;
-    --kaki:#8FB83B;
     --turquoise:#119177;
     --turquoise2:#14a789;
-    --blue: #0080E3;
-    --blue2: #0063FF;
+    --blue2:#1464bef3;
     --blue3:#0754acf3;
-    --blue4: #05A8FA;
     --beige: #f7f4efe1;
 }
 
@@ -64,6 +54,18 @@ main{
     border: none;
 }
 
+.btnCancel {
+    background: var(--blue3);
+    cursor: pointer;
+    border: none;
+}
+
+.btnCancel:hover {
+    background: var(--blue2);
+    cursor: pointer;
+    border: none;
+}
+
 /* Links */
 .link {
 color: var(--green5);
@@ -77,9 +79,7 @@ a {
     cursor: pointer;
 }
 
-
 /* Pages */
-
 /* Page home */
 .hero{
     color: var(--darkGreen2);
@@ -97,7 +97,6 @@ a {
     display: flex;
 }
 
-
 /* Page userCars */
 .modal-active {
     visibility: visible;
@@ -105,7 +104,6 @@ a {
 }
 
 .modal-hidden{
-    /* visibility: hidden; */
     display: none;
 }
 
@@ -123,7 +121,7 @@ a {
     position: relative;
 }
 
-.lineRigth {
+.lineRight {
     flex-grow: 1;
     flex-shrink: 1;
     height: 6px;
@@ -144,7 +142,7 @@ a {
     left: -2px;
 }
 
-.lineRigth::after {
+.lineRight::after {
     content: "";
     position: absolute;
     background:var(--blue3);
@@ -155,11 +153,4 @@ a {
     display: inline-block;
     top: -7px;
     right: -9px;
-}
-
-/* Page details */
-
-.cardFeeback {
-    background: var(--beige);
-    border: solid 1px var(--beige);
 }

@@ -34,7 +34,7 @@ class CreditsApi
             if (! empty($creditsUpdate)) {
                 Router::jsonResponse(["status" => "error", "message" => $creditsUpdate], 401);
             } else {
-                Router::jsonResponse(["status" => "success", "message" => "Les credits sont mise a jours"], 200);
+                Router::jsonResponse(["status" => "success", "message" => "Les crédits ont été mis à jour avec succès."], 200);
             }
         } else {
             Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);

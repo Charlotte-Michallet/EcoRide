@@ -291,7 +291,7 @@ class TripRepository extends Repository
     public function showAllTripsFilter($departCity, $arrival_city, $date_trip, $num_seats, $userId, $filter)
     {
         try {
-            $sql = "SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.status, s.kilometers, s.travel_time, c.energy_type, u.username, u.photo, u.notes FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé' ";
+            $sql = "SELECT s.id, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, s.arrival_time, s.price, s.num_seats, s.status, s.kilometers, s.travel_time, c.energy_type, u.username, u.photo, u.notes FROM car_sharing s INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u ON c.user_id = u.id WHERE s.departure_date = :date AND s.departure_city= :departure AND s.arrival_city = :arrival AND s.num_seats >= :seats AND s.status = 'Programmé'";
 
             if ($userId !== null) {
                 $sql .= " AND u.id != :user_id";
@@ -345,8 +345,9 @@ class TripRepository extends Repository
             $query->execute();
 
             $tripsData = $query->fetchAll(\PDO::FETCH_ASSOC);
+
             if (empty($tripsData)) {
-                return "Aucun trajet trouvé avec ces paramètres.";
+                return [];
             } else {
                 $trips = [];
                 if ($tripsData) {

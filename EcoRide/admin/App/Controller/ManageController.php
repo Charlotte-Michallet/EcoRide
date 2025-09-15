@@ -29,7 +29,7 @@ class ManageController extends Router
                         throw new \Exception("Cette action n'existe pas :" . $_GET["action"]);
                 }
             } else {
-                throw new \Exception("Acune action détéctée");
+                throw new \Exception("Aucune action détectée");
             }
         } catch (\Exception $e) {
             $this->render("errors/error", ["error" => $e->getMessage()]);
@@ -65,6 +65,7 @@ class ManageController extends Router
                     $userContr = new ManageUsersCont();
                     $userContr->deleteEmployee($idsubmitted);
                     header("Location: /admin/index.php?controller=manage&action=employees");
+                    exit();
 
                 } else {
                     $this->employeesAccount();
@@ -133,6 +134,7 @@ class ManageController extends Router
 
             if ($success === true) {
                 header("Location: /admin/index.php?controller=manage&action=users");
+                exit();
             }
         }
 
@@ -165,6 +167,7 @@ class ManageController extends Router
 
                 if ($success === true) {
                     header("Location: /admin/index.php?controller=manage&action=employees");
+                    exit();
                 }
             }
         }

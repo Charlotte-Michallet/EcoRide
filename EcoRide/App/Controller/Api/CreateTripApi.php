@@ -63,7 +63,7 @@ class CreateTripApi
             if (! empty($tripError)) {
                 Router::jsonResponse(["status" => "error", "message" => $tripError], 401);
             } else {
-                Router::jsonResponse(["status" => "success", "message" => "La création de trajer réussi"], 200);
+                Router::jsonResponse(["status" => "success", "message" => "La création de trajet réussi"], 200);
             }
         } else {
             Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);

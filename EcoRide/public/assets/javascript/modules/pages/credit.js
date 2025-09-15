@@ -13,13 +13,13 @@ input.addEventListener("input", (e) => {
     let value = Number(e.target.value);
 
     if (isNaN(value) || !Number.isInteger(value)) {
-        errorDisplay("form", "Ce champs doit contenir que des chiffre entre");
+        errorDisplay("form", "Ce champ doit contenir uniquement des chiffres");
         credits = null;
     } else if (value.length === 0) {
-        errorDisplay("form", "Le champs doit etre renseigne");
+        errorDisplay("form", "Le champ doit être renseigné");
         credits = null;
     } else if (value < 1) {
-        errorDisplay("form", "Vous devez mettre un minimun de 1€.");
+        errorDisplay("form", "Vous devez entrer un minimum de 1 €.");
         credits = null;
     } else {
         errorDisplay("form", "", true);
@@ -64,9 +64,9 @@ form.addEventListener("submit", async (e) => {
                 errorDisplay("TripForm", responseData.message);
             }
         } catch (error) {
-            alert(`La manipulation na pas marché : ${error.message}`);
+            alert(`Une erreur est survenue. : ${error.message}`);
         }
     } else {
-        errorDisplay("form", "Veillez remplir tout les champs.");
+        errorDisplay("form", "euillez remplir tous les champs.");
     }
 });

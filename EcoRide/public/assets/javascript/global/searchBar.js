@@ -179,6 +179,7 @@ const apiTrip = async (ItineraryData) => {
         if (resp.ok) {
             let trips = responseData.trips;
             let seats = ItineraryData.numberPlaces;
+
             show(trips, seats);
         } else {
             errorDisplay("form", responseData.message);

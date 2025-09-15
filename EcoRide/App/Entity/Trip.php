@@ -25,10 +25,7 @@ class Trip
     protected string $color;
     private ?bool $smoking_allowed = null;
     private ?bool $animal_allowed  = null;
-    private string $smoking;
-    private string $animal;
-    private ?string $description = null;
-    private ?string $feedback;
+    private ?string $description   = null;
     protected ?float $notes;
 
     /**
@@ -425,60 +422,6 @@ class Trip
     public function setAnimalAllowed(?bool $animal_allowed): self
     {
         $this->animal_allowed = $animal_allowed;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of smoking
-     */
-    public function getSmoking(): string
-    {
-        return $this->smoking;
-    }
-
-    /**
-     * Set the value of smoking
-     */
-    public function setSmoking(string $smoking): self
-    {
-        $this->smoking = $smoking;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of animal
-     */
-    public function getAnimal(): string
-    {
-        return $this->animal;
-    }
-
-    /**
-     * Set the value of animal
-     */
-    public function setAnimal(string $animal): self
-    {
-        $this->animal = $animal;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of feedback
-     */
-    public function getFeedback(): ?string
-    {
-        return $this->feedback;
-    }
-
-    /**
-     * Set the value of feedback
-     */
-    public function setFeedback(?string $feedback): self
-    {
-        $this->feedback = $feedback;
 
         return $this;
     }

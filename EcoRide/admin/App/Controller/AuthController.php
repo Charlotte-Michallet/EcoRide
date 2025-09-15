@@ -28,7 +28,7 @@ class AuthController extends Router
                         throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
                 }
             } else {
-                throw new \Exception("Acune action détéctée");
+                throw new \Exception("Aucune action détectée");
             }
         } catch (\Exception $e) {
             $this->render("errors/error", ["error" => $e->getMessage()]);
@@ -57,6 +57,7 @@ class AuthController extends Router
             $this->render("auth/profil", ["token" => $currentToken, "user" => $user, "preferences" => $preferences, "meta" => $meta["profil"]]);
         } else {
             header("Location: /admin/index.php?controller=auth&action=login");
+            exit();
         }
     }
 
@@ -69,6 +70,7 @@ class AuthController extends Router
             $this->render("auth/modifProfil", ["token" => $currentToken, "meta" => $meta["profilModify"]]);
         } else {
             header("Location: /admin/index.php?controller=auth&action=login");
+            exit();
         }
     }
 }

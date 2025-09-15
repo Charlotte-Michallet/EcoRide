@@ -10,7 +10,7 @@ class GraphApi
     {
         $dataSend = [];
 
-        header("Content-Type:application/json ");
+        header("Content-Type:application/json");
 
         $tripsRepo   = new TripRepo();
         $tripsPerDay = $tripsRepo->graphiqueTrips();

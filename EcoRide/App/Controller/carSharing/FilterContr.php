@@ -22,24 +22,24 @@ class FilterContr
         $errors = [];
 
         if ($this->InputEmpty() === true) {
-            $errors = ["Au moins un champs doit etre rempli."];
+            $errors = ["Au moins un champ doit être rempli."];
             return $errors;
         }
 
         if (! empty($this->ecoTrip) && $this->ecoTrip !== "eco") {
-            $errors = ["La valeur du boutton est incorrect"];
+            $errors = ["La valeur du bouton est incorrecte"];
         }
 
         if (! empty($this->numberStars) && $this->numberInvalid() === true) {
-            $errors = ["Les étoiles doit etre compris entre 1 et 5"];
+            $errors = ["Le nombre d'étoiles doit être compris entre 1 et 5"];
         }
 
         if (! empty($this->priceMax) && $this->priceInvalid() === true) {
-            $errors = ["La valeur du prix est incorrect"];
+            $errors = ["La valeur du prix est incorrecte."];
         }
 
         if (! empty($this->timeMax) && $this->timeInvalid() === true) {
-            $errors = ["La valeur du temps max est incorrect"];
+            $errors = ["La valeur du temps maximum est incorrecte"];
         }
 
         return $errors;

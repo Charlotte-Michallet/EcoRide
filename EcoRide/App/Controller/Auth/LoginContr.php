@@ -33,7 +33,7 @@ class LoginContr extends AccountContr
                 $user = $repoLogin->getUser($this->email, $this->password);
 
                 if ($user === false) {
-                    $errors[] = ["Le pseudo ou l’adresse e-mail sont incorrects."];
+                    $errors[] = ["Le nom d’utilisateur ou l’adresse e-mail sont incorrects."];
                     return $errors;
                 }
 

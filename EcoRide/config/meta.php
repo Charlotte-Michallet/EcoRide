@@ -2,7 +2,7 @@
 return [
     // Page router
     "home"            => ["title" => "Covoiturage écoresponsable - EcoRide", "description" => "Rejoignez notre communauté de voyageurs responsables. Partagez vos trajets pour économiser et réduire ensemble l'empreinte carbone de la mobilité.", "keywords" => "covoiturage, écologique, économique"],
-    "legal"           => ["title" => "Mentions Légales - EcoRide", "description" => "Consultez les informations légales de notre site de covoiturage, incluant les coordonnées de l'éditeur, la politique de confidentialité et les conditions d'utilisation.", "keywords" => "mentions légales, informations légales, covoiturage"],
+    "legal"           => ["title" => "Mentions Légales - EcoRide", "description" => "Consultez les informations légales de notre site de covoiturage, y compris les coordonnées de l'éditeur, la politique de confidentialité et les conditions d'utilisation.", "keywords" => "mentions légales, informations légales, covoiturage"],
     "contact"         => ["title" => "Nous Contacter - EcoRide", "description" => "Besoin d'aide avec votre réservation de covoiturage ou avez une question générale ? Contactez notre service pour obtenir de l'aide rapidement et facilement.", "keywords" => "contact, support, aide, nous joindre, questions"],
     // CarSharing Controller
     "showItinerary"   => ["title" => "Trouver un trajet en covoiturage - EcoRide", "description" => "Recherchez et réservez votre prochain covoiturage en quelques clics. Entrez votre ville de départ et d'arrivée pour trouver des trajets économiques et conviviaux.", "keywords" => "covoiturage, trajet, recherche, trouver, itinéraire, voyage, car sharing, réservation"],
@@ -16,13 +16,13 @@ return [
     "profilModify"    => ["title" => "Modifier mon profil - EcoRide", "description" => "Mettez à jour vos informations personnelles, changez votre mot de passe et gérez les préférences de votre compte en toute sécurité.", "keywords" => "modifier profil, mon compte, informations personnelles, changer mot de passe, covoiturage", "robots" => "noindex, nofollow"],
 
     // Users Controller
-    "cars"            => ["title" => "Mes voitures - EcoRide", "description" => "Gérez les véhicules que vous utilisez pour vos trajets de covoiturage. Ajoutez ou supprimez vos voitures en toute simplicité", "keywords" => "mes voitures, mes véhicules, gérer, ajouter, covoiturage", "robots" => "noindex, nofollow"],
+    "cars"            => ["title" => "Mes voitures - EcoRide", "description" => "Gérez les véhicules que vous utilisez pour vos trajets de covoiturage. Ajoutez ou supprimez vos voitures en toute simplicité.", "keywords" => "mes voitures, mes véhicules, gérer, ajouter, covoiturage", "robots" => "noindex, nofollow"],
     "credits"         => ["title" => "Recharger mon crédit - EcoRide", "description" => "Ajoutez des fonds à votre solde pour réserver vos covoiturages futurs en toute simplicité et en toute sécurité.", "keywords" => "recharger crédit, solde, paiement, ajouter fonds, covoiturage", "robots" => "noindex, nofollow"],
     "createTrip"      => ["title" => "Créer un covoiturage - EcoRide", "description" => "Proposez votre trajet en quelques clics et partagez les frais de votre voyage. Créez votre offre de covoiturage dès maintenant.", "keywords" => "créer trajet, proposer covoiturage, offrir trajet, créer annonce, covoiturage", "robots" => "noindex, nofollow"],
     "manageTrip"      => ["title" => "Gérer mes trajets - EcoRide", "description" => "Gérez vos réservations. Modifiez ou annulez vos trajets en toute simplicité.", "keywords" => "Gérer mes trajets, mes voyages, covoiturage, annuler", "robots" => "noindex, nofollow"],
     "history"         => ["title" => "Historique de mes trajets - EcoRide", "description" => "Consultez l'historique complet de vos covoiturages, y compris vos voyages passés et vos réservations terminées.", "keywords" => "historique, mes trajets, mes voyages, covoiturage, terminé, passé", "robots" => "noindex, nofollow"],
 
     // Employees Controller
-    "manageFeedbacks" => ["title" => "Gestion des avis - Espace Employé  - EcoRide", "description" => "Modérez les avis et les commentaires des utilisateurs. Approuvez, rejetez ou signalez les contenus inappropriés pour maintenir la qualité de notre service.", "robots" => "noindex, nofollow"],
+    "manageFeedbacks" => ["title" => "Gestion des avis - Espace Employé - EcoRide", "description" => "Modérez les avis et les commentaires des utilisateurs. Approuvez, rejetez ou signalez les contenus inappropriés pour maintenir la qualité de notre service.", "robots" => "noindex, nofollow"],
     "badReviews"      => ["title" => "Gestion des avis négatifs - Espace Employé - EcoRide", "description" => "Consultez et modérez les avis et commentaires négatifs sur les trajets de covoiturage. Gérez les signalements pour assurer la qualité de notre service.", "robots" => "noindex, nofollow"],
 ];

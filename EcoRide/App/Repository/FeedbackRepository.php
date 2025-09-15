@@ -88,7 +88,7 @@ class FeedbackRepository extends Repository
     public function showAllFeedbacks()
     {
         try {
-            $query = $this->pdo->prepare("SELECT f.id, f.trip_status, f.note, f.feedback, f.status, f.status, r.number_reser, f.reservation_id, r.totalPrice, r.num_seats_bookes, r.car_sharing_id, u_passe.username AS passengers_username, u_passe.photo AS passengers_photo, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, u_driver.username AS driver_username, u_driver.photo as driver_photo FROM feedbacks f INNER JOIN reservations r ON f.reservation_id = r.id INNER JOIN users u_passe ON f.user_id = u_passe.id INNER JOIN car_sharing s ON r.car_sharing_id = s.id INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u_driver ON c.user_id = u_driver.id WHERE f.status != 'En attente de validation' ORDER BY departure_date ASC, departure_hour ASC;");
+            $query = $this->pdo->prepare("SELECT f.id, f.trip_status, f.note, f.feedback, f.status, f.status, r.number_reser, f.reservation_id, r.totalPrice, r.num_seats_bookes, r.car_sharing_id, u_passe.username AS passengers_username, u_passe.photo AS passengers_photo, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, u_driver.username AS driver_username, u_driver.photo as driver_photo FROM feedbacks f INNER JOIN reservations r ON f.reservation_id = r.id INNER JOIN users u_passe ON f.user_id = u_passe.id INNER JOIN car_sharing s ON r.car_sharing_id = s.id INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u_driver ON c.user_id = u_driver.id WHERE (f.status = 'Validé' OR f.status ='Refusé' OR f.status ='Enregistré') ORDER BY departure_date ASC, departure_hour ASC;");
 
             $query->execute();
 
@@ -133,7 +133,59 @@ class FeedbackRepository extends Repository
     public function showbadFeedback()
     {
         try {
-            $query = $this->pdo->prepare("SELECT f.id, f.trip_status, f.note , f.feedback, r.payment_status, r.number_reser, f.reservation_id, r.totalPrice, r.num_seats_bookes, r.car_sharing_id, u_passe.username AS passengers_username, u_passe.email AS passengers_email, u_passe.photo AS passengers_photo, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, u_driver.username AS driver_username, u_driver.email AS driver_email, u_driver.photo as driver_photo FROM feedbacks f INNER JOIN reservations r ON f.reservation_id = r.id INNER JOIN users u_passe ON f.user_id = u_passe.id INNER JOIN car_sharing s ON r.car_sharing_id = s.id INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u_driver ON c.user_id = u_driver.id WHERE f.trip_status = 'Non' ORDER BY departure_date ASC, departure_hour ASC;");
+            $query = $this->pdo->prepare("SELECT f.id, f.trip_status, f.note , f.feedback, f.status, r.payment_status, r.number_reser, f.reservation_id, r.totalPrice, r.num_seats_bookes, r.car_sharing_id, u_passe.username AS passengers_username, u_passe.email AS passengers_email, u_passe.photo AS passengers_photo, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, u_driver.username AS driver_username, u_driver.email AS driver_email, u_driver.photo as driver_photo FROM feedbacks f INNER JOIN reservations r ON f.reservation_id = r.id INNER JOIN users u_passe ON f.user_id = u_passe.id INNER JOIN car_sharing s ON r.car_sharing_id = s.id INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u_driver ON c.user_id = u_driver.id WHERE f.trip_status = 'Non' AND f.status = 'En attente de contact' ORDER BY departure_date ASC, departure_hour ASC;");
+
+            $query->execute();
+
+            $feedbacksData = $query->fetchAll(\PDO::FETCH_ASSOC);
+            $feedbacks     = [];
+            if ($feedbacksData) {
+                // Hydration
+                foreach ($feedbacksData as $feedbackData) {
+                    $dateObject = new \DateTime($feedbackData["departure_date"]);
+                    $tripDate   = $dateObject->format("d/m/Y");
+
+                    $feedbackinfo = new Feedback();
+                    $feedbackinfo->setId($feedbackData["id"]);
+                    $feedbackinfo->setReservationId($feedbackData["reservation_id"]);
+                    $feedbackinfo->setTripWell($feedbackData["trip_status"]);
+                    $feedbackinfo->setNumberReser($feedbackData["number_reser"]);
+                    $feedbackinfo->setNumPlaces($feedbackData["num_seats_bookes"]);
+                    $feedbackinfo->setTotalPrice($feedbackData["totalPrice"]);
+                    $feedbackinfo->setPassengersUsername($feedbackData["passengers_username"]);
+                    $feedbackinfo->setPassengersEmail($feedbackData["passengers_email"]);
+                    $feedbackinfo->setPassengersPhoto($feedbackData["passengers_photo"]);
+                    $feedbackinfo->setDepartureCity($feedbackData["departure_city"]);
+                    $feedbackinfo->setArrivalCity($feedbackData["arrival_city"]);
+                    $feedbackinfo->setDepartureDate($tripDate);
+                    $feedbackinfo->setDepartureHour($feedbackData["departure_hour"]);
+                    $feedbackinfo->setDriverUsername($feedbackData["driver_username"]);
+                    $feedbackinfo->setDriverEmail($feedbackData["driver_email"]);
+                    $feedbackinfo->setDriverPhoto($feedbackData["driver_photo"]);
+                    $feedbackinfo->setCarSharingId($feedbackData["car_sharing_id"]);
+                    $feedbackinfo->setPaymentStatus($feedbackData["payment_status"]);
+                    $feedbackinfo->setStatus($feedbackData["status"]);
+
+                    if ($feedbackData["feedback"] !== null) {
+                        $feedbackinfo->setFeedback($feedbackData["feedback"]);
+                    }
+                    if ($feedbackData["note"] !== null) {
+                        $feedbackinfo->setNote($feedbackData["note"]);
+                    }
+
+                    $feedbacks[] = $feedbackinfo;
+                }
+            }
+            return $feedbacks;
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+    public function allshowbadFeedback()
+    {
+        try {
+            $query = $this->pdo->prepare("SELECT f.id, f.trip_status, f.note , f.feedback, r.payment_status, r.number_reser, f.reservation_id, r.totalPrice, r.num_seats_bookes, r.car_sharing_id, u_passe.username AS passengers_username, u_passe.email AS passengers_email, u_passe.photo AS passengers_photo, s.departure_city, s.arrival_city, s.departure_date, s.departure_hour, u_driver.username AS driver_username, u_driver.email AS driver_email, u_driver.photo as driver_photo FROM feedbacks f INNER JOIN reservations r ON f.reservation_id = r.id INNER JOIN users u_passe ON f.user_id = u_passe.id INNER JOIN car_sharing s ON r.car_sharing_id = s.id INNER JOIN cars c ON s.car_id = c.id INNER JOIN users u_driver ON c.user_id = u_driver.id WHERE f.trip_status = 'Non' AND f.feedback != 'En attente de contact' ORDER BY departure_date ASC, departure_hour ASC;");
 
             $query->execute();
 
@@ -311,4 +363,23 @@ class FeedbackRepository extends Repository
         }
     }
 
+    public function feedbackEmpty($feedbackId)
+    {
+        try {
+            $query = $this->pdo->prepare("SELECT note FROM feedbacks WHERE id = :id;");
+
+            $query->bindValue(":id", $feedbackId, $this->pdo::PARAM_INT);
+            $query->execute();
+
+            $feedbacksData = $query->fetchAll(\PDO::FETCH_ASSOC);
+            if ($feedbacksData && $feedbacksData["note"] === null) {
+                return null;
+            } else {
+                return true;
+            }
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
 }

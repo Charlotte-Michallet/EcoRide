@@ -12,7 +12,6 @@ class Feedback
     protected int $reservationId;
     protected int $number_reser;
     protected string $payment_status;
-    protected string $status_reservation;
     protected int $totalPrice;
     protected string $passengers_username;
     protected string $passengers_email;
@@ -169,24 +168,6 @@ class Feedback
     public function setPaymentStatus(string $payment_status): self
     {
         $this->payment_status = $payment_status;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of status_reservation
-     */
-    public function getStatusReservation(): string
-    {
-        return $this->status_reservation;
-    }
-
-    /**
-     * Set the value of status_reservation
-     */
-    public function setStatusReservation(string $status_reservation): self
-    {
-        $this->status_reservation = $status_reservation;
 
         return $this;
     }

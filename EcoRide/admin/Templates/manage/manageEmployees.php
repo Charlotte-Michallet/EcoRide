@@ -33,7 +33,7 @@
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase text-gray-800">
-                                                Pseudo
+                                                Nom d’utilisateur
                                             </span>
                                         </div>
                                     </th>
@@ -203,7 +203,7 @@
                         <div class="grid gap-y-4">
 
                             <div>
-                                <label for="username" class="block text-sm mb-2">Pseudo</label>
+                                <label for="username" class="block text-sm mb-2">Nom d’utilisateur</label>
                                 <input type="text" id="username" name="username"
                                     class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
                                     aria-describedby="brandrror" placeholder="Prénom">

@@ -7,14 +7,14 @@
         <div class="flex w-full max-w-3xl px-8 mx-auto lg:px-12 lg:w-3/5">
             <div class="w-full">
                 <h1 class="text-2xl font-semibold tracking-wider capitalize">
-                    Créer votre compte des maintenant
+                    Créez votre compte dès maintenant
                 </h1>
                 <a href="/index.php?controller=auth&action=login">
-                    <p class="mt-1 text-sm text-gray-500">Déjà un compte! Connectez vous</p>
+                    <p class="mt-1 text-sm text-gray-500">Déjà un compte ? Connectez-vous</p>
                 </a>
 
                 <div class="mt-6">
-                    <h2 class="text-gray-800">Selectionner votre statut</h2>
+                    <h2 class="text-gray-800">Sélectionnez votre statut</h2>
                 </div>
 
                 <form class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-2" method="post">
@@ -22,7 +22,7 @@
                     <div class="col-span-2">
 
                         <fieldset class="flex justify-between">
-                            <legend class="sr-only">Role utilisateur</legend>
+                            <legend class="sr-only">Rôle utilisateur</legend>
 
                             <div>
                                 <label for="driverAndPassengerR" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
@@ -57,7 +57,7 @@
                     </div>
 
                     <div>
-                        <label for="usernameRegister" class="block mb-2 text-sm">Pseudo</label>
+                        <label for="usernameRegister" class="block mb-2 text-sm">Nom d’utilisateur</label>
                         <input type="text" id="usernameRegister" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500  focus:outline-none" name="usernameRegister" placeholder="Prénom" />
                          <p class="hidden text-xs text-red-600 mt-2" id="usernameError"></p>
                     </div>
@@ -77,7 +77,7 @@
                     <div>
                         <label for="pwdRegister" class="block mb-2 text-sm">Mot de passe</label>
                         <div class="relative">
-                            <input type="password" id="pwdRegister" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="pwdRegister" placeholder="8+ caractères, majuscule, chiffre" />
+                            <input type="password" id="pwdRegister" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="pwdRegister" placeholder="8+ caractères, une majuscule et un chiffre" />
                             <span id="toggleVisibility" class="absolute inset-y-3 right-3" >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
@@ -90,7 +90,7 @@
                     </div>
 
                     <div>
-                        <label for="ConfPwdR" class="block mb-2 text-sm">Confirmation de mot de passe</label>
+                        <label for="ConfPwdR" class="block mb-2 text-sm">Confirmation du mot de passe</label>
                         <div class="relative">
                             <input type="password" id="ConfPwdR" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="ConfPwdR" placeholder="Retapez votre mot de passe" />
                             <span id="toggleV" class="absolute inset-y-3 right-3" >

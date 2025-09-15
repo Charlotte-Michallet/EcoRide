@@ -11,7 +11,7 @@
             <p class="mt-1 text-center text-gray-500">Drive Green Together</p>
             <form method="post">
                 <div class="mb-4">
-                    <label class="block mb-2 text-sm">Email</label>
+                    <label class="block mb-2 text-sm">E-mail</label>
                     <input type="text" id="emailLogin" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="emailLogin" placeholder="nom.prénom@gmail.com" aria-label="email" />
                     <p class="hidden text-xs text-red-600 mt-2" id="emailLoginError"></p>
                 </div>

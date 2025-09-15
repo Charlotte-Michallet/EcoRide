@@ -5,16 +5,16 @@ ini_set("session.use_strict_mode", 1);
 
 session_start();
 
-// regenarate id for more security
+// regenerate id for more security
 if (! isset($_SESSION["last_regeneration"])) {
     regenerateSessionId();
 
 } else {
-    // initiate variable to 30minites (60s * 30min)
+    // initialize variable for 30 minutes
     $interval = 60 * 30;
 
     if (time() - $_SESSION["last_regeneration"] >= $interval) {
-        // regenarate session id if last session id is more than 30min
+        // regenerate session id if last session id is more than 30min
         regenerateSessionId();
     }
 }

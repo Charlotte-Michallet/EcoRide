@@ -74,13 +74,13 @@ const usernamecheck = (value) => {
     if (value.length > 0 && (value.length < 3 || value.length > 20)) {
         errorDisplay(
             "username",
-            "Le pseudo doit contenir entre 3 et 20 caractères."
+            "Le nom d’utilisateur doit contenir entre 3 et 20 caractères."
         );
         username = null;
     } else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
         errorDisplay(
             "username",
-            "Le pseudo ne doit pas contenir de caractères spéciaux."
+            "Le nom d’utilisateur ne doit pas contenir de caractères spéciaux."
         );
         username = null;
     } else {
@@ -130,7 +130,7 @@ const passwordCheck = (value) => {
     ) {
         errorDisplay(
             "pwd",
-            "Le mot de passe doit comporter au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caracteres special."
+            "Le mot de passe doit comporter au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial."
         );
         password = null;
     } else {
@@ -206,7 +206,7 @@ form.addEventListener("submit", async (e) => {
                 errorDisplay(
                     "form",
                     responseData.message ||
-                        "Le pseudo ou l'adresse e-mail exist déjà."
+                        "Le nom d’utilisateur ou l'adresse e-mail existe déjà."
                 );
             } else if (resp.ok) {
                 window.location.href =
@@ -218,7 +218,7 @@ form.addEventListener("submit", async (e) => {
                 );
             }
         } catch (error) {
-            alert(`Inscription échouer : ${error.message}`);
+            alert(`Inscription échouée : ${error.message}`);
         }
     } else {
         errorDisplay("form", "Veuillez remplir tous les champs.");

@@ -37,7 +37,7 @@ class ReservationContr
                 $updateseats = $tripRepo->updatetSeatsTrip($seatsAvailable, $carSharingId);
 
                 if (empty($updateseats)) {
-                    $error[] = "la mise a jour du covoiturage n'a pas marche";
+                    $error[] = "La mise à jour du covoiturage n'a pas fonctionné";
                 } else {
                     // commision for the plateform
                     $companyContr = new CompanyContr();
@@ -51,10 +51,10 @@ class ReservationContr
                 }
 
             } else {
-                $error[] = "la mise a jour du credit na pas marché";
+                $error[] = "La mise à jour du credit n'a pas fonctionné";
             }
         } else {
-            $error[] = "reservation na pas marche";
+            $error[] = "Reservation n'a pas fonctionné";
         }
         return $error;
     }

@@ -43,19 +43,19 @@
 
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
-                                            <span class="text-xs font-semibold uppercase">Modele</span>
+                                            <span class="text-xs font-semibold uppercase">Modèle</span>
                                         </div>
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
-                                            <span class="text-xs font-semibold uppercase">Type d'energie utiliser</span>
+                                            <span class="text-xs font-semibold uppercase">Type d'énergie utilisé</span>
                                         </div>
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
-                                            <span class="text-xs font-semibold uppercase">Nombre de place maximum</span>
+                                            <span class="text-xs font-semibold uppercase">Nombre de places maximum</span>
                                         </div>
                                     </th>
 
@@ -67,8 +67,7 @@
 
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
-                                            <span class="text-xs font-semibold uppercase">Date première
-                                                immatriculation</span>
+                                            <span class="text-xs font-semibold uppercase">Date de première immatriculation</span>
                                         </div>
                                     </th>
 
@@ -186,24 +185,23 @@
                             <div>
                                 <label for="brandCreate" class="block text-sm mb-2">Marque de la voiture</label>
                                 <input type="text" id="brandCreate" name="brandCreate"
-                                    class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
-                                    aria-describedby="brandrror" placeholder="Renault">
+                                    class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" placeholder="Renault">
                                 <p class="hidden text-xs text-red-600 mt-2" id="brandError"></p>
                             </div>
 
                             <div>
-                                <label for="modelCreate" class="block text-sm mb-2">Model de la voiture</label>
+                                <label for="modelCreate" class="block text-sm mb-2">Modèle de la voiture</label>
                                 <input type="text" id="modelCreate" name="modelCreate"
                                     class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
-                                    aria-describedby="modelerror" placeholder="Zoe">
+                                   placeholder="Zoe">
                                 <p class="hidden text-xs text-red-600 mt-2" id="modelError"></p>
                             </div>
 
                             <div>
-                                <label for="energyType" class="block text-sm mb-2 ">Type d'energie de la voiture</label>
+                                <label for="energyType" class="block text-sm mb-2 ">Type d'énergie de la voiture</label>
                                 <select name="energyType" id="energyType"
                                     class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none">
-                                    <option value="Energy">-- Choisissez un type d'energie --</option>
+                                    <option value="Energy">-- Choisissez un type d'énergie --</option>
                                     <option value="Electrique">Electrique</option>
                                     <option value="Hybride">Hybride</option>
                                     <option value="Thermique">Thermique</option>
@@ -211,8 +209,7 @@
                             </div>
 
                             <div>
-                                <label for="numSpaces" class="block text-sm mb-2">Nombre de place total de la
-                                    voiture</label>
+                                <label for="numSpaces" class="block text-sm mb-2">Nombre total de places</label>
                                 <input type="number" id="numSpaces" name="numSpaces"
                                     class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
                                     min="2" max="9" aria-describedby="numspaceerror" placeholder="5">

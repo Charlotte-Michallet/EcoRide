@@ -1,7 +1,7 @@
 <?php
 return [
     // Page router
-    "dashbaord"    => ["title" => "Tableau de Bord Admin - EcoRide", "description" => "Interface de gestion et de supervision de l'activité du site. Gérez les utilisateurs et les employés", "robots" => "noindex, nofollow"],
+    "dashboard"    => ["title" => "Tableau de Bord Admin - EcoRide", "description" => "Interface de gestion et de supervision de l'activité du site. Gérez les utilisateurs et les employés", "robots" => "noindex, nofollow"],
     "legals"       => ["title" => "Mentions Légales -Espace Admin  - EcoRide", "description" => "Accès aux documents juridiques et aux politiques internes du site. Pour usage exclusif des administrateurs et du personnel autorisé.", "robots" => "noindex, nofollow"],
 
     // Auth Controller

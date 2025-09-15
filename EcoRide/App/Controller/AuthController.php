@@ -39,10 +39,10 @@ class AuthController extends Router
                         break;
 
                     default:
-                        throw new \Exception("Cette action n'existe pas" . $_GET["action"]);
+                        throw new \Exception("Cette action n'existe pas : " . $_GET["action"]);
                 }
             } else {
-                // home page
+                throw new \Exception("Aucune action détectée");
             }
         } catch (\Exception $e) {
             $this->render("errors/default", ["error" => $e->getMessage()]);
@@ -92,6 +92,7 @@ class AuthController extends Router
             $this->deleteUserMethod();
         } else {
             header("Location: /index.php");
+            exit();
         }
     }
 
@@ -110,6 +111,7 @@ class AuthController extends Router
             $this->render("auth/modifyProfil", ["user" => $user, "token" => $currentToken, "meta" => $meta["profilModify"]]);
         } else {
             header("Location: /index.php");
+            exit();
         }
     }
 
@@ -131,6 +133,7 @@ class AuthController extends Router
             $this->render("userTrips/userCars", ["token" => $currentToken, "cars" => $carsInfo, "meta" => $meta["cars"]]);
         } else {
             header("Location: index.php");
+            exit();
         }
     }
 
@@ -150,6 +153,7 @@ class AuthController extends Router
             $this->render("auth/credit", ["token" => $currentToken, "credits" => $credits, "meta" => $meta["credits"]]);
         } else {
             header("Location: /index.php");
+            exit();
         }
     }
 

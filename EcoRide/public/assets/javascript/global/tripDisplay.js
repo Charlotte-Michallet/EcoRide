@@ -1,7 +1,12 @@
 const API_ENDPOINT = "index.php?controller=api&resource=search&action=filter";
 // filter
+let originalTrip = null;
 export function show(trips, seats) {
     tripResults.textContent = "";
+
+    if (originalTrip === null) {
+        originalTrip = trips;
+    }
 
     // filter
     const filterContainer = document.createElement("div");
@@ -27,7 +32,7 @@ export function show(trips, seats) {
 
     const EcoBtn = document.createElement("button");
     EcoBtn.className =
-        "py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-600 focus:outline-hidden focus:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none";
+        "btnSearch py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent text-white";
     EcoBtn.textContent = "Voyage écologique";
     EcoBtn.setAttribute("type", "button");
     EcoContainer.appendChild(EcoBtn);
@@ -38,12 +43,12 @@ export function show(trips, seats) {
 
     const labelstarsNum = document.createElement("label");
     labelstarsNum.htmlFor = "starsNum";
-    labelstarsNum.textContent = "Etoiles minimum";
+    labelstarsNum.textContent = "Étoiles minimum";
     starsContainer.appendChild(labelstarsNum);
 
     const starsSelect = document.createElement("select");
     starsSelect.className =
-        "py-3 px-3 pe-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none";
+        "block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring";
     starsSelect.name = "starsNum";
     starsSelect.id = "starsNum";
     starsContainer.appendChild(starsSelect);
@@ -88,7 +93,7 @@ export function show(trips, seats) {
     imputPricesMax.placeholder = "45 Crédits";
     imputPricesMax.setAttribute("min", "1");
     imputPricesMax.className =
-        "block w-full py-2.5 px-3 text-gray-700 placeholder-gray-400/70 border border-gray-200 rounded-lg focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40";
+        "block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring";
     priceInputContainer.appendChild(imputPricesMax);
 
     const timeMaxContainer = document.createElement("div");
@@ -97,7 +102,7 @@ export function show(trips, seats) {
 
     const labelTimeMax = document.createElement("label");
     labelTimeMax.htmlFor = "timePrice";
-    labelTimeMax.textContent = "Temps trajets max";
+    labelTimeMax.textContent = "Durée maximale du trajet";
     timeMaxContainer.appendChild(labelTimeMax);
 
     const timeInputContainer = document.createElement("div");
@@ -109,7 +114,7 @@ export function show(trips, seats) {
     imputTimeMax.id = "timeMax";
     imputTimeMax.placeholder = "01:00";
     imputTimeMax.className =
-        "block w-full py-2.5 px-3 text-gray-700 placeholder-gray-400/70 border border-gray-200 rounded-lg focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40";
+        "block w-full px-4 py-2 mt-2 border border-gray-200 rounded-md focus:ring-emerald-500 focus:ring-opacity-10 focus:outline-none focus:ring";
     timeInputContainer.appendChild(imputTimeMax);
 
     const resetContainer = document.createElement("div");
@@ -118,7 +123,7 @@ export function show(trips, seats) {
 
     const resetBtn = document.createElement("button");
     resetBtn.className =
-        "py-3 px-4 w-9/10 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-600 focus:outline-hidden focus:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none";
+        "btnSearch py-3 px-4 w-9/10 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent text-white";
     resetBtn.textContent = "Réinitialiser";
     resetBtn.setAttribute("type", "reset");
     resetContainer.appendChild(resetBtn);
@@ -129,181 +134,202 @@ export function show(trips, seats) {
 
     const submitBtn = document.createElement("button");
     submitBtn.className =
-        "py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-600 focus:outline-hidden focus:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none";
+        "btnSearch py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent text-white";
     submitBtn.textContent = "Appliquer les filtres";
     submitBtn.setAttribute("type", "submit");
     submitContainer.appendChild(submitBtn);
 
-    // TRIPS
-    // Date trip
-    const containerDate = document.createElement("div");
-    containerDate.className = "p-4 md:p-5";
-    tripResults.appendChild(containerDate);
+    if (!trips || trips.length === 0) {
+        const errorsContainer = document.createElement("div");
+        errorsContainer.className = "flex justify-center w-full";
+        tripResults.appendChild(errorsContainer);
 
-    const textDate = document.createElement("p");
-    textDate.className = "text-xl font-semibold";
-    textDate.textContent = trips[0].date;
-    containerDate.appendChild(textDate);
+        const errorTriptext = document.createElement("p");
+        errorTriptext.className = "text-xl text-red-600 mt-2";
+        errorTriptext.textContent = "Aucun trajet trouvé avec ces critères";
+        errorsContainer.appendChild(errorTriptext);
 
-    // trip container
-    trips.forEach((trip) => {
-        const card = document.createElement("div");
-        card.className = "pt-2 border border-gray-200 w-1/2 rounded-xl";
+        resetBtn.addEventListener("click", async () => {
+            btnEco = null;
+            starsNumber = null;
+            priceMaxValue = null;
+            timeMaxValue = null;
+            errorTriptext.textContent = "";
 
-        const container = document.createElement("div");
-        container.className = "p-4 md:p-5";
-        card.appendChild(container);
+            show(originalTrip, seats);
+        });
+    } else {
+        // TRIPS
+        // Date trip
+        const containerDate = document.createElement("div");
+        containerDate.className = "p-4 md:p-5";
+        tripResults.appendChild(containerDate);
 
-        // price and places
-        const containerPrice = document.createElement("div");
-        containerPrice.className =
-            "flex justify-between gap-x-2 px-5 pb-3 gap-x-2 pb-2";
+        const textDate = document.createElement("p");
+        textDate.className = "text-xl font-semibold";
+        textDate.textContent = trips[0].date;
+        containerDate.appendChild(textDate);
 
-        const textPlaces = document.createElement("p");
-        textPlaces.className = "text-xl font-semibold";
-        textPlaces.textContent = `${trip.places} place disponible`;
-        containerPrice.appendChild(textPlaces);
+        // trip container
+        trips.forEach((trip) => {
+            const card = document.createElement("div");
+            card.className = "pt-2 border border-gray-200 w-1/2 rounded-xl";
 
-        const textPrice = document.createElement("p");
-        textPrice.className = "text-2xl font-semibold";
-        textPrice.textContent = `${trip.price} Crédits`;
-        containerPrice.appendChild(textPrice);
+            const container = document.createElement("div");
+            container.className = "p-4 md:p-5";
+            card.appendChild(container);
 
-        container.appendChild(containerPrice);
+            // price and places
+            const containerPrice = document.createElement("div");
+            containerPrice.className =
+                "flex justify-between gap-x-2 px-5 pb-3 gap-x-2 pb-2";
 
-        // times
-        const containerTimes = document.createElement("div");
-        containerTimes.className = "flex justify-end gap-x-2 pb-2";
+            const textPlaces = document.createElement("p");
+            textPlaces.className = "text-xl font-semibold";
+            textPlaces.textContent = `${trip.places} place disponible`;
+            containerPrice.appendChild(textPlaces);
 
-        const textdeparture = document.createElement("p");
-        textdeparture.className = "font-semibold";
-        textdeparture.textContent = trip.hour;
+            const textPrice = document.createElement("p");
+            textPrice.className = "text-2xl font-semibold";
+            textPrice.textContent = `${trip.price} Crédits`;
+            containerPrice.appendChild(textPrice);
 
-        const lineLeft = document.createElement("div");
-        lineLeft.className = "lineLeft my-2 ml-3";
+            container.appendChild(containerPrice);
 
-        const textTimeTrip = document.createElement("p");
-        textTimeTrip.className = "text-lg font-semibold";
-        textTimeTrip.textContent = trip.travelTime;
+            // times
+            const containerTimes = document.createElement("div");
+            containerTimes.className = "flex justify-end gap-x-2 pb-2";
 
-        const lineRight = document.createElement("div");
-        lineRight.className = "lineRigth my-2 mr-3";
+            const textdeparture = document.createElement("p");
+            textdeparture.className = "font-semibold";
+            textdeparture.textContent = trip.hour;
 
-        const textArrival = document.createElement("p");
-        textArrival.className = "font-semibold";
-        textArrival.textContent = trip.time;
+            const lineLeft = document.createElement("div");
+            lineLeft.className = "lineLeft my-2 ml-3";
 
-        containerTimes.appendChild(textdeparture);
-        containerTimes.appendChild(lineLeft);
-        containerTimes.appendChild(textTimeTrip);
-        containerTimes.appendChild(lineRight);
-        containerTimes.appendChild(textArrival);
-        container.appendChild(containerTimes);
+            const textTimeTrip = document.createElement("p");
+            textTimeTrip.className = "text-lg font-semibold";
+            textTimeTrip.textContent = trip.travelTime;
 
-        // city
-        const containerCity = document.createElement("div");
-        containerCity.className = "flex justify-between gap-x-2 px-5 pb-3";
+            const lineRight = document.createElement("div");
+            lineRight.className = "lineRight my-2 mr-3";
 
-        const containerLeft = document.createElement("div");
-        containerLeft.className = "flex items-center gap-x-2";
-        const textcitydeparture = document.createElement("p");
-        textcitydeparture.className = "font-semibold";
-        textcitydeparture.textContent = trip.departure;
-        containerLeft.appendChild(textcitydeparture);
+            const textArrival = document.createElement("p");
+            textArrival.className = "font-semibold";
+            textArrival.textContent = trip.time;
 
-        const containerMiddel = document.createElement("div");
-        containerMiddel.className = "flex items-center gap-x-2";
-        const textKilometers = document.createElement("p");
-        textKilometers.className = "font-semibold";
-        textKilometers.textContent = `${trip.kilometers} km`;
-        containerMiddel.appendChild(textKilometers);
+            containerTimes.appendChild(textdeparture);
+            containerTimes.appendChild(lineLeft);
+            containerTimes.appendChild(textTimeTrip);
+            containerTimes.appendChild(lineRight);
+            containerTimes.appendChild(textArrival);
+            container.appendChild(containerTimes);
 
-        const containerRigth = document.createElement("div");
-        containerRigth.className = "flex items-center gap-x-2";
-        const textCityArrival = document.createElement("p");
-        textCityArrival.className = "font-semibold";
-        textCityArrival.textContent = trip.arrival;
-        containerRigth.appendChild(textCityArrival);
+            // city
+            const containerCity = document.createElement("div");
+            containerCity.className = "flex justify-between gap-x-2 px-5 pb-3";
 
-        containerCity.appendChild(containerLeft);
-        containerCity.appendChild(containerMiddel);
-        containerCity.appendChild(containerRigth);
-        container.appendChild(containerCity);
+            const containerLeft = document.createElement("div");
+            containerLeft.className = "flex items-center gap-x-2";
+            const textcitydeparture = document.createElement("p");
+            textcitydeparture.className = "font-semibold";
+            textcitydeparture.textContent = trip.departure;
+            containerLeft.appendChild(textcitydeparture);
 
-        // user
-        const containerUserInfo = document.createElement("div");
-        containerUserInfo.className = "flex justify-between gap-x-2";
+            const containerMiddel = document.createElement("div");
+            containerMiddel.className = "flex items-center gap-x-2";
+            const textKilometers = document.createElement("p");
+            textKilometers.className = "font-semibold";
+            textKilometers.textContent = `${trip.kilometers} km`;
+            containerMiddel.appendChild(textKilometers);
 
-        // username and photo
-        const containerUsername = document.createElement("div");
-        containerUsername.className = "flex items-center gap-x-2";
+            const containerRigth = document.createElement("div");
+            containerRigth.className = "flex items-center gap-x-2";
+            const textCityArrival = document.createElement("p");
+            textCityArrival.className = "font-semibold";
+            textCityArrival.textContent = trip.arrival;
+            containerRigth.appendChild(textCityArrival);
 
-        const img = document.createElement("img");
-        img.className = "object-cover w-12 h-12 rounded-full";
-        img.src = trip.photo;
-        img.alt = "photo profil";
-        containerUsername.appendChild(img);
+            containerCity.appendChild(containerLeft);
+            containerCity.appendChild(containerMiddel);
+            containerCity.appendChild(containerRigth);
+            container.appendChild(containerCity);
 
-        const textUsername = document.createElement("p");
-        textUsername.className = "font-semibold";
-        textUsername.textContent = trip.username;
-        containerUsername.appendChild(textUsername);
+            // user
+            const containerUserInfo = document.createElement("div");
+            containerUserInfo.className = "flex justify-between gap-x-2";
 
-        const containernotes = document.createElement("div");
-        containernotes.className = "flex items-center gap-x-2";
-        const textNotes = document.createElement("p");
-        textNotes.className = "font-semibold";
+            // username and photo
+            const containerUsername = document.createElement("div");
+            containerUsername.className = "flex items-center gap-x-2";
 
-        if (trip.notes !== null) {
-            textNotes.textContent = `${trip.notes}/5 étoiles`;
-        } else {
-            textNotes.textContent = ``;
-        }
-        containernotes.appendChild(textNotes);
+            const img = document.createElement("img");
+            img.className = "object-cover w-12 h-12 rounded-full";
+            img.src = trip.photo;
+            img.alt = "photo profil";
+            containerUsername.appendChild(img);
 
-        containerUserInfo.appendChild(containerUsername);
-        containerUserInfo.appendChild(containernotes);
-        container.appendChild(containerUserInfo);
+            const textUsername = document.createElement("p");
+            textUsername.className = "font-semibold";
+            textUsername.textContent = trip.username;
+            containerUsername.appendChild(textUsername);
 
-        // info
-        const containerDetails = document.createElement("div");
-        containerDetails.className = "flex justify-between mt-3 gap-x-2";
+            const containernotes = document.createElement("div");
+            containernotes.className = "flex items-center gap-x-2";
+            const textNotes = document.createElement("p");
+            textNotes.className = "font-semibold";
 
-        const containerEnergie = document.createElement("div");
-        containerEnergie.className = "flex items-center gap-x-2";
-        const textEnergie = document.createElement("p");
-        textEnergie.className = "text-xs font-semibold";
-        if (trip.energy === "Electrique") {
-            textEnergie.textContent = "* Voyage écologique";
-            const logo = document.createElement("img");
-            logo.className = "w-auto h-7 w-7";
-            logo.src = "/assets/img/logo/form.png";
-            logo.alt = "logo";
-            containerEnergie.appendChild(logo);
-        } else {
-            textEnergie.textContent = "";
-        }
-        containerEnergie.appendChild(textEnergie);
+            if (trip.notes !== null) {
+                textNotes.textContent = `${trip.notes}/5 étoiles`;
+            } else {
+                textNotes.textContent = ``;
+            }
+            containernotes.appendChild(textNotes);
 
-        const linkDetail = document.createElement("a");
-        linkDetail.href = `/index.php?controller=car-sharing&action=details&id=${trip.id}&seats=${seats}`;
+            containerUserInfo.appendChild(containerUsername);
+            containerUserInfo.appendChild(containernotes);
+            container.appendChild(containerUserInfo);
 
-        const btn = document.createElement("button");
-        btn.type = "submit";
-        btn.name = "idDetail";
-        btn.value = "idDetail";
-        btn.textContent = "Détails";
-        btn.className =
-            " btnSearch px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80";
-        linkDetail.appendChild(btn);
+            // info
+            const containerDetails = document.createElement("div");
+            containerDetails.className = "flex justify-between mt-3 gap-x-2";
 
-        containerDetails.appendChild(containerEnergie);
-        containerDetails.appendChild(linkDetail);
-        container.appendChild(containerDetails);
+            const containerEnergie = document.createElement("div");
+            containerEnergie.className = "flex items-center gap-x-2";
+            const textEnergie = document.createElement("p");
+            textEnergie.className = "text-xs font-semibold";
+            if (trip.energy === "Electrique") {
+                textEnergie.textContent = "* Voyage écologique";
+                const logo = document.createElement("img");
+                logo.className = "w-auto h-7 w-7";
+                logo.src = "/assets/img/logo/form.png";
+                logo.alt = "logo";
+                containerEnergie.appendChild(logo);
+            } else {
+                textEnergie.textContent = "";
+            }
+            containerEnergie.appendChild(textEnergie);
 
-        // insert all
-        tripResults.appendChild(card);
-    });
+            const linkDetail = document.createElement("a");
+            linkDetail.href = `/index.php?controller=car-sharing&action=details&id=${trip.id}&seats=${seats}`;
+
+            const btn = document.createElement("button");
+            btn.type = "submit";
+            btn.name = "idDetail";
+            btn.value = "idDetail";
+            btn.textContent = "Détails";
+            btn.className =
+                "btnSearch px-6 py-2 font-medium tracking-wide text-white transition-colors duration-300 rounded-lg focus:outline-none focus:ring";
+            linkDetail.appendChild(btn);
+
+            containerDetails.appendChild(containerEnergie);
+            containerDetails.appendChild(linkDetail);
+            container.appendChild(containerDetails);
+
+            // insert all
+            tripResults.appendChild(card);
+        });
+    }
 
     // event listners
     const formatTime = (time) => {
@@ -342,7 +368,7 @@ export function show(trips, seats) {
             let stars = parseInt(starsstring, 10);
             if (stars < 1 || stars > 5) {
                 errortext.textContent =
-                    "Les étoiles doit etre compris entre 1 et 5.";
+                    "Les étoiles doivent être comprises entre 1 et 5.";
                 starsNumber = null;
             } else {
                 starsNumber = stars;
@@ -374,7 +400,7 @@ export function show(trips, seats) {
 
         if (!time.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)) {
             timeMaxValue = null;
-            errortext.textContent = "Veillez remplir comme ce formmat 01:30";
+            errortext.textContent = "Veuillez remplir au format 01:30";
         } else if (time.length === 0) {
             timeMaxValue = null;
             errortext.textContent = "";
@@ -385,13 +411,14 @@ export function show(trips, seats) {
         }
     });
 
-    resetBtn.addEventListener("click", () => {
+    resetBtn.addEventListener("click", async () => {
         btnEco = null;
         starsNumber = null;
         priceMaxValue = null;
         timeMaxValue = null;
+        errortext.textContent = "";
 
-        filterData = {};
+        show(originalTrip, seats);
     });
 
     filterForm.addEventListener("submit", async (e) => {
@@ -436,17 +463,31 @@ export function show(trips, seats) {
 
                     show(trips, seats);
                     errortext.textContent = "";
+                } else if (
+                    responseData.message ===
+                    "Aucun trajet trouvé avec ces paramètres."
+                ) {
                     console.log(responseData);
-                } else if (responseData === 204) {
-                    console.log("no");
+                    errortext.textContent = responseData.message;
+                    filterData = {
+                        btnEco: btnEco || null,
+                        starsNumber: starsNumber || null,
+                        priceMax: priceMaxValue || null,
+                        timeMax: timeMaxValue || null,
+                        departure: trips[0].departure,
+                        arrival: trips[0].arrival,
+                        date: dateTrip,
+                        seats: seats,
+                    };
+                    console.log(filterData);
                 } else {
                     errortext.textContent = responseData.message;
                 }
             } catch (error) {
-                alert(`Connexion echouer : ${error.message}`);
+                alert(`Connexion échouée : ${error.message}`);
             }
         } else {
-            errortext.textContent = "Veuillez remplir au moins un champs.";
+            errortext.textContent = "Veuillez remplir au moins un champ.";
         }
     });
 }

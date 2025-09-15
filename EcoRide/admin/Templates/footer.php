@@ -14,7 +14,7 @@
     <!-- logo -->
     <div class="lg:flex lg:items-center lg:justify-between pb-5 items-center">
       <div>
-        <img class="h-20 w-35 object-contain" src="<?php ROOT_PATHS?>/../assets/img/logo/logo.png" alt="Logo ecoride">
+        <img class="h-20 w-35 object-contain" src="<?php ROOT_PATHS?>/../assets/img/logo/logo.png" alt="Logo EcoRide">
       </div>
 
       <!-- Copyright text -->

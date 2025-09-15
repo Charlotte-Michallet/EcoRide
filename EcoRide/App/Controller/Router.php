@@ -50,7 +50,8 @@ class Router
                         break;
 
                     default:
-                        throw new \Exception(("Le controleur n'existe pas"));
+                        $this->render("errors/error", ["error" => $e->getMessage()]);
+                        break;
                 }
             } else {
                 // home page
@@ -96,7 +97,6 @@ class Router
         http_response_code($statusCode);
         header("Content-Type: application/json");
         echo json_encode($data);
-
         exit();
     }
 }

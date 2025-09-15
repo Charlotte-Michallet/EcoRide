@@ -4,7 +4,6 @@
         <div class="bg-gray-100 p-5 mb-10 rounded-2xl">
             <h2 class="font-bold text-2xl mb-2">1. Éditeur du site</h2>
             <p class="my-3">Ce site web est édité par :
-
                 [Nom et Prénom de l'étudiant ou de l'équipe]
                 [Adresse e-mail de contact]</p>
         </div>
@@ -12,7 +11,6 @@
         <div class="bg-gray-100 p-5 mb-10 rounded-2xl">
             <h2 class="font-bold text-2xl mb-2">2. Hébergement du site</h2>
             <p class="my-3">Ce site web est hébergé par :
-
                 [Nom de l'hébergeur] (par exemple : Netlify, Vercel, OVH, etc.)
                 [Adresse postale de l'hébergeur]
                 [Numéro de téléphone de l'hébergeur]</p>

@@ -73,7 +73,7 @@ class FindItinaryApi
                             "notes"      => $trip->getNotes(),
                         ];
                     }
-                    Router::jsonResponse(["status" => "success", "message" => "La création de trajer réussi", "trips" => $tripsArray], 200);
+                    Router::jsonResponse(["status" => "success", "message" => "Les trajets ont été trouvés", "trips" => $tripsArray], 200);
                 }
             }
         } else {

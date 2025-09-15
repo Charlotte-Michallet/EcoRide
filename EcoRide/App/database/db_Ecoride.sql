@@ -20,8 +20,7 @@ CREATE TABLE users (
     id_role INT(11),
     drivers_license BOOLEAN,
     CONSTRAINT fk_user_role
-        FOREIGN KEY (id_role) REFERENCES roles(id)
-        ON DELETE RESTRICT
+        FOREIGN KEY (id_role) REFERENCES roles(id) ON DELETE RESTRICT
 );
 
 CREATE TABLE cars(
@@ -86,7 +85,8 @@ CREATE TABLE feedbacks(
     reservation_id INT(11),
     CONSTRAINT fk_user_feedback
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-        FOREIGN KEY (reservation_id) REFERENCES reservations(id)
+    CONSTRAINT fk_feedback_reservations
+        FOREIGN KEY (reservation_id) REFERENCES reservations(id) ON DELETE CASCADE
 );
 
 CREATE TABLE company(

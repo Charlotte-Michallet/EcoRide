@@ -66,5 +66,4 @@ class ProfilContr
             throw new \Exception($e->getMessage());
         }
     }
-
 }

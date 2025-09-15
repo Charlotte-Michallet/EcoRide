@@ -56,7 +56,7 @@ class FeedbackApi
             if (! empty($feedback)) {
                 Router::jsonResponse(["status" => "error", "message" => $feedback], 401);
             } else {
-                Router::jsonResponse(["status" => "success", "message" => "Les credits sont mise a jours"], 200);
+                Router::jsonResponse(["status" => "success", "message" => "Votre avis a été enregistré avec succès."], 200);
             }
         } else {
             Router::jsonResponse(["status" => "error", "message" => "Token CSRF invalide."], 403);

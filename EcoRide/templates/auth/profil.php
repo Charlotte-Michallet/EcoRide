@@ -12,7 +12,7 @@
                     </h2>
 
                     <div class="flex flex-col items-center mt-8">
-                        <p class="block w-full py-3 text-gray-700 font-medium"> Pseudo <span class="font-normal">
+                        <p class="block w-full py-3 text-gray-700 font-medium"> Nom d’utilisateur <span class="font-normal">
                                 <?php echo " : " . htmlspecialchars($user->getUsername()) ?></span>
                         </p>
 
@@ -25,10 +25,10 @@
                                 class="font-normal"><?php echo " : " . htmlspecialchars($user->getDateOfBirth()); ?></span>
                         </p>
                         <p class="block w-full py-3 text-gray-700 font-medium">
-                            Credits <span
+                            Crédits <span
                                 class="font-normal"><?php echo " : " . htmlspecialchars($user->getCredits()); ?></span>
                         </p>
-                        <p class="block w-full py-3 text-gray-700 font-medium"> Role <span
+                        <p class="block w-full py-3 text-gray-700 font-medium"> Rôle <span
                                 class="font-normal"><?php echo " : " . htmlspecialchars($user->getRole()); ?></span>
                         </p>
                         <p class="block w-full py-3 text-gray-700 font-medium"> Notes <span
@@ -42,21 +42,18 @@
             <div class="container lg:col-span-4 min-h-1/2 px-6 mx-auto">
                 <div class="w-full max-w-md">
                     <h2 class="mb-2 text-3xl text-gray-800 font-bold lg:text-4xl">
-                        Mes préferences
+                       Mes préférences
                     </h2>
 
                     <div class="flex flex-col items-center mt-8">
-                        <p class="block w-full py-3 text-gray-700 font-medium"> Animal
-                            acepter
+                        <p class="block w-full py-3 text-gray-700 font-medium"> Animaux acceptés
                             <span
                                 class="font-normal"><?php echo " : " . htmlspecialchars($preferences["animal"]); ?></span>
                         </p>
-                        <p class="block w-full py-3 text-gray-700 font-medium"> Fumer
-                            acepeter <span
+                        <p class="block w-full py-3 text-gray-700 font-medium"> Fumeurs acceptés <span
                                 class="font-normal"><?php echo " : " . htmlspecialchars($preferences["smoking"]); ?></span>
                         </p>
-                        <p class="block w-full py-3 text-gray-700 font-medium"> Mes autre
-                            preferences
+                        <p class="block w-full py-3 text-gray-700 font-medium"> Mes autres préférences
                             <span class="font-normal">
                                 <?php echo " : " . htmlspecialchars($preferences["descriptif"]); ?></span>
                         </p>
@@ -104,15 +101,15 @@
                     <div class="p-6 bg-gray-100 rounded-lg my-8">
                         <div class="flex justify-between">
                             <h2 class="font-semibold"> Notes et avis passager</h2>
-                            <p>Numéro de reservation : <span><?php echo $allfeedback->getNumberReser() ?></span></p>
+                            <p>Numéro de réservation : <span><?php echo $allfeedback->getNumberReser() ?></span></p>
                         </div>
                         <div>
-                            <p>Covoiturage c'est bien passé : <span><?php echo $allfeedback->getTripWell() ?></span></p>
+                            <p>Le covoiturage s’est bien passé : <span><?php echo $allfeedback->getTripWell() ?></span></p>
                         </div>
 
                         <div class="flex justify-between mt-2">
                             <div>
-                                <p class="leading-loose"><?php echo $allfeedback->getNote() ?>/5 Etoiles</p>
+                                <p class="leading-loose"><?php echo $allfeedback->getNote() ?>/5 étoiles</p>
 
                                 <p class="leading-loose">
                                     <?php echo $allfeedback->getFeedback() ?>
@@ -120,7 +117,7 @@
                             </div>
 
                             <div>
-                                <p class="font-semibold">Voyage le
+                                <p class="font-semibold">Voyage effectué le
                                     <span><?php echo $allfeedback->getDepartureDate() ?></span> à
                                     <span><?php echo $allfeedback->getDepartureHour() ?></span> -
                                     <span><?php echo $allfeedback->getArrivalHour() ?></span>
@@ -134,7 +131,7 @@
                                 <p class="font-semibold">Prix : <span><?php echo $allfeedback->getTotalPrice() ?></span>
                                     Crédits
                                 </p>
-                                <p class="font-semibold">Nombre de place reserver :
+                                <p class="font-semibold">Nombre de places réservées :
                                     <span><?php echo $allfeedback->getNumPlaces() ?></span>
                                 </p>
                             </div>
@@ -154,7 +151,7 @@
                                 </div>
                                 <div class="flex items-center mt-2">
                                     <div class="mx-4">
-                                        <h3 class="font-semibold">Status de l'avis :
+                                        <h3 class="font-semibold">Statut de l’avis :
                                             <span><?php echo $allfeedback->getStatus(); ?></span>
                                         </h3>
                                     </div>
@@ -165,6 +162,5 @@
                 <?php }?>
             </div>
         </div>
-
     </div>
 </section>

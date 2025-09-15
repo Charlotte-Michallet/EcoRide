@@ -41,7 +41,7 @@ participateDetailsBtn.addEventListener("click", async () => {
         } else if (resp.status == 405) {
             errorDetails.classList.remove("hidden");
             errorDetails.textContent =
-                "Vous devais etre passager ou conducteur passager";
+                "Vous devez être passager ou conducteur-passager";
             setTimeout(() => {
                 window.location.href =
                     "/index.php?controller=auth&action=profilModify";
