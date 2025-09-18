@@ -7,7 +7,6 @@ export async function init() {
     const resp = await fetch(API_ENDPOINT);
 
     if (!resp.ok) {
-        console.log(resp);
         throw new Error("Erreur de réseau ou de serveur");
     }
     const datatrips = await resp.json();

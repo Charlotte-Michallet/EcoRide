@@ -467,7 +467,6 @@ export function show(trips, seats) {
                     responseData.message ===
                     "Aucun trajet trouvé avec ces paramètres."
                 ) {
-                    console.log(responseData);
                     errortext.textContent = responseData.message;
                     filterData = {
                         btnEco: btnEco || null,
@@ -479,7 +478,6 @@ export function show(trips, seats) {
                         date: dateTrip,
                         seats: seats,
                     };
-                    console.log(filterData);
                 } else {
                     errortext.textContent = responseData.message;
                 }

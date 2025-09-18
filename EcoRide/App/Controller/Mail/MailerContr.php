@@ -18,13 +18,15 @@ class MailerContr
     public function configureSmtp()
     {
         try {
+            $config = parse_ini_file(dirname(__DIR__, 3) . "/" . ".env");
+
             $this->mail->isSMTP();
-            $this->mail->Host       = "smtp.gmail.com";
+            $this->mail->Host       = $config["MAIL_HOST"];
             $this->mail->SMTPAuth   = true;
-            $this->mail->Username   = "ecoridejose@gmail.com";
-            $this->mail->Password   = "odghprphrbfahnyz";
+            $this->mail->Username   = $config["MAIL_ADRESS"];
+            $this->mail->Password   = $config["MAIL_PWD"];
             $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $this->mail->Port       = 587;
+            $this->mail->Port       = $config["MAIL_PORT"];
 
             $this->mail->SMTPOptions = [
                 'ssl' => [
@@ -41,10 +43,12 @@ class MailerContr
     public function sendMail($recipientEmail, $recipientName)
     {
         try {
+            $config = parse_ini_file(dirname(__DIR__, 3) . "/" . ".env");
+
             $this->mail->CharSet = 'UTF-8';
 
             // Recipient
-            $this->mail->setFrom("ecoridejose@gmail.com", "Ecoride");
+            $this->mail->setFrom($config["MAIL_ADRESS"], "Ecoride");
             $this->mail->addAddress($recipientEmail, $recipientName);
 
             // Content
@@ -65,10 +69,11 @@ class MailerContr
     public function sendMailPassenger($recipientEmail, $recipientName, $driverName, $dateTrip, $departureTrip, $arrivalTrip)
     {
         try {
+            $config              = parse_ini_file(dirname(__DIR__, 3) . "/" . ".env");
             $this->mail->CharSet = 'UTF-8';
 
             // Recipient
-            $this->mail->setFrom("ecoridejose@gmail.com", "Ecoride");
+            $this->mail->setFrom($config["MAIL_ADRESS"], "Ecoride");
             $this->mail->addAddress($recipientEmail, $recipientName);
 
             // Content

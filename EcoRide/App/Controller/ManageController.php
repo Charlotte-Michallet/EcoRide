@@ -70,12 +70,13 @@ class ManageController extends Router
 
         $feedbackRepo = new FeedbackRepository();
         $feedbacks    = $feedbackRepo->showbadFeedback();
+        $Resolvedfeed = $feedbackRepo->allshowbadFeedback();
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->paymentMethod();
         }
 
         if ($userId && ($roleid === 2 || $roleid === 1)) {
-            $this->render("employee/badReviews", ["token" => $currentToken, "feedbacks" => $feedbacks, "meta" => $meta["badReviews"]]);
+            $this->render("employee/badReviews", ["token" => $currentToken, "feedbacks" => $feedbacks, "Resolvedfeeds" => $Resolvedfeed, "meta" => $meta["badReviews"]]);
         } else {
             header("Location: /index.php");
             exit();

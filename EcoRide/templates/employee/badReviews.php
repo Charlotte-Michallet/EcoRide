@@ -109,5 +109,88 @@
                 </div>
             <?php }?>
         </div>
+
+        <h2 class="text-2xl font-semibold text-center text-gray-800 lg:text-3xl">
+           Les covoiturages qui se sont mal passés et ont été résolus
+        </h2>
+        <div class="mx-auto mt-8 xl:mt-10 max-w-7xl">
+
+            <?php foreach ($Resolvedfeeds as $Resolvedfeed) {?>
+                <div class="p-6 bg-gray-100 rounded-lg my-8">
+                    <div class="flex justify-between">
+                        <h2 class="font-semibold">Notes et avis des passagers</h2>
+                        <p>Numéro de réservation : <span><?php echo $Resolvedfeed->getNumberReser() ?></span> </p>
+                    </div>
+
+                    <div class="flex justify-between mt-2">
+                        <div>
+                            <?php $note = $Resolvedfeed->getNote();
+                                if ($note) {?>
+                                <p class="leading-loose"><?php echo $Resolvedfeed->getNote() ?>/5 étoiles</p>
+                            <?php } else {
+                                }?>
+
+                            <?php if (method_exists($Resolvedfeed, "getFeedback")) {?>
+                                <p class="leading-loose"><?php echo $Resolvedfeed->getFeedback() ?></p>
+                            <?php }?>
+
+                            <div class="flex items-center mt-3">
+                                <img class="object-cover rounded-full w-10 h-10"
+                                    src="<?php echo $Resolvedfeed->getPassengersPhoto() ?>" alt="passager photo">
+
+                                <div class="mx-4">
+                                    <h2 class="font-semibold"><?php echo $Resolvedfeed->getPassengersUsername() ?></h2>
+                                </div>
+
+                                <div class="mx-4">
+                                    <h3 class="font-semibold">Email :
+                                        <span><?php echo $Resolvedfeed->getPassengersEmail() ?></span></h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="font-semibold">Voyage effectué le <span><?php echo $Resolvedfeed->getDepartureDate() ?></span> à
+                                <span><?php echo $Resolvedfeed->getDepartureHour() ?></span>
+                            </p>
+                            <p class="font-semibold">De <span><?php echo $Resolvedfeed->getDepartureCity() ?></span> à
+                                <span><?php echo $Resolvedfeed->getArrivalCity() ?>
+                            </p>
+                            <p class="font-semibold">Numéro de covoiturage :
+                                <span><?php echo $Resolvedfeed->getCarSharingId() ?></span>
+                            </p>
+                        </div>
+
+                        <div>
+                            <p class="font-semibold">Prix : <span><?php echo $Resolvedfeed->getTotalPrice() ?></span> Crédits
+                            </p>
+                            <p class="font-semibold">Nombre de places réservées :
+                                <span><?php echo $Resolvedfeed->getNumPlaces() ?></span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-7">
+                        <h2 class="font-semibold">Conducteur : </h2>
+                        <div class="flex justify-between">
+                            <div class="flex items-center mt-2">
+
+                                <img class="object-cover rounded-full w-10 h-10"
+                                    src="<?php echo $Resolvedfeed->getDriverPhoto() ?>" alt="Conducteur photo">
+
+                                <div class="mx-4">
+                                    <h3 class="font-semibold"><?php echo $Resolvedfeed->getDriverUsername() ?></h3>
+                                </div>
+
+                                <div class="mx-4">
+                                    <h3 class="font-semibold">Email : </h3>
+                                    <h3 class="font-semibold"><?php echo $Resolvedfeed->getDriverEmail() ?></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php }?>
+        </div>
     </div>
 </section>

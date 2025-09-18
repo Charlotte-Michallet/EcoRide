@@ -191,7 +191,6 @@ const api = async (feedbackData) => {
             body: JSON.stringify(feedbackData),
         });
         const responseData = await resp.json();
-        console.log(feedbackData);
 
         if (resp.status == 401) {
             errorDisplay("feedback", responseData.message);
