@@ -104,7 +104,7 @@
                             <div class="inline-flex gap-x-2 text-sm">
                                 <img class="w-auto h-7 w-7" src="<?php ROOT_PATH?> /assets/img/logo/form.png"
                                     alt="logo EcoRide">
-                                <p>* Voyage écologique = voyage électrique</p>
+                                <p>* Voyage écologique = voyage en électrique</p>
                             </div>
                         </div>
 

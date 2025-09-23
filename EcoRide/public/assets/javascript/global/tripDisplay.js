@@ -299,7 +299,7 @@ export function show(trips, seats) {
             const textEnergie = document.createElement("p");
             textEnergie.className = "text-xs font-semibold";
             if (trip.energy === "Electrique") {
-                textEnergie.textContent = "* Voyage écologique";
+                textEnergie.textContent = "*voyage écologique = voyage en électrique";
                 const logo = document.createElement("img");
                 logo.className = "w-auto h-7 w-7";
                 logo.src = "/assets/img/logo/form.png";

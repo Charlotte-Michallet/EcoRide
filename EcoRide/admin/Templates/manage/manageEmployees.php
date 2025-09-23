@@ -189,7 +189,7 @@
 
     <!-- Modal -->
     <div id="employeeModal" class="hidden bg-gray-500/50 size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto"
-        role="dialog" tabindex="-1" aria-labelledby="hs-modal-signup-label">
+        role="dialog" tabindex="-1">
         <div id="employeeoverlay"
             class="hidden hs-overlay-open:mt-7  hs-overlay-open:duration-500 mt-5 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
             <div class="bg-white border border-gray-200 rounded-xl shadow-2xs">
