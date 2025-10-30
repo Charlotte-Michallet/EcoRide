@@ -171,7 +171,6 @@ class TripRepository extends Repository
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
-
     }
 
     public function findTrip($departCity, $arrival_city, $date_trip, $num_seats, $user_id)

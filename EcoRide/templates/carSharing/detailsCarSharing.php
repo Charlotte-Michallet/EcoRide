@@ -231,7 +231,7 @@
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <div class="mt-4">
                 <p class="text-pretty text-gray-700">
-                    Le trajet coûte <span>                                                                                                                                                                                                                                                                                                                                                        <?php echo $totalPrice ?></span> . Êtes-vous sûr de vouloir participer a ce
+                    Le trajet coûte <span>                                            <?php echo $totalPrice ?></span> . Êtes-vous sûr de vouloir participer a ce
                     trajet</p>
             </div>
 

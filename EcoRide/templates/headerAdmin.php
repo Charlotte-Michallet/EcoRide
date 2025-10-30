@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- favicon -->
-  <link rel="shortcut icon" href="<?php ROOT_PATHS?>/../assets/img/logo/form.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/img/logo/form.png" type="image/x-icon">
 
   <!-- links for tailwind -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -31,7 +31,7 @@
     <div class="flex justify-around items-center gap-8 mx-10 text-gray-900">
 
       <div class="block">
-        <img class="w-auto h-10 sm:h-15" src="<?php ROOT_PATHS?>/../assets/img/logo/logo.png" alt="logo">
+        <img class="w-auto h-10 sm:h-15" src="/assets/img/logo/logo.png" alt="logo">
       </div>
       <?php if (isset($_SESSION["username"]) && $_SESSION["role"] === 1) {?>
       <div class="flex flex-1 items-center justify-end md:justify-between">

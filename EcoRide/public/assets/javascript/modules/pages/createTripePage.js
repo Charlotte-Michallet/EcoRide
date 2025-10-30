@@ -235,8 +235,8 @@ const priceTripCheck = (value) => {
     } else if (price.length === 0) {
         errorDisplay("prices", "Veuillez renseigner un prix.");
         pricePlaces = null;
-    } else if (price < 0) {
-        errorDisplay("prices", "Le prix doit être supérieur à zéro.");
+    } else if (price < 2) {
+        errorDisplay("prices", "Le prix doit être supérieur à deux.");
         pricePlaces = null;
     } else {
         errorDisplay("prices", "", true);

@@ -3,7 +3,7 @@
     <div class="m-13 w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md ">
         <div class="px-6 py-4">
             <div class="flex justify-center mx-auto">
-                <img class="w-auto h-10 sm:h-15" src="<?php ROOT_PATHS?>/../assets/img/logo/logo.png" alt="logo">
+                <img class="w-auto h-10 sm:h-15" src="/assets/img/logo/logo.png" alt="logo">
             </div>
             <h1 class="mt-3 text-3xl font-medium text-center text-gray-600">Admin</h1>
             <h3 class="mt-3 text-xl font-medium text-center text-gray-600">Se connecter</h3>

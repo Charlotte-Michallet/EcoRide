@@ -229,7 +229,7 @@ class CreateTripContr
 
     protected function priceInvalid()
     {
-        if (filter_var($this->price, FILTER_VALIDATE_INT) === false || $this->price < 0) {
+        if (filter_var($this->price, FILTER_VALIDATE_INT) === false || $this->price < 2) {
             $result = true;
         } else {
             $result = false;

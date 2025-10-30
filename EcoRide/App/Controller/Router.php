@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Controller\Admin\AdminController;
 use App\Controller\Api\ApiController;
 
 class Router
@@ -49,8 +50,13 @@ class Router
                         $manageRouter->route($meta);
                         break;
 
+                    case 'admin':
+                        $adminRouter = new AdminController();
+                        $adminRouter->route($meta);
+                        break;
+
                     default:
-                        $this->render("errors/error", ["error" => $e->getMessage()]);
+                        $this->render("errors/default", ["error" => $e->getMessage()]);
                         break;
                 }
             } else {
@@ -74,6 +80,29 @@ class Router
         $header   = ROOT_PATH . "/templates/header.php";
         $filePath = ROOT_PATH . "/templates/" . $path . ".php";
         $footer   = ROOT_PATH . "/templates/footer.php";
+
+        try {
+            if (! file_exists($filePath) || ! file_exists($header) || ! file_exists($footer)) {
+                // generer erreure
+                throw new \Exception(message: "Fichier non trouver :" . $filePath . $header . $footer);
+            } else {
+                // recuperer si fichier
+                extract($params);
+
+                require_once $header;
+                require_once $filePath;
+                require_once $footer;
+            }
+        } catch (\Exception $e) {
+            $this->render("errors/default", ["error" => $e->getMessage()]);
+        }
+    }
+
+    protected function renderadmin(string $path, array $params = [])
+    {
+        $header   = ROOT_PATH . "/templates/headerAdmin.php";
+        $filePath = ROOT_PATH . "/templates/" . $path . ".php";
+        $footer   = ROOT_PATH . "/templates/footerAdmin.php";
 
         try {
             if (! file_exists($filePath) || ! file_exists($header) || ! file_exists($footer)) {

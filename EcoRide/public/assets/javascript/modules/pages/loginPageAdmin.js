@@ -1,7 +1,6 @@
 import { escapeHtml, errorDisplay } from "./../../global/formValidator.js";
 
-const API_ENDPOINT =
-    "/admin/index.php?controller=api&resource=auth&action=login";
+const API_ENDPOINT = "index.php?controller=api&resource=auth&action=login";
 const form = document.querySelector("form");
 const inputs = document.querySelectorAll("input");
 const tokenLogin = document.getElementById("tokenLogin");
@@ -105,7 +104,7 @@ form.addEventListener("submit", async (e) => {
 
             if (resp.ok) {
                 window.location.href =
-                    "/admin/index.php?controller=pages&action=dashboard";
+                    "index.php?controller=admin&action=dashboard";
             } else if (resp.status == 401) {
                 errorDisplay("formcheck", responseData.message);
             } else {
