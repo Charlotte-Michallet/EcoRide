@@ -3,5 +3,5 @@ require_once dirname(__DIR__, 2) . "/config/configSession.php";
 
 session_unset();
 session_destroy();
-header("Location: /admin/index.php?controller=auth&action=login");
+header("Location: /index.php?controller=admin&action=login");
 exit();

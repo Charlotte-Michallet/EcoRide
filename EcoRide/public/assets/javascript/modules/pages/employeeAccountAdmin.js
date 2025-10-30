@@ -210,7 +210,7 @@ form.addEventListener("submit", async (e) => {
                 );
             } else if (resp.ok) {
                 window.location.href =
-                    "/admin/index.php?controller=manage&action=employees";
+                    "/index.php?controller=admin&action=employees";
             } else {
                 errorDisplay(
                     "form",

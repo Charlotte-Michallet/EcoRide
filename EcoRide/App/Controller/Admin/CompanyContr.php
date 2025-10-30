@@ -1,9 +1,9 @@
 <?php
-namespace Admin\App\Controller;
+namespace App\Controller\Admin;
 
-use Admin\App\Repository\CompanyRepository;
 use Admin\App\Repository\Mongo\PlateformCreditsRepository;
-use Admin\App\Repository\TripRepo;
+use App\Repository\Admin\CompanyRepository;
+use App\Repository\Admin\TripRepo;
 use App\Repository\ReservationRepository;
 use DateTime;
 

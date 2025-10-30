@@ -1,5 +1,5 @@
 <?php
-namespace Admin\App\Repository\Mongo;
+namespace App\Repository\Admin;
 
 use DateTime;
 use MongoDB\BSON\UTCDateTime;

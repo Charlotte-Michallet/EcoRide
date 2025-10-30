@@ -1,11 +1,10 @@
 <?php
-namespace Admin\App\Controller;
+namespace App\Controller\Admin;
 
-use Admin\App\Controller\Manage\ManageEmployeesContr;
-use Admin\App\Repository\CompanyRepository;
 use Admin\App\Repository\Mongo\PlateformCreditsRepository;
-use Admin\App\Repository\TripRepo;
-use Admin\App\Repository\UsersRepo;
+use App\Repository\Admin\CompanyRepository;
+use App\Repository\Admin\TripRepo;
+use App\Repository\Admin\UsersRepo;
 
 class DasboardContr
 {

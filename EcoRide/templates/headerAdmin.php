@@ -39,28 +39,28 @@
           <ul class="flex items-center gap-6 text-lg">
             <li>
               <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                href="/admin/index.php?controller=pages&action=dashboard">
+                href="/index.php?controller=admin&action=dashboard">
                 Dashboard
               </a>
             </li>
 
             <li>
               <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                href="/admin/index.php?controller=manage&action=users">
+                href="/index.php?controller=admin&action=users">
                 Utilisateurs
               </a>
             </li>
 
             <li>
               <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                href="/admin/index.php?controller=manage&action=employees">
+                href="index.php?controller=admin&action=employees">
                 Comptes employés
               </a>
             </li>
 
             <li>
               <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                href="/admin/index.php?controller=manage&action=transactions">
+                href="index.php?controller=admin&action=transactions">
                 Reçus de transactions
               </a>
             </li>
@@ -69,11 +69,11 @@
         </nav>
         <div class="flex items-center gap-4 text-lg">
             <div class="flex items-center gap-x-6">
-              <a href="/admin/index.php?controller=auth&action=profil"><img class="object-cover w-9 h-9 rounded-full"
+              <a href="index.php?controller=auth&action=profil"><img class="object-cover w-9 h-9 rounded-full"
                   src="<?php echo htmlspecialchars($_SESSION["photo"]) ?>" alt="profil pic"></a>
 
               <a class="btn bg-teal-500 block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-                href="/admin/config/logout.php">
+                href="/conf/logout_admin.php">
                 Déconnexion
               </a>
 
@@ -86,7 +86,7 @@
           <ul class="flex items-center gap-6 text-lg">
             <li>
               <a class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                href="/admin/index.php?controller=auth&action=login">
+                href="/index.php?controller=admin&action=login">
                 Se connecter
               </a>
             </li>

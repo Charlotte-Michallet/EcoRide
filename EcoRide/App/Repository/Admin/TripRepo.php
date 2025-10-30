@@ -1,5 +1,5 @@
 <?php
-namespace Admin\App\Repository;
+namespace App\Repository\Admin;
 
 use App\Repository\Repository;
 

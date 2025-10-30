@@ -1,5 +1,5 @@
 <?php
-namespace Admin\App\Repository\Mongo;
+namespace App\Repository\Admin;
 
 use App\Db\MongoDb;
 use MongoDB\Client;

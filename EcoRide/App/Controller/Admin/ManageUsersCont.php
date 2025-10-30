@@ -1,7 +1,7 @@
 <?php
-namespace Admin\App\Controller\Manage;
+namespace App\Controller\Admin;
 
-use Admin\App\Repository\UsersRepo;
+use App\Repository\Admin\UsersRepo;
 
 class ManageUsersCont
 {
