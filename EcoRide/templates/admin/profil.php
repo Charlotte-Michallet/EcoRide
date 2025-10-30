@@ -43,7 +43,7 @@
                         <p class="block w-full py-3 text-gray-700">Animaux acceptés
                             <?php echo " : " . htmlspecialchars($preferences["animal"]); ?> </p>
                         <p class="block w-full py-3 text-gray-700"> Fumeur
-                            accepté                                                                                                                                                                                                                                                             <?php echo " : " . htmlspecialchars($preferences["smoking"]); ?></p>
+                            accepté                                                                                                                                                                                                                                                                                                 <?php echo " : " . htmlspecialchars($preferences["smoking"]); ?></p>
                         <p class="block w-full py-3 text-gray-700"> Mes autres
                             préférences<?php echo " : " . htmlspecialchars($preferences["descriptif"]); ?></p>
                     </div>
@@ -53,7 +53,7 @@
             <div class="container lg:col-span-4 min-h-screen px-6 mx-auto">
                 <div class="sm:flex sm:gap-4 w-full">
                     <a class="btn block rounded-md px-4 py-3 content-center font-medium text-white transition hover:bg-teal-700"
-                        href="/admin/index.php?controller=auth&action=modifProfil">
+                        href="index.php?controller=admin&action=modifProfil">
                         Modifier le compte
                     </a>
                 </div>

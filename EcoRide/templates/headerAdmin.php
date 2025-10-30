@@ -69,7 +69,7 @@
         </nav>
         <div class="flex items-center gap-4 text-lg">
             <div class="flex items-center gap-x-6">
-              <a href="index.php?controller=auth&action=profil"><img class="object-cover w-9 h-9 rounded-full"
+              <a href="/index.php?controller=admin&action=profil"><img class="object-cover w-9 h-9 rounded-full"
                   src="<?php echo htmlspecialchars($_SESSION["photo"]) ?>" alt="profil pic"></a>
 
               <a class="btn bg-teal-500 block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"

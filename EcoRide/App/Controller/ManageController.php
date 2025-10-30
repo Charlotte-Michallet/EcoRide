@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use Admin\App\Controller\CompanyContr;
+use App\Controller\Admin\CompanyContr;
 use App\Controller\Auth\NotesContr;
 use App\Repository\FeedbackRepository;
 use App\Repository\ReservationRepository;

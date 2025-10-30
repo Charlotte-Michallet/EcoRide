@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller\CarSharing;
 
-use Admin\App\Controller\CompanyContr;
+use App\Controller\Admin\CompanyContr;
 use App\Repository\FeedbackRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\UserRepository;

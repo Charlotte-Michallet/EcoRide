@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller\Api;
 
-use Admin\App\Controller\Api\GraphApi;
 use App\Controller\Router;
 
 class ApiController

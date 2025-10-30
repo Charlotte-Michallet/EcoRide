@@ -1,8 +1,8 @@
 <?php
 namespace App\Controller\Admin;
 
-use Admin\App\Repository\Mongo\PlateformCreditsRepository;
 use App\Repository\Admin\CompanyRepository;
+use App\Repository\Admin\PlateformCreditsRepository;
 use App\Repository\Admin\TripRepo;
 use App\Repository\Admin\UsersRepo;
 

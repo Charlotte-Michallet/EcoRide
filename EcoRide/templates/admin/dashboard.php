@@ -119,7 +119,7 @@
                   </div>
                   <div class="inline-flex gap-x-2">
 
-                    <a href="/admin/index.php?controller=manage&action=employees"
+                    <a href="/index.php?controller=admin&action=employees"
                       class="btn py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent text-white">
                       <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

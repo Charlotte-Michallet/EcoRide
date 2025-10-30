@@ -23,7 +23,7 @@
       <!-- Links for pages -->
       <ul class="flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-0 lg:justify-end lg:gap-12">
         <li>
-          <a class="text-gray-700 transition hover:text-gray-700/75" href="/admin/index.php?controller=pages&action=legal"> Mentions légales </a>
+          <a class="text-gray-700 transition hover:text-gray-700/75" href="/index.php?controller=admin&action=legal"> Mentions légales </a>
         </li>
       </ul>
     </div>

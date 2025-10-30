@@ -1,9 +1,11 @@
 <?php
 namespace App\Controller\Admin;
 
+use App\Controller\Auth\ProfilContr;
 use App\Controller\Router;
 use App\Controller\TokenCsrf;
 use App\Repository\Admin\PlateformCreditsRepository;
+use App\Repository\UserRepository;
 
 class AdminController extends Router
 {
@@ -78,7 +80,7 @@ class AdminController extends Router
     protected function legal($meta)
     {
         if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
-            $this->renderadmin("pages/legals", ["meta" => $meta["legal"]]);
+            $this->renderadmin("pages/legals", ["meta" => $meta["legals_admin"]]);
         } else {
             header("Location: /index.php?controller=admin&action=login");
             exit();
@@ -165,21 +167,21 @@ class AdminController extends Router
 
     public function profil($meta)
     {
-        $tokenObj = new TokenCsrf();
-        // $currentToken = $tokenObj->getGenerateToken();
-        // $userId       = $_SESSION["id"];
+        $tokenObj     = new TokenCsrf();
+        $currentToken = $tokenObj->getGenerateToken();
+        $userId       = $_SESSION["id"];
 
-        // if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
-        //     $userRepo = new UserRepository();
-        //     $user     = $userRepo->userInfo($userId);
+        if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
+            $userRepo = new UserRepository();
+            $user     = $userRepo->userInfo($userId);
 
-        //     $profilContr = new ProfilContr();
-        //     $preferences = $profilContr->Preferences($userId);
-        //     $this->renderadmin("auth/profil", ["token" => $currentToken, "user" => $user, "preferences" => $preferences, "meta" => $meta["profil"]]);
-        // } else {
-        header("Location: /index.php?controller=admin&action=login");
-        exit();
-        // }
+            $profilContr = new ProfilContr();
+            $preferences = $profilContr->Preferences($userId);
+            $this->renderadmin("admin/profil", ["token" => $currentToken, "user" => $user, "preferences" => $preferences, "meta" => $meta["profil_admin"]]);
+        } else {
+            header("Location: /index.php?controller=admin&action=login");
+            exit();
+        }
     }
 
     public function modifProfil($meta)
@@ -187,12 +189,12 @@ class AdminController extends Router
         $tokenObj     = new TokenCsrf();
         $currentToken = $tokenObj->getGenerateToken();
 
-        // if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
-        //     $this->renderadmin("auth/modifProfil", ["token" => $currentToken, "meta" => $meta["profilModify"]]);
-        // } else {
-        header("Location: /index.php?controller=admin&action=login");
-        exit();
-        // }
+        if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
+            $this->renderadmin("admin/modifProfil", ["token" => $currentToken, "meta" => $meta["profilModify_admin"]]);
+        } else {
+            header("Location: /index.php?controller=admin&action=login");
+            exit();
+        }
     }
 
     // Methods

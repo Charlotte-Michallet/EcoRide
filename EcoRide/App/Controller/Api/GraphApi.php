@@ -1,8 +1,8 @@
 <?php
-namespace Admin\App\Controller\Api;
+namespace App\Controller\Api;
 
-use Admin\App\Repository\Mongo\PlateformCreditsRepository;
-use Admin\App\Repository\TripRepo;
+use App\Repository\Admin\PlateformCreditsRepository;
+use App\Repository\Admin\TripRepo;
 
 class GraphApi
 {

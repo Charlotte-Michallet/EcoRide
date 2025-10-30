@@ -39,4 +39,5 @@ return [
     "employee_admin"     => ["title" => "Gestion des Employés - Espace Admin - EcoRide", "description" => "Gérez les comptes des employés, créez de nouveaux accès ou suspendez leurs comptes.", "robots" => "noindex, nofollow"],
     "users_admin"        => ["title" => "Gestion des comptes utilisateurs - Espace Admin  - EcoRide", "description" => "Gérez les comptes des utilisateurs, modérez les profils et supervisez les activités de la communauté. Pour usage exclusif des administrateurs.", "robots" => "noindex, nofollow"],
     "transaction_admin"  => ["title" => "Historique des transactions - Espace Admin - EcoRide", "description" => "Consultez l'historique complet des transactions du site. Accès réservé pour l'audit et le suivi financier.", "robots" => "noindex, nofollow"],
+    "legals_admin"       => ["title" => "Mentions Légales -Espace Admin  - EcoRide", "description" => "Accès aux documents juridiques et aux politiques internes du site. Pour usage exclusif des administrateurs et du personnel autorisé.", "robots" => "noindex, nofollow"],
 ];

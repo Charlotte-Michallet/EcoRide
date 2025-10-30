@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use Admin\App\Controller\CompanyContr;
+use App\Controller\Admin\CompanyContr;
 use App\Controller\Mail\MailerContr;
 use App\Controller\Mail\SendMailContr;
 use App\Repository\CarRepository;
