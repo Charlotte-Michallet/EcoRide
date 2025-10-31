@@ -8,7 +8,8 @@ const selectRadio = document.querySelectorAll(
     "input[name='userRolesRegister']"
 );
 
-let role, username, email, dob, password, pwdVerify;
+let role, username, email, password, pwdVerify;
+let dob = null;
 
 let token = tokenRegister.value;
 
@@ -114,15 +115,17 @@ const emailcheck = (value) => {
 
 // verify date of birth (under 18)
 const dobCheck = (value) => {
-    const today = new Date().getFullYear();
-    let dateob = new Date(value).getFullYear();
-    let age = today - dateob;
+    const dateob = new Date(value);
+    const today = new Date();
 
-    if (age < 18) {
+    today.setFullYear(today.getFullYear() - 18);
+
+    if (dateob > today) {
         errorDisplay(
             "dob",
             "Vous devez être majeur pour vous inscrire sur notre site."
         );
+        dob = null;
     } else {
         errorDisplay("dob", "", true);
         dob = value;
@@ -221,7 +224,7 @@ form.addEventListener("submit", async (e) => {
             } else {
                 errorDisplay(
                     "registerForm",
-                    responseData.message || "L'inscription a échoué.."
+                    responseData.message || "L'inscription a échoué."
                 );
             }
         } catch (error) {

@@ -82,13 +82,16 @@ class AccountContr
 
     protected function userUnderAge()
     {
-        $today = new \DateTimeImmutable();
-        $dOB   = \DateTimeImmutable::createFromFormat('Y-m-d', $this->date_of_birth);
+        $dOB = \DateTimeImmutable::createFromFormat('Y-m-d', $this->date_of_birth);
 
-        $interval = $dOB->diff($today);
-        $age      = $interval->y;
+        if ($dOB === false) {
+            $result = true;
+        }
 
-        if ($age < 18) {
+        $today      = new \DateTimeImmutable();
+        $dateLimite = $today->modify('-18 years');
+
+        if ($dOB > $dateLimite) {
             $result = true;
         } else {
             $result = false;

@@ -9,7 +9,8 @@ const inputs = document.querySelectorAll("input");
 const form = document.getElementById("employeeForm");
 
 let token = tokenCsrf.value;
-let username, email, dob, password, pwdVerify;
+let username, email, password, pwdVerify;
+let dob = null;
 let role = "employee";
 
 modalopen.addEventListener("click", () => {
@@ -106,15 +107,17 @@ const emailcheck = (value) => {
 
 // verify date of birth (under 18)
 const dobCheck = (value) => {
-    const today = new Date().getFullYear();
-    let dateob = new Date(value).getFullYear();
-    let age = today - dateob;
+    const dateob = new Date(value);
+    const today = new Date();
 
-    if (age < 18) {
+    today.setFullYear(today.getFullYear() - 18);
+
+    if (dateob > today) {
         errorDisplay(
             "dob",
             "L'employé doit être majeur pour s'inscrire sur ce site."
         );
+        dob = null;
     } else {
         errorDisplay("dob", "", true);
         dob = value;

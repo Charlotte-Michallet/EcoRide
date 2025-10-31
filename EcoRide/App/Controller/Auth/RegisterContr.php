@@ -24,35 +24,35 @@ class RegisterContr extends AccountContr
         $errors = [];
         try {
             if ($this->InputEmpty() === true) {
-                $errors = ["Tous les champs sont obligatoires."];
+                $errors[] = ["Tous les champs sont obligatoires."];
             }
 
             if ($this->userInvalid() === true) {
-                $errors = ["Le nom d'utilisateur est invalide. Utilisez uniquement des lettres et des chiffres."];
+                $errors[] = ["Le nom d'utilisateur est invalide. Utilisez uniquement des lettres et des chiffres."];
             }
 
             if ($this->emailInvalid() === true) {
-                $errors = ["L'adresse email est invalide."];
+                $errors[] = ["L'adresse email est invalide."];
             }
 
             if ($this->pwdInvalid() === true) {
-                $errors = ["Le mot de passe est invalide."];
+                $errors[] = ["Le mot de passe est invalide."];
             }
 
             if ($this->pwdMatch() === false) {
-                $errors = ["Les mots de passe ne sont pas identiques."];
+                $errors[] = ["Les mots de passe ne sont pas identiques."];
             }
 
             if ($this->usernameTaken() === true) {
-                $errors = ["Ce nom d'utilisateur est déjà utilisé."];
+                $errors[] = ["Ce nom d'utilisateur est déjà utilisé."];
             }
 
             if ($this->emailTaken() === true) {
-                $errors = ["Cet email est déjà utilisé."];
+                $errors[] = ["Cet email est déjà utilisé."];
             }
 
             if ($this->userUnderAge() === true) {
-                $errors = ["Vous devez être majeur pour vous inscrire sur notre plateforme."];
+                $errors[] = ["Vous devez être majeur pour vous inscrire sur notre plateforme."];
             }
 
             if (! empty($errors)) {
