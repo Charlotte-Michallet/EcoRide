@@ -86,7 +86,7 @@
                             </div>
 
                             <?php $status = $feedback->getStatus();
-                                if ($status === "En attente de contact") {?>
+                                if ($status === "En attente de contact" || $status = "En attente de validation") {?>
                                 <div class="items-center mt-2">
                                     <p>Quand vous aurez résolu le différend, vous pourrez payer le conducteur</p>
                                     <div class="flex justify-center mt-3">

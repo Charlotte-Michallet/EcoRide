@@ -206,19 +206,22 @@ class AdminController extends Router
 
         $numTransaction = $transactionRepo->calcTransation();
 
-        foreach ($transactionInfo as $transaction) {
-            $mongotime     = $transaction["companyPayment"]["dateTransaction"];
+        foreach ($transactionInfo as $key => $transaction) {
+            // date transaction
+            $mongotime = $transaction["companyPayment"]["dateTransaction"];
+            $dateObjet = $mongotime->toDateTime();
+
+            $transactionInfo[$key]["dateTransactionComapnyFormatted"] = $dateObjet->format("d/m/Y");
+
+            // date trip
             $mongoTimeTrip = $transaction["tripDetails"]["dateTrip"];
-
-            $dateObjet              = $mongotime->toDateTime();
-            $dateTransactionCompany = $dateObjet->format("d/m/Y");
-
             $dateObjetTrip = $mongoTimeTrip->toDateTime();
-            $dateTrip      = $dateObjetTrip->format("d/m/Y H:i");
+
+            $transactionInfo[$key]["dateTripFormatted"] = $dateObjetTrip->format("d/m/Y H:i");
         }
 
         if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
-            $this->renderadmin("admin/tripReceipts", ["transactions" => $transactionInfo, "dateCompany" => $dateTransactionCompany, "dateTrip" => $dateTrip, "numTransaction" => $numTransaction, "meta" => $meta["transaction_admin"]]);
+            $this->renderadmin("admin/tripReceipts", ["transactions" => $transactionInfo, "numTransaction" => $numTransaction, "meta" => $meta["transaction_admin"]]);
         } else {
             header("Location: /index.php?controller=admin&action=login");
             exit();

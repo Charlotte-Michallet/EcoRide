@@ -161,7 +161,7 @@
                                         <td class="size-px whitespace-nowrap">
                                             <div class="px-4 py-3">
                                                 <span class="text-sm text-gray-600">
-                                                    <?php echo $dateCompany; ?>
+                                                    <?php echo $transaction["dateTransactionComapnyFormatted"]; ?>
                                                 </span>
                                             </div>
                                         </td>
@@ -207,7 +207,7 @@
                                         <td class="size-px whitespace-nowrap">
                                             <div class="px-4 py-3">
                                                 <span
-                                                    class="text-sm text-gray-600"><?php echo $dateTrip; ?></span>
+                                                    class="text-sm text-gray-600"><?php echo $transaction["dateTripFormatted"]; ?></span>
                                             </div>
                                         </td>
 
