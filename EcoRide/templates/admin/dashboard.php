@@ -68,7 +68,7 @@
       </div>
 
       <!-- graphiques -->
-      <div class="grid lg:grid-cols-2 gap-4 sm:gap-6">
+      <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
         <div class="p-4 md:p-5 min-h-102.5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
 
           <div class="flex flex-wrap justify-between items-center gap-2">
@@ -106,7 +106,7 @@
       </div>
 
       <!-- Employés -->
-      <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+      <div class="max-w-[85rem] px-4 py-10 hidden lg:block lg:px-8 lg:py-14 mx-auto">
         <div class="flex flex-col">
           <div class="-m-1.5 overflow-x-auto">
             <div class="p-1.5 min-w-full inline-block align-middle">

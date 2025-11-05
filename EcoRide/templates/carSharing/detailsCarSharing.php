@@ -2,7 +2,7 @@
     <div class="container px-6 py-10 mx-auto">
         <div class="flex justify-between">
 
-            <div class="flex justify-between  gap-6">
+            <div class="flex justify-between gap-6">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="#0754acf3" class="size-10">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -12,15 +12,15 @@
                 </h2>
             </div>
 
-            <div class="flex  justify-end ">
+            <div class="flex justify-end ">
                 <p class="hidden text-lg text-red-600 mt-2" id="errorDetails"></p>
             </div>
         </div>
 
         <!-- trip -->
-        <div class="flex justify-between mt-6 gap-6">
+        <div class="flex flex-wrap md:flex-nowrap md:justify-between mt-6 gap-6">
 
-            <div class="p-6 space-y-3 border-2 border-emerald-600 shadow-xs rounded-xl w-2/3">
+            <div class="p-6 space-y-3 border-2 border-emerald-600 shadow-xs rounded-xl w-full md:w-2/3">
                 <div>
                     <p class="text-lg font-semibold">Trajet: </p>
                 </div>
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="p-6 space-y-3 border-2 border-emerald-600 shadow-xs rounded-xl w-1/3">
+            <div class="p-6 space-y-3 border-2 border-emerald-600 shadow-xs rounded-xl w-full md:w-1/3">
                 <div>
                     <p class="text-lg font-semibold">Informations sur le trajet: </p>
                 </div>
@@ -85,8 +85,8 @@
                 <div>
                     <p class="text-lg font-semibold">Chauffeur: </p>
                 </div>
-                <div class="flex w-full items-center">
-                    <div class="flex w-1/2 items-center">
+                <div class="flex flex-wrap w-full items-center">
+                    <div class="flex w-full md:w-1/2 items-center">
                         <img class="object-cover w-20 h-20 rounded-full mr-9" src="<?php echo $details->getPhoto() ?>"
                             alt="photo profil">
                         <p class="text-xl font-semibold mr-9"><?php echo $details->getUsername() ?></p>
@@ -103,7 +103,7 @@
                         </div>
                     </div>
 
-                    <div class="w-1/2">
+                    <div class="w-full md:w-1/2">
                         <p class="text-xl font-semibold">
                             Préférences :
                         </p>
@@ -231,7 +231,7 @@
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <div class="mt-4">
                 <p class="text-pretty text-gray-700">
-                    Le trajet coûte <span>                                            <?php echo $totalPrice ?></span> . Êtes-vous sûr de vouloir participer a ce
+                    Le trajet coûte <span>                                                                                                                                                                                                                                                                                                                                                                                                    <?php echo $totalPrice ?></span> . Êtes-vous sûr de vouloir participer a ce
                     trajet</p>
             </div>
 

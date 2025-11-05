@@ -3,7 +3,7 @@
   <div class="relative mx-auto max-w-screen-xl px-4 py-2 sm:px-6 lg:px-8 lg:pt-5">
 
     <!-- Scroll to top link -->
-    <div class="absolute -end-20 -top-5">
+    <div class="absolute end-5 lx:-end-20 lg:end-5 md:end-20 -top-5">
       <a class="btn inline-block rounded-full p-1 text-white shadow-sm transition sm:p-2 lg:p-4" href="#" aria-label="Revenir en haut">
         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />

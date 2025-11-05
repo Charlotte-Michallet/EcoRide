@@ -29,6 +29,8 @@ body {
 
 main{
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* buttons */
@@ -93,8 +95,9 @@ a {
 /* Page login */
 .login {
     background: var(--beige);
-    min-height: 71vh;
     display: flex;
+    flex-grow: 1;
+    flex-direction: column;
 }
 
 /* Page userCars */

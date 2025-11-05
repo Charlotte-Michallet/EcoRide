@@ -130,7 +130,7 @@
                         <p class="hidden text-green-600 mt-2" id="succes"></p>
 
                         <button type="submit"
-                            class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">
+                            class="btn flex items-center justify-between w-full px-6 py-3 mb-4 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">
                             <span>Créer le trajet</span>
 
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 rtl:-scale-x-100" viewBox="0 0 20 20"

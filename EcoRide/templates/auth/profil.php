@@ -66,7 +66,7 @@
                 <?php if ($_SESSION["role"] !== 1) {?>
                     <div class="sm:flex sm:gap-4 w-full">
 
-                        <a class="btn block rounded-md px-4 py-3 content-center font-medium text-white transition hover:bg-teal-700"
+                        <a class="btn rounded-md px-4 py-3 text-center font-medium text-white transition hover:bg-teal-700"
                             href="/index.php?controller=auth&action=profilModify">
                             Modifier compte
                         </a>
@@ -82,7 +82,7 @@
                 <?php } else {?>
                     <div class="flex justify-center">
 
-                        <a class="btn block rounded-md px-4 py-3 content-center font-medium text-white transition hover:bg-teal-700"
+                        <a class="btn rounded-md px-4 py-3 text-center font-medium text-white transition hover:bg-teal-700"
                             href="/index.php?controller=auth&action=profilModify">
                             Modifier compte
                         </a>

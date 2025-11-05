@@ -38,12 +38,12 @@
 
 <body>
   <header>
-    <div class="flex justify-around items-center gap-8 mx-10 text-gray-900">
-      <a class="block" href="/index.php">
+    <div class="flex flex-wrap justify-around items-center gap-8 mx-10 text-gray-900">
+      <a href="/index.php">
         <img class="h-20 w-36 object-contain" src="assets/img/logo/logo.png" alt="Ecoride logo">
       </a>
-      <div class="flex flex-1 items-center justify-end md:justify-between">
-        <nav class="hidden md:block">
+      <div class="flex flex-1 items-center flex-wrap sm:justify-between">
+        <nav class="flex flex-wrap">
           <ul class="flex items-center gap-6 text-lg">
             <li>
               <a class="transition hover:text-gray-700/75"
@@ -72,13 +72,13 @@
             </div>
 
           <?php } else {?>
-            <div class="sm:flex sm:gap-4">
+            <div class="flex gap-4">
               <a class="btn block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
                 href="/index.php?controller=auth&action=login">
                 Connexion
               </a>
 
-              <a class="link hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
+              <a class="link block rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 "
                 href="/index.php?controller=auth&action=register">
                 Inscription
               </a>

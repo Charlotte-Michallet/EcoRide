@@ -1,9 +1,9 @@
 </main>
-<footer class="bg-gray-100">
-  <div class="relative mx-auto max-w-screen-xl px-4 py-2 sm:px-6 lg:px-8 lg:pt-5">
+<footer class="bg-gray-100 w-full">
+  <div class="relative mx-auto max-w-screen-2xl px-4 py-2 sm:px-6 w-full">
 
     <!-- Scroll to top link -->
-    <div class="absolute -end-20 -top-5">
+    <div class="absolute end-5 lx:-end-20 lg:end-5 md:end-20 -top-5">
       <a class="btn inline-block rounded-full p-1 text-white shadow-sm transition sm:p-2 lg:p-4" href="#">
         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
@@ -21,7 +21,7 @@
       <p class="my-auto mx-auto max-w-md text-center text-gray-500 lg:text-left">EcoRide &copy; 2025. Tous droits réservés</p>
 
       <!-- Links for pages -->
-      <ul class="flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-0 lg:justify-end lg:gap-12">
+      <ul class="flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-0 lg:ml-15 lg:justify-end lg:gap-12">
         <li>
           <a class="text-gray-700 transition hover:text-gray-700/75" href="/index.php?controller=admin&action=legal"> Mentions légales </a>
         </li>

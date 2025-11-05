@@ -19,13 +19,12 @@
 
                 <form class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-2" method="post">
 
-                    <div class="col-span-2">
-
-                        <fieldset class="flex justify-between">
+                    <div class="col-span-1 md:col-span-2">
+                        <fieldset class="block md:flex justify-between">
                             <legend class="sr-only">Rôle utilisateur</legend>
 
                             <div>
-                                <label for="driverAndPassengerR" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
+                                <label for="driverAndPassengerR" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 mb-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
                                     <p class="text-gray-700">Conducteur et passager</p>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -35,7 +34,7 @@
                             </div>
 
                             <div>
-                                <label for="driverR" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
+                                <label for="driverR" class="flex items-center justify-between gap-4 rounded border border-gray-300 p-3 mb-3 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 has-checked:ring-1 has-checked:ring-emerald-500">
                                     <p>Conducteur</p>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

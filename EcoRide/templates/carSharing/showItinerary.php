@@ -18,8 +18,8 @@
 
     <?php } else {?>
         <form action="post" id="formItinerary" class="form w-3/4 mx-auto p-5 mt-15 rounded-md shadow-md border border-gray-200">
-            <div class="flex flex-col">
-                <div class="w-full flex items-center gap-6 justify-around">
+            <div class="block lg:flex flex-col">
+                <div class="w-full block lg:flex items-center gap-6 justify-around">
                     <div>
                         <label for="departureItinerary">Ville de départ</label>
                         <input type="text" id="departureItinerary"
@@ -56,7 +56,7 @@
 
                     <input type="hidden" name="tokenItinerary" id="tokenItinerary"
                         value="<?php echo htmlspecialchars($token) ?>">
-                    <div>
+                    <div class="mt-2 lg:mt-0">
                         <button type="submit" id="submitItinerary"
                             class="btnSearch item-center px-5 py-2 leading-5 text-white transition-colors duration-300 transform rounded-md focus:outline-none">Rechercher</button>
                     </div>
