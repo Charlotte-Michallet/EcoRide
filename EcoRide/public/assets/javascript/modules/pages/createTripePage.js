@@ -63,7 +63,6 @@ inputs.forEach((input) => {
                 break;
 
             default:
-                null;
                 break;
         }
     });
@@ -169,7 +168,7 @@ const arrivalCityCheck = async (value) => {
 };
 
 const numPlacesCheck = (value) => {
-    if (isNaN(value)) {
+    if (Number.isNaN(value)) {
         errorDisplay(
             "numPlaces",
             "Ce champ doit contenir uniquement des chiffres"
@@ -227,9 +226,9 @@ const hourDepartureCheck = (value) => {
 
 // verify price
 const priceTripCheck = (value) => {
-    let price = parseFloat(value);
+    let price = Number.parseFloat(value);
 
-    if (isNaN(price) || !Number.isInteger(price)) {
+    if (Number.isNaN(price) || !Number.isInteger(price)) {
         errorDisplay("prices", "Veuillez entrer un nombre entier valide.");
         pricePlaces = null;
     } else if (price.length === 0) {

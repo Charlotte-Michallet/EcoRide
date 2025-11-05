@@ -2,11 +2,11 @@
 export function escapeHtml(unsafe) {
     const unsafeTrim = String(unsafe || "").trim();
     return unsafeTrim
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replaceAll(/&/g, "&amp;")
+        .replaceAll(/</g, "&lt;")
+        .replaceAll(/>/g, "&gt;")
+        .replaceAll(/"/g, "&quot;")
+        .replaceAll(/'/g, "&#039;");
 }
 
 // Display error message in a paragraph

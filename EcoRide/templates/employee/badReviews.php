@@ -33,7 +33,7 @@
 
                             <div class="flex items-center mt-3">
                                 <img class="object-cover rounded-full w-10 h-10"
-                                    src="<?php echo $feedback->getPassengersPhoto() ?>" alt="passager photo">
+                                    src="<?php echo $feedback->getPassengersPhoto() ?>" alt="profil passager">
 
                                 <div class="mx-4">
                                     <h2 class="font-semibold"><?php echo $feedback->getPassengersUsername() ?></h2>
@@ -73,7 +73,7 @@
                             <div class="flex items-center mt-2">
 
                                 <img class="object-cover rounded-full w-10 h-10"
-                                    src="<?php echo $feedback->getDriverPhoto() ?>" alt="Conducteur photo">
+                                    src="<?php echo $feedback->getDriverPhoto() ?>" alt="profil conducteur">
 
                                 <div class="mx-4">
                                     <h3 class="font-semibold"><?php echo $feedback->getDriverUsername() ?></h3>
@@ -136,7 +136,7 @@
 
                             <div class="flex items-center mt-3">
                                 <img class="object-cover rounded-full w-10 h-10"
-                                    src="<?php echo $Resolvedfeed->getPassengersPhoto() ?>" alt="passager photo">
+                                    src="<?php echo $Resolvedfeed->getPassengersPhoto() ?>" alt="profil passager">
 
                                 <div class="mx-4">
                                     <h2 class="font-semibold"><?php echo $Resolvedfeed->getPassengersUsername() ?></h2>
@@ -176,7 +176,7 @@
                             <div class="flex items-center mt-2">
 
                                 <img class="object-cover rounded-full w-10 h-10"
-                                    src="<?php echo $Resolvedfeed->getDriverPhoto() ?>" alt="Conducteur photo">
+                                    src="<?php echo $Resolvedfeed->getDriverPhoto() ?>" alt="profil conducteur">
 
                                 <div class="mx-4">
                                     <h3 class="font-semibold"><?php echo $Resolvedfeed->getDriverUsername() ?></h3>

@@ -42,7 +42,6 @@ class FindItinaryApi
 
             if (! empty($checkInputs)) {
                 Router::jsonResponse(["status" => "error", "message" => $checkInputs], 402);
-                return;
             } else {
                 $trips = $showTripContr->getTrips();
 
@@ -50,7 +49,6 @@ class FindItinaryApi
 
                     $error = $trips["errors"];
                     Router::jsonResponse(["status" => "error", "message" => $error], 402);
-                    return;
                 } else {
                     $tripsArray = [];
 

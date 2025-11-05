@@ -88,7 +88,7 @@
                 <div class="flex flex-wrap w-full items-center">
                     <div class="flex w-full md:w-1/2 items-center">
                         <img class="object-cover w-20 h-20 rounded-full mr-9" src="<?php echo $details->getPhoto() ?>"
-                            alt="photo profil">
+                            alt="profil conduteur">
                         <p class="text-xl font-semibold mr-9"><?php echo $details->getUsername() ?></p>
 
                         <div class="flex items-center text-xl font-semibold">
@@ -196,7 +196,7 @@
                                 <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
                                     <div class="shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
                                         <img class="object-cover w-10 h-10 rounded-full mr-9"
-                                            src="<?php echo $feedback->getPassengersPhoto() ?>" alt="photo profil">
+                                            src="<?php echo $feedback->getPassengersPhoto() ?>" alt="profil passagers">
                                         <p class="text font-semibold mx-2">
                                             <?php echo $feedback->getPassengersUsername() ?>
                                         </p>
@@ -231,7 +231,7 @@
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <div class="mt-4">
                 <p class="text-pretty text-gray-700">
-                    Le trajet coûte <span>                                                                                                                                                                                                                                                                                                                                                                                                    <?php echo $totalPrice ?></span> . Êtes-vous sûr de vouloir participer a ce
+                    Le trajet coûte <span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <?php echo $totalPrice ?></span> . Êtes-vous sûr de vouloir participer a ce
                     trajet</p>
             </div>
 

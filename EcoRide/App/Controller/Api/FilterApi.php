@@ -35,13 +35,11 @@ class FilterApi
 
         if (! empty($checkInputs)) {
             Router::jsonResponse(["status" => "error", "message" => $checkInputs], 402);
-            return;
         } else {
             $trips = $showTripContr->getTripsFilter();
 
             if (empty($trips)) {
                 Router::jsonResponse(["status" => "error", "message" => "Aucun trajet trouvé avec ces paramètres."]);
-                return;
             } else {
                 $tripsArray = [];
 

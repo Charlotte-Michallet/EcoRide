@@ -31,7 +31,6 @@ selectRadio.forEach((input) => {
                 break;
 
             default:
-                null;
                 break;
         }
     });
@@ -62,14 +61,13 @@ inputs.forEach((input) => {
                 break;
 
             default:
-                null;
                 break;
         }
     });
 });
 
 const rattingCheck = (value) => {
-    if (isNaN(value)) {
+    if (Number.isNaN(value)) {
         errorDisplay(
             "feedback",
             "Ce champ doit contenir uniquement des chiffres"

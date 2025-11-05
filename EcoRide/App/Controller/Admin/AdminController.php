@@ -9,6 +9,8 @@ use App\Repository\UserRepository;
 
 class AdminController extends Router
 {
+    private $loginURL = "/index.php?controller=admin&action=login";
+
     public function route($meta)
     {
         try {
@@ -72,7 +74,7 @@ class AdminController extends Router
         if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
             $this->renderadmin("admin/dashboard", ["token" => $currentToken, "statistiques" => $statistiques, "employees" => $employees, "meta" => $meta["dashboard_admin"]]);
         } else {
-            header("Location: /index.php?controller=admin&action=login");
+            header("Location: $this->loginURL");
             exit();
         }
     }
@@ -82,7 +84,7 @@ class AdminController extends Router
         if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
             $this->renderadmin("pages/legals", ["meta" => $meta["legals_admin"]]);
         } else {
-            header("Location: /index.php?controller=admin&action=login");
+            header("Location: $this->loginURL");
             exit();
         }
     }
@@ -130,7 +132,7 @@ class AdminController extends Router
 
             $this->renderadmin("admin/manageEmployees", ["token" => $currentToken, "employees" => $employees, "totalEmplyees" => $totalEmployees, "meta" => $meta["employee_admin"]]);
         } else {
-            header("Location: /index.php?controller=admin&action=login");
+            header("Location: $this->loginURL");
             exit();
         }
 
@@ -153,7 +155,7 @@ class AdminController extends Router
         if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
             $this->renderadmin("admin/manageUsers", ["token" => $currentToken, "users" => $users, "totalUsers" => $totalUsers, "meta" => $meta["users_admin"]]);
         } else {
-            header("Location: /index.php?controller=admin&action=login");
+            header("Location: $this->loginURL");
             exit();
         }
     }
@@ -179,7 +181,7 @@ class AdminController extends Router
             $preferences = $profilContr->Preferences($userId);
             $this->renderadmin("admin/profil", ["token" => $currentToken, "user" => $user, "preferences" => $preferences, "meta" => $meta["profil_admin"]]);
         } else {
-            header("Location: /index.php?controller=admin&action=login");
+            header("Location: $this->loginURL");
             exit();
         }
     }
@@ -192,7 +194,7 @@ class AdminController extends Router
         if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
             $this->renderadmin("admin/modifProfil", ["token" => $currentToken, "meta" => $meta["profilModify_admin"]]);
         } else {
-            header("Location: /index.php?controller=admin&action=login");
+            header("Location: $this->loginURL");
             exit();
         }
     }
@@ -223,7 +225,7 @@ class AdminController extends Router
         if (isset($_SESSION["id"]) && $_SESSION["role"] === 1) {
             $this->renderadmin("admin/tripReceipts", ["transactions" => $transactionInfo, "numTransaction" => $numTransaction, "meta" => $meta["transaction_admin"]]);
         } else {
-            header("Location: /index.php?controller=admin&action=login");
+            header("Location: $this->loginURL");
             exit();
         }
 

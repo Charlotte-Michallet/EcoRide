@@ -61,7 +61,6 @@ inputs.forEach((input) => {
                 break;
 
             default:
-                null;
                 break;
         }
     });
@@ -329,7 +328,6 @@ forms.forEach((form) => {
                 break;
 
             default:
-                null;
                 break;
         }
     });

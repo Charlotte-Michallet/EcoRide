@@ -109,7 +109,7 @@ export const dateTripCheck = (value, error) => {
 };
 
 export const numPlacesCheck = (value, error) => {
-    if (isNaN(value)) {
+    if (Number.isNaN(value)) {
         errorDisplay(error, "Ce champ doit contenir uniquement des chiffres.");
         numberPlaces = null;
     } else if (value.length === 0) {

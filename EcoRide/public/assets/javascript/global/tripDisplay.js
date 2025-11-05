@@ -299,7 +299,8 @@ export function show(trips, seats) {
             const textEnergie = document.createElement("p");
             textEnergie.className = "text-xs font-semibold";
             if (trip.energy === "Electrique") {
-                textEnergie.textContent = "*voyage écologique = voyage en électrique";
+                textEnergie.textContent =
+                    "*voyage écologique = voyage en électrique";
                 const logo = document.createElement("img");
                 logo.className = "w-auto h-7 w-7";
                 logo.src = "/assets/img/logo/form.png";
@@ -335,8 +336,8 @@ export function show(trips, seats) {
     const formatTime = (time) => {
         const parts = time.split(":");
         if (parts.length === 2) {
-            let hour = parseInt(parts[0], 10);
-            let minutes = parseInt(parts[1], 10);
+            let hour = Number.parseInt(parts[0], 10);
+            let minutes = Number.parseInt(parts[1], 10);
 
             let hourFormated = hour < 10 ? "0" + hour : hour;
             let minutesFormated = minutes < 10 ? "0" + minutes : minutes;
@@ -365,7 +366,7 @@ export function show(trips, seats) {
             starsNumber = null;
             errortext.textContent = "";
         } else {
-            let stars = parseInt(starsstring, 10);
+            let stars = Number.parseInt(starsstring, 10);
             if (stars < 1 || stars > 5) {
                 errortext.textContent =
                     "Les étoiles doivent être comprises entre 1 et 5.";
@@ -378,9 +379,9 @@ export function show(trips, seats) {
     });
 
     imputPricesMax.addEventListener("input", (e) => {
-        let price = parseFloat(e.target.value);
+        let price = Number.parseFloat(e.target.value);
 
-        if (isNaN(price) || !Number.isInteger(price)) {
+        if (Number.isNaN(price) || !Number.isInteger(price)) {
             priceMaxValue = null;
             errortext.textContent = "Veuillez entrer un nombre entier valide.";
         } else if (price.length === 0) {

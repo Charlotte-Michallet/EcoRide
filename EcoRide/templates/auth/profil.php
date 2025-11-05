@@ -143,7 +143,7 @@
                                 <div class="flex items-center mt-2">
 
                                     <img class="object-cover rounded-full w-10 h-10"
-                                        src="<?php echo $allfeedback->getDriverPhoto() ?>" alt="Conducteur photo">
+                                        src="<?php echo $allfeedback->getDriverPhoto() ?>" alt="Profil conducteur">
 
                                     <div class="mx-4">
                                         <h3 class="font-semibold"><?php echo $allfeedback->getDriverUsername() ?></h3>

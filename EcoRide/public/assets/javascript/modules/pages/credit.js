@@ -12,7 +12,7 @@ let token = tokenCsrf.value;
 input.addEventListener("input", (e) => {
     let value = Number(e.target.value);
 
-    if (isNaN(value) || !Number.isInteger(value)) {
+    if (Number.isNaN(value) || !Number.isInteger(value)) {
         errorDisplay("form", "Ce champ doit contenir uniquement des chiffres");
         credits = null;
     } else if (value.length === 0) {

@@ -56,7 +56,6 @@ inputs.forEach((input) => {
                 break;
 
             default:
-                null;
                 break;
         }
     });

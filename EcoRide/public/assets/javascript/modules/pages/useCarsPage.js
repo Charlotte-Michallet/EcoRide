@@ -57,7 +57,6 @@ carInputs.forEach((input) => {
                 break;
 
             default:
-                null;
                 break;
         }
     });
@@ -112,7 +111,7 @@ energyType.addEventListener("change", (e) => {
 
 // verify number seats
 const seatsCheck = (value) => {
-    if (isNaN(value)) {
+    if (Number.isNaN(value)) {
         errorDisplay("seats", "Ce champ doit contenir uniquement des chiffres");
         seats = null;
     } else if (value.length === 0) {

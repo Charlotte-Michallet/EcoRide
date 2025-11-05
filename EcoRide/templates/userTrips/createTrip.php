@@ -93,7 +93,7 @@
                                     class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
                                     name="priceTrip" min="2" placeholder="4 Crédits" />
                                 <p class="text-sm mt-2" id="calcperson"> ~0,10 Crédits / km</p>
-                                <p class="text-sm mt-2" id="CitFound">* Frais de service : 2 Crédits / 1 Crédits = 1 €</p>
+                                <p class="text-sm mt-2">* Frais de service : 2 Crédits / 1 Crédits = 1 €</p>
 
                                 <p class="hidden text-xs text-red-600 mt-2" id="pricesError"></p>
 
