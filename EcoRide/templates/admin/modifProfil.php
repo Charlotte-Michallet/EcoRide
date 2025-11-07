@@ -5,9 +5,9 @@
             <div class="container lg:col-span-5 min-h-screen px-6 mx-auto">
                 <h2 class="text-2xl font-semibold tracking-wider">Modifier mon profil</h2>
 
-                <div class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-4">
+                <div class="grid grid-cols-1 mt-1 gap-6  xl:grid-cols-4">
                     <!-- Username -->
-                    <form method="post" id="formUsername" class="col-span-2 flex">
+                    <form method="post" id="formUsername" class="col-span-1 xl:col-span-2 flex">
                         <div>
                             <label for="username" class="block mb-2 text-sm">Modifier le nom d’utilisateur</label>
                             <input type="text" id="username"
@@ -16,12 +16,12 @@
                             <p class="hidden text-xs text-red-600 mt-2" id="usernameError"></p>
                             <input type="hidden" id="tokenUser" value="<?php echo htmlspecialchars($token) ?>">
                             <button type="submit"
-                                class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier le nom d’utilisateur</button>
+                                class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg mt-2">Modifier le nom d’utilisateur</button>
                         </div>
                     </form>
 
                     <!-- Email -->
-                    <form method="post" id="formEmail" class="col-span-2 flex">
+                    <form method="post" id="formEmail" class="col-span-1 col-start-1 xl:col-span-2 flex">
                         <div>
                             <label for="email" class="block mb-2 text-sm">Modifier l'e-mail</label>
                             <input type="text" id="email"
@@ -30,7 +30,7 @@
                             <p class="hidden text-xs text-red-600 mt-2" id="emailError"></p>
                             <input type="hidden" id="tokenEmail" value="<?php echo htmlspecialchars($token) ?>">
                             <button type="submit"
-                                class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg">Modifier
+                                class="btn flex items-center justify-between px-6 py-3 text-sm text-white transition-colors duration-300 transform rounded-lg mt-2">Modifier
                                 l'e-mail</button>
                         </div>
                     </form>
@@ -50,7 +50,7 @@
                             <p class="hidden text-xs text-red-600 mt-2" id="photoError"></p>
                             <input type="hidden" id="tokenPhoto" value="<?php echo htmlspecialchars($token) ?>">
                             <button type="submit"
-                                class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Ajouter
+                                class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1 mt-2">Ajouter
                                 une photo</button>
                         </div>
                     </form>
@@ -77,7 +77,7 @@
                         </div>
 
                         <div>
-                            <label for="ConfPwd" class="block mb-2 text-sm">Confirmation de mot de passe</label>
+                            <label for="ConfPwd" class="block mb-2 text-sm mt-2">Confirmation de mot de passe</label>
                             <div class="relative">
                                 <input type="password" id="ConfPwd"
                                     class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
@@ -97,7 +97,7 @@
                         <div class="col-span-2 flex">
                             <input type="hidden" id="tokenPwd" value="<?php echo htmlspecialchars($token) ?>">
                             <button type="submit"
-                                class="btn flex items-center justify-between px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Modifier
+                                class="btn flex items-center justify-between px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1 mt-2">Modifier
                                 le mot de passe</button>
                         </div>
                     </form>
@@ -169,7 +169,7 @@
 
                 <form class="grid grid-cols-1 mt-1 gap-6 md:grid-cols-2" method="post" id="formotherPreferences">
                     <div>
-                        <label for="otherPreferences" class="block mb-2 text-sm">Mes préférences</label>
+                        <label for="otherPreferences" class="block mb-2 text-sm mt-2">Mes préférences</label>
                         <textarea name="otherPreferences" id="otherPreferences"
                             class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"></textarea>
                         <p class="hidden text-xs text-red-600 mt-2" id="otherPreferencesError"></p>
@@ -177,7 +177,7 @@
                     <input type="hidden" name="token_csrf" id="tokenpreference"
                         value="<?php echo htmlspecialchars($token) ?>">
                     <button type="submit"
-                        class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1">Valider
+                        class="btn flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white transition-colors duration-300 transform rounded-lg md:col-start-1 mt-2">Valider
                         mes préférences</button>
                 </form>
                 <p class="hidden text-green-600 mt-2" id="succes"></p>

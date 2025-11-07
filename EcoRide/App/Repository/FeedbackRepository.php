@@ -6,6 +6,8 @@ use App\Entity\Feedback;
 class FeedbackRepository extends Repository
 {
 
+    private $dateFormatdmY = "d/m/Y";
+
     public function createFeedback($tripStatus, $rating, $feedback, $userId, $status, $reservationId)
     {
         $query = $this->pdo->prepare("INSERT INTO feedbacks (user_id, trip_status, note, feedback, status, reservation_id) VALUES(:user_id, :trip_status, :note, :feedback, :status, :reservation_id);");
@@ -53,7 +55,7 @@ class FeedbackRepository extends Repository
                 // Hydration
                 foreach ($feedbacksData as $feedbackData) {
                     $dateObject = new \DateTime($feedbackData["departure_date"]);
-                    $tripDate   = $dateObject->format("d/m/Y");
+                    $tripDate   = $dateObject->format("$this->dateFormatdmY");
 
                     $feedbackinfo = new Feedback();
                     $feedbackinfo->setId($feedbackData["id"]);
@@ -98,7 +100,7 @@ class FeedbackRepository extends Repository
                 // Hydration
                 foreach ($feedbacksData as $feedbackData) {
                     $dateObject = new \DateTime($feedbackData["departure_date"]);
-                    $tripDate   = $dateObject->format("d/m/Y");
+                    $tripDate   = $dateObject->format("$this->dateFormatdmY");
 
                     $feedbackinfo = new Feedback();
                     $feedbackinfo->setId($feedbackData["id"]);
@@ -143,7 +145,7 @@ class FeedbackRepository extends Repository
                 // Hydration
                 foreach ($feedbacksData as $feedbackData) {
                     $dateObject = new \DateTime($feedbackData["departure_date"]);
-                    $tripDate   = $dateObject->format("d/m/Y");
+                    $tripDate   = $dateObject->format("$this->dateFormatdmY");
 
                     $feedbackinfo = new Feedback();
                     $feedbackinfo->setId($feedbackData["id"]);
@@ -195,7 +197,7 @@ class FeedbackRepository extends Repository
                 // Hydration
                 foreach ($feedbacksData as $feedbackData) {
                     $dateObject = new \DateTime($feedbackData["departure_date"]);
-                    $tripDate   = $dateObject->format("d/m/Y");
+                    $tripDate   = $dateObject->format("$this->dateFormatdmY");
 
                     $feedbackinfo = new Feedback();
                     $feedbackinfo->setId($feedbackData["id"]);
@@ -262,7 +264,7 @@ class FeedbackRepository extends Repository
                 // Hydration
                 foreach ($feedbacksData as $feedbackData) {
                     $dateObject = new \DateTime($feedbackData["departure_date"]);
-                    $tripDate   = $dateObject->format("d/m/Y");
+                    $tripDate   = $dateObject->format("$this->dateFormatdmY");
 
                     $feedbackinfo = new Feedback();
                     $feedbackinfo->setId($feedbackData["id"]);
@@ -309,7 +311,7 @@ class FeedbackRepository extends Repository
                 // Hydration
                 foreach ($feedbacksData as $feedbackData) {
                     $dateObject = new \DateTime($feedbackData["departure_date"]);
-                    $tripDate   = $dateObject->format("d/m/Y");
+                    $tripDate   = $dateObject->format("$this->dateFormatdmY");
 
                     $feedbackinfo = new Feedback();
 

@@ -22,32 +22,32 @@
 
             <div class="p-6 space-y-3 border-2 border-emerald-600 shadow-xs rounded-xl w-full md:w-2/3">
                 <div>
-                    <p class="text-lg font-semibold">Trajet: </p>
+                    <p class="md:text-lg font-semibold">Trajet: </p>
                 </div>
                 <div class="flex justify-between gap-x-2 pb-2">
                     <div class="flex items-center gap-x-2">
-                        <p class="text-lg font-semibold"><?php echo $details->getDepartureHour() ?> </p>
+                        <p class="md:text-lg font-semibold"><?php echo $details->getDepartureHour() ?> </p>
                     </div>
 
-                    <div class="lineLeft my-2 ml-4"></div>
+                    <div class="lineLeft hidden sm:flex my-2 ml-4"></div>
                     <div class="flex items-center gap-x-2">
-                        <p class="text-lg font-semibold"><?php echo $details->getTravel_time() ?> </p>
+                        <p class="md:text-lg font-semibold"><?php echo $details->getTravel_time() ?> </p>
                     </div>
 
-                    <div class="lineRight my-2 mr-4"></div>
+                    <div class="lineRight hidden sm:flex  my-2 mr-4"></div>
                     <div class="flex items-center gap-x-2">
-                        <p class="text-lg font-semibold"><?php echo $details->getArrivalTime() ?> </p>
+                        <p class="md:text-lg font-semibold"><?php echo $details->getArrivalTime() ?> </p>
                     </div>
                 </div>
 
                 <div class="flex justify-between gap-x-2 pb-2">
                     <div class="flex items-center gap-x-2">
-                        <p class="text-lg font-semibold"> <span><?php echo $details->getDepartureCity() ?></span></p>
+                        <p class="md:text-lg font-semibold"> <span><?php echo $details->getDepartureCity() ?></span></p>
                     </div>
 
                     <div class="flex items-center gap-x-2">
-                        <p class="text-lg font-semibold"><span
-                                class="text-lg font-semibold"><?php echo $details->getKilometers() ?></span> km </p>
+                        <p class="md:text-lg font-semibold"><span
+                                class="md:text-lg font-semibold"><?php echo $details->getKilometers() ?></span> km </p>
                     </div>
 
                     <div class="flex items-center gap-x-2">
@@ -61,13 +61,13 @@
                     <p class="text-lg font-semibold">Informations sur le trajet: </p>
                 </div>
                 <div class="flex justify-between">
-                    <p class="text-2xl font-semibold"> <span
-                            class="text-2xl font-semibold"><?php echo $details->getNumSeats() ?></span> places
+                    <p class="text-lg lg:text-2xl font-semibold"> <span
+                            class="text-lg lg:text-2xl font-semibold"><?php echo $details->getNumSeats() ?></span> places
                         disponibles
                     </p>
 
-                    <p class="text-3xl font-semibold"> <span id="credits"
-                            class="text-3xl font-semibold"><?php echo $details->getPrice() ?></span> Crédits</p>
+                    <p class="text-lg lg:text-3xl font-semibold"> <span id="credits"
+                            class="text-lg lg:text-3xl font-semibold"><?php echo $details->getPrice() ?></span> Crédits</p>
                 </div>
 
                 <div class="flex justify-between">
@@ -86,8 +86,8 @@
                     <p class="text-lg font-semibold">Chauffeur: </p>
                 </div>
                 <div class="flex flex-wrap w-full items-center">
-                    <div class="flex w-full md:w-1/2 items-center">
-                        <img class="object-cover w-20 h-20 rounded-full mr-9" src="<?php echo $details->getPhoto() ?>"
+                    <div class="flex flex-wrap w-full md:w-1/2 items-center">
+                        <img class="object-cover w-15 h-15 md:w-20 md:h-20 rounded-full mr-9" src="<?php echo $details->getPhoto() ?>"
                             alt="profil conduteur">
                         <p class="text-xl font-semibold mr-9"><?php echo $details->getUsername() ?></p>
 
@@ -103,7 +103,7 @@
                         </div>
                     </div>
 
-                    <div class="w-full md:w-1/2">
+                    <div class="w-full mt-4 md:mt-0 md:w-1/2">
                         <p class="text-xl font-semibold">
                             Préférences :
                         </p>
@@ -142,8 +142,8 @@
                 <div>
                     <p class="text-lg font-semibold">Informations sur la voiture: </p>
                 </div>
-                <div class="flex w-full items-center">
-                    <div class="flex w-1/2">
+                <div class="flex flex-wrap w-full items-center">
+                    <div class="flex flex-wrap w-1/2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xml:space="preserve"
                             style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"
                             width="50" heigth="50">
@@ -155,7 +155,7 @@
                                 style="fill:none;stroke:#0754acf3;stroke-width:2px" />
                             <path d="m44.75 46.748 2.5 2 4-3.5" style="fill:none;stroke:#0754acf3;stroke-width:2px" />
                         </svg>
-                        <div class="flex items-center">
+                        <div class="flex flex-wrap items-center">
                             <p class="text-lg font-semibold mx-2">Marque, modèle et couleur</p>
                             <p class="text-lg font-semibold mx-2">
                                 <?php echo $details->getBrand() ?>
@@ -171,7 +171,7 @@
                         </div>
 
                     </div>
-                    <div class="flex w-1/2">
+                    <div class="flex flex-wrap w-1/2">
                         <p class="text-lg font-semibold mx-2">Énergie de la voiture :
                             <span><?php echo $details->getEnergyTy() ?></span>
                         </p>
@@ -231,7 +231,7 @@
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <div class="mt-4">
                 <p class="text-pretty text-gray-700">
-                    Le trajet coûte <span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <?php echo $totalPrice ?></span> . Êtes-vous sûr de vouloir participer a ce
+                    Le trajet coûte <span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <?php echo $totalPrice ?></span> . Êtes-vous sûr de vouloir participer a ce
                     trajet</p>
             </div>
 

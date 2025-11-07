@@ -104,17 +104,17 @@
 
   <!-- info -->
   <div class="max-w-6xl px-6 mx-auto">
-    <div class="relative z-20 w-full mt-8 flex items-center">
-     <div class="absolute w-full bg-green-600 -z-10 h-50 md:h-75 rounded-2xl"></div>
+    <div class="relative w-full mt-8 flex items-center">
+     <div class="absolute w-full bg-green-600 -z-10 h-[15rem] sm:h-[12.5rem] md:h-[18.75rem] rounded-2xl"></div>
 
-      <div class="w-full p-5 flex items-center rounded-2xl bg-transparent p-0 lg:px-12 justify-evenly">
+      <div class="w-full p-5 bg-green-600 md:flex md:items-center rounded-2xl md:bg-transparent md:p-0 lg:px-12 md:justify-evenly">
         <img
-          class="mx-6 object-cover shadow-lg h-[15rem] md:h-[20rem] w-60 lg:h-[27rem] lg:w-[17rem] rounded-2xl"
+          class="h-24 w-24 md:mx-6 rounded-full object-cover shadow-lg md:h-[20rem] md:w-60 lg:h-[27rem] lg:w-[17rem] md:rounded-2xl"
           src="https://images.unsplash.com/photo-1635604553688-d9640263bd9e?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="route en foret" />
 
-        <div class="mt-2 mx-6">
-          <p class="text-sm text-white md:text-xl"><strong>EcoRide</strong> est une entreprise française
+        <div class="mt-2 sm:mx-6">
+          <p class="text-xs text-white md:text-xl"><strong>EcoRide</strong> est une entreprise française
             dédiée à une
             mobilité plus durable. En favorisant le <strong>covoiturage</strong>, nous réduisons l’empreinte carbone.
             Notre mission est
@@ -128,19 +128,19 @@
     </div>
   </div>
 
-  <div class="max-w-6xl px-6 mx-auto mb-10">
-    <div class="relative z-20 w-full mt-8 md:flex md:items-center">
-       <div class="absolute w-full bg-green-600 -z-10 md:h-75 rounded-2xl"></div>
+  <div class="max-w-6xl px-6 mx-auto mb-15">
+    <div class="relative w-full mt-8 flex items-center">
+       <div class="absolute w-full bg-green-600 -z-10 h-[15rem] sm:h-[12.5rem] md:h-[18.75rem] rounded-2xl"></div>
 
-      <div class="w-full p-6 md:flex md:items-center rounded-2xl md:bg-transparent md:p-0 lg:px-12 md:justify-evenly">
-        <div class="mt-2 md:mx-6">
-          <p class="text-lg leading-relaxed text-white md:text-xl"> Voyagez en toute confiance avec EcoRide.
+      <div class="w-full p-6 bg-green-600 md:flex md:items-center rounded-2xl md:bg-transparent md:p-0 lg:px-12 md:justify-evenly">
+        <div class="mt-2 sm:mx-6">
+          <p class="text-xs text-white md:text-xl"> Voyagez en toute confiance avec EcoRide.
             Notre plateforme sécurisée vous permet de partager vos trajets avec d’autres passagers et de profiter d’un
             transport fiable. Que ce soit pour un déplacement quotidien ou longue distance, trouvez facilement un
             trajet adapté à vos besoins et contribuez à un avenir plus durable.</p>
         </div>
         <img
-          class="md:mx-6 object-cover shadow-lg md:h-[20rem] md:w-60 lg:h-[27rem] lg:w-[17rem] rounded-2xl"
+          class="h-24 w-24 mt-2 md:mx-6 object-cover rounded-full shadow-lg md:h-[20rem] md:w-60 lg:h-[27rem] lg:w-[17rem] md:rounded-2xl"
           src="/assets/img/sourire-femmes-et-homme-positif-assis-dans-la-voiture.jpg"
           alt="groupe de personnes dans une voiture en covoiturage" />
       </div>

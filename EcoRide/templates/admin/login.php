@@ -11,13 +11,13 @@
             <p class="mt-1 text-center text-gray-500">Drive Green Together</p>
             <form method="post">
                 <div class="mb-4">
-                    <label class="block mb-2 text-sm">E-mail</label>
+                    <label class="block mb-2 text-sm" for="emailLogin">E-mail</label>
                     <input type="text" id="emailLogin" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="emailLogin" placeholder="nom.prénom@gmail.com" aria-label="email" />
                     <p class="hidden text-xs text-red-600 mt-2" id="emailLoginError"></p>
                 </div>
 
                 <div class="mb-4">
-                    <label class="block mb-2 text-sm">Mot de passe</label>
+                    <label class="block mb-2 text-sm" for="pwdLogin">Mot de passe</label>
                         <div class="relative">
                             <input type="password" id="pwdLogin" class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none" name="pwdLogin" placeholder="8+ caractères, majuscule, chiffre" />
                             <span id="toggleVisibility" class="absolute inset-y-3 right-3" >

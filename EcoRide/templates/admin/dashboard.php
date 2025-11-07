@@ -1,5 +1,5 @@
 <section id="dashboard">
-  <div class="w-full px-20">
+  <div class="w-full px-2 md:px-20">
     <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <div class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
@@ -69,8 +69,7 @@
 
       <!-- graphiques -->
       <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
-        <div class="p-4 md:p-5 min-h-102.5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
-
+        <div class="p-2 md:p-5 min-h-102.5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
           <div class="flex flex-wrap justify-between items-center gap-2">
             <div>
               <h2 class="text-sm text-gray-500">
@@ -87,7 +86,7 @@
           </div>
         </div>
 
-        <div class="p-4 md:p-5 min-h-102.5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
+        <div class="p-4 md:p-5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
           <div class="flex flex-wrap justify-between items-center gap-2">
             <div>
               <h2 class="text-sm text-gray-500">
@@ -99,12 +98,11 @@
             </div>
           </div>
 
-          <div class="flex h-full justify-center items-center">
-            <canvas class=" h-9/10 w-9/10" id="graphCredit"></canvas>
+          <div class="flex h-full w-full justify-center items-center">
+            <canvas class="w-full h-full md:h-9/10 md:w-9/10" id="graphCredit"></canvas>
           </div>
         </div>
       </div>
-
       <!-- Employés -->
       <div class="max-w-[85rem] px-4 py-10 hidden lg:block lg:px-8 lg:py-14 mx-auto">
         <div class="flex flex-col">

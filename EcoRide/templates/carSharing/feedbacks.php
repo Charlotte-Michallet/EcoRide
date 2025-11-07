@@ -10,11 +10,11 @@
                 </p>
 
                 <div class="mt-8">
-                    <div class="flex justify-between">
+                    <div class="flex flex-wrap justify-between">
                         <h2 class="text-lg font-semibold text-gray-800">
-                            Le trajet du                                         <?php echo $reservation->getDepartureDate() ?>
+                            Le trajet du                                                                                 <?php echo $reservation->getDepartureDate() ?>
                         </h2>
-                        <h3>Numéro de réservation :                                                      <?php echo $reservation->getNumReser() ?></h3>
+                        <h3>Numéro de réservation :                                                                                                           <?php echo $reservation->getNumReser() ?></h3>
                     </div>
 
                     <ul class="mt-2 space-y-2">
@@ -32,11 +32,11 @@
                         </li>
 
                         <li class="flex gap-x-3">
-                            Nom du chauffeur :                                               <?php echo $reservation->getUsername() ?>
+                            Nom du chauffeur :                                                                                             <?php echo $reservation->getUsername() ?>
                         </li>
 
                         <li class="flex gap-x-3">
-                            Heure de départ :                                               <?php echo $reservation->getDepartHour() ?>
+                            Heure de départ :                                                                                             <?php echo $reservation->getDepartHour() ?>
                         </li>
 
                         <li class="flex gap-x-3">
@@ -45,11 +45,11 @@
                             <span><?php echo $reservation->getColor() ?></span>
                         </li>
                         <li class="flex gap-x-3">
-                            Type d'énergie :                                              <?php echo $reservation->getEnergie() ?>
+                            Type d'énergie :                                                                                           <?php echo $reservation->getEnergie() ?>
                         </li>
 
                         <li class="flex gap-x-3">
-                            Nombre de places réserver :                                                         <?php echo $reservation->getNumSeatsBookes() ?>
+                            Nombre de places réserver :                                                                                                                 <?php echo $reservation->getNumSeatsBookes() ?>
                         </li>
                     </ul>
                 </div>

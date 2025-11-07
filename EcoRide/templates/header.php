@@ -38,12 +38,12 @@
 
 <body>
   <header>
-    <div class="flex flex-wrap justify-around items-center gap-8 mx-10 text-gray-900">
+    <div class="block md:flex md:justify-around items-center gap-8 mx-10 text-gray-900">
       <a href="/index.php">
         <img class="h-20 w-36 object-contain" src="assets/img/logo/logo.png" alt="Ecoride logo">
       </a>
       <div class="flex flex-1 items-center flex-wrap sm:justify-between">
-        <nav class="flex flex-wrap">
+        <nav class="flex">
           <ul class="flex items-center gap-6 text-lg">
             <li>
               <a class="transition hover:text-gray-700/75"
@@ -56,8 +56,7 @@
 
           </ul>
         </nav>
-        <div class="flex items-center gap-4 text-lg">
-
+        <div class="flex items-center gap-4 text-lg mt-3 md:mt-0">
           <?php if (isset($_SESSION["username"])) {?>
 
             <div class="flex items-center gap-x-6">

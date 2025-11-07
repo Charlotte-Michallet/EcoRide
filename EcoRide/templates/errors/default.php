@@ -9,8 +9,8 @@
             <h1 class="mt-3 text-2xl font-semibold text-gray-800 md:text-3xl">Page non trouvée</h1>
             <p class="mt-4 text-gray-500">La page que vous recherchez n'existe pas.</p>
 
-            <div class="flex items-center w-full mt-6 gap-x-3 shrink-0 sm:w-auto">
-                <a href="index.php"> <button class="btnSearch w-1/2 px-5 py-2 text-sm tracking-wide text-white duration-200 rounded-lg shrink-0 sm:w-auto">
+            <div class="flex items-center w-full mt-6 gap-x-3 shrink-0 w-auto">
+                <a href="/index.php"> <button class="btnSearch w-full px-5 py-2 text-xs md:text-sm tracking-wide text-white duration-200 rounded-lg shrink-0 w-auto">
                         Page d'accueil
                     </button>
                 </a>

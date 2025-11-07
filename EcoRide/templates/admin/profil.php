@@ -3,7 +3,7 @@
     <!-- Profil info and feedback -->
     <div class="max-w-[85rem] px-4 py-5 sm:px-2 lg:px-4 lg:py-14 mx-auto">
 
-        <div class="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-center lg:justify-between">
+        <div class="grid lg:grid-cols-12 lg:gap-16 lg:items-center lg:justify-between">
 
             <!-- Info -->
             <div class="container lg:col-span-4 lg:col-start-1 min-h-screen px-6 mx-auto">
@@ -43,7 +43,7 @@
                         <p class="block w-full py-3 text-gray-700">Animaux acceptés
                             <?php echo " : " . htmlspecialchars($preferences["animal"]); ?> </p>
                         <p class="block w-full py-3 text-gray-700"> Fumeur
-                            accepté                                                                                                                                                                                                                                                                                                 <?php echo " : " . htmlspecialchars($preferences["smoking"]); ?></p>
+                            accepté                                                                                                                                                                                                                                                                                                                                     <?php echo " : " . htmlspecialchars($preferences["smoking"]); ?></p>
                         <p class="block w-full py-3 text-gray-700"> Mes autres
                             préférences<?php echo " : " . htmlspecialchars($preferences["descriptif"]); ?></p>
                     </div>
