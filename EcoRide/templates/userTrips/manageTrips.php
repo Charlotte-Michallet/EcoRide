@@ -9,10 +9,10 @@
                     <div class="p-4 md:p-5">
                         <div class="flex justify-between gap-x-2 pb-2">
                             <div class="flex items-center gap-x-2">
-                                <p class="font-semibold text-xl"><span><?php echo $trip->getDepartureDate(); ?></span></p>
+                                <p class="font-semibold text-sm md:text-xl"><span><?php echo $trip->getDepartureDate(); ?></span></p>
                             </div>
                             <div class="flex items-center gap-x-2">
-                                <p class="font-semibold text-lg">
+                                <p class="font-semibold text-xs md:text-lg">
                                     <span><?php echo $trip->getStatus(); ?></span>
                                 </p>
                             </div>
@@ -20,33 +20,33 @@
 
                         <div class="flex justify-between gap-x-2 pb-2">
                             <div class="flex items-center gap-x-2">
-                                <p class="font-semibold text-lg"><span><?php echo $trip->getDepartureCity(); ?></span></p>
+                                <p class="font-semibold text-xs md:text-lg"><span><?php echo $trip->getDepartureCity(); ?></span></p>
                             </div>
                             <div class="lineLeft my-2 ml-2"></div>
                             <div class="flex items-center gap-x-2">
-                                <p class="font-semibold text-lg"><span><?php echo $trip->getKilometers(); ?></span> km</p>
+                                <p class="font-semibold text-xs md:text-lg"><span><?php echo $trip->getKilometers(); ?></span> km</p>
                             </div>
                             <div class="lineRight my-2 mr-2"></div>
                             <div class="flex items-center gap-x-2">
-                                <p class="font-semibold text-lg"><span><?php echo $trip->getArrivalCity(); ?></span></p>
+                                <p class="font-semibold text-xs md:text-lg"><span><?php echo $trip->getArrivalCity(); ?></span></p>
                             </div>
                         </div>
 
                         <div class="flex justify-between gap-x-2 px-5 pb-3">
                             <div class="flex items-center gap-x-2 ">
-                                <p class="font-semibold text-lg"><span><?php echo $trip->getDepartureHour(); ?></span></p>
+                                <p class="font-semibold text-xs md:text-lg"><span><?php echo $trip->getDepartureHour(); ?></span></p>
                             </div>
                             <div class="flex items-center gap-x-2 ">
-                                <p class="font-semibold text-lg"><span><?php echo $trip->getTravel_time(); ?></span></p>
+                                <p class="font-semibold text-xs md:text-lg"><span><?php echo $trip->getTravel_time(); ?></span></p>
                             </div>
                             <div class="flex items-center gap-x-2 ">
-                                <p class="font-semibold text-lg"><span><?php echo $trip->getArrivalTime(); ?></span></p>
+                                <p class="font-semibold text-xs md:text-lg"><span><?php echo $trip->getArrivalTime(); ?></span></p>
                             </div>
                         </div>
 
-                        <div class="flex justify-between gap-x-2">
-                            <div class="flex items-center gap-x-2 ">
-                                <p class="font-semibold text-lg">Places disponibles :
+                        <div class="sm:flex justify-between gap-x-2">
+                            <div class="flex items-center gap-x-2 mb-3 sm:mb-0">
+                                <p class="font-semibold text-xs md:text-lg">Places disponibles :
                                     <span><?php echo $trip->getNumSeats(); ?></span>
                                 </p>
                             </div>
@@ -106,69 +106,70 @@
                     <div class="p-4 md:p-5">
                         <div class="flex justify-between gap-x-2 pb-2">
                             <div class="flex items-center gap-x-2">
-                                <p class="font-semibold text-xl">
+                                <p class="font-semibold text-sm md:text-xl">
                                     <span><?php echo $reservation->getDepartureDate(); ?></span>
                                 </p>
                             </div>
                             <div class="flex items-center gap-x-2">
-                                <p class="font-semibold text-lg">
+                                <p class="font-semibold text-xs md:text-lg">
                                     <span><?php echo $reservation->getNumSeatsBookes(); ?></span> place réservée
                                 </p>
-                                <p class="font-semibold text-xl"><?php echo $reservation->getPrices(); ?> credit</p>
+                                <p class="font-semibold text-sm md:text-xl"><?php echo $reservation->getPrices(); ?> credit</p>
                             </div>
                         </div>
 
                         <div class="flex justify-between gap-x-2 pb-2">
                             <div class="flex items-center gap-x-2">
-                                <p class="font-semibold text-lg"><?php echo $reservation->getDepartCity(); ?></p>
+                                <p class="font-semibold text-xs md:text-lg"><?php echo $reservation->getDepartCity(); ?></p>
                             </div>
                             <div class="lineLeft my-2 ml-2"></div>
                             <div class="flex items-center gap-x-2">
-                                <p class="font-semibold text-lg"><?php echo $reservation->getKilometer(); ?> km</p>
+                                <p class="font-semibold text-xs md:text-lg"><?php echo $reservation->getKilometer(); ?> km</p>
                             </div>
                             <div class="lineRight my-2 mr-2"></div>
                             <div class="flex items-center gap-x-2">
-                                <p class="font-semibold text-lg"><?php echo $reservation->getArriCity(); ?></p>
+                                <p class="font-semibold text-xs md:text-lg"><?php echo $reservation->getArriCity(); ?></p>
                             </div>
                         </div>
 
                         <div class="flex justify-between gap-x-2 px-5 pb-3">
                             <div class="flex items-center gap-x-2 ">
-                                <p class="font-semibold text-lg"><?php echo $reservation->getDepartHour(); ?></p>
+                                <p class="font-semibold text-xs md:text-lg"><?php echo $reservation->getDepartHour(); ?></p>
                             </div>
                             <div class="flex items-center gap-x-2 ">
-                                <p class="font-semibold text-lg"><?php echo $reservation->getTravelTime(); ?></p>
+                                <p class="font-semibold text-xs md:text-lg"><?php echo $reservation->getTravelTime(); ?></p>
                             </div>
                             <div class="flex items-center gap-x-2 ">
-                                <p class="font-semibold text-lg"><?php echo $reservation->getArrTime(); ?></p>
+                                <p class="font-semibold text-xs md:text-lg"><?php echo $reservation->getArrTime(); ?></p>
                             </div>
                         </div>
 
-                        <div class="flex justify-between gap-x-2 bg-gray-200 p-5">
-                            <div class="flex items-center gap-x-2 ">
-                                <p class="font-semibold text-lg">Numéro de réservation :
+                        <div class="md:flex md:justify-between gap-x-2 bg-gray-200 p-5">
+                            <div class="flex items-center gap-x-2 mb-3 md:mb-0">
+                                <p class="font-semibold text-xs md:text-lg">Numéro de réservation :
                                     <span><?php echo $reservation->getNumReser(); ?></span>
                                 </p>
                             </div>
-                            <div class="font-semibold">
-                                <p class="font-semibold text-lg">Statut de paiement :
+                            <div class="font-semibold mb-3 md:mb-0">
+                                <p class="font-semibold text-xs md:text-lg">Statut de paiement :
                                     <span><?php echo $reservation->getPaymentStatus(); ?></span>
                                 </p>
                             </div>
 
                             <div class="font-semibold">
-                                <p class="font-semibold text-lg"> Statut de réservation :
+                                <p class="font-semibold text-xs md:text-lg"> Statut de réservation :
                                     <span><?php echo $reservation->getStatus(); ?></span>
                                 </p>
                             </div>
                         </div>
 
-                        <div class="flex justify-between items-center gap-x-2 py-3 px-5">
-                            <div>
+                        <div class="md:flex md:justify-between items-center gap-x-2 py-3 px-5 text-xs md:text-base">
+                            <div class="mb-3 md:mb-0">
                                 <p class="font-semibold">Conducteur :</p>
                                 <span class="font-semibold"><?php echo $reservation->getUsername(); ?></span>
                             </div>
-                            <div>
+
+                            <div class="mb-3 md:mb-0">
                                 <p class="font-semibold"> Voiture :</p>
                                 <div class="flex items-center gap-x-2 ">
                                     <p class="font-semibold"><?php echo $reservation->getBrand(); ?></p>

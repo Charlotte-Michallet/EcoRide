@@ -3,13 +3,13 @@
     <!-- Profil info and feedback -->
     <div class="max-w-[85rem] px-4 py-5 sm:px-2 lg:px-4 lg:py-14 mx-auto">
 
-        <div class="grid lg:grid-cols-12 lg:gap-16 lg:items-center lg:justify-between">
+        <div class="grid grid-cols-12 lg:gap-16 items-center justify-between">
 
             <!-- Info -->
-            <div class="container lg:col-span-4 lg:col-start-1 min-h-screen px-6 mx-auto">
+            <div class="container col-span-12 lg:col-span-4 lg:col-start-1 lg:min-h-screen px-6 mx-auto">
                 <div class="w-full max-w-md">
 
-                    <h2 class="mb-2 text-3xl text-gray-800 font-bold lg:text-4xl dark:text-neutral-200">
+                    <h2 class="mb-2 text-3xl text-gray-800 font-bold lg:text-4xl">
                         Mon profil
                     </h2>
 
@@ -32,10 +32,10 @@
             </div>
 
             <!-- Preferences -->
-            <div class="container lg:col-span-4 min-h-screen px-6 mx-auto">
+            <div class="container col-span-12 lg:col-span-4 lg:min-h-screen px-6 mx-auto mt-4 lg:mt-0">
                 <div class="w-full max-w-md">
 
-                    <h2 class="mb-2 text-3xl text-gray-800 font-bold lg:text-4xl dark:text-neutral-200">
+                    <h2 class="mb-2 text-3xl text-gray-800 font-bold lg:text-4xl">
                         Mes préférences
                     </h2>
 
@@ -43,14 +43,14 @@
                         <p class="block w-full py-3 text-gray-700">Animaux acceptés
                             <?php echo " : " . htmlspecialchars($preferences["animal"]); ?> </p>
                         <p class="block w-full py-3 text-gray-700"> Fumeur
-                            accepté                                                                                                                                                                                                                                                                                                                                     <?php echo " : " . htmlspecialchars($preferences["smoking"]); ?></p>
+                            accepté                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <?php echo " : " . htmlspecialchars($preferences["smoking"]); ?></p>
                         <p class="block w-full py-3 text-gray-700"> Mes autres
                             préférences<?php echo " : " . htmlspecialchars($preferences["descriptif"]); ?></p>
                     </div>
                 </div>
             </div>
 
-            <div class="container lg:col-span-4 min-h-screen px-6 mx-auto">
+            <div class="container col-span-12 lg:col-span-4 px-6 mx-auto lg:min-h-screen mt-4 lg:mt-0">
                 <div class="sm:flex sm:gap-4 w-full">
                     <a class="btn block rounded-md px-4 py-3 content-center font-medium text-white transition hover:bg-teal-700"
                         href="index.php?controller=admin&action=modifProfil">

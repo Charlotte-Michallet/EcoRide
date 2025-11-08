@@ -14,16 +14,20 @@
 
             <?php foreach ($feedbacks as $feedback) {?>
                 <div class="p-6 bg-gray-100 rounded-lg my-8">
-                    <div class="flex justify-between">
-                        <h2 class="font-semibold"> Notes et avis des passagers</h2>
-                        <p>Numéro de réservation : <span><?php echo $feedback->getNumberReser() ?></span></p>
-                    </div>
-                    <div>
-                        <p>Le covoiturage s'est bien passé : <span><?php echo $feedback->getTripWell() ?></span></p>
+
+                    <div class="flex flex-wrap justify-between mb-4">
+                        <div class="text-sm md:text-base">
+                            <h2 class="font-semibold"> Notes et avis des passagers</h2>
+                            <p>Numéro de réservation : <span><?php echo $feedback->getNumberReser() ?></span></p>
+                        </div>
+
+                        <div class="text-sm md:text-base mt-2 md:mt-0">
+                            <p>Le covoiturage s'est bien passé : <span><?php echo $feedback->getTripWell() ?></span></p>
+                        </div>
                     </div>
 
-                    <div class="flex justify-between mt-2">
-                        <div>
+                    <div class="flex flex-wrap justify-between mt-2 text-sm md:text-base">
+                        <div class="mr-2 md:mr-0 mb-4 lg:mb-0">
                             <?php $note = $feedback->getNote();
                                 if ($note) {?>
                                 <p class="leading-loose"><?php echo $feedback->getNote() ?>/5 étoiles</p>
@@ -33,26 +37,29 @@
                                 <?php echo $feedback->getFeedback() ?>
                             </p>
 
-                            <div class="flex items-center mt-3">
-                                <img class="object-cover rounded-full w-10 h-10"
+                            <div class="block mt-2">
+                                <p class="font-semibold">Passager :</p>
+                                <div class="flex flex-wrap items-center mt-2">
+                                    <img class="object-cover rounded-full w-10 h-10"
                                     src="<?php echo $feedback->getPassengersPhoto() ?>" alt="profil passager">
 
-                                <div class="mx-4">
-                                    <h2 class="font-semibold"><?php echo $feedback->getPassengersUsername() ?></h2>
+                                    <div class="mx-4">
+                                        <h2 class="font-semibold"><?php echo $feedback->getPassengersUsername() ?></h2>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div>
-                            <p class="font-semibold">Voyage effectué le <span><?php echo $feedback->getDepartureDate() ?></span> à
-                                <span><?php echo $feedback->getDepartureHour() ?></span>
+                        <div class="mx-2 md:mx-0 mb-4 md:mb-0">
+                            <p class="font-semibold">Voyage effectué le <span><?php echo $feedback->getDepartureDate() ?></span>
+                            <p class="font-semibold">A <span><?php echo $feedback->getDepartureHour() ?></span></p>
                             </p>
                             <p class="font-semibold">De <span><?php echo $feedback->getDepartureCity() ?></span> à
                                 <span><?php echo $feedback->getArrivalCity() ?>
                             </p>
                         </div>
 
-                        <div>
+                        <div class="ml-2 md:ml-0">
                             <p class="font-semibold">Prix : <span><?php echo $feedback->getTotalPrice() ?></span> Crédits
                             </p>
                             <p class="font-semibold">Nombre de places réservées :
@@ -61,10 +68,10 @@
                         </div>
                     </div>
 
-                    <div class="mt-7">
+                    <div class="mt-10">
                         <h2 class="font-semibold">Conducteur : </h2>
-                        <div class="flex justify-between">
-                            <div class="flex items-center mt-2">
+                        <div class="flex flex-wrap justify-between">
+                            <div class="flex flex-wrap items-center mt-2">
 
                                 <img class="object-cover rounded-full w-10 h-10"
                                     src="<?php echo $feedback->getDriverPhoto() ?>" alt="profil conducteur">
@@ -75,8 +82,8 @@
                             </div>
                             <?php $feedbackStatus = $feedback->getStatus();
                                 if ($feedbackStatus === "En attente de validation" || $feedbackStatus === "Payé") {?>
-                                <div class="flex gap-4">
-                                    <form method="post">
+                                <div class="flex flex-wrap gap-4">
+                                    <form method="post" class="mt-3 md:mt-0">
                                         <input type="hidden" name="token" value="<?php echo htmlspecialchars($token) ?>">
                                         <input type="hidden" name="idFeedback" value="<?php echo $feedback->getId() ?>">
                                         <input type="hidden" name="idreservation" value="<?php echo $feedback->getReservationId() ?>">
@@ -85,7 +92,7 @@
                                             avis</button>
                                     </form>
 
-                                    <form method="post">
+                                    <form method="post" class="mt-3 md:mt-0">
                                         <input type="hidden" name="token" value="<?php echo htmlspecialchars($token) ?>">
                                         <input type="hidden" name="idFeedback" value="<?php echo $feedback->getId() ?>">
                                         <input type="hidden" name="idreservation" value="<?php echo $feedback->getReservationId() ?>">
@@ -105,14 +112,14 @@
 
         <div class="mx-auto mt-8 xl:mt-10 max-w-7xl">
             <div>
-                <h2 class="text-2xl font-semibold text-center text-gray-800 lg:text-3xl">
+                <h2 class="text-xl font-semibold text-center text-gray-800 lg:text-2xl">
            Tous les avis des covoiturages
         </h2>
 
             </div>
             <?php foreach ($allfeedbacks as $allfeedback) {?>
                 <div class="p-6 bg-gray-100 rounded-lg my-8">
-                    <div class="flex justify-between">
+                    <div class="text-sm md:text-base flex justify-between">
                         <h2 class="font-semibold">Notes et avis des passagers</h2>
                         <p>Numéro de réservation : <span><?php echo $allfeedback->getNumberReser() ?></span></p>
                     </div>
@@ -120,8 +127,8 @@
                         <p>Le covoiturage s'est bien passé : <span><?php echo $allfeedback->getTripWell() ?></span></p>
                     </div>
 
-                    <div class="flex justify-between mt-2">
-                        <div>
+                    <div class="flex flex-wrap justify-between mt-2">
+                        <div class="mr-2 md:mr-0 mb-4 lg:mb-0">
                             <?php $note = $allfeedback->getNote();
                                 if ($note) {?>
                                 <p class="leading-loose"><?php echo $allfeedback->getNote() ?>/5 étoiles</p>
@@ -131,7 +138,7 @@
                                 <?php echo $allfeedback->getFeedback() ?>
                             </p>
 
-                            <div class="flex items-center mt-3">
+                            <div class="flex flex-wrap items-center mt-3">
                                 <img class="object-cover rounded-full w-10 h-10"
                                     src="<?php echo $allfeedback->getPassengersPhoto() ?>" alt="profil passager">
                                 <div class="mx-4">
@@ -140,7 +147,7 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div class="mx-2 md:mx-0 mb-4 lg:mb-0">
                             <p class="font-semibold">Voyage effectué le <span><?php echo $allfeedback->getDepartureDate() ?></span> à
                                 <span><?php echo $allfeedback->getDepartureHour() ?></span>
                             </p>
@@ -149,7 +156,7 @@
                             </p>
                         </div>
 
-                        <div>
+                        <div class="ml-2 md:ml-0">
                             <p class="font-semibold">Prix : <span><?php echo $allfeedback->getTotalPrice() ?></span> Crédits
                             </p>
                             <p class="font-semibold">Nombre de places réservées :
@@ -158,10 +165,10 @@
                         </div>
                     </div>
 
-                    <div class="mt-7">
+                    <div class="mt-10">
                         <h2 class="font-semibold">Conducteur : </h2>
-                        <div class="flex justify-between">
-                            <div class="flex items-center mt-2">
+                        <div class="flex flex-wrap justify-between">
+                            <div class="flex flex-wrap items-center mt-2">
 
                                 <img class="object-cover rounded-full w-10 h-10"
                                     src="<?php echo $allfeedback->getDriverPhoto() ?>" alt="profil conducteur">
