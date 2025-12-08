@@ -43,7 +43,7 @@
         <img class="h-20 w-36 object-contain" src="assets/img/logo/logo.png" alt="Ecoride logo">
       </a>
       <div class="flex flex-1 items-center flex-wrap sm:justify-between">
-        <nav class="flex">
+        <nav class="flex" role="navigation" aria-label="menu principal">
           <ul class="flex items-center gap-6 text-lg">
             <li>
               <a class="transition hover:text-gray-700/75"

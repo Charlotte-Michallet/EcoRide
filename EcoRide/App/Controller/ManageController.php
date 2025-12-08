@@ -25,7 +25,7 @@ class ManageController extends Router
                         break;
 
                     default:
-                        // throw new \Exception("Cette action n'existe pas : " . $_GET["action"]);
+                        throw new \Exception("Cette action n'existe pas : " . $_GET["action"]);
                 }
             } else {
                 throw new \Exception("Aucune action détectée");

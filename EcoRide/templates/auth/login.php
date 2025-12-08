@@ -11,9 +11,9 @@
             <form method="post">
                 <div class="mb-4">
                     <label class="block mb-2 text-sm" for="emailLogin">E-mail</label>
-                    <input type="text" id="emailLogin"
+                    <input type="email" id="emailLogin"
                         class="block w-full px-5 py-3 mt-2 border border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
-                        name="emailLogin" placeholder="nom.prénom@gmail.com" aria-label="email" />
+                        name="emailLogin" placeholder="nom.prénom@gmail.com" aria-label="email" autocomplete="email"/>
                     <p class="hidden text-xs text-red-600 mt-2" id="emailLoginError"></p>
                 </div>
 

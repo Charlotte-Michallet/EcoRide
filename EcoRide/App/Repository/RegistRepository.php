@@ -55,6 +55,7 @@ class RegistRepository extends Repository
 
         return $count > 0;
     }
+
     public function checkEmailInDb(string $email): mixed
     {
         $query = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email;");

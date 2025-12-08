@@ -35,7 +35,7 @@
       </div>
       <?php if (isset($_SESSION["username"]) && $_SESSION["role"] === 1) {?>
       <div class="flex flex-1 items-center flex-wrap md:justify-between">
-        <nav class="flex flex-wrap text-xs lg:text-sm">
+        <nav class="flex flex-wrap text-xs lg:text-sm" role="navigation" aria-label="menu principal">
           <ul class="flex items-center gap-6">
             <li>
               <a class="text-start flex items-center gap-x-2.5 py-2 px-2.5  text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
