@@ -51,7 +51,7 @@ class PageController extends Router
 
     protected function privacyPolicy($meta)
     {
-        $this->render("pages/privacyPolicy", ["meta" => $meta["legal"]]);
+        $this->render("pages/privacyPolicy", ["meta" => $meta["privacyPolicy"]]);
     }
 
     protected function contact($meta)
