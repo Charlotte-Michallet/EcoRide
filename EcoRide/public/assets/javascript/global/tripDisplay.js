@@ -187,7 +187,14 @@ export function show(trips, seats) {
 
             const textPlaces = document.createElement("p");
             textPlaces.className = "text-base md:text-xl font-semibold";
-            textPlaces.textContent = `${trip.places} place disponible`;
+            if (trip.places == 1) {
+                console.log(trip.places);
+
+                textPlaces.textContent = `${trip.places} place disponible`;
+            } else {
+                console.log(trip.places);
+                textPlaces.textContent = `${trip.places} places disponibles`;
+            }
             containerPrice.appendChild(textPlaces);
 
             const textPrice = document.createElement("p");

@@ -46,8 +46,7 @@
 
                         <div class="sm:flex justify-between gap-x-2">
                             <div class="flex items-center gap-x-2 mb-3 sm:mb-0">
-                                <p class="font-semibold text-xs md:text-lg">Places disponibles :
-                                    <span><?php echo $trip->getNumSeats(); ?></span>
+                                <p class="font-semibold text-xs md:text-lg">Places disponibles :<span><?php echo $trip->getNumSeats(); ?></span>
                                 </p>
                             </div>
                             <div class="flex items-center gap-x-2 pb-2">

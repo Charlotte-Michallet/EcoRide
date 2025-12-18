@@ -20,6 +20,10 @@ class PageController extends Router
                         $this->legal($meta);
                         break;
 
+                    case 'privacyPolicy':
+                        $this->privacyPolicy($meta);
+                        break;
+
                     default:
                         throw new \Exception("Cette action n'existe pas : " . $_GET["action"]);
                 }
@@ -43,6 +47,11 @@ class PageController extends Router
     protected function legal($meta)
     {
         $this->render("pages/legals", ["meta" => $meta["legal"]]);
+    }
+
+    protected function privacyPolicy($meta)
+    {
+        $this->render("pages/privacyPolicy", ["meta" => $meta["legal"]]);
     }
 
     protected function contact($meta)

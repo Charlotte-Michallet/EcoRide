@@ -61,8 +61,10 @@
                     <p class="text-lg font-semibold">Informations sur le trajet: </p>
                 </div>
                 <div class="flex justify-between">
-                    <p class="text-lg lg:text-2xl font-semibold"> <span
-                            class="text-lg lg:text-2xl font-semibold"><?php echo $details->getNumSeats() ?></span> places
+
+                    <p class="text-lg lg:text-2xl font-semibold">                                                                  <?php
+
+                                                                  echo $details->getNumSeats() ?>places
                         disponibles
                     </p>
 
@@ -231,7 +233,7 @@
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <div class="mt-4">
                 <p class="text-pretty text-gray-700">
-                    Le trajet coûte <span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <?php echo $totalPrice ?></span> . Êtes-vous sûr de vouloir participer a ce
+                    Le trajet coûte <span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           <?php echo $totalPrice ?></span> . Êtes-vous sûr de vouloir participer a ce
                     trajet</p>
             </div>
 

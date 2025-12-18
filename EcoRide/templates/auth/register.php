@@ -116,6 +116,11 @@
                         </svg>
                     </button>
                 </form>
+
+                <div class="mt-5 mb-7 flex justify-end">
+                    <a href="/index.php?controller=pages&action=privacyPolicy" target="_blank" class="text-xs">Politique de confidentialité</a>
+                </div>
+
             </div>
         </div>
     </div>
